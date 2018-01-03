@@ -6,3 +6,4 @@ coverage
 mock
 pynsist
 unittest2; python_version < '2.7'
+versioneer
