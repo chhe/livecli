@@ -59,20 +59,6 @@ clone() {
   cd ..
 }
 
-replaceversion() {
-  cd $CLI
-  OLD_VERSION=`python setup.py --version`
-  echo "OLD VERSION:" $OLD_VERSION
-
-  echo "1. Replaced __init__.py versioning"
-  sed -i "s/$OLD_VERSION/$1/g" src/streamlink/__init__.py
-
-  echo "2. Replaced setup.py versioning"
-  sed -i "s/$OLD_VERSION/$1/g" setup.py
-  
-  cd ..
-}
-
 changelog() {
   cd $CLI
   echo "Getting commit changes. Writing to ../changes.txt"
@@ -99,7 +85,7 @@ changelog_rst() {
 }
 
 git_commit() {
-  cd $CLI 
+  cd $CLI
 
   BRANCH=`git symbolic-ref --short HEAD`
   if [ -z "$BRANCH" ]; then
@@ -122,6 +108,7 @@ git_commit() {
 sign() {
   # Tarball it!
   cd $CLI
+  git tag $1
   python setup.py sdist
   mv dist/$CLI-$1.tar.gz ..
   cd ..
@@ -145,41 +132,41 @@ sign() {
 push() {
   CHANGES=$(cat changes.txt)
   # Release it!
-  github-release release \
+  $GOPATH/bin/github-release release \
       --user $UPSTREAM_REPO \
       --repo $CLI \
       --tag $1 \
       --name "$1" \
       --description "$CHANGES"
   if [ $? -eq 0 ]; then
-        echo RELEASE UPLOAD OK 
-  else 
+        echo RELEASE UPLOAD OK
+  else
         echo RELEASE UPLOAD FAIL
         exit
   fi
 
-  github-release upload \
+  $GOPATH/bin/github-release upload \
       --user $UPSTREAM_REPO \
       --repo $CLI \
       --tag $1 \
       --name "$CLI-$1.tar.gz" \
       --file $CLI-$1.tar.gz
   if [ $? -eq 0 ]; then
-        echo TARBALL UPLOAD OK 
-  else 
+        echo TARBALL UPLOAD OK
+  else
         echo TARBALL UPLOAD FAIL
         exit
   fi
 
-  github-release upload \
+  $GOPATH/bin/github-release upload \
       --user $UPSTREAM_REPO \
       --repo $CLI\
       --tag $1 \
       --name "$CLI-$1.tar.gz.asc" \
       --file $CLI-$1.tar.gz.asc
   if [ $? -eq 0 ]; then
-        echo SIGNED TARBALL UPLOAD OK 
-  else 
+        echo SIGNED TARBALL UPLOAD OK
+  else
         echo SIGNED TARBALL UPLOAD FAIL
         exit
   fi
@@ -212,10 +199,10 @@ main() {
   usage
 
   echo "What is your Github username? (location of your $CLI fork)"
-  read ORIGIN_REPO 
+  read ORIGIN_REPO
   echo "You entered: $ORIGIN_REPO"
   echo ""
-  
+
   echo ""
   echo "First, please enter the version of the NEW release: "
   read VERSION
@@ -238,7 +225,6 @@ main() {
   PS3='Please enter your choice: '
   options=(
   "Git clone master"
-  "Replace version number"
   "Generate changelog"
   "Generate changelog for release"
   "Create PR"
@@ -254,9 +240,6 @@ main() {
       case $opt in
           "Git clone master")
               clone $VERSION
-              ;;
-          "Replace version number")
-              replaceversion $VERSION
               ;;
           "Generate changelog")
               changelog $PREV_VERSION
