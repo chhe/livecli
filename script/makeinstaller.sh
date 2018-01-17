@@ -6,6 +6,7 @@ set -e # stop on error
 command -v makensis > /dev/null 2>&1 || { echo >&2 "makensis is required to build the installer. Aborting."; exit 1; }
 command -v pynsist > /dev/null 2>&1 || { echo >&2 "pynsist is required to build the installer. Aborting."; exit 1; }
 
+LIVECLI_ASSET_BASE=${LIVECLI_ASSET_BASE:-"https://raw.githubusercontent.com/livecli/assets/master"}
 # For travis nightly builds generate a version number with commit hash
 LIVECLI_VERSION=$(python setup.py --version)
 LIVECLI_VERSION_PLAIN="${LIVECLI_VERSION%%+*}"
@@ -232,6 +233,11 @@ cp "win32/liveurlrc" "${nsis_dir}/liveurlrc"
 # copy the ffmpeg and rtmpdump directories to the install build dir
 cp -r "win32/ffmpeg" "${nsis_dir}/"
 cp -r "win32/rtmpdump" "${nsis_dir}/"
+
+# Downloading external assets
+wget -c -O "${nsis_dir}/ffmpeg/ffmpeg.exe" "${LIVECLI_ASSET_BASE}/win32/ffmpeg/ffmpeg.exe"
+wget -c -O "${nsis_dir}/rtmpdump/rtmpdump.exe" "${LIVECLI_ASSET_BASE}/win32/rtmpdump/rtmpdump.exe"
+wget -c -O "${nsis_dir}/rtmpdump/librtmp.dll" "${LIVECLI_ASSET_BASE}/win32/rtmpdump/librtmp.dll"
 
 pynsist build/livecli.cfg
 
