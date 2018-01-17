@@ -15,46 +15,27 @@ Distribution                         Installing
 ==================================== ===========================================
 `Arch Linux`_                        .. code-block:: console
 
-                                        # pacman -S livecli
+                                        #
 
 `Arch Linux (aur, git)`_             .. code-block:: console
 
-                                        # pacaur -S livecli-git
+                                        #
 
                                      `Installing AUR packages`_
 `Fedora`_                            .. code-block:: console
 
-                                        # dnf install livecli
-`Gentoo Linux`_                      .. code-block:: console
-
-                                        # emerge net-misc/livecli
-`NetBSD (pkgsrc)`_                   .. code-block:: console
-
-                                        $ cd /usr/pkgsrc/multimedia/livecli
-                                        # make install clean
-`NixOS`_                             `Installing NixOS packages`_
-`Solus`_                             .. code-block:: console
-
-                                        # eopkg install livecli
+                                        #
 `Ubuntu`_                            .. code-block:: console
 
-                                        # add-apt-repository ppa:nilarimogard/webupd8
-                                        # apt update
-                                        # apt install livecli
-`Void`_                              .. code-block:: console
-
-                                        # xbps-install livecli
+                                        #
+                                        #
+                                        #
 ==================================== ===========================================
 
-.. _Arch Linux: https://www.archlinux.org/packages/community/any/livecli/
-.. _Arch Linux (aur, git): https://aur.archlinux.org/packages/livecli-git/
-.. _Fedora: https://apps.fedoraproject.org/packages/python-livecli
-.. _Gentoo Linux: https://packages.gentoo.org/package/net-misc/livecli
-.. _NetBSD (pkgsrc): http://pkgsrc.se/multimedia/livecli
-.. _NixOS: https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/video/livecli
-.. _Solus: https://git.solus-project.com/packages/livecli/
-.. _Ubuntu: http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/s/livecli/
-.. _Void: https://github.com/voidlinux/void-packages/tree/master/srcpkgs/livecli
+.. _Arch Linux:
+.. _Arch Linux (aur, git):
+.. _Fedora:
+.. _Ubuntu:
 
 .. _Installing AUR packages: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
 .. _Installing NixOS packages: https://nixos.org/wiki/Install/remove_software#How_to_install_software
@@ -67,23 +48,23 @@ Platform                             Installing
 ==================================== ===========================================
 Mac OS X                             .. code-block:: console
 
-                                        # easy_install -U livecli
+                                        #
 `Homebrew`_                          .. code-block:: console
 
-                                        # brew install livecli
+                                        #
 
                                      `Installing Homebrew packages`_
 Microsoft Windows                    See `Windows binaries`_ and `Windows portable version`_.
 
 `Chocolatey`_                        .. code-block:: console
 
-                                        C:\> choco install livecli
+                                        C:\>
 
                                      `Installing Chocolatey packages`_
 ==================================== ===========================================
 
-.. _Homebrew: https://github.com/Homebrew/homebrew-core/blob/master/Formula/livecli.rb
-.. _Chocolatey: https://chocolatey.org/packages/livecli
+.. _Homebrew:
+.. _Chocolatey:
 
 .. _Installing Homebrew packages: https://brew.sh
 .. _Installing Chocolatey packages: https://chocolatey.org
@@ -93,18 +74,13 @@ Package maintainers
 ==================================== ===========================================
 Distribution/Platform                Maintainer
 ==================================== ===========================================
-Arch                                 Giancarlo Razzolini <grazzolini at archlinux.org>
-Arch (aur, git)                      Josip Ponjavic <josipponjavic at gmail.com>
-Chocolatey                           Scott Walters <me at scowalt.com>
-Fedora                               Mohamed El Morabity <melmorabity at fedoraproject.org>
-Gentoo                               soredake <fdsfgs at krutt.org>
-NetBSD                               Maya Rashish <maya at netbsd.org>
-NixOS                                Tuomas Tynkkynen <tuomas.tynkkynen at iki.fi>
-Solus                                Bryan T. Meyers <bmeyers at datadrake.com>
-Ubuntu                               Alin Andrei <andrew at webupd8.org>
-Void                                 wkuipers <wietse at kuiprs.nl>
-Windows binaries                     beardypig <beardypig at protonmail.com>
-Windows port. version                RosadinTV <RosadinTV at outlook.com>, beardypig <beardypig at protonmail.com>
+Arch
+Arch (aur, git)
+Chocolatey
+Fedora
+Ubuntu
+Windows binaries
+Windows port. version
 ==================================== ===========================================
 
 
@@ -115,9 +91,9 @@ If a package is not available for your platform (or it's out of date) you
 can install Livecli via source.
 
 There are a few different methods to do this,
-`pip <http://pip.readthedocs.org/en/latest/installing.html>`_ the Python package
+`pip <https://pip.readthedocs.io/en/latest/installing/>`_ the Python package
 manager, or by checking out the latest code with
-`Git <http://git-scm.com/downloads>`_. Using :command:`easy_install` is no longer recommended.
+`Git <https://git-scm.com/downloads>`_. Using :command:`easy_install` is no longer recommended.
 
 .. note::
 
@@ -167,13 +143,14 @@ Name                                 Notes
 
 **Automatically installed by the setup script**
 --------------------------------------------------------------------------------
-`python-argparse`_                   Only needed on Python versions older than **2.7**.
+`iso-639`_                           Used for localization settings, provides language information
+`iso3166`_                           Used for localization settings, provides country information
+`pycryptodome`_                      Required to play some encrypted streams
+`pysocks`_
 `python-futures`_                    Only needed on Python **2.x**.
 `python-requests`_                   At least version **1.0**.
 `python-singledispatch`_             Only needed on Python versions older than **3.4**.
-`pycryptodome`_                      Required to play some encrypted streams
-`iso-639`_                           Used for localization settings, provides language information
-`iso3166`_                           Used for localization settings, provides country information
+`websocket`_
 
 **Optional**
 --------------------------------------------------------------------------------
@@ -195,7 +172,6 @@ With these two environment variables it is possible to use `pycrypto`_ instead o
 
 .. _Python: http://python.org/
 .. _python-setuptools: http://pypi.python.org/pypi/setuptools
-.. _python-argparse: http://pypi.python.org/pypi/argparse
 .. _python-futures: http://pypi.python.org/pypi/futures
 .. _python-requests: http://python-requests.org/
 .. _python-singledispatch: http://pypi.python.org/pypi/singledispatch
@@ -203,6 +179,8 @@ With these two environment variables it is possible to use `pycrypto`_ instead o
 .. _pycountry: https://pypi.python.org/pypi/pycountry
 .. _pycrypto: https://www.dlitz.net/software/pycrypto/
 .. _pycryptodome: https://pycryptodome.readthedocs.io/en/latest/
+.. _pysocks: https://pypi.python.org/pypi/PySocks
+.. _websocket: https://pypi.python.org/pypi/websocket-client
 .. _ffmpeg: https://www.ffmpeg.org/
 .. _iso-639: https://pypi.python.org/pypi/iso-639
 .. _iso3166: https://pypi.python.org/pypi/iso3166
@@ -235,11 +213,6 @@ instead.
     Using livecli without activating the environment
     $ ~/myenv/bin/livecli ...
 
-.. note::
-
-    This may also be required on some OS X versions that seems to have weird
-    permission issues (see issue #401).
-
 
 .. _virtualenv: http://virtualenv.readthedocs.org/en/latest/
 
@@ -250,7 +223,7 @@ Windows binaries
 .. important::
 
     Windows XP is not supported. |br|
-    Windows Vista requires at least SP2 to be installed. 
+    Windows Vista requires at least SP2 to be installed.
 
 ==================================== ====================================
 Release                              Notes
@@ -265,8 +238,8 @@ Release                              Notes
 .. _Stable release:
 .. _GitHub releases page: https://github.com/livecli/livecli/releases/latest
 .. _Development build:
-.. _Bintray: https://bintray.com/livecli/livecli-nightly/livecli/_latestVersion/#files
-.. _list of recent changes: https://bintray.com/livecli/livecli-nightly/livecli/latest#release
+.. _Bintray:
+.. _list of recent changes:
 
 These installers contain:
 
@@ -295,7 +268,7 @@ Maintainer                           Links
 RosadinTV                            `Latest precompiled stable release`__
 
                                      `Latest builder`__
-                                     
+
                                      `More info`__
 
 Beardypig                            `Latest precompiled stable release`__

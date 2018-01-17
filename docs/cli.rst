@@ -17,20 +17,20 @@ works best with `VLC`_ or `mpv`_, which are also cross-platform, but other playe
 may be compatible too, see the :ref:`Players` page for a complete overview.
 
 Now to get into actually using Livecli, let's say you want to watch the
-stream located on http://twitch.tv/day9tv, you start off by telling Livecli
+stream located on http://twitch.tv/twitch, you start off by telling Livecli
 where to attempt to extract streams from. This is done by giving the URL to the
 command :command:`livecli` as the first argument:
 
 .. code-block:: console
 
-    $ livecli twitch.tv/day9tv
-    [cli][info] Found matching plugin twitch for URL twitch.tv/day9tv
+    $ livecli twitch.tv/twitch
+    [cli][info] Found matching plugin twitch for URL twitch.tv/twitch
     Available streams: audio, high, low, medium, mobile (worst), source (best)
 
 
 .. note::
     You don't need to include the protocol when dealing with HTTP URLs,
-    e.g. just ``twitch.tv/day9tv`` is enough and quicker to type.
+    e.g. just ``twitch.tv/twitch`` is enough and quicker to type.
 
 
 This command will tell Livecli to attempt to extract streams from the URL
@@ -44,8 +44,8 @@ even on Windows.
 
 .. code-block:: console
 
-    $ livecli hlsvariant://file://C:/hls/playlist.m3u8
-    [cli][info] Found matching plugin stream for URL hlsvariant://file://C:/hls/playlist.m3u8
+    $ livecli hls://file://C:/hls/playlist.m3u8
+    [cli][info] Found matching plugin stream for URL hls://file://C:/hls/playlist.m3u8
     Available streams: 180p (worst), 272p, 408p, 554p, 818p, 1744p (best)
 
 
@@ -54,8 +54,8 @@ argument to the :command:`livecli` command:
 
 .. sourcecode:: console
 
-    $ livecli twitch.tv/day9tv source
-    [cli][info] Found matching plugin twitch for URL twitch.tv/day9tv
+    $ livecli twitch.tv/twitch source
+    [cli][info] Found matching plugin twitch for URL twitch.tv/twitch
     [cli][info] Opening stream: source (hls)
     [cli][info] Starting player: vlc
 
@@ -75,11 +75,11 @@ into customizing it to your own needs, such as:
   before playing the stream to help avoiding buffering issues
 
 
-.. _command prompt: http://windows.microsoft.com/en-us/windows/command-prompt-faq#1TC=windows-8
-.. _PowerShell: http://www.microsoft.com/powershell
-.. _Terminal: http://en.wikipedia.org/wiki/Terminal_(OS_X)
-.. _VLC: http://videolan.org/
-.. _mpv: http://mpv.io/
+.. _command prompt: https://en.wikipedia.org/wiki/Command_Prompt
+.. _PowerShell: https://www.microsoft.com/powershell
+.. _Terminal: https://en.wikipedia.org/wiki/Terminal_(OS_X)
+.. _VLC: https://www.videolan.org/
+.. _mpv: https://mpv.io/
 
 
 .. _cli-liveclirc:
@@ -100,13 +100,6 @@ Unix-like (POSIX) - $XDG_CONFIG_HOME/livecli/config
                   - ~/.liveclirc
 Windows           %APPDATA%\\livecli\\liveclirc
 ================= ====================================================
-
-.. note::
-  Currently the Windows installer does not create the liveclirc file. This
-  is a known issue being tracked
-  `here <https://github.com/livecli/livecli/issues/81>`_. An example
-  configuration file is available in the
-  `repo <https://github.com/livecli/livecli/blob/master/win32/liveclirc>`_.
 
 You can also specify the location yourself using the :option:`--config` option.
 
@@ -321,7 +314,7 @@ Name                           Prefix
 ============================== =================================================
 Adobe HTTP Dynamic Streaming   hds://
 Akamai HD Adaptive Streaming   akamaihd://
-Apple HTTP Live Streaming      hls:// hlsvariant:// [1]_
+Apple HTTP Live Streaming      hls:// [1]_
 Real Time Messaging Protocol   rtmp:// rtmpe:// rtmps:// rtmpt:// rtmpte://
 Progressive HTTP, HTTPS, etc   httpstream:// [1]_
 ============================== =================================================
