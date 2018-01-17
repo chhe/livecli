@@ -1,13 +1,9 @@
-import json
 import re
 
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
-from livecli.plugin.api import validate
 from livecli.compat import urlparse, unquote
 from livecli.stream import HTTPStream, HLSStream
-from livecli.utils import parse_json, update_scheme
-from livecli.utils.crypto import unpad_pkcs5
 
 
 class VK(Plugin):

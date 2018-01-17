@@ -80,7 +80,7 @@ class Picarto(Plugin):
 
         channel_api_json = json.loads(ci.text)
 
-        if channel_api_json["online"] != True:
+        if channel_api_json["online"] is not True:
             self.logger.error("The channel {0} is currently offline".format(url_channel_name))
             return
 

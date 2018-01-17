@@ -1,7 +1,6 @@
 import time
 from requests import Session, __build__ as requests_version
 from requests.adapters import HTTPAdapter
-from requests.exceptions import RequestException
 
 from livecli.packages.requests_file import FileAdapter
 

@@ -11,7 +11,9 @@ Full documentation is available at https://livecli.github.io.
 """
 import warnings
 from sys import version_info
-
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
 
 if version_info[:2] == (2, 6):
     warnings.warn(
@@ -21,10 +23,6 @@ if version_info[:2] == (2, 6):
         DeprecationWarning
     )
 
-
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
 __title__ = "livecli"
 __license__ = "Simplified BSD"
 __author__ = "Livecli"
@@ -87,4 +85,3 @@ from .api import streams
 from .exceptions import (LivecliError, PluginError, NoStreamsError,
                          NoPluginError, StreamError)
 from .session import Livecli
-

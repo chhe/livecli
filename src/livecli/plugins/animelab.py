@@ -1,6 +1,5 @@
 from __future__ import print_function
 import re
-from pprint import pprint
 
 from livecli.plugin import Plugin, PluginOptions
 from livecli.plugin.api import http

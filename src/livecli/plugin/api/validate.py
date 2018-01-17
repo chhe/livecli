@@ -35,7 +35,7 @@ __all__ = [
 ]
 
 #: Alias for text type on each Python version
-text = is_py2 and basestring or str
+text = is_py2 and basestring or str  # noqa
 
 # References to original functions that we override in this module
 _all = all
@@ -77,7 +77,7 @@ class transform(object):
         # instantiated and therefore can't be used to transform the value,
         # so we force to unicode instead.
         if is_py2 and func == text:
-            func = unicode
+            func = unicode  # noqa
 
         self.func = func
 
@@ -226,7 +226,7 @@ def map(func):
     # instantiated and therefore can't be used to transform the value,
     # so we force to unicode instead.
     if is_py2 and text == func:
-        func = unicode
+        func = unicode  # noqa
 
     def expand_kv(kv):
         return func(*kv)

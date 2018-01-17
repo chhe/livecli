@@ -16,7 +16,7 @@ from websocket import __version__ as websocket_version
 
 from livecli import __version__ as livecli_version
 from livecli import (Livecli, StreamError, PluginError,
-                        NoPluginError)
+                     NoPluginError)
 from livecli.cache import Cache
 from livecli.stream import StreamProcess
 from livecli.plugins.twitch import TWITCH_CLIENT_ID
@@ -806,23 +806,23 @@ def setup_plugin_options():
     """Sets Livecli plugin options."""
     if args.twitch_cookie:
         livecli.set_plugin_option("twitch", "cookie",
-                                     args.twitch_cookie)
+                                  args.twitch_cookie)
 
     if args.twitch_oauth_token:
         livecli.set_plugin_option("twitch", "oauth_token",
-                                     args.twitch_oauth_token)
+                                  args.twitch_oauth_token)
 
     if args.twitch_disable_hosting:
         livecli.set_plugin_option("twitch", "disable_hosting",
-                                     args.twitch_disable_hosting)
+                                  args.twitch_disable_hosting)
 
     if args.ustream_password:
         livecli.set_plugin_option("ustreamtv", "password",
-                                     args.ustream_password)
+                                  args.ustream_password)
 
     if args.crunchyroll_username:
         livecli.set_plugin_option("crunchyroll", "username",
-                                     args.crunchyroll_username)
+                                  args.crunchyroll_username)
 
     if args.crunchyroll_username and not args.crunchyroll_password:
         crunchyroll_password = console.askpass("Enter Crunchyroll password: ")
@@ -831,17 +831,17 @@ def setup_plugin_options():
 
     if crunchyroll_password:
         livecli.set_plugin_option("crunchyroll", "password",
-                                     crunchyroll_password)
+                                  crunchyroll_password)
     if args.crunchyroll_purge_credentials:
         livecli.set_plugin_option("crunchyroll", "purge_credentials",
-                                     args.crunchyroll_purge_credentials)
+                                  args.crunchyroll_purge_credentials)
     if args.crunchyroll_session_id:
         livecli.set_plugin_option("crunchyroll", "session_id",
-                                     args.crunchyroll_session_id)
+                                  args.crunchyroll_session_id)
 
     if args.crunchyroll_locale:
         livecli.set_plugin_option("crunchyroll", "locale",
-                                     args.crunchyroll_locale)
+                                  args.crunchyroll_locale)
 
     if args.btv_username:
         livecli.set_plugin_option("btv", "username", args.btv_username)
@@ -962,7 +962,7 @@ def setup_plugin_options():
 
     if args.zattoo_purge_credentials:
         livecli.set_plugin_option("zattoo", "purge_credentials",
-                                     args.zattoo_purge_credentials)
+                                  args.zattoo_purge_credentials)
 
     # Deprecated options
     if args.jtv_legacy_names:

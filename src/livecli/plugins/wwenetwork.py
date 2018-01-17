@@ -1,7 +1,5 @@
 from __future__ import print_function
 import re
-from pprint import pprint
-
 import time
 
 from livecli import PluginError
@@ -10,7 +8,6 @@ from livecli.plugin import Plugin, PluginOptions
 from livecli.plugin.api import http
 from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
-from livecli.compat import urlparse, parse_qsl
 from livecli.stream import HLSStream
 
 

@@ -1,8 +1,7 @@
 import re
-import json
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
+from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
 _url_re = re.compile(r"http(?:s)?://connectcast.tv/(\w+)?")
@@ -15,7 +14,7 @@ class ConnectCast(Plugin):
         return _url_re.match(url)
 
     def _get_streams(self):
-        res = self.session.http.get(self.url)
+        res = http.get(self.url)
         match = _stream_re.search(res.text)
         if match:
             streams = {}

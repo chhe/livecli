@@ -5,7 +5,7 @@ import ssl
 import websocket
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import useragents, http
+from livecli.plugin.api import useragents
 from livecli.stream import RTMPStream
 
 _url_re = re.compile(r"""

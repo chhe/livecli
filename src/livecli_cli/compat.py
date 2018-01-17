@@ -7,9 +7,9 @@ is_py3 = (sys.version_info[0] == 3)
 is_win32 = os.name == "nt"
 
 if is_py2:
-    input = raw_input
+    input = raw_input  # noqa
     stdout = sys.stdout
-    file = file
+    file = file  # noqa
     _find_unsafe = re.compile(r"[^\w@%+=:,./-]").search
 
     from backports.shutil_get_terminal_size import get_terminal_size

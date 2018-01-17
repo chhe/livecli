@@ -2,7 +2,7 @@ import re
 import json
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
+from livecli.plugin.api import http
 from livecli.stream import RTMPStream
 from livecli.stream import HLSStream
 
@@ -33,7 +33,7 @@ class Tigerdile(Plugin):
             self.logger.error("The channel {0} does not exist or is marked private".format(streamname))
             return
 
-        if api_json[0]["online"] == False:
+        if api_json[0]["online"] is False:
             self.logger.error("The channel {0} is not online".format(streamname))
             return
 

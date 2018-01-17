@@ -1,10 +1,9 @@
-#coding: utf-8
+# -*- coding: utf-8 -*-
 
 import re
 
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
-from livecli.plugin.api.utils import parse_query
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 
 CHANNEL_INFO_URL = "http://api.plu.cn/tga/streams/%s"

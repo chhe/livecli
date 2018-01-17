@@ -18,8 +18,8 @@ except ImportError:
 
 if is_py2:
     _str = str
-    str = unicode
-    range = xrange
+    str = unicode  # noqa
+    range = xrange  # noqa
 
     def bytes(b, enc="ascii"):
         return _str(b)

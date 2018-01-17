@@ -77,7 +77,7 @@ class BeatFLVTagConcat(FLVTagConcat):
 
     def iter_tags(self, fd=None, buf=None, skip_header=None):
         flags = U8.read(fd)
-        quality = flags & 15
+        # quality = flags & 15  # ? Never used ?
         version = flags >> 4
         lookup_size = U16BE.read(fd)
         enc_table = fd.read(lookup_size)

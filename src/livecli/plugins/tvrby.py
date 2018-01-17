@@ -1,14 +1,10 @@
 from __future__ import print_function
 import re
-from wsgiref import headers
 
-from livecli import PluginError
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
-from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
-from livecli.compat import urlparse
 from livecli.stream import RTMPStream
 
 

@@ -5,8 +5,6 @@ import sys
 
 from time import sleep
 
-import re
-
 from .compat import is_win32, stdout
 from .constants import DEFAULT_PLAYER_ARGUMENTS
 from .utils import ignored

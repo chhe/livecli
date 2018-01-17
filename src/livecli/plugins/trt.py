@@ -4,7 +4,6 @@ from base64 import b64decode
 
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
-from livecli.plugin.api import validate
 from livecli.compat import urlparse, parse_qsl
 from livecli.stream import HDSStream
 from livecli.stream import HLSStream

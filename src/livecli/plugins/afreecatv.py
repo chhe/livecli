@@ -2,7 +2,6 @@ import re
 
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
-from livecli.plugin.api.utils import parse_query
 from livecli.stream import RTMPStream
 
 

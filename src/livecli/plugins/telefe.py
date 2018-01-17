@@ -1,7 +1,7 @@
 import re
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, useragents, validate
+from livecli.plugin.api import http, useragents
 from livecli.stream import HLSStream, HTTPStream
 from livecli.utils import parse_json
 

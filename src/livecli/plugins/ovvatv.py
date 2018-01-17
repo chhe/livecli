@@ -1,8 +1,7 @@
 from __future__ import print_function
 import re
-import string
+
 from base64 import b64decode
-from pprint import pprint
 
 from livecli import PluginError
 from livecli.plugin import Plugin

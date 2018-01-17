@@ -1,8 +1,7 @@
 import re
-import json
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
+from livecli.plugin.api import http
 from livecli.stream import HDSStream
 
 _url_re = re.compile(r"(http(s)?://(\w+\.)?antenna.gr)/webtv/watch\?cid=.+")

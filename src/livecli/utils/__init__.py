@@ -75,7 +75,7 @@ def parse_xml(data, name="XML", ignore_ns=False, exception=PluginError, schema=N
      - Allows stripping namespace information
      - Wraps errors in custom exception with a snippet of the data in the message
     """
-    if is_py2 and isinstance(data, unicode):
+    if is_py2 and isinstance(data, unicode):  # noqa
         data = data.encode("utf8")
 
     if ignore_ns:

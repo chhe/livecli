@@ -5,8 +5,6 @@ import uuid
 import random
 import json
 
-from requests.adapters import HTTPAdapter
-
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import (HTTPStream, HLSStream)

@@ -7,8 +7,8 @@ from livecli.stream import hls_playlist
 from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
 from livecli.stream.http import HTTPStream
 from livecli.stream.segmented import (SegmentedStreamReader,
-                                         SegmentedStreamWriter,
-                                         SegmentedStreamWorker)
+                                      SegmentedStreamWriter,
+                                      SegmentedStreamWorker)
 from ..exceptions import StreamError
 
 Sequence = namedtuple("Sequence", "num segment")

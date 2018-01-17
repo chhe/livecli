@@ -2,7 +2,7 @@
 
 import re
 
-from livecli.plugin import Plugin, PluginError
+from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import RTMPStream
 
@@ -25,7 +25,7 @@ def getStreamURL(channel):
         streamdata = streamerinfo['media']
         # print(streamdata)
         streamurl = "rtmp://" + streamdata['host'] + streamdata['app'] + "/" + streamdata['stream']
-        #print (streamurl)
+        # print (streamurl)
 
     return streamurl
 
