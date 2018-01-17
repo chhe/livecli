@@ -8,7 +8,7 @@ from livecli.stream import HLSStream
 
 class TVRPlus(Plugin):
     url_re = re.compile(r"https?://(?:www\.)tvrplus.ro/live-")
-    hls_file_re = re.compile(r"file: (?P<q>[\"'])(?P<url>http.+?m3u8.*?)(?P=q)")
+    hls_file_re = re.compile(r"""src:\s?(?P<q>["'])(?P<url>http.+?m3u8.*?)(?P=q)""")
 
     stream_schema = validate.Schema(
         validate.all(
@@ -24,7 +24,8 @@ class TVRPlus(Plugin):
     def _get_streams(self):
         stream_url = self.stream_schema.validate(http.get(self.url).text)
         if stream_url:
-            return HLSStream.parse_variant_playlist(self.session, stream_url)
+            headers = {"Referer": self.url}
+            return HLSStream.parse_variant_playlist(self.session, stream_url, headers=headers)
 
 
 __plugin__ = TVRPlus
