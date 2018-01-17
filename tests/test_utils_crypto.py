@@ -19,7 +19,7 @@ class TestUtil(unittest.TestCase):
     def test_decrpyt(self):
         # data generated with:
         #   echo "this is a test" | openssl enc -aes-256-cbc -pass pass:"livecli" -base64
-        data = base64.b64decode("U2FsdGVkX1+nEpemEwoJIuXU949/oRwR+qzhEVVvKNM=")
+        data = base64.b64decode("U2FsdGVkX19ZqpcbqkGIMTLsXunnM32Qe91+CrGtklg=")
         self.assertEqual(
             b"this is a test\n",
             decrypt_openssl(data, b"livecli")
