@@ -153,6 +153,30 @@ def update_scheme(current, target):
         return target
 
 
+_time_re = re.compile(r"""
+    (?:
+        (?P<hours>\d+)h
+    )?
+    (?:
+        (?P<minutes>\d+)m
+    )?
+    (?:
+        (?P<seconds>\d+)s
+    )?
+""", re.VERBOSE)
+
+
+def time_to_offset(t):
+    match = _time_re.match(t)
+    if match:
+        offset = int(match.group("hours") or "0") * 60 * 60
+        offset += int(match.group("minutes") or "0") * 60
+        offset += int(match.group("seconds") or "0")
+    else:
+        offset = 0
+
+    return offset
+
 #####################################
 # Deprecated functions, do not use. #
 #####################################

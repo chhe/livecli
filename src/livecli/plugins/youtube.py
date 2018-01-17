@@ -6,6 +6,7 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api.utils import parse_query
 from livecli.stream import HTTPStream, HLSStream
 from livecli.stream.ffmpegmux import MuxedStream
+from livecli.utils import time_to_offset
 
 API_KEY = "AIzaSyBDBi-4roGzWJN4du9TuDMLd_jVTcVkKz4"
 API_BASE = "https://www.googleapis.com/youtube/v3"
@@ -95,7 +96,9 @@ _search_schema = validate.Schema(
 _channelid_re = re.compile(r'meta itemprop="channelId" content="([^"]+)"')
 _livechannelid_re = re.compile(r'meta property="og:video:url" content="([^"]+)')
 _url_re = re.compile(r"""
-    http(s)?://(\w+\.)?youtube.com
+    https?://
+    (?:
+    (?:\w+\.)?youtube(?:-nocookie)?\.com
     (?:
         (?:
             /(watch.+v=|embed/|v/)
@@ -109,6 +112,9 @@ _url_re = re.compile(r"""
         (?:
             /(c/)?(?P<liveChannel>[^/?]+)/live
         )
+    )
+    |
+    youtu\.be/(?P<video_id_2>[0-9A-z_-]{11})
     )
 """, re.VERBOSE)
 
@@ -198,7 +204,7 @@ class YouTube(Plugin):
         elif live_channel:
             return self._find_canonical_stream_info()
         else:
-            video_id = match.group("video_id")
+            video_id = match.group("video_id") or match.group("video_id_2")
             if video_id == "live_stream":
                 query_info = dict(parse_qsl(urlparse(url).query))
                 if "channel" in query_info:
@@ -290,6 +296,12 @@ class YouTube(Plugin):
 
         hls_playlist = info.get("hlsvp")
         if hls_playlist:
+            parsed = urlparse(self.url)
+            params = parse_query(parsed.query)
+            time_offset = params.get("t")
+            if time_offset:
+                self.session.set_option("hls-start-offset", time_to_offset(params.get("t")))
+
             try:
                 hls_streams = HLSStream.parse_variant_playlist(
                     self.session, hls_playlist, headers=HLS_HEADERS, namekey="pixels"

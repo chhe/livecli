@@ -12,6 +12,7 @@ from livecli.plugin.api.utils import parse_json, parse_query
 from livecli.stream import (
     HTTPStream, HLSStream, FLVPlaylist, extract_flv_header_tags
 )
+from livecli.utils import time_to_offset
 
 try:
     from itertools import izip as zip
@@ -53,17 +54,6 @@ _url_re = re.compile(r"""
     (?:
         /
         (?P<clip_name>[\w]+)
-    )?
-""", re.VERBOSE)
-_time_re = re.compile(r"""
-    (?:
-        (?P<hours>\d+)h
-    )?
-    (?:
-        (?P<minutes>\d+)m
-    )?
-    (?:
-        (?P<seconds>\d+)s
     )?
 """, re.VERBOSE)
 
@@ -136,18 +126,6 @@ _quality_options_schema = validate.Schema(
     },
     validate.get("quality_options")
 )
-
-
-def time_to_offset(t):
-    match = _time_re.match(t)
-    if match:
-        offset = int(match.group("hours") or "0") * 60 * 60
-        offset += int(match.group("minutes") or "0") * 60
-        offset += int(match.group("seconds") or "0")
-    else:
-        offset = 0
-
-    return offset
 
 
 class UsherService(object):
@@ -549,6 +527,10 @@ class Twitch(Plugin):
         self.logger.debug("Getting {0} HLS streams for {1}".format(stream_type, self.channel))
         self._authenticate()
         self._hosted_chain.append(self.channel)
+
+        time_offset = self.params.get("t")
+        if time_offset:
+            self.session.set_option("hls-start-offset", time_to_offset(self.params.get("t")))
 
         if stream_type == "live":
             hosted_channel = self._check_for_host()
