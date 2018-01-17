@@ -70,31 +70,6 @@ All contributions are welcome.
 Feel free to open a new thread on the issue tracker or submit a new pull request.
 Please read [CONTRIBUTING.md][contributing] first. Thanks!
 
-[![Contributors][opencollective-contributors]][contributors]
-
-
-## Backers
-
-Thank you to all our backers! \[[Become a backer][opencollective-backer]\]
-
-[![Backers on Open Collective][opencollective-backers-image]][opencollective-backers]
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. \[[Become a sponsor][opencollective-sponsor]\]
-
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/0/avatar.svg)](https://opencollective.com/livecli/sponsor/0/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/1/avatar.svg)](https://opencollective.com/livecli/sponsor/1/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/2/avatar.svg)](https://opencollective.com/livecli/sponsor/2/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/3/avatar.svg)](https://opencollective.com/livecli/sponsor/3/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/4/avatar.svg)](https://opencollective.com/livecli/sponsor/4/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/5/avatar.svg)](https://opencollective.com/livecli/sponsor/5/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/6/avatar.svg)](https://opencollective.com/livecli/sponsor/6/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/7/avatar.svg)](https://opencollective.com/livecli/sponsor/7/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/8/avatar.svg)](https://opencollective.com/livecli/sponsor/8/website)
-[![Open Collective Livecli Sponsor](https://opencollective.com/livecli/sponsor/9/avatar.svg)](https://opencollective.com/livecli/sponsor/9/website)
-
 
   [livecli-website]: https://livecli.github.io
   [livecli-plugins]: https://livecli.github.io/plugin_matrix.html
@@ -113,10 +88,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   [travisci-build-status-badge]: https://travis-ci.org/livecli/livecli.svg?branch=master
   [codecov-coverage]: https://codecov.io/github/livecli/livecli?branch=master
   [codecov-coverage-badge]: https://codecov.io/github/livecli/livecli/coverage.svg?branch=master
-  [opencollective-contributors]: https://opencollective.com/livecli/contributors.svg?width=890
-  [opencollective-backer]: https://opencollective.com/livecli#backer
-  [opencollective-backers]: https://opencollective.com/livecli#backers
-  [opencollective-backers-image]: https://opencollective.com/livecli/backers.svg?width=890
-  [opencollective-sponsor]: https://opencollective.com/livecli#sponsor
-  [opencollective-backers-badge]: https://opencollective.com/livecli/backers/badge.svg
-  [opencollective-sponsors-badge]: https://opencollective.com/livecli/sponsors/badge.svg

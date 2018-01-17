@@ -22,6 +22,7 @@ dist
 *.tmp*
 *.swp
 docs/_build
+env/
 include/
 lib/
 local/

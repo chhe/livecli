@@ -42,6 +42,3 @@ REPLACE THIS TEXT WITH YOUR LOG
 ### Comments, screenshots, etc.
 
 ...
-
-
-[Love Livecli? Please consider supporting our collective. Thanks!](https://opencollective.com/livecli/donate)

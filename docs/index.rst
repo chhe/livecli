@@ -65,6 +65,5 @@ See their respective sections for more information on how to use them.
     api_guide
     api
     changelog
-    donate
     applications
     thirdparty

@@ -19,30 +19,30 @@ If you think that this application is helpful, please consider supporting the ma
     Alexis Murzeau <amubtdx@outlook.fr> (2):
           docs: add new line before codeblock to fix them
           Fix sphinx warning on Directive class
-    
+
     Charlie Drage <charlie@charliedrage.com> (1):
           Update the release script
-    
+
     Emrah Er <emraher@users.noreply.github.com> (1):
           plugins.canlitv: fix URLs (#1281)
-    
+
     Jake Robertson <jake@faltro.com> (3):
           exit with code 130 after a KeyboardInterrupt
           refactor error code determination
           unify sys.exit() calls
-    
+
     RosadinTV <rosadintv@outlook.com> (5):
           Update eltrecetv.py
           Update eltrecetv.py
           Update plugin_matrix.rst
           Add webcast_india_gov.py
           Add test_webcast_india_gov.py
-    
+
     back-to <back-to@users.noreply.github.com> (3):
           [zattoo] It won't work with None in Python 3.6, set always a default date instead of None.
           [liveme] API update (#1298)
           Ignore WinError 10053 / WSAECONNABORTED
-    
+
     beardypig <beardypig@users.noreply.github.com> (10):
           plugins.tvplayer: extract the channel id when logged in as a subscriber
           installer: include the socks proxy modules
@@ -54,19 +54,19 @@ If you think that this application is helpful, please consider supporting the ma
           plugins.dogan: fix for kanald
           plugins.tvcatchup: HLS source extraction update
           setup: fix PySocks module dependency
-    
+
     ficofabrid <31028711+ficofabrid@users.noreply.github.com> (1):
           Add a single newline at the end of the file. (#1235)
-    
+
     fozzy <fozzy@fozzy.co> (1):
           fix huya.com plugin
-    
+
     steven7851 <steven7851@msn.com> (1):
           plugins.pandatv: fix APIv3 (#1286)
-    
+
     wlerin <wlerin@gmail.com> (1):
           plugin.showroom: update to new api (#1311)
-    
+
 
 Streamlink 0.8.1 (2017-09-12)
 -----------------------------
@@ -90,39 +90,39 @@ If you think that this application is helpful, please consider supporting the ma
 
     Benedikt Gollatz <ben@differentialschokolade.org> (1):
           Fix player URL extraction in bloomberg plugin
-    
+
     Forrest <gravyboat@users.noreply.github.com> (1):
           Update donation docs to note open collective (#1105)
-    
+
     Journey <timtag1190@gmail.com> (2):
           Update Arconaitv to new url
           fix arconai test plugin
-    
+
     Pascal Romahn <pascal.romahn@gmail.com> (1):
           The site always contains the text "does not exist". This should resolve issue https://github.com/streamlink/streamlink/issues/1193
-    
+
     RosadinTV <rosadintv@outlook.com> (2):
           Update Windows portable version documentation
           Fix documentation font-size
-    
+
     Sad Paladin <SadPaladin@users.noreply.github.com> (1):
           plugins.vk: add support for vk.com vod/livestreams
-    
+
     Xavier Damman <xdamman@gmail.com> (1):
           Added backers and sponsors on the README
-    
+
     back-to <back-to@users.noreply.github.com> (5):
           [zattoo] New plugin for zattoo.com / tvonline.ewe.de / nettv.netcologne.com (#1039)
           [vidio] Fixed Plugin, new Regex for HLS URL
           [arconai] Fixed plugin for new website
           [npo] Update for new website layout, Added HTTPStream support
           [liveme] url regex update
-    
+
     bastimeyer <mail@bastimeyer.de> (3):
           docs: add a third party applications list
           docs: add an official streamlink applications list
           Restructure README.md
-    
+
     beardypig <beardypig@users.noreply.github.com> (17):
           plugins.brittv: support for live streams on brittv.co.uk
           plugins.hitbox: fix bug when checking for hosted channels
@@ -141,7 +141,7 @@ If you think that this application is helpful, please consider supporting the ma
           plugins.cdnbg: support for updated layout and extra channels
           plugins: add priority ordering to plugins
           plugins.bbciplayer: support for older VOD streams
-    
+
     fozzy <fozzy@fozzy.co> (10):
           remove unused code
           fix douyutv plugin by using new API
@@ -153,14 +153,14 @@ If you think that this application is helpful, please consider supporting the ma
           Add support for skai.gr
           add eol
           remove unused importing
-    
+
     jgilf <james.gilfillan92@gmail.com> (2):
           Update ufctv.py
           Update ufctv.py
-    
+
     sdfwv <sdfwv@protonmail.ch> (1):
           [bongacams] replace RTMP with HLS Fixed streamlink/streamlink#1074
-    
+
     steven7851 <steven7851@msn.com> (8):
           plugins.douyutv: update post data
           plugins.app17: fix HLS url
@@ -170,14 +170,14 @@ If you think that this application is helpful, please consider supporting the ma
           plugins.app17: new layout
           plugins.app17: use https
           plugins.app17: fix wansu cdn url
-    
+
     supergonkas <supergonkas@gmail.com> (1):
           Add support for RTP Play (#1051)
-    
+
     unnutricious <unnutricious@protonmail.com> (2):
           bigo: add support for hls streams
           bigo: improve plugin url regex
-    
+
 
 streamlink 0.7.0 (2017-06-30)
 -----------------------------
@@ -195,31 +195,30 @@ Outlined are the major features in this month's release:
 
 Many thanks to those who've contributed in this release!
 
-If you think that this application is helpful, please consider supporting the maintainers by [donating](https://streamlink.github.io/donate.html).
 
 
 ::
 
     Alex Shafer <shafer.alex@gmail.com> (1):
           Return sorted list of streams. (#731)
-    
+
     Alexandre Hitchcox <alexandre@hitchcox.me> (1):
           Allow live channel links without '/c/' prefix
-    
+
     Alexis Murzeau <amubtdx@outlook.fr> (1):
           docs: fix typo: specifiying, neverthless
-    
+
     CatKasha <CatKasha@users.noreply.github.com> (1):
           Add MPC-HC x64 in streamlinkrc
-    
+
     Forrest <gravyboat@users.noreply.github.com> (1):
           Add a few more examples to the player option (#896)
-    
+
     Jacob Malmberg <jacobma@kth.se> (3):
           Here's the plugin I wrote for teamliquid.net (w/ some help from https://github.com/back-to)
           Tests for teamliquid plugin
           Now with RE!
-    
+
     Mohamed El Morabity <melmorabity@fedoraproject.org> (9):
           Update for live API changes
           Add unit tests for Euronews plugin
@@ -230,21 +229,21 @@ If you think that this application is helpful, please consider supporting the ma
           Add support for VOD/audio streams
           Add support for radio.net
           Ignore unreliable stream status returned by radio.net
-    
+
     Sebastian Meyer <mail@bastimeyer.de> (1):
           Homebrew package (#929)
-    
+
     back-to <back-to@users.noreply.github.com> (2):
           [dailymotion] fix for broken .f4m file that is a .m3u8 file (only livestreams)
           [arte] vod api url update & add new/missing languages
-    
+
     bastimeyer <mail@bastimeyer.de> (2):
           docs: fix parameters being linked in code blocks
           Improve CLI documentation
-    
+
     beardypig <beardypig@protonmail.com> (1):
           plugins.hitbox: add support for smashcast.tv
-    
+
     beardypig <beardypig@users.noreply.github.com> (21):
           plugins.bbciplayer: update to reflect slight site layout change
           plugins.bbciplayer: add option to login to a bbc account
@@ -267,28 +266,28 @@ If you think that this application is helpful, please consider supporting the ma
           plugins.picarto: support for VOD
           plugins.ine: update to extract the relocated jwplayer config
           plugin.ufctv: support for free and premium vod/live streams
-    
+
     cirrus <nailzuk@gmail.com> (3):
           Create arconia.py
           Rename arconia.py to arconai.py
           Create plugin_matrix.rst
-    
+
     steven7851 <steven7851@msn.com> (4):
           plugins.app17: fix hls url and support UID page
           little change
           plugins.app17: change ROOM_URL
           [douyu] temporary fix by revert to previously commit (#1015)
-    
+
     whizzoo <grenardus@gmail.com> (2):
           Restore support for RTL XL
           plugin.rtlxl: Remove spaces from line 14
-    
+
     yhel <joel.delahayes@gmail.com> (1):
           Don't return an error when the stream is offline
-    
+
     yhel <yhelae@gmail.com> (1):
           Add capability of extracting current sport.francetv stream
-    
+
 
 streamlink 0.6.0 (2017-05-11)
 -----------------------------
@@ -298,20 +297,18 @@ We've updated more plugins, improved documentation, and moved out nightly builds
 
 Again, many thanks for those who've contributed!
 
-If you think that this application is helpful, please consider supporting the maintainers by [donating](https://streamlink.github.io/donate.html).
-
 Thank you very much!
 
 ::
 
     Daniel Draper <Germandrummer92@users.noreply.github.com> (1):
           Will exit with exit code 1 if stream cannot be opened. (#785)
-    
+
     Forrest Alvarez <gravyboat@users.noreply.github.com> (3):
           Update readme so users are aware using Streamlink bypasses ads
           Forgot a )
           Make notice more agnostic
-    
+
     Mohamed El Morabity <melmorabity@fedoraproject.org> (18):
           Disable HDS streams which are no more available
           Add support for pc-yourfreetv.com
@@ -331,20 +328,20 @@ Thank you very much!
           Pluzz platform replaced by new france.tv website
           Update documentation
           Always use token generator for streams from france.tv
-    
+
     Mohamed El Morabity <melmorabity@users.noreply.github.com> (1):
           plugins.brightcove: support for HLS stream URLs with query strings + RTMPE stream URLs (#790)
-    
+
     RosadinTV <rosadintv@outlook.com> (5):
           Update plugin_matrix.rst
           Add telefe.py
           Add test_plugin_telefe.py
           Update telefe.py
           Add support for ElTreceTV (VOD & Live) (#816)
-    
+
     Sebastian Meyer <mail@bastimeyer.de> (1):
           Improve contribution guidelines (#772)
-    
+
     back-to <back-to@users.noreply.github.com> (9):
           [chaturbate] New API for HLS url
           [chaturbate] Fixed python 3.5 bug and added regex tests
@@ -355,7 +352,7 @@ Thank you very much!
           [Facebook] Added unittests
           [ArteTV] new regex, removed rtmp and better result for available streams
           [NRK.NO] fixed regex for _api_baseurl_re
-    
+
     beardypig <beardypig@protonmail.com> (15):
           travis: use pytest to run the tests for coverage
           Revert "stream.hds: ensure the live edge does not go past the latest fragment"
@@ -372,7 +369,7 @@ Thank you very much!
           utils.crypto: fix openssl_decrypt for py27
           build: update the bintray release notes for nightlies
           plugins.streamable: support for videos on streamable.com
-    
+
     beardypig <beardypig@users.noreply.github.com> (20):
           plugins.ustreamtv: support for the new ustream.tv API
           plugins.ustreamtv: add suppot for redirectLocked embedded streams
@@ -394,14 +391,14 @@ Thank you very much!
           cli: clarification of the --url option
           cli: add wildcard to --stream-types option
           plugins.rtve: stop IOError bubbling up on 404 errors
-    
+
     wlerin <wlerin@gmail.com> (2):
           Send Referer and UserAgent headers
           Fix method decorator
-    
+
     zp@users.noreply.github.com <zp@users.noreply.github.com> (1):
           New plugin for Facebook 360p streams https://gist.github.com/zp/c461761565dba764c90548758ee5ae9f
-    
+
 
 streamlink 0.5.0 (2017-04-04)
 -----------------------------
@@ -415,8 +412,6 @@ We've also gone ahead and removed dead plugins (sites which have gone down) as w
 
 Again, many thanks for those who have contributed!
 
-If you think that this application is helpful, please consider supporting the maintainers by [donating](https://streamlink.github.io/donate.html).
-
 Thank you very much!
 
 ::
@@ -424,27 +419,27 @@ Thank you very much!
     CallMeJuf <CallMeJuf@users.noreply.github.com> (2):
           Aliez plugin now accepts any TLD (#696)
           New Periscope URL #748
-    
+
     Daniel Draper <Germandrummer92@gmail.com> (2):
           More robust url regex for bigo plugin.
           More robust url regex for bigo plugin, added unittest
-    
+
     Josip Ponjavic <josipponjavic@gmail.com> (4):
           fix vaugnlive info_url
           Update archlinux installation instructions and maintainer info
           setup: choose pycrypto as a dependency using an environment variable
           Add info about pycrypto and pycountry variables to install doc
-    
+
     Mohamed El Morabity <melmorabity@users.noreply.github.com> (1):
           plugins.pluzz: fix SWF player URL search to bring back HDS stream support (#679)
-    
+
     back-to <back-to@users.noreply.github.com> (5):
           plugins.camsoda Added support for camsoda.com
           plugins.canlitv - Added new plugin canlitv
           Removed dead plugins (#702)
           plugins.camsoda - Added tests and small update for the plugin
           plugins.garena - Added new plugin garena
-    
+
     beardypig <beardypig@users.noreply.github.com> (11):
           plugins.bbciplayer: add support for BBC iPlayer live and VOD
           plugins.vaughnlive: updated player version and info URL
@@ -457,12 +452,12 @@ Thank you very much!
           plugins.googledocs: plugin to support playing videos stored on google docs
           plugins.googledocs: updated the url regex and added a status check
           plugins.googledrive: add googledrive support
-    
+
     steven7851 <steven7851@msn.com> (3):
           plugins.17media: Add support for HTTP stream
           plugins.17media: fix rtmp stream
           plugins.douyutv: support vod (#706)
-    
+
 
 streamlink 0.4.0 (2017-03-09)
 -----------------------------
@@ -476,7 +471,7 @@ We've also introduced a change for Streamlink to *not* check for new updates eac
 
 The major features of this release are:
   - New plugins added
-  - Ongoing support to current plugins via bug fixes 
+  - Ongoing support to current plugins via bug fixes
   - Ensure retries to HLS streams
   - Disable update check
 
@@ -487,10 +482,10 @@ Many thanks to all contributors who have contributed in this release!
     406NotAcceptable <406NotAcceptable@somewhere> (2):
           plugins.afreecatv: API changes
           plugins.connectcast: API changes
-    
+
     BackTo <back-to@users.noreply.github.com> (1):
           plugins.zdf_mediathek Added missing headers for http.get (#653)
-    
+
     Charlie Drage <charlie@charliedrage.com> (7):
           Updating the release script.
           0.3.1 Release
@@ -499,39 +494,39 @@ Many thanks to all contributors who have contributed in this release!
           Fix the CHANGELOG.rst
           0.3.2 Release
           Update underscores title release script (#563)
-    
+
     Forrest <gravyboat@users.noreply.github.com> (3):
           Update license and debian copyright (#515)
           Add a donation page (#578)
           Fix up the donate docs (#672)
-    
+
     Forrest Alvarez <gravyboat@users.noreply.github.com> (1):
           Update license and debian copyright
-    
+
     John Smith <v2.0@protonmail.com> (1):
           plugins.bongacams: a few small changes (#429)
-    
+
     Mohamed El Morabity <melmorabity@fedoraproject.org> (1):
           Check whether videos are DRM-protected Add log messages when no stream is available
-    
+
     Mohamed El Morabity <melmorabity@users.noreply.github.com> (3):
           Add support for replay.gulli.fr (#468)
           plugins.pluzz: add support for ludo.fr and zouzous.fr (#536)
           Add subtitle support for pluzz plugins (#646)
-    
+
     Scott Buettner <buettner.scott@live.com> (1):
           Fix Crunchyroll string.format in Python 2.6 (#539)
-    
+
     Sven <sven@androd.se> (1):
           Adding Huomao plugin with possibility for different stream qualities.
-    
+
     Sven Anderzén <svenanderzen@users.noreply.github.com> (1):
           Huomao plugin tests (#566)
-    
+
     back-to <back-to@users.noreply.github.com> (2):
           [earthcam] Added HLS, Fixed live RTMP and changes some stuff
           plugins.ard_mediathek added mediathek.daserste.de support
-    
+
     beardypig <beardypig@users.noreply.github.com> (74):
           plugins.schoolism: add support for schoolism.com
           plugins.earthcam: added support for live and archive cam streams
@@ -607,36 +602,36 @@ Many thanks to all contributors who have contributed in this release!
           plugins.wwenetwork: use the resolution and bitrate in the stream name
           docs: make the nightly installer link more obvious
           stream.hls: option to select a specific, non-standard audio channel
-    
+
     fozzy <fozzy@fozzy.co> (4):
           update douyutv plugin, use new API
           update to support different quality
           fix typo and indent
           correct typo
-    
+
     fozzy <fozzysec@gmail.com> (3):
           Add support for Huya.com in issue #425 (#465)
           Fix issue #426 on plugins/tga.py (#456)
           fix douyutv issue #637 (#666)
-    
+
     intact <intact.devel@gmail.com> (1):
           Add Rtvs.sk Plugin
-    
+
     steven7851 <steven7851@msn.com> (4):
           plugins.douyutv: fix room id regex (#514)
           plugins.pandatv: use Pandatv API v3 (#410)
           Add plugin for 17app.co (#502)
           plugins.zhanqi: use new api (#498)
-    
+
     wlerin <wlerin@gmail.com> (1):
           plugins.showroom: add support for showroom-live.com live streams (#633)
-    
+
 
 streamlink 0.3.2 (2017-02-10)
 -----------------------------
 0.3.2 release of Streamlink!
 
-A minor bug release of 0.3.2 to fix a few issues with stream providers. 
+A minor bug release of 0.3.2 to fix a few issues with stream providers.
 
 Thanks to all whom have contributed to this (tiny) release!
 
@@ -646,10 +641,10 @@ Thanks to all whom have contributed to this (tiny) release!
           Update release script again to include sdist
           Fix underlining issue
           Fix the CHANGELOG.rst
-    
+
     Sven <sven@androd.se> (1):
           Adding Huomao plugin with possibility for different stream qualities.
-    
+
     beardypig <beardypig@users.noreply.github.com> (7):
           Ensure retries with HLS Streams (#522)
           utils.l10n: add Country/Language classes, use pycountry is the iso modules are not available
@@ -658,10 +653,10 @@ Thanks to all whom have contributed to this (tiny) release!
           plugins.openrectv: add source quality for openrectv
           utils.l10n: default to en_US when an invalid locale is set
           stream.hls: pick a better default stream language
-    
+
     intact <intact.devel@gmail.com> (1):
           Add Rtvs.sk Plugin
-    
+
 
 streamlink 0.3.1 (2017-02-03)
 -----------------------------
@@ -675,22 +670,22 @@ Thanks again for all the contributions as well as updates!
 
     Charlie Drage <charlie@charliedrage.com> (1):
           Updating the release script.
-    
+
     Forrest <gravyboat@users.noreply.github.com> (1):
           Update license and debian copyright (#515)
-    
+
     Forrest Alvarez <gravyboat@users.noreply.github.com> (1):
           Update license and debian copyright
-    
+
     John Smith <v2.0@protonmail.com> (1):
           plugins.bongacams: a few small changes (#429)
-    
+
     Mohamed El Morabity <melmorabity@fedoraproject.org> (1):
           Check whether videos are DRM-protected Add log messages when no stream is available
-    
+
     Mohamed El Morabity <melmorabity@users.noreply.github.com> (1):
           Add support for replay.gulli.fr (#468)
-    
+
     beardypig <beardypig@users.noreply.github.com> (20):
           plugins.schoolism: add support for schoolism.com
           stream.hls_playlist: invalid durations in EXTINF lines are ignored
@@ -712,20 +707,20 @@ Thanks again for all the contributions as well as updates!
           plugins.twitch: update public API calls to use v5 API (#484)
           plugins.filmon: support for new site layout (#508)
           Support for Ceskatelevize streams (#520)
-    
+
     fozzy <fozzysec@gmail.com> (1):
           Add support for Huya.com in issue #425 (#465)
-    
+
     steven7851 <steven7851@msn.com> (1):
           plugins.douyutv: fix room id regex (#514)
-    
+
 
 streamlink 0.3.0 (2017-01-24)
 -------------------------------
 
 Release 0.3.0 of Streamlink!
 
-A lot of updates to each plugin (thank you @beardypig !), automated Windows releases, PEP8 formatting throughout Streamlink are some of the few updates to this release as we near a stable 1.0.0 release. 
+A lot of updates to each plugin (thank you @beardypig !), automated Windows releases, PEP8 formatting throughout Streamlink are some of the few updates to this release as we near a stable 1.0.0 release.
 
 Main features are:
   - Lot's of maintaining / updates to plugins
@@ -736,25 +731,25 @@ Main features are:
 
     Agustín Carrasco <asermax@gmail.com> (1):
           Links on crunchy's rss no longer contain the show name in the url (#379)
-    
+
     Brainzyy <Brainzyy@users.noreply.github.com> (1):
           Add basic tests for stream.me plugin (#391)
-    
+
     Javier Cantero <jcantero@escomposlinux.org> (2):
           plugins/twitch: use version v3 of the API
           plugins/twitch: use kraken URL
-    
+
     John Smith <v2.0@protonmail.com> (3):
           Added support for bongacams.com streams (#329)
           streamlink_cli.main: close stream_fd on exit (#427)
           streamlink_cli.utils.progress: write new line at finish (#442)
-    
+
     Max Riegler <rinukkusu@sub-r.de> (1):
           plugins.chaturbate: new regex (#457)
-    
+
     Michiel Sikma <michiel@wedemandhtml.com> (1):
           Update PLAYER_VERSION, as old one does not return data. Add ability to use streams with /embed/video in the URL, from embedded players. (#311)
-    
+
     Mohamed El Morabity <melmorabity@users.noreply.github.com> (6):
           Add support for pluzz.francetv.fr (#343)
           Fix ArteTV plugin (#385)
@@ -762,18 +757,18 @@ Main features are:
           Update installation instructions for Fedora (#443)
           Add support for Play TV (#439)
           Use token generator for HLS streams, as for HDS ones (#466)
-    
+
     RosadinTV <rosadintv@outlook.com> (1):
           --can-handle-url-no-redirect parameter added (#333)
-    
+
     Stefan Hanreich <stefanhani@gmail.com> (1):
           added chocolatey to the documentation (#380)
-    
+
     bastimeyer <mail@bastimeyer.de> (3):
           Automatically create Github releases
           Set changelog in automated github releases
           Add a github issue template
-    
+
     beardypig <beardypig@users.noreply.github.com> (55):
           plugins.tvcatchup: site layout changed, updated the stream regex to accommodate the change (#338)
           plugins.streamlive: streamlive.to have added some extra protection to their streams which currently prevents us from capturing them (#339)
@@ -830,20 +825,20 @@ Main features are:
           plugins.srgssr: fixed bug in api URL and fixed akamai urls with authparams
           cli: try to terminate the player process before killing it (if terminate takes too long)
           plugins.swisstxt: add support for the SRG SSR sites sports sections
-    
+
     fozzy <fozzysec@gmail.com> (1):
           Add plugin for huajiao.com and zhanqi.tv (#334)
-    
+
     sqrt2 <sqrt2@users.noreply.github.com> (1):
           Fix swf_url in livestream.com plugin (#428)
-    
+
     stepshal <nessento@openmailbox.org> (1):
           Remove trailing.
-    
+
     stepshal <stepshal@users.noreply.github.com> (2):
           Add blank line after class or function definition (#408)
           PEP8 (#414)
-    
+
 
 streamlink 0.2.0 (2016-12-16)
 -----------------------------
