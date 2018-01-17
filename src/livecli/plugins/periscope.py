@@ -1,5 +1,6 @@
 import re
 
+from livecli.exceptions import NoStreamsError
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
@@ -44,14 +45,20 @@ class Periscope(Plugin):
         if res.status_code in STATUS_UNAVAILABLE:
             return
 
-        playlist_url = http.json(res, schema=_stream_schema)
-        if "hls_url" in playlist_url:
-            return dict(replay=HLSStream(self.session, playlist_url["hls_url"]))
-        elif "replay_url" in playlist_url:
+        data = http.json(res, schema=_stream_schema)
+        if data.get("hls_url"):
+            hls_url = data["hls_url"]
+        elif data.get("replay_url"):
             self.logger.info("Live Stream ended, using replay instead")
-            return dict(replay=HLSStream(self.session, playlist_url["replay_url"]))
+            hls_url = data["replay_url"]
         else:
-            return
+            raise NoStreamsError(self.url)
+
+        streams = HLSStream.parse_variant_playlist(self.session, hls_url)
+        if not streams:
+            return {"live": HLSStream(self.session, hls_url)}
+        else:
+            return streams
 
 
 __plugin__ = Periscope
