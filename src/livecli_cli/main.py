@@ -966,6 +966,16 @@ def setup_plugin_options():
     if args.zattoo_purge_credentials:
         livecli.set_plugin_option("zattoo", "purge_credentials",
                                   args.zattoo_purge_credentials)
+    if args.afreeca_username:
+        livecli.set_plugin_option("afreeca", "username", args.afreeca_username)
+
+    if args.afreeca_username and not args.afreeca_password:
+        afreeca_password = console.askpass("Enter afreecatv account password: ")
+    else:
+        afreeca_password = args.afreeca_password
+
+    if afreeca_password:
+        livecli.set_plugin_option("afreeca", "password", afreeca_password)
 
     # Deprecated options
     if args.jtv_legacy_names:
