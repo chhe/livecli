@@ -15,7 +15,7 @@ def exit(msg):
     sys.exit()
 
 
-class LiveurlPlayer(object):
+class LivecliPlayer(object):
     def __init__(self):
         self.fd = None
         self.mainloop = gobject.MainLoop()
@@ -130,7 +130,7 @@ def main():
     stream = streams[quality]
 
     # Create the player and start playback
-    player = LiveurlPlayer()
+    player = LivecliPlayer()
 
     # Blocks until playback is done
     player.play(stream)

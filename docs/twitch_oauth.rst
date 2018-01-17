@@ -29,7 +29,7 @@ Twitch OAuth authentication
 
 You successfully authenticated Livecli with Twitch.
 
-Paste this into your :ref:`configuration file <cli-liveurlrc>`:
+Paste this into your :ref:`configuration file <cli-liveclirc>`:
 
 .. code-block:: bash
 

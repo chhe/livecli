@@ -14,7 +14,7 @@ from socks import __version__ as socks_version
 from time import sleep
 from websocket import __version__ as websocket_version
 
-from livecli import __version__ as liveurl_version
+from livecli import __version__ as livecli_version
 from livecli import (Livecli, StreamError, PluginError,
                         NoPluginError)
 from livecli.cache import Cache
@@ -81,7 +81,7 @@ def create_output():
                          "executable with --player.")
 
         if args.player_fifo:
-            pipename = "liveurlpipe-{0}".format(os.getpid())
+            pipename = "liveclipipe-{0}".format(os.getpid())
             console.logger.info("Creating pipe {0}", pipename)
 
             try:
@@ -699,7 +699,7 @@ def setup_plugins():
         load_plugins(args.plugin_dirs)
 
 
-def setup_liveurl():
+def setup_livecli():
     """Creates the Livecli session."""
     global livecli
 
@@ -1011,7 +1011,7 @@ def log_current_versions():
 
         console.logger.debug("OS:         {0}".format(os_version))
         console.logger.debug("Python:     {0}".format(platform.python_version()))
-        console.logger.debug("Livecli: {0}".format(liveurl_version))
+        console.logger.debug("Livecli: {0}".format(livecli_version))
         console.logger.debug("Requests({0}), Socks({1}), Websocket({2})".format(
             requests.__version__, socks_version, websocket_version))
 
@@ -1049,7 +1049,7 @@ def main():
     error_code = 0
 
     setup_args()
-    setup_liveurl()
+    setup_livecli()
     setup_plugins()
     setup_config_args()
     setup_console()

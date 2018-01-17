@@ -7,7 +7,7 @@ Livecli is a CLI utility that pipes flash videos from online streaming services 
 
 The main purpose of livecli is to convert CPU-heavy flash plugins to a less CPU-intensive format.
 
-Liveurl is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreamer] project.
+Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreamer] project.
 
 Please note that by using this application you're bypassing ads run by
 sites such as Twitch.tv. Please consider donating or paying for subscription

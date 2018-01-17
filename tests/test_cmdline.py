@@ -16,7 +16,7 @@ from livecli_cli.compat import is_win32
 PluginPath = os.path.join(os.path.dirname(__file__), "plugins")
 
 
-def setup_liveurl():
+def setup_livecli():
     livecli_cli.main.livecli = Livecli()
     livecli_cli.main.livecli.load_plugins(PluginPath)
     return livecli_cli.main.livecli
@@ -28,10 +28,10 @@ class TestCommandLineInvocation(unittest.TestCase):
     """
 
     @patch('livecli_cli.main.CONFIG_FILES', ["/dev/null"])
-    @patch('livecli_cli.main.setup_liveurl', side_effect=setup_liveurl)
+    @patch('livecli_cli.main.setup_livecli', side_effect=setup_livecli)
     @patch('subprocess.Popen')
     @patch('sys.argv')
-    def _test_args(self, args, commandline, mock_argv, mock_popen, mock_setup_liveurl, passthrough=False, exit_code=0):
+    def _test_args(self, args, commandline, mock_argv, mock_popen, mock_setup_livecli, passthrough=False, exit_code=0):
         mock_argv.__getitem__.side_effect = lambda x: args[x]
 
         def side_effect(results):
@@ -49,7 +49,7 @@ class TestCommandLineInvocation(unittest.TestCase):
             actual_exit_code = exc.code
 
         self.assertEqual(exit_code, actual_exit_code)
-        mock_setup_liveurl.assert_called_with()
+        mock_setup_livecli.assert_called_with()
         if not passthrough:
             mock_popen.assert_called_with(commandline, stderr=ANY, stdout=ANY, bufsize=ANY, stdin=ANY)
         else:

@@ -4,7 +4,7 @@ from string import printable
 from textwrap import dedent
 
 from .constants import (
-    LIVEURL_VERSION, STREAM_PASSTHROUGH, DEFAULT_PLAYER_ARGUMENTS
+    LIVECLI_VERSION, STREAM_PASSTHROUGH, DEFAULT_PLAYER_ARGUMENTS
 )
 from .utils import find_default_player
 
@@ -218,7 +218,7 @@ general.add_argument(
 general.add_argument(
     "-V", "--version",
     action="version",
-    version="%(prog)s {0}".format(LIVEURL_VERSION),
+    version="%(prog)s {0}".format(LIVECLI_VERSION),
     help="""
     Show version number and exit.
     """

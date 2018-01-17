@@ -84,7 +84,7 @@ __credits__ = [
 ]
 
 from .api import streams
-from .exceptions import (LiveurlError, PluginError, NoStreamsError,
+from .exceptions import (LivecliError, PluginError, NoStreamsError,
                          NoPluginError, StreamError)
 from .session import Livecli
 

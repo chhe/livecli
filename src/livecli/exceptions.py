@@ -1,13 +1,13 @@
-class LiveurlError(Exception):
+class LivecliError(Exception):
     """Any error caused by Livecli will be caught
        with this exception."""
 
 
-class PluginError(LiveurlError):
+class PluginError(LivecliError):
     """Plugin related error."""
 
 
-class NoStreamsError(LiveurlError):
+class NoStreamsError(LivecliError):
     def __init__(self, url):
         self.url = url
         err = "No streams found on this URL: {0}".format(url)
@@ -18,9 +18,9 @@ class NoPluginError(PluginError):
     """No relevant plugin has been loaded."""
 
 
-class StreamError(LiveurlError):
+class StreamError(LivecliError):
     """Stream related error."""
 
 
-__all__ = ["LiveurlError", "PluginError", "NoPluginError",
+__all__ = ["LivecliError", "PluginError", "NoPluginError",
            "NoStreamsError", "StreamError"]

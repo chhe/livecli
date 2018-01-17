@@ -112,7 +112,7 @@ cat >"${build_dir}/installer_tmpl.nsi" <<EOF
 
     Function EditConfig
         SetShellVarContext current
-        Exec '"\$WINDIR\notepad.exe" "\$APPDATA\livecli\liveurlrc"'
+        Exec '"\$WINDIR\notepad.exe" "\$APPDATA\livecli\liveclirc"'
         SetShellVarContext all
     FunctionEnd
 
@@ -145,7 +145,7 @@ SubSection /e "Bundled tools" bundled
         SetOutPath "\$INSTDIR\rtmpdump"
         File /r "rtmpdump\*.*"
         SetShellVarContext current
-        \${ConfigWrite} "\$APPDATA\livecli\liveurlrc" "rtmpdump=" "\$INSTDIR\rtmpdump\rtmpdump.exe" \$R0
+        \${ConfigWrite} "\$APPDATA\livecli\liveclirc" "rtmpdump=" "\$INSTDIR\rtmpdump\rtmpdump.exe" \$R0
         SetShellVarContext all
         SetOutPath -
     SectionEnd
@@ -154,7 +154,7 @@ SubSection /e "Bundled tools" bundled
         SetOutPath "\$INSTDIR\ffmpeg"
         File /r "ffmpeg\*.*"
         SetShellVarContext current
-        \${ConfigWrite} "\$APPDATA\livecli\liveurlrc" "ffmpeg-ffmpeg=" "\$INSTDIR\ffmpeg\ffmpeg.exe" \$R0
+        \${ConfigWrite} "\$APPDATA\livecli\liveclirc" "ffmpeg-ffmpeg=" "\$INSTDIR\ffmpeg\ffmpeg.exe" \$R0
         SetShellVarContext all
         SetOutPath -
     SectionEnd
@@ -167,7 +167,7 @@ SubSectionEnd
     SetShellVarContext current # install the config file for the current user
     SetOverwrite off # config file we don't want to overwrite
     SetOutPath \$APPDATA\livecli
-    File /r "liveurlrc"
+    File /r "liveclirc"
     SetOverwrite ifnewer
     SetOutPath -
     SetShellVarContext all
@@ -226,9 +226,9 @@ EOF
 
 echo "Building Python 3 installer" 1>&2
 
-# copy the liveurlrc file to the build dir, we cannot use the Include.files property in the config file
+# copy the liveclirc file to the build dir, we cannot use the Include.files property in the config file
 # because those files will always overwrite, and for a config file we do not want to overwrite
-cp "win32/liveurlrc" "${nsis_dir}/liveurlrc"
+cp "win32/liveclirc" "${nsis_dir}/liveclirc"
 
 # copy the ffmpeg and rtmpdump directories to the install build dir
 cp -r "win32/ffmpeg" "${nsis_dir}/"

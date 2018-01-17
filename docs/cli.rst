@@ -69,7 +69,7 @@ specify ``worst`` to get the lowest quality.
 Now that you have a basic grasp of how Livecli works, you may want to look
 into customizing it to your own needs, such as:
 
-- Creating a :ref:`configuration file <cli-liveurlrc>` of options you
+- Creating a :ref:`configuration file <cli-liveclirc>` of options you
   want to use
 - Setting up your player to :ref:`cache some data <issues-player_caching>`
   before playing the stream to help avoiding buffering issues
@@ -82,7 +82,7 @@ into customizing it to your own needs, such as:
 .. _mpv: http://mpv.io/
 
 
-.. _cli-liveurlrc:
+.. _cli-liveclirc:
 
 Configuration file
 ------------------
@@ -97,16 +97,16 @@ your platform:
 Platform          Location
 ================= ====================================================
 Unix-like (POSIX) - $XDG_CONFIG_HOME/livecli/config
-                  - ~/.liveurlrc
-Windows           %APPDATA%\\livecli\\liveurlrc
+                  - ~/.liveclirc
+Windows           %APPDATA%\\livecli\\liveclirc
 ================= ====================================================
 
 .. note::
-  Currently the Windows installer does not create the liveurlrc file. This
+  Currently the Windows installer does not create the liveclirc file. This
   is a known issue being tracked
   `here <https://github.com/livecli/livecli/issues/81>`_. An example
   configuration file is available in the
-  `repo <https://github.com/livecli/livecli/blob/master/win32/liveurlrc>`_.
+  `repo <https://github.com/livecli/livecli/blob/master/win32/liveclirc>`_.
 
 You can also specify the location yourself using the :option:`--config` option.
 
@@ -169,8 +169,8 @@ Examples
 Platform          Location
 ================= ====================================================
 Unix-like (POSIX) - $XDG_CONFIG_HOME/livecli/config\ **.twitch**
-                  - ~/.liveurlrc\ **.ustreamtv**
-Windows           %APPDATA%\\livecli\\liveurlrc\ **.youtube**
+                  - ~/.liveclirc\ **.ustreamtv**
+Windows           %APPDATA%\\livecli\\liveclirc\ **.youtube**
 ================= ====================================================
 
 Have a look at the :ref:`list of plugins <plugin_matrix>` to see
@@ -221,7 +221,7 @@ asking your username and password again.
 
 Nevertheless, these credentials are valid for a limited amount of time, so it
 might be a good idea to save your username and password in your
-:ref:`configuration file <cli-liveurlrc>` anyway.
+:ref:`configuration file <cli-liveclirc>` anyway.
 
 .. warning::
 

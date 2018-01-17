@@ -17,7 +17,7 @@ def get_session():
     return s
 
 
-class TestLiveurlAPI(unittest.TestCase):
+class TestLivecliAPI(unittest.TestCase):
     @patch('livecli.api.Livecli', side_effect=get_session)
     def test_find_test_plugin(self, session):
         self.assertTrue(

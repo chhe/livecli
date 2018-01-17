@@ -78,7 +78,7 @@ audio_only.m3u8
 
         return playlist + playlistEnd
 
-    def start_liveurl(self, masterPlaylist, kwargs={}):
+    def start_livecli(self, masterPlaylist, kwargs={}):
         print("Executing livecli")
         livecli = Livecli()
 
@@ -105,11 +105,11 @@ audio_only.m3u8
                 mock.get("http://mocked/path/stream{0}.ts".format(i), content=stream)
 
             # Start livecli on the generated stream
-            liveurlResult = self.start_liveurl("http://mocked/path/master.m3u8", {'start_offset': 1, 'duration': 1})
+            livecliResult = self.start_livecli("http://mocked/path/master.m3u8", {'start_offset': 1, 'duration': 1})
 
         # Check result
         expectedResult = b''.join(streams[1:3])
-        self.assertEqual(liveurlResult, expectedResult)
+        self.assertEqual(livecliResult, expectedResult)
 
     def test_hls_encryted_aes128(self):
         # Encryption parameters
@@ -123,7 +123,7 @@ audio_only.m3u8
         playlist1 = self.getPlaylist(aesIv, "stream{0}.ts.enc")
         playlist2 = self.getPlaylist(aesIv, "stream2_{0}.ts.enc") + "#EXT-X-ENDLIST\n"
 
-        liveurlResult = None
+        livecliResult = None
         with requests_mock.Mocker() as mock:
             mock.get("http://mocked/path/master.m3u8", text=masterPlaylist)
             mock.get("http://mocked/path/playlist.m3u8", [{'text': playlist1}, {'text': playlist2}])
@@ -134,12 +134,12 @@ audio_only.m3u8
                 mock.get("http://mocked/path/stream2_{0}.ts.enc".format(i), content=encryptedStream)
 
             # Start livecli on the generated stream
-            liveurlResult = self.start_liveurl("http://mocked/path/master.m3u8")
+            livecliResult = self.start_livecli("http://mocked/path/master.m3u8")
 
         # Check result
         # Live streams starts the last 3 segments from the playlist
         expectedResult = b''.join(clearStreams[1:] + clearStreams)
-        self.assertEqual(liveurlResult, expectedResult)
+        self.assertEqual(livecliResult, expectedResult)
 
 
 if __name__ == "__main__":
