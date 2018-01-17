@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import StreamMapper, http, validate
-from streamlink.stream import HLSStream, HDSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import StreamMapper, http, validate
+from livecli.stream import HLSStream, HDSStream
 
 API_URL = "http://www.svt.se/videoplayer-api/video/{0}"
 

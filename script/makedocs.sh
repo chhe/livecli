@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Execute this at the base of the streamlink repo.
+# Execute this at the base of the livecli repo.
 
 if [ "$#" -ne 1 ] ; then
-    echo "Path to streamlink.github.io repo is required."
+    echo "Path to livecli.github.io repo is required."
     exit 1
 fi
 

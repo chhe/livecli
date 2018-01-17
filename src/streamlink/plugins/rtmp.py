@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.plugin import parse_url_params
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.plugin import parse_url_params
+from livecli.stream import RTMPStream
 
 
 class RTMPPlugin(Plugin):

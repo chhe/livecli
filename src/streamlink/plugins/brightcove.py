@@ -3,13 +3,13 @@ import re
 from binascii import hexlify
 from io import BytesIO
 
-from streamlink import PluginError
-from streamlink.packages.flashmedia import AMFMessage, AMFPacket
-from streamlink.packages.flashmedia.types import AMF3ObjectBase
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate, useragents
-from streamlink.stream import HLSStream, HTTPStream, RTMPStream
-from streamlink.compat import urlparse, parse_qsl, urlencode
+from livecli import PluginError
+from livecli.packages.flashmedia import AMFMessage, AMFPacket
+from livecli.packages.flashmedia.types import AMF3ObjectBase
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate, useragents
+from livecli.stream import HLSStream, HTTPStream, RTMPStream
+from livecli.compat import urlparse, parse_qsl, urlencode
 
 
 @AMF3ObjectBase.register("com.brightcove.experience.ViewerExperienceRequest")

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.btv import BTV
+from livecli.plugins.btv import BTV
 
 
 class TestPluginBTV(unittest.TestCase):

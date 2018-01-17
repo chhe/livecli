@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.bigo import Bigo
+from livecli.plugins.bigo import Bigo
 
 
 class TestPluginBigo(unittest.TestCase):

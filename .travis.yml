@@ -5,7 +5,7 @@ matrix:
   - python: '2.7'
   - python: '3.4'
   - python: '3.5'
-    env: BUILD_DOCS=yes BUILD_INSTALLER=yes STREAMLINK_INSTALLER_DIST_DIR=$TRAVIS_BUILD_DIR/dist/nsis
+    env: BUILD_DOCS=yes BUILD_INSTALLER=yes LIVECLI_INSTALLER_DIST_DIR=$TRAVIS_BUILD_DIR/dist/nsis
   - python: '3.6'
   - python: '3.7-dev'
   allow_failures:
@@ -44,7 +44,7 @@ before_deploy:
 deploy:
   - provider: releases
     api_key: "${RELEASES_API_KEY}"
-    file: "${STREAMLINK_INSTALLER_DIST_DIR}/streamlink-${TRAVIS_TAG}.exe"
+    file: "${LIVECLI_INSTALLER_DIST_DIR}/livecli-${TRAVIS_TAG}.exe"
     file_glob: true
     skip_cleanup: true
     on:

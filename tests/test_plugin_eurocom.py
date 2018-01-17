@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.eurocom import Eurocom
+from livecli.plugins.eurocom import Eurocom
 
 
 class TestPluginEurocom(unittest.TestCase):

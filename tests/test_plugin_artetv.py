@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.artetv import ArteTV
+from livecli.plugins.artetv import ArteTV
 
 
 class TestPluginArteTV(unittest.TestCase):

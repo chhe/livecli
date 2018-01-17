@@ -1,10 +1,10 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream, HTTPStream, RTMPStream
-from streamlink.utils import parse_json
-from streamlink.plugins.common_jwplayer import _js_to_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream, HTTPStream, RTMPStream
+from livecli.utils import parse_json
+from livecli.plugins.common_jwplayer import _js_to_json
 
 
 class TV5Monde(Plugin):

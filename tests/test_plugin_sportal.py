@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.sportal import Sportal
+from livecli.plugins.sportal import Sportal
 
 
 class TestPluginSportal(unittest.TestCase):

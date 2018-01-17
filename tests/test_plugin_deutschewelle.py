@@ -2,7 +2,7 @@
 
 import unittest
 
-from streamlink.plugins.deutschewelle import DeutscheWelle
+from livecli.plugins.deutschewelle import DeutscheWelle
 
 
 class TestPluginDeutscheWelle(unittest.TestCase):

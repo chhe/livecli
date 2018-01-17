@@ -1,9 +1,9 @@
 import hashlib
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HDSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HDSStream
 
 # Got the secret from the swf with rev number location
 # (tv/wat/player/media/Media.as)

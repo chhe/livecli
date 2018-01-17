@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.chaturbate import Chaturbate
+from livecli.plugins.chaturbate import Chaturbate
 
 
 class TestPluginChaturbate(unittest.TestCase):

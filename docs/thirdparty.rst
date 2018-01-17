@@ -20,7 +20,7 @@
        - that is neutral and only shows your application
     5. optionally add more fields like a URL to the source code repository, a larger info or features text, etc.
 
-    Please be aware that the Streamlink team may edit and remove your entry at any time.
+    Please be aware that the Livecli team may edit and remove your entry at any time.
 
     Thank you! :)
 

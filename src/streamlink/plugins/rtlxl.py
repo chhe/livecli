@@ -1,9 +1,9 @@
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, RTMPStream
 
 _url_re = re.compile("""http(?:s)?://(?:\w+\.)?rtl.nl/video/(?P<uuid>.*?)\Z""", re.IGNORECASE)
 

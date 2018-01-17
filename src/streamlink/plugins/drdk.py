@@ -2,9 +2,9 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream, HDSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream, HDSStream
 
 LIVE_CHANNELS_API_URL = "http://www.dr.dk/tv/external/channels?mediaType=tv"
 VOD_API_URL = "http://www.dr.dk/mu/programcard/expanded/{0}"

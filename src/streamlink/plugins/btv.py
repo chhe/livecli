@@ -1,13 +1,13 @@
 from __future__ import print_function
 import re
 
-from streamlink import PluginError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
-from streamlink.plugin import PluginOptions
+from livecli import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
+from livecli.plugin import PluginOptions
 
 
 class BTV(Plugin):

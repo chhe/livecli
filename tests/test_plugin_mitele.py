@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.mitele import Mitele
+from livecli.plugins.mitele import Mitele
 
 
 class TestPluginMitele(unittest.TestCase):

@@ -1,14 +1,14 @@
 from __future__ import print_function
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.compat import urlparse, parse_qsl
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.stream import RTMPStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.compat import urlparse, parse_qsl
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.stream import RTMPStream
+from livecli.utils import parse_json
 
 
 class TV8cat(Plugin):

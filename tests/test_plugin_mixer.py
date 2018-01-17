@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.mixer import Mixer
+from livecli.plugins.mixer import Mixer
 
 
 class TestPluginMixer(unittest.TestCase):

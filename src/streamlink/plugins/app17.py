@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents
-from streamlink.stream import HLSStream, RTMPStream, HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents
+from livecli.stream import HLSStream, RTMPStream, HTTPStream
 
 API_URL = "https://api-dsa.17app.co/api/v1/liveStreams/getLiveStreamInfo"
 

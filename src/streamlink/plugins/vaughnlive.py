@@ -4,9 +4,9 @@ import itertools
 import ssl
 import websocket
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import useragents, http
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import useragents, http
+from livecli.stream import RTMPStream
 
 _url_re = re.compile(r"""
     http(s)?://(\w+\.)?

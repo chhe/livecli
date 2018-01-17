@@ -8,24 +8,24 @@ try:
 except ImportError:
     CAN_DECRYPT = False
 
-from streamlink.compat import range
-from streamlink.exceptions import StreamError
-from streamlink.packages.flashmedia.tag import (
+from livecli.compat import range
+from livecli.exceptions import StreamError
+from livecli.packages.flashmedia.tag import (
     AACAudioData, AudioData, AVCVideoData, RawData, Tag, VideoData
 )
-from streamlink.packages.flashmedia.tag import (
+from livecli.packages.flashmedia.tag import (
     AAC_PACKET_TYPE_RAW, AAC_PACKET_TYPE_SEQUENCE_HEADER,
     AUDIO_BIT_RATE_16, AUDIO_CODEC_ID_AAC, AUDIO_RATE_44_KHZ, AUDIO_TYPE_STEREO,
     AVC_PACKET_TYPE_NALU, AVC_PACKET_TYPE_SEQUENCE_HEADER,
     TAG_TYPE_AUDIO, TAG_TYPE_VIDEO, VIDEO_CODEC_ID_AVC,
     VIDEO_FRAME_TYPE_INTER_FRAME, VIDEO_FRAME_TYPE_KEY_FRAME
 )
-from streamlink.packages.flashmedia.types import U8, U16BE, U32BE
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import Stream, StreamIOIterWrapper
-from streamlink.stream.flvconcat import FLVTagConcat
-from streamlink.stream.segmented import (
+from livecli.packages.flashmedia.types import U8, U16BE, U32BE
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import Stream, StreamIOIterWrapper
+from livecli.stream.flvconcat import FLVTagConcat
+from livecli.stream.segmented import (
     SegmentedStreamReader, SegmentedStreamWriter, SegmentedStreamWorker
 )
 

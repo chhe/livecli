@@ -1,13 +1,13 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import StreamMapper
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api import useragents
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
-from streamlink.utils import parse_json, parse_xml
+from livecli.plugin import Plugin
+from livecli.plugin.api import StreamMapper
+from livecli.plugin.api import http, validate
+from livecli.plugin.api import useragents
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.utils import parse_json, parse_xml
 
 
 class AdultSwim(Plugin):

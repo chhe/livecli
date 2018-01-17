@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tigerdile import Tigerdile
+from livecli.plugins.tigerdile import Tigerdile
 
 
 class TestPluginTigerdile(unittest.TestCase):

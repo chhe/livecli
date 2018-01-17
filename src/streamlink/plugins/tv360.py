@@ -2,11 +2,11 @@ from __future__ import print_function
 import re
 from functools import partial
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 
 class TV360(Plugin):

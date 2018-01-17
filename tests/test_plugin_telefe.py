@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.telefe import Telefe
+from livecli.plugins.telefe import Telefe
 
 
 class TestPluginTelefe(unittest.TestCase):

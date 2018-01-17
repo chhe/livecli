@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 import re
 
-from streamlink.exceptions import NoStreamsError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.plugin.api.utils import parse_json
-from streamlink.stream import HLSStream
+from livecli.exceptions import NoStreamsError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.plugin.api.utils import parse_json
+from livecli.stream import HLSStream
 
 
 class QQ(Plugin):
-    """Streamlink Plugin for live.qq.com"""
+    """Livecli Plugin for live.qq.com"""
 
     _data_schema = validate.Schema(
         {

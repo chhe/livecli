@@ -1,16 +1,16 @@
 import re
 
-from streamlink.exceptions import NoStreamsError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.plugin.api.utils import parse_json
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
+from livecli.exceptions import NoStreamsError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.plugin.api.utils import parse_json
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
 
 
 class MLGTV(Plugin):
-    """Streamlink Plugin for Livestreams on mlg.tv / majorleaguegaming.com"""
+    """Livecli Plugin for Livestreams on mlg.tv / majorleaguegaming.com"""
 
     PLAYER_EMBED_URL = "http://player2.majorleaguegaming.com/api/v2/player/embed/live/?ch={0}"
     CHANNEL_API = "https://www.majorleaguegaming.com/api/channel/{0}"

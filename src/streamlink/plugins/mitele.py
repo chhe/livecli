@@ -2,14 +2,14 @@ from __future__ import print_function
 
 import re
 
-from streamlink import NoStreamsError
-from streamlink.compat import urljoin
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli import NoStreamsError
+from livecli.compat import urljoin
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 
 class Mitele(Plugin):
@@ -17,7 +17,7 @@ class Mitele(Plugin):
     _suffix_re = re.compile(r"""acl=(?P<path>[^"'*]+)""")
 
     # For more informations see:
-    # https://github.com/streamlink/streamlink/issues/1337
+    # https://github.com/livecli/livecli/issues/1337
     livehlsdai = "https://livehlsdai-i.akamaihd.net"
     mdslivehls = "https://mdslivehls-i.akamaihd.net"
 

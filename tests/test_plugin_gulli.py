@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.gulli import Gulli
+from livecli.plugins.gulli import Gulli
 
 
 class TestPluginGulli(unittest.TestCase):

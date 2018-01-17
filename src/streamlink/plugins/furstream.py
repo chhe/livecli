@@ -1,8 +1,8 @@
 ﻿import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream
 
 _url_re = re.compile(r"^http(s)?://(\w+\.)?furstre\.am/stream/.+")
 _stream_url_re = re.compile(r"<source src=\"([^\"]+)\"")

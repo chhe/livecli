@@ -3,10 +3,10 @@ import types
 import time
 import json
 
-from streamlink.compat import quote
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HTTPStream
+from livecli.compat import quote
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HTTPStream
 
 ROOM_API = "https://www.panda.tv/api_room_v3?token=&hostid={0}&roomid={1}&roomkey={2}&_={3}&param={4}&time={5}&sign={6}"
 ROOM_API_V2 = "https://www.panda.tv/api_room_v2?roomid={0}&_={1}"

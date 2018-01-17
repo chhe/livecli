@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.streamme import StreamMe
+from livecli.plugins.streamme import StreamMe
 
 
 class TestPluginStreamMe(unittest.TestCase):

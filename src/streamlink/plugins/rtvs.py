@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HLSStream
 
 RUURL = "b=chrome&p=win&v=56&f=0&d=1"
 

@@ -3,9 +3,9 @@ import re
 import string
 import datetime
 
-from streamlink.plugin import Plugin, PluginError, PluginOptions
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin, PluginError, PluginOptions
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
 
 API_URL = "https://api.crunchyroll.com/{0}.0.json"
 API_DEFAULT_LOCALE = "en_US"

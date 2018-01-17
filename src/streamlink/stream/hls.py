@@ -3,10 +3,10 @@ from collections import defaultdict, namedtuple
 
 from Crypto.Cipher import AES
 
-from streamlink.stream import hls_playlist
-from streamlink.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
-from streamlink.stream.http import HTTPStream
-from streamlink.stream.segmented import (SegmentedStreamReader,
+from livecli.stream import hls_playlist
+from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
+from livecli.stream.http import HTTPStream
+from livecli.stream.segmented import (SegmentedStreamReader,
                                          SegmentedStreamWriter,
                                          SegmentedStreamWorker)
 from ..exceptions import StreamError

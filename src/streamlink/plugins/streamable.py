@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HTTPStream
-from streamlink.utils import parse_json, update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HTTPStream
+from livecli.utils import parse_json, update_scheme
 
 
 class Streamable(Plugin):

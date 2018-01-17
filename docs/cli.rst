@@ -6,24 +6,24 @@ Command-Line Interface
 Tutorial
 --------
 
-Streamlink is command-line application, this means the commands described
+Livecli is command-line application, this means the commands described
 here should be typed into a terminal. On Windows this means you should open
 the `command prompt`_ or `PowerShell`_, on Mac OS X open the `Terminal`_ app
 and if you're on Linux or BSD you probably already know the drill.
 
-The way Streamlink works is that it's only a means to extract and transport
-the streams, and the playback is done by an external video player. Streamlink
+The way Livecli works is that it's only a means to extract and transport
+the streams, and the playback is done by an external video player. Livecli
 works best with `VLC`_ or `mpv`_, which are also cross-platform, but other players
 may be compatible too, see the :ref:`Players` page for a complete overview.
 
-Now to get into actually using Streamlink, let's say you want to watch the
-stream located on http://twitch.tv/day9tv, you start off by telling Streamlink
+Now to get into actually using Livecli, let's say you want to watch the
+stream located on http://twitch.tv/day9tv, you start off by telling Livecli
 where to attempt to extract streams from. This is done by giving the URL to the
-command :command:`streamlink` as the first argument:
+command :command:`livecli` as the first argument:
 
 .. code-block:: console
 
-    $ streamlink twitch.tv/day9tv
+    $ livecli twitch.tv/day9tv
     [cli][info] Found matching plugin twitch for URL twitch.tv/day9tv
     Available streams: audio, high, low, medium, mobile (worst), source (best)
 
@@ -33,7 +33,7 @@ command :command:`streamlink` as the first argument:
     e.g. just ``twitch.tv/day9tv`` is enough and quicker to type.
 
 
-This command will tell Streamlink to attempt to extract streams from the URL
+This command will tell Livecli to attempt to extract streams from the URL
 specified, and if it's successful, print out a list of available streams to choose
 from.
 
@@ -44,17 +44,17 @@ even on Windows.
 
 .. code-block:: console
 
-    $ streamlink hlsvariant://file://C:/hls/playlist.m3u8
+    $ livecli hlsvariant://file://C:/hls/playlist.m3u8
     [cli][info] Found matching plugin stream for URL hlsvariant://file://C:/hls/playlist.m3u8
     Available streams: 180p (worst), 272p, 408p, 554p, 818p, 1744p (best)
 
 
 To select a stream and start playback, we simply add the stream name as a second
-argument to the :command:`streamlink` command:
+argument to the :command:`livecli` command:
 
 .. sourcecode:: console
 
-    $ streamlink twitch.tv/day9tv source
+    $ livecli twitch.tv/day9tv source
     [cli][info] Found matching plugin twitch for URL twitch.tv/day9tv
     [cli][info] Opening stream: source (hls)
     [cli][info] Starting player: vlc
@@ -62,14 +62,14 @@ argument to the :command:`streamlink` command:
 
 The stream you chose should now be playing in the player. It's a common use case
 to just want start the highest quality stream and not be bothered with what it's
-named. To do this just specify ``best`` as the stream name and Streamlink will
+named. To do this just specify ``best`` as the stream name and Livecli will
 attempt to rank the streams and open the one of highest quality. You can also
 specify ``worst`` to get the lowest quality.
 
-Now that you have a basic grasp of how Streamlink works, you may want to look
+Now that you have a basic grasp of how Livecli works, you may want to look
 into customizing it to your own needs, such as:
 
-- Creating a :ref:`configuration file <cli-streamlinkrc>` of options you
+- Creating a :ref:`configuration file <cli-liveurlrc>` of options you
   want to use
 - Setting up your player to :ref:`cache some data <issues-player_caching>`
   before playing the stream to help avoiding buffering issues
@@ -82,31 +82,31 @@ into customizing it to your own needs, such as:
 .. _mpv: http://mpv.io/
 
 
-.. _cli-streamlinkrc:
+.. _cli-liveurlrc:
 
 Configuration file
 ------------------
 
-Writing the command-line options every time is inconvenient, that's why Streamlink
+Writing the command-line options every time is inconvenient, that's why Livecli
 is capable of reading options from a configuration file instead.
 
-Streamlink will look for config files in different locations depending on
+Livecli will look for config files in different locations depending on
 your platform:
 
 ================= ====================================================
 Platform          Location
 ================= ====================================================
-Unix-like (POSIX) - $XDG_CONFIG_HOME/streamlink/config
-                  - ~/.streamlinkrc
-Windows           %APPDATA%\\streamlink\\streamlinkrc
+Unix-like (POSIX) - $XDG_CONFIG_HOME/livecli/config
+                  - ~/.liveurlrc
+Windows           %APPDATA%\\livecli\\liveurlrc
 ================= ====================================================
 
 .. note::
-  Currently the Windows installer does not create the streamlinkrc file. This
+  Currently the Windows installer does not create the liveurlrc file. This
   is a known issue being tracked
-  `here <https://github.com/streamlink/streamlink/issues/81>`_. An example
+  `here <https://github.com/livecli/livecli/issues/81>`_. An example
   configuration file is available in the
-  `repo <https://github.com/streamlink/streamlink/blob/master/win32/streamlinkrc>`_.
+  `repo <https://github.com/livecli/livecli/blob/master/win32/liveurlrc>`_.
 
 You can also specify the location yourself using the :option:`--config` option.
 
@@ -159,7 +159,7 @@ can be accomplished by placing those settings inside a plugin specific
 config file. Options inside these config files will override the main
 config file when a URL matching the plugin is used.
 
-Streamlink expects this config to be named like the main config but
+Livecli expects this config to be named like the main config but
 with ``.<plugin name>`` attached to the end.
 
 Examples
@@ -168,9 +168,9 @@ Examples
 ================= ====================================================
 Platform          Location
 ================= ====================================================
-Unix-like (POSIX) - $XDG_CONFIG_HOME/streamlink/config\ **.twitch**
-                  - ~/.streamlinkrc\ **.ustreamtv**
-Windows           %APPDATA%\\streamlink\\streamlinkrc\ **.youtube**
+Unix-like (POSIX) - $XDG_CONFIG_HOME/livecli/config\ **.twitch**
+                  - ~/.liveurlrc\ **.ustreamtv**
+Windows           %APPDATA%\\livecli\\liveurlrc\ **.youtube**
 ================= ====================================================
 
 Have a look at the :ref:`list of plugins <plugin_matrix>` to see
@@ -183,19 +183,19 @@ Plugin specific usage
 Authenticating with Twitch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It's possible to access subscription content on Twitch by giving Streamlink
+It's possible to access subscription content on Twitch by giving Livecli
 access to your account.
 
-Authentication is done by creating an OAuth token that Streamlink will
+Authentication is done by creating an OAuth token that Livecli will
 use to access your account. It's done like this:
 
 .. sourcecode:: console
 
-    $ streamlink --twitch-oauth-authenticate
+    $ livecli --twitch-oauth-authenticate
 
 
 This will open a web browser where Twitch will ask you if you want to give
-Streamlink permission to access your account, then forwards you to a page
+Livecli permission to access your account, then forwards you to a page
 with further instructions on how to use it.
 
 
@@ -210,18 +210,18 @@ You can login like this:
 
 .. sourcecode:: console
 
-    $ streamlink --crunchyroll-username=xxxx --crunchyroll-password=xxx http://crunchyroll.com/a-crunchyroll-episode-link
+    $ livecli --crunchyroll-username=xxxx --crunchyroll-password=xxx http://crunchyroll.com/a-crunchyroll-episode-link
 
 .. note::
 
-    If you omit the password, streamlink will ask for it.
+    If you omit the password, livecli will ask for it.
 
 Once logged in, the plugin makes sure to save the session credentials to avoid
 asking your username and password again.
 
 Nevertheless, these credentials are valid for a limited amount of time, so it
 might be a good idea to save your username and password in your
-:ref:`configuration file <cli-streamlinkrc>` anyway.
+:ref:`configuration file <cli-liveurlrc>` anyway.
 
 .. warning::
 
@@ -249,27 +249,27 @@ in again using your username and password.
 Sideloading plugins
 -------------------
 
-Streamlink will attempt to load standalone plugins from these directories:
+Livecli will attempt to load standalone plugins from these directories:
 
 ================= ====================================================
 Platform          Location
 ================= ====================================================
-Unix-like (POSIX) $XDG_CONFIG_HOME/streamlink/plugins
-Windows           %APPDATA%\\streamlink\\plugins
+Unix-like (POSIX) $XDG_CONFIG_HOME/livecli/plugins
+Windows           %APPDATA%\\livecli\\plugins
 ================= ====================================================
 
 .. note::
 
     If a plugin is added with the same name as a built-in plugin then
     the added plugin will take precedence. This is useful if you want
-    to upgrade plugins independently of the Streamlink version.
+    to upgrade plugins independently of the Livecli version.
 
 
 Playing built-in streaming protocols directly
 ---------------------------------------------
 
 There are many types of streaming protocols used by services today and
-Streamlink supports most of them. It's possible to tell Streamlink
+Livecli supports most of them. It's possible to tell Livecli
 to access a streaming protocol directly instead of relying on a plugin
 to extract the streams from a URL for you.
 
@@ -282,7 +282,7 @@ Accessing a stream that requires extra parameters to be passed along
 
 .. code-block:: console
 
-    $ streamlink "rtmp://streaming.server.net/playpath live=1 swfVfy=http://server.net/flashplayer.swf"
+    $ livecli "rtmp://streaming.server.net/playpath live=1 swfVfy=http://server.net/flashplayer.swf"
 
 When passing parameters to the built-in stream plugins the values will either be treated as plain
 strings, as is the case in the above example for ``swfVry``, or they will be interpreted as Python literals. For
@@ -290,8 +290,8 @@ example you can pass a Python dict or Python list as one of the parameters.
 
 .. code-block:: console
 
-    $ streamlink "rtmp://streaming.server.net/playpath conn=['B:1', 'S:authMe', 'O:1', 'NN:code:1.23', 'NS:flag:ok', 'O:0']"
-    $ streamlink "hls://streaming.server.net/playpath params={'token': 'magicToken'}"
+    $ livecli "rtmp://streaming.server.net/playpath conn=['B:1', 'S:authMe', 'O:1', 'NN:code:1.23', 'NS:flag:ok', 'O:0']"
+    $ livecli "hls://streaming.server.net/playpath params={'token': 'magicToken'}"
 
 In the above examples ``conn`` will be passed as the Python list:
 
@@ -310,7 +310,7 @@ a Adobe HDS stream:
 
 .. code-block:: console
 
-    $ streamlink hds://streaming.server.net/playpath/manifest.f4m
+    $ livecli hds://streaming.server.net/playpath/manifest.f4m
 
 
 Supported streaming protocols
@@ -333,7 +333,7 @@ Proxy Support
 -------------
 
 You can use the :option:`--http-proxy` and :option:`--https-proxy` options to
-change the proxy server that Streamlink will use for HTTP and HTTPS requests respectively.
+change the proxy server that Livecli will use for HTTP and HTTPS requests respectively.
 As HTTP and HTTPS requests can be handled by separate proxies, you may need to specify both
 options if the plugin you use makes HTTP and HTTPS requests.
 
@@ -343,7 +343,7 @@ For example:
 
 .. code-block:: console
 
-    $ streamlink --http-proxy "http://user:pass@10.10.1.10:3128/" --https-proxy "socks5://10.10.1.10:1242"
+    $ livecli --http-proxy "http://user:pass@10.10.1.10:3128/" --https-proxy "socks5://10.10.1.10:1242"
 
 
 Command-line usage
@@ -351,9 +351,9 @@ Command-line usage
 
 .. code-block:: console
 
-    $ streamlink [OPTIONS] <URL> [STREAM]
+    $ livecli [OPTIONS] <URL> [STREAM]
 
 
 .. argparse::
-    :module: streamlink_cli.argparser
+    :module: livecli_cli.argparser
     :attr: parser

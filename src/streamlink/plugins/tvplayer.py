@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import re
 
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api import useragents
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http, validate
+from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
 
 
 class TVPlayer(Plugin):

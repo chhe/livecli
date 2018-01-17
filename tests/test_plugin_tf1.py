@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tf1 import TF1
+from livecli.plugins.tf1 import TF1
 
 
 class TestPluginTF1(unittest.TestCase):

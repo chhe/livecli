@@ -21,9 +21,9 @@ Limitations:
 
 import re
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http
-from streamlink.stream import HTTPStream, HLSStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http
+from livecli.stream import HTTPStream, HLSStream
 
 API_URL_MEDIA = "https://api.media.ccc.de"
 API_URL_STREAMING_MEDIA = "https://streaming.media.ccc.de/streams/v1.json"

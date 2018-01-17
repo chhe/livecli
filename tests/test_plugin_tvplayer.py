@@ -1,18 +1,18 @@
 import unittest
 
-from streamlink import Streamlink
+from livecli import Livecli
 
 try:
     from unittest.mock import patch, Mock, ANY
 except ImportError:
     from mock import patch, Mock, ANY
-from streamlink.plugins.tvplayer import TVPlayer
-from streamlink.stream import HLSStream
+from livecli.plugins.tvplayer import TVPlayer
+from livecli.stream import HLSStream
 
 
 class TestPluginTVPlayer(unittest.TestCase):
     def setUp(self):
-        self.session = Streamlink()
+        self.session = Livecli()
 
     def test_can_handle_url(self):
         # should match
@@ -30,9 +30,9 @@ class TestPluginTVPlayer(unittest.TestCase):
         self.assertFalse(TVPlayer.can_handle_url("http://www.tvcatchup.com/"))
         self.assertFalse(TVPlayer.can_handle_url("http://www.youtube.com/"))
 
-    @patch('streamlink.plugins.tvplayer.TVPlayer._get_stream_data')
-    @patch('streamlink.plugins.tvplayer.http')
-    @patch('streamlink.plugins.tvplayer.HLSStream')
+    @patch('livecli.plugins.tvplayer.TVPlayer._get_stream_data')
+    @patch('livecli.plugins.tvplayer.http')
+    @patch('livecli.plugins.tvplayer.HLSStream')
     def test_get_streams(self, hlsstream, mock_http, mock_get_stream_data):
         mock_get_stream_data.return_value = {
             "stream": "http://test.se/stream1"
@@ -68,7 +68,7 @@ class TestPluginTVPlayer(unittest.TestCase):
         # test that the correct URL is used for the HLSStream
         hlsstream.parse_variant_playlist.assert_called_with(ANY, "http://test.se/stream1")
 
-    @patch('streamlink.plugins.tvplayer.http')
+    @patch('livecli.plugins.tvplayer.http')
     def test_get_invalid_page(self, mock_http):
         page_resp = Mock()
         page_resp.text = u"""

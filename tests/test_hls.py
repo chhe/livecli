@@ -8,8 +8,8 @@ else:
 from Crypto.Cipher import AES
 from binascii import hexlify
 
-from streamlink.stream import hls
-from streamlink.session import Streamlink
+from livecli.stream import hls
+from livecli.session import Livecli
 from functools import partial
 import requests_mock
 
@@ -78,19 +78,19 @@ audio_only.m3u8
 
         return playlist + playlistEnd
 
-    def start_streamlink(self, masterPlaylist, kwargs={}):
-        print("Executing streamlink")
-        streamlink = Streamlink()
+    def start_liveurl(self, masterPlaylist, kwargs={}):
+        print("Executing livecli")
+        livecli = Livecli()
 
         # Set to default value to avoid a test fail if the default change
-        streamlink.set_option("hls-live-edge", 3)
+        livecli.set_option("hls-live-edge", 3)
 
-        streamlink.logger.set_level("debug")
-        masterStream = hls.HLSStream.parse_variant_playlist(streamlink, masterPlaylist, **kwargs)
+        livecli.logger.set_level("debug")
+        masterStream = hls.HLSStream.parse_variant_playlist(livecli, masterPlaylist, **kwargs)
         stream = masterStream["1080p (source)"].open()
         data = b"".join(iter(partial(stream.read, 8192), b""))
         stream.close()
-        print("End of streamlink execution")
+        print("End of livecli execution")
         return data
 
     def test_hls_non_encrypted(self):
@@ -104,12 +104,12 @@ audio_only.m3u8
             for i, stream in enumerate(streams):
                 mock.get("http://mocked/path/stream{0}.ts".format(i), content=stream)
 
-            # Start streamlink on the generated stream
-            streamlinkResult = self.start_streamlink("http://mocked/path/master.m3u8", {'start_offset': 1, 'duration': 1})
+            # Start livecli on the generated stream
+            liveurlResult = self.start_liveurl("http://mocked/path/master.m3u8", {'start_offset': 1, 'duration': 1})
 
         # Check result
         expectedResult = b''.join(streams[1:3])
-        self.assertEqual(streamlinkResult, expectedResult)
+        self.assertEqual(liveurlResult, expectedResult)
 
     def test_hls_encryted_aes128(self):
         # Encryption parameters
@@ -123,7 +123,7 @@ audio_only.m3u8
         playlist1 = self.getPlaylist(aesIv, "stream{0}.ts.enc")
         playlist2 = self.getPlaylist(aesIv, "stream2_{0}.ts.enc") + "#EXT-X-ENDLIST\n"
 
-        streamlinkResult = None
+        liveurlResult = None
         with requests_mock.Mocker() as mock:
             mock.get("http://mocked/path/master.m3u8", text=masterPlaylist)
             mock.get("http://mocked/path/playlist.m3u8", [{'text': playlist1}, {'text': playlist2}])
@@ -133,13 +133,13 @@ audio_only.m3u8
             for i, encryptedStream in enumerate(encryptedStreams):
                 mock.get("http://mocked/path/stream2_{0}.ts.enc".format(i), content=encryptedStream)
 
-            # Start streamlink on the generated stream
-            streamlinkResult = self.start_streamlink("http://mocked/path/master.m3u8")
+            # Start livecli on the generated stream
+            liveurlResult = self.start_liveurl("http://mocked/path/master.m3u8")
 
         # Check result
         # Live streams starts the last 3 segments from the playlist
         expectedResult = b''.join(clearStreams[1:] + clearStreams)
-        self.assertEqual(streamlinkResult, expectedResult)
+        self.assertEqual(liveurlResult, expectedResult)
 
 
 if __name__ == "__main__":

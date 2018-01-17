@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.showroom import Showroom
+from livecli.plugins.showroom import Showroom
 
 _should_match = (
     "https://www.showroom-live.com/48_NISHIMURA_NANAKO",

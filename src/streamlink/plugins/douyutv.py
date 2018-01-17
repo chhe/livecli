@@ -4,9 +4,9 @@ import hashlib
 
 from requests.adapters import HTTPAdapter
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate, useragents
-from streamlink.stream import HTTPStream, HLSStream, RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate, useragents
+from livecli.stream import HTTPStream, HLSStream, RTMPStream
 
 API_URL = "https://capi.douyucdn.cn/api/v1/{0}&auth={1}"
 VAPI_URL = "https://vmobile.douyu.com/video/getInfo?vid={0}"

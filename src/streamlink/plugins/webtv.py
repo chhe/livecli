@@ -6,12 +6,12 @@ import binascii
 
 from Crypto.Cipher import AES
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json, update_scheme
-from streamlink.utils.crypto import unpad_pkcs5
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json, update_scheme
+from livecli.utils.crypto import unpad_pkcs5
 
 
 class WebTV(Plugin):

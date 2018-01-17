@@ -1,9 +1,9 @@
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HDSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HDSStream
 
 _url_re = re.compile(r"http(s)?://(\w+\.)?sportschau.de/")
 _player_js = re.compile(r"https?://deviceids-medp.wdr.de/ondemand/.*\.js")

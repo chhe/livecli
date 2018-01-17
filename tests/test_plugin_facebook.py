@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.facebook import Facebook
+from livecli.plugins.facebook import Facebook
 
 
 class TestPluginFacebook(unittest.TestCase):

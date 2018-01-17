@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.vk import VK
+from livecli.plugins.vk import VK
 
 
 class TestPluginVK(unittest.TestCase):

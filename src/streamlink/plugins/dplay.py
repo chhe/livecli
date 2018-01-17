@@ -3,11 +3,11 @@
 import re
 import time
 
-from streamlink.compat import quote
-from streamlink.exceptions import PluginError, NoStreamsError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import StreamMapper, http, validate
-from streamlink.stream import HLSStream, HDSStream
+from livecli.compat import quote
+from livecli.exceptions import PluginError, NoStreamsError
+from livecli.plugin import Plugin
+from livecli.plugin.api import StreamMapper, http, validate
+from livecli.stream import HLSStream, HDSStream
 
 # Interface URLs for Dplay
 GENERAL_API_URL = 'http://www.{0}/api/v2/ajax/videos?video_id={1}'

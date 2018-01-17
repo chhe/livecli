@@ -3,7 +3,7 @@ from requests import Session, __build__ as requests_version
 from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException
 
-from streamlink.packages.requests_file import FileAdapter
+from livecli.packages.requests_file import FileAdapter
 
 try:
     from requests.packages.urllib3.util import Timeout

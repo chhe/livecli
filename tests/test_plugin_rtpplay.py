@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.rtpplay import RTPPlay
+from livecli.plugins.rtpplay import RTPPlay
 
 
 class TestPluginRTPPlay(unittest.TestCase):

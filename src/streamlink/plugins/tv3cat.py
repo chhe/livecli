@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
-from streamlink.plugin.api import validate
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
+from livecli.plugin.api import validate
 
 STREAM_INFO_URL = "http://dinamics.ccma.cat/pvideo/media.jsp?media=video&version=0s&idint={ident}&profile=pc&desplacament=0"
 _url_re = re.compile(r"http://(?:www.)?ccma.cat/tv3/directe/(.+?)/")

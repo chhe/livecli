@@ -1,9 +1,9 @@
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import StreamMapper, http, validate
-from streamlink.stream import HLSStream, RTMPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import StreamMapper, http, validate
+from livecli.stream import HLSStream, RTMPStream
 
 CHANNEL_URL = "http://www.mobileonline.tv/channel.php"
 

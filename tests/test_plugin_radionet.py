@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.radionet import RadioNet
+from livecli.plugins.radionet import RadioNet
 
 
 class TestPluginRadioNet(unittest.TestCase):

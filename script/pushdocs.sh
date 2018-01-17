@@ -4,8 +4,8 @@ if [ "$TRAVIS_BRANCH" != "master" ] || [ "$BUILD_DOCS" != "yes" ] || [ "$TRAVIS_
     exit 0
 fi
 
-DOCS_REPO_NAME="streamlink.github.io"
-DOCS_REPO_URL="git@github.com:streamlink/streamlink.github.io.git"
+DOCS_REPO_NAME="livecli.github.io"
+DOCS_REPO_URL="git@github.com:livecli/livecli.github.io.git"
 DOCS_KEY="deploy-key"
 DOCS_USER="Travis CI"
 
@@ -24,7 +24,7 @@ if bash script/makedocs.sh "$DOCS_REPO_NAME" ; then
     git config user.email "<>"
     git add --all
     # Check if anything changed, and if it's the case, push to origin/master.
-    if git commit -m 'update docs' -m "Commit: https://github.com/streamlink/streamlink/commit/$TRAVIS_COMMIT" ; then
+    if git commit -m 'update docs' -m "Commit: https://github.com/livecli/livecli/commit/$TRAVIS_COMMIT" ; then
         git push origin master
     fi
 

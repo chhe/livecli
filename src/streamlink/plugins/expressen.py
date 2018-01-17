@@ -1,8 +1,8 @@
 import re
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HDSStream, HLSStream, RTMPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HDSStream, HLSStream, RTMPStream
 
 
 STREAMS_INFO_URL = "http://www.expressen.se/Handlers/WebTvHandler.ashx?id={0}"

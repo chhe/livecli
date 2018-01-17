@@ -1,6 +1,6 @@
 import sys
 
-from streamlink.plugins.adultswim import AdultSwim
+from livecli.plugins.adultswim import AdultSwim
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
 else:

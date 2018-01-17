@@ -4,13 +4,13 @@ import base64
 import re
 from hashlib import sha1
 
-from streamlink.compat import parse_qsl, urlparse
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli.compat import parse_qsl, urlparse
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 
 class BBCiPlayer(Plugin):

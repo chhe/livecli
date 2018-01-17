@@ -4,15 +4,15 @@ from threading import Thread, Event
 
 import time
 
-from streamlink import PluginError
-from streamlink.compat import urljoin
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
-from streamlink.stream.hls import HLSStreamReader
+from livecli import PluginError
+from livecli.compat import urljoin
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream.hls import HLSStreamReader
 
 
 class ModuleInfoNoStreams(Exception):

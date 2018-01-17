@@ -1,10 +1,10 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.plugin import parse_url_params, LOW_PRIORITY, NORMAL_PRIORITY, NO_PRIORITY
-from streamlink.stream import HLSStream
-from streamlink.utils import update_scheme
-from streamlink.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.plugin import parse_url_params, LOW_PRIORITY, NORMAL_PRIORITY, NO_PRIORITY
+from livecli.stream import HLSStream
+from livecli.utils import update_scheme
+from livecli.compat import urlparse
 
 
 class HLSPlugin(Plugin):

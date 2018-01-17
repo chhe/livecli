@@ -4,7 +4,7 @@ from string import printable
 from textwrap import dedent
 
 from .constants import (
-    LIVESTREAMER_VERSION, STREAM_PASSTHROUGH, DEFAULT_PLAYER_ARGUMENTS
+    LIVEURL_VERSION, STREAM_PASSTHROUGH, DEFAULT_PLAYER_ARGUMENTS
 )
 from .utils import find_default_player
 
@@ -162,15 +162,15 @@ parser = ArgumentParser(
     add_help=False,
     usage="%(prog)s [OPTIONS] <URL> [STREAM]",
     description=dedent("""
-    Streamlink is command-line utility that extracts streams from
+    Livecli is command-line utility that extracts streams from
     various services and pipes them into a video player of choice.
     """),
     epilog=dedent("""
     For more in-depth documentation see:
-      https://streamlink.github.io
+      https://livecli.github.io
 
     Please report broken plugins or bugs to the issue tracker on Github:
-      https://github.com/streamlink/streamlink/issues
+      https://github.com/livecli/livecli/issues
     """)
 )
 
@@ -218,7 +218,7 @@ general.add_argument(
 general.add_argument(
     "-V", "--version",
     action="version",
-    version="%(prog)s {0}".format(LIVESTREAMER_VERSION),
+    version="%(prog)s {0}".format(LIVEURL_VERSION),
     help="""
     Show version number and exit.
     """
@@ -234,7 +234,7 @@ general.add_argument(
     "--can-handle-url",
     metavar="URL",
     help="""
-    Check if Streamlink has a plugin that can handle the specified URL.
+    Check if Livecli has a plugin that can handle the specified URL.
 
     Returns status code 1 for false and 0 for true.
 
@@ -295,7 +295,7 @@ general.add_argument(
     metavar="{yes,true,1,on,no,false,0,off}",
     default=False,
     help="""
-    Enable or disable the automatic check for a new version of Streamlink.
+    Enable or disable the automatic check for a new version of Livecli.
 
     Default is "no".
     """
@@ -333,23 +333,23 @@ player.add_argument(
 
     This is a shell-like syntax to support using a specific player:
 
-      streamlink --player=vlc <url> <quality>
+      livecli --player=vlc <url> <quality>
 
     Absolute or relative paths can also be passed via this option
     in the event the player's executable can not be resolved:
 
-      streamlink --player=/path/to/vlc <url> <quality>
-      streamlink --player=./vlc-player/vlc <url> <quality>
+      livecli --player=/path/to/vlc <url> <quality>
+      livecli --player=./vlc-player/vlc <url> <quality>
 
     To use a player that is located in a path with spaces you must
     quote the parameter or its value:
 
-      streamlink "--player=/path/with spaces/vlc" <url> <quality>
-      streamlink --player "C:\path\with spaces\mpc-hc64.exe" <url> <quality>
+      livecli "--player=/path/with spaces/vlc" <url> <quality>
+      livecli --player "C:\path\with spaces\mpc-hc64.exe" <url> <quality>
 
     Options may also be passed to the player. For example:
 
-      streamlink --player "vlc --file-caching=5000" <url> <quality>
+      livecli --player "vlc --file-caching=5000" <url> <quality>
 
     As an alternative to this, see the --player-args parameter,
     which does not log any custom player arguments.
@@ -383,7 +383,7 @@ player.add_argument(
 
     Example:
 
-      streamlink -p vlc -a "--play-and-exit {{filename}}" <url> <quality>
+      livecli -p vlc -a "--play-and-exit {{filename}}" <url> <quality>
 
     """.format(DEFAULT_PLAYER_ARGUMENTS)
 )
@@ -469,7 +469,7 @@ player.add_argument(
     "--player-no-close",
     action="store_true",
     help="""
-    By default Streamlink will close the player when the stream ends.
+    By default Livecli will close the player when the stream ends.
     This is to avoid "dead" GUI players lingering after a stream ends.
 
     It does however have the side-effect of sometimes closing a player
@@ -1092,7 +1092,7 @@ plugin.add_argument(
     "--twitch-oauth-authenticate",
     action="store_true",
     help="""
-    Open a web browser where you can grant Streamlink access
+    Open a web browser where you can grant Livecli access
     to your Twitch account which creates a token for use with
     --twitch-oauth-token.
     """

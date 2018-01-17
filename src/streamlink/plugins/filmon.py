@@ -2,10 +2,10 @@ import re
 
 import time
 
-from streamlink import StreamError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
+from livecli import StreamError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
 
 
 class FilmOnHLS(HLSStream):

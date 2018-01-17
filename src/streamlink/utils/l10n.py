@@ -1,6 +1,6 @@
 import locale
 
-from streamlink.compat import is_py2
+from livecli.compat import is_py2
 
 try:
     from iso639 import languages

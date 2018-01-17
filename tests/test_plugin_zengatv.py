@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.zengatv import ZengaTV
+from livecli.plugins.zengatv import ZengaTV
 
 
 class TestPluginZengaTV(unittest.TestCase):

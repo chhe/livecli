@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.plugin import parse_url_params
-from streamlink.stream import HTTPStream
-from streamlink.utils import update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.plugin import parse_url_params
+from livecli.stream import HTTPStream
+from livecli.utils import update_scheme
 
 
 class HTTPStreamPlugin(Plugin):

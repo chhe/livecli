@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.viasat import Viasat
+from livecli.plugins.viasat import Viasat
 
 
 class TestPluginViasat(unittest.TestCase):

@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HTTPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HTTPStream, HLSStream
 
 API_URL = "https://www.zhanqi.tv/api/static/v2.1/room/domain/{0}.json"
 

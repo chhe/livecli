@@ -1,19 +1,19 @@
 import json
 import unittest
 
-from streamlink import Streamlink
+from livecli import Livecli
 
 try:
     from unittest.mock import patch, Mock
 except ImportError:
     from mock import patch, Mock
 
-from streamlink.plugins.garena import Garena
+from livecli.plugins.garena import Garena
 
 
 class TestPluginGarena(unittest.TestCase):
     def setUp(self):
-        self.session = Streamlink()
+        self.session = Livecli()
 
     def test_can_handle_url(self):
         # should match
@@ -24,7 +24,7 @@ class TestPluginGarena(unittest.TestCase):
         self.assertFalse(Garena.can_handle_url("http://local.local/"))
         self.assertFalse(Garena.can_handle_url("http://localhost.localhost/"))
 
-    @patch('streamlink.plugins.garena.http')
+    @patch('livecli.plugins.garena.http')
     def test_post_api_info(self, mock_http):
         API_INFO = Garena.API_INFO
         schema = Garena._info_schema
@@ -51,7 +51,7 @@ class TestPluginGarena(unittest.TestCase):
 
         mock_http.post.assert_called_with(API_INFO, json=dict(alias="LOLTW"))
 
-    @patch('streamlink.plugins.garena.http')
+    @patch('livecli.plugins.garena.http')
     def test_post_api_stream(self, mock_http):
         API_STREAM = Garena.API_STREAM
         schema = Garena._stream_schema

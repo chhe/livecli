@@ -1,9 +1,9 @@
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
 
 _url_re = re.compile(r"http(?:s)?://connectcast.tv/(\w+)?")
 _stream_re = re.compile(r'file.*?:.*?"(.*?)"')

@@ -2,19 +2,19 @@ import pkgutil
 import sys
 
 import imp
-from streamlink import Streamlink
+from livecli import Livecli
 
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
 else:
     import unittest
-import streamlink.plugins
+import livecli.plugins
 import os.path
 
 
 class PluginTestMeta(type):
     def __new__(mcs, name, bases, dict):
-        plugin_path = os.path.dirname(streamlink.plugins.__file__)
+        plugin_path = os.path.dirname(livecli.plugins.__file__)
         plugins = []
         for loader, pname, ispkg in pkgutil.iter_modules([plugin_path]):
             file, pathname, desc = imp.find_module(pname, [plugin_path])
@@ -22,7 +22,7 @@ class PluginTestMeta(type):
             if hasattr(module, "__plugin__"):
                 plugins.append((pname, file, pathname, desc))
 
-        session = Streamlink()
+        session = Livecli()
 
         def gentest(pname, file, pathname, desc):
             def load_plugin_test(self):

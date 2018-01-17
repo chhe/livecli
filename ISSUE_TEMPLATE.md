@@ -31,7 +31,7 @@
 
 ### Logs
 
-_Logs are always required for a bug report, use `-l debug` [(help)](https://streamlink.github.io/cli.html#cmdoption-l)
+_Logs are always required for a bug report, use `-l debug` [(help)](https://livecli.github.io/cli.html#cmdoption-l)
 Make sure to **remove username and password**
 You can upload your logs to https://gist.github.com/ or_
 
@@ -44,4 +44,4 @@ REPLACE THIS TEXT WITH YOUR LOG
 ...
 
 
-[Love Streamlink? Please consider supporting our collective. Thanks!](https://opencollective.com/streamlink/donate)
+[Love Livecli? Please consider supporting our collective. Thanks!](https://opencollective.com/livecli/donate)

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.bongacams import bongacams
+from livecli.plugins.bongacams import bongacams
 
 
 class TestPluginBongacams(unittest.TestCase):

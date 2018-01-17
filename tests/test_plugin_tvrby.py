@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tvrby import TVRBy
+from livecli.plugins.tvrby import TVRBy
 
 
 class TestPluginTVRBy(unittest.TestCase):

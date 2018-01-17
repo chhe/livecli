@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
 
 EMBED_URL_1 = "http://www.canlitv.plus/kanallar.php?kanal={0}"
 EMBED_URL_2 = "http://www.ecanlitvizle.net/embed.php?kanal={0}"

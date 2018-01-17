@@ -3,10 +3,10 @@ import re
 import subprocess
 from operator import itemgetter
 
-from streamlink.stream.streamprocess import StreamProcess
-from streamlink.compat import str, which
-from streamlink.exceptions import StreamError
-from streamlink.utils import rtmpparse, escape_librtmp
+from livecli.stream.streamprocess import StreamProcess
+from livecli.compat import str, which
+from livecli.exceptions import StreamError
+from livecli.utils import rtmpparse, escape_librtmp
 
 
 class RTMPStream(StreamProcess):

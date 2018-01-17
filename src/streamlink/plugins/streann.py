@@ -6,13 +6,13 @@ import base64
 import random
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_qsd
-from streamlink.utils.crypto import decrypt_openssl
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
+from livecli.utils import parse_qsd
+from livecli.utils.crypto import decrypt_openssl
 
 
 class Streann(Plugin):

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.buffers import Buffer, RingBuffer
+from livecli.buffers import Buffer, RingBuffer
 
 
 class TestBuffer(unittest.TestCase):

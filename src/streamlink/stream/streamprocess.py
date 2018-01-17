@@ -1,10 +1,10 @@
 import subprocess
 from operator import itemgetter
 
-from streamlink.stream import Stream
-from streamlink.stream.wrappers import StreamIOThreadWrapper
-from streamlink.compat import devnull, which
-from streamlink.exceptions import StreamError
+from livecli.stream import Stream
+from livecli.stream.wrappers import StreamIOThreadWrapper
+from livecli.compat import devnull, which
+from livecli.exceptions import StreamError
 
 import time
 import tempfile
@@ -29,7 +29,7 @@ class StreamProcess(Stream):
     def __init__(self, session, params=None, args=None, timeout=60.0):
         """
 
-        :param session: Streamlink session
+        :param session: Livecli session
         :param params: keyword arguments mapped to process argument
         :param args: positional arguments
         :param timeout: timeout for process
@@ -46,7 +46,7 @@ class StreamProcess(Stream):
         if self.errorlog_path:
             self.stderr = open(self.errorlog_path, "w")
         elif self.errorlog:
-            self.stderr = tempfile.NamedTemporaryFile(prefix="streamlink", suffix=".err", delete=False)
+            self.stderr = tempfile.NamedTemporaryFile(prefix="livecli", suffix=".err", delete=False)
         else:
             self.stderr = devnull()
 

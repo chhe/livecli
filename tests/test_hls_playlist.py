@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import sys
 
-from streamlink.stream.hls_playlist import load, StreamInfo, Resolution, Media
+from livecli.stream.hls_playlist import load, StreamInfo, Resolution, Media
 
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest

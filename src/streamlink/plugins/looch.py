@@ -2,12 +2,12 @@ import re
 
 import itertools
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.utils import parse_json
 
 
 class Looch(Plugin):

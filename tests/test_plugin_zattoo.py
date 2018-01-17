@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.zattoo import Zattoo
+from livecli.plugins.zattoo import Zattoo
 
 
 class TestPluginZattoo(unittest.TestCase):

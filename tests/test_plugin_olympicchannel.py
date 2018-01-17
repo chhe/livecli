@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.olympicchannel import OlympicChannel
+from livecli.plugins.olympicchannel import OlympicChannel
 
 
 class TestPluginOlympicChannel(unittest.TestCase):

@@ -8,19 +8,19 @@ from .utils import JSONEncoder
 
 
 class ConsoleOutput(object):
-    def __init__(self, output, streamlink, json=False):
-        self.streamlink = streamlink
-        self.logger = streamlink.logger.new_module("cli")
+    def __init__(self, output, livecli, json=False):
+        self.livecli = livecli
+        self.logger = livecli.logger.new_module("cli")
 
         self.json = json
         self.set_output(output)
 
     def set_level(self, level):
-        self.streamlink.set_loglevel(level)
+        self.livecli.set_loglevel(level)
 
     def set_output(self, output):
         self.output = output
-        self.streamlink.set_logoutput(output)
+        self.livecli.set_logoutput(output)
 
     def ask(self, msg, *args, **kwargs):
         formatted = msg.format(*args, **kwargs)

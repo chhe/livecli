@@ -1,7 +1,7 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
 
 HEADERS = {
     "User-Agent": ("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) "

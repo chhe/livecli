@@ -5,7 +5,7 @@ try:
 except ImportError:
     from mock import patch
 
-import streamlink.utils.l10n as l10n
+import livecli.utils.l10n as l10n
 
 try:
     import iso639

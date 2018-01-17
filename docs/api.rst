@@ -3,11 +3,11 @@
 API Reference
 =============
 
-.. module:: streamlink
+.. module:: livecli
 
-This ia reference of all the available API methods in Streamlink.
+This ia reference of all the available API methods in Livecli.
 
-Streamlink
+Livecli
 ------------
 
 .. autofunction:: streams
@@ -16,13 +16,13 @@ Streamlink
 Session
 -------
 
-.. autoclass:: Streamlink
+.. autoclass:: Livecli
     :members:
 
 
 Plugins
 -------
-.. module:: streamlink.plugin
+.. module:: livecli.plugin
 .. autoclass:: Plugin
     :members:
 
@@ -32,7 +32,7 @@ Streams
 
 All streams inherit from the :class:`Stream` class.
 
-.. module:: streamlink.stream
+.. module:: livecli.stream
 .. autoclass:: Stream
     :members:
 
@@ -64,9 +64,9 @@ different properties are available depending on stream type.
 Exceptions
 ----------
 
-Streamlink has three types of exceptions:
+Livecli has three types of exceptions:
 
-.. autoexception:: streamlink.StreamlinkError
-.. autoexception:: streamlink.PluginError
-.. autoexception:: streamlink.NoPluginError
-.. autoexception:: streamlink.StreamError
+.. autoexception:: livecli.LivecliError
+.. autoexception:: livecli.PluginError
+.. autoexception:: livecli.NoPluginError
+.. autoexception:: livecli.StreamError

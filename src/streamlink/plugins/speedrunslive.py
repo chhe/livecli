@@ -1,6 +1,6 @@
 import re
 
-from streamlink.plugin import Plugin
+from livecli.plugin import Plugin
 
 TWITCH_URL_FORMAT = "http://www.twitch.tv/{0}"
 

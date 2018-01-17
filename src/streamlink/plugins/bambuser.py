@@ -2,9 +2,9 @@ import re
 
 from random import random
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HTTPStream, RTMPStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http, validate
+from livecli.stream import HTTPStream, RTMPStream
 
 API_CLIENT_NAME = "Bambuser AS2"
 API_CONTEXT = "b_broadcastpage"

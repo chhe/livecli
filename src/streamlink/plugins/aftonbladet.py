@@ -2,9 +2,9 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream
 
 PLAYLIST_URL_FORMAT = "http://{address}/{path}/{filename}"
 STREAM_TYPES = {

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.webtv import WebTV
+from livecli.plugins.webtv import WebTV
 
 
 class TestPluginWebTV(unittest.TestCase):

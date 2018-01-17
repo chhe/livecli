@@ -1,11 +1,11 @@
 from io import BytesIO
 
-from streamlink import NoStreamsError
-from streamlink.plugins import Plugin
-from streamlink.options import Options
-from streamlink.stream import *
+from livecli import NoStreamsError
+from livecli.plugins import Plugin
+from livecli.options import Options
+from livecli.stream import *
 
-from streamlink.plugin.api.support_plugin import testplugin_support
+from livecli.plugin.api.support_plugin import testplugin_support
 
 
 class TestStream(Stream):

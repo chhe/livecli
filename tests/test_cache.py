@@ -3,7 +3,7 @@ import unittest
 import tempfile
 import os.path
 
-import streamlink.cache
+import livecli.cache
 from shutil import rmtree
 
 try:
@@ -15,10 +15,10 @@ is_py2 = (sys.version_info[0] == 2)
 
 class TestCache(unittest.TestCase):
     def setUp(self):
-        self.tmp_dir = tempfile.mkdtemp("streamlink-test")
+        self.tmp_dir = tempfile.mkdtemp("livecli-test")
 
-        streamlink.cache.cache_dir = self.tmp_dir
-        self.cache = streamlink.cache.Cache("cache.json")
+        livecli.cache.cache_dir = self.tmp_dir
+        self.cache = livecli.cache.Cache("cache.json")
 
     def tearDown(self):
         rmtree(self.tmp_dir)
@@ -47,7 +47,7 @@ class TestCache(unittest.TestCase):
         if is_py2:
             patch('__builtin__.open', side_effect=IOError)
         else:
-            patch('streamlink.cache.open', side_effect=IOError)
+            patch('livecli.cache.open', side_effect=IOError)
         self.cache._load()
         self.assertEqual({}, self.cache._cache)
 
@@ -57,21 +57,21 @@ class TestCache(unittest.TestCase):
 
     def test_create_directory(self):
         try:
-            streamlink.cache.cache_dir = os.path.join(tempfile.gettempdir(), "streamlink-test")
-            cache = streamlink.cache.Cache("cache.json")
+            livecli.cache.cache_dir = os.path.join(tempfile.gettempdir(), "livecli-test")
+            cache = livecli.cache.Cache("cache.json")
             self.assertFalse(os.path.exists(cache.filename))
             cache.set("value", 10)
             self.assertTrue(os.path.exists(cache.filename))
         finally:
-            rmtree(streamlink.cache.cache_dir, ignore_errors=True)
+            rmtree(livecli.cache.cache_dir, ignore_errors=True)
 
     @patch('os.makedirs', side_effect=OSError)
     def test_create_directory_fail(self, makedirs):
         try:
-            streamlink.cache.cache_dir = os.path.join(tempfile.gettempdir(), "streamlink-test")
-            cache = streamlink.cache.Cache("cache.json")
+            livecli.cache.cache_dir = os.path.join(tempfile.gettempdir(), "livecli-test")
+            cache = livecli.cache.Cache("cache.json")
             self.assertFalse(os.path.exists(cache.filename))
             cache.set("value", 10)
             self.assertFalse(os.path.exists(cache.filename))
         finally:
-            rmtree(streamlink.cache.cache_dir, ignore_errors=True)
+            rmtree(livecli.cache.cache_dir, ignore_errors=True)

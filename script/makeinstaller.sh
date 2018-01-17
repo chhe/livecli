@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Execute this at the base of the streamlink repo.
+# Execute this at the base of the livecli repo.
 
 set -e # stop on error
 
@@ -7,29 +7,29 @@ command -v makensis > /dev/null 2>&1 || { echo >&2 "makensis is required to buil
 command -v pynsist > /dev/null 2>&1 || { echo >&2 "pynsist is required to build the installer. Aborting."; exit 1; }
 
 # For travis nightly builds generate a version number with commit hash
-STREAMLINK_VERSION=$(python setup.py --version)
-STREAMLINK_VERSION_PLAIN="${STREAMLINK_VERSION%%+*}"
-STREAMLINK_INSTALLER="streamlink-${STREAMLINK_VERSION}"
+LIVECLI_VERSION=$(python setup.py --version)
+LIVECLI_VERSION_PLAIN="${LIVECLI_VERSION%%+*}"
+LIVECLI_INSTALLER="livecli-${LIVECLI_VERSION}"
 
 # include the build number
-STREAMLINK_VI_VERSION="${STREAMLINK_VERSION_PLAIN}.${TRAVIS_BUILD_NUMBER:-0}"
+LIVECLI_VI_VERSION="${LIVECLI_VERSION_PLAIN}.${TRAVIS_BUILD_NUMBER:-0}"
 
 build_dir="$(pwd)/build"
 nsis_dir="${build_dir}/nsis"
 # get the dist directory from an environment variable, but default to the build/nsis directory
-dist_dir="${STREAMLINK_INSTALLER_DIST_DIR:-$nsis_dir}"
+dist_dir="${LIVECLI_INSTALLER_DIST_DIR:-$nsis_dir}"
 mkdir -p "${build_dir}" "${dist_dir}" "${nsis_dir}"
 
-echo "Building streamlink-${STREAMLINK_VERSION} package..." 1>&2
+echo "Building livecli-${LIVECLI_VERSION} package..." 1>&2
 python setup.py build 1>&2
 
-echo "Building ${STREAMLINK_INSTALLER} installer..." 1>&2
+echo "Building ${LIVECLI_INSTALLER} installer..." 1>&2
 
-cat > "${build_dir}/streamlink.cfg" <<EOF
+cat > "${build_dir}/livecli.cfg" <<EOF
 [Application]
-name=Streamlink
-version=${STREAMLINK_VERSION}
-entry_point=streamlink_cli.main:main
+name=Livecli
+version=${LIVECLI_VERSION}
+entry_point=livecli_cli.main:main
 icon=../win32/doggo.ico
 
 [Python]
@@ -38,7 +38,7 @@ format=bundled
 
 [Include]
 ; dep tree
-;   streamlink+streamlink_cli
+;   livecli+livecli_cli
 ;       - pkg-resources (indirect)
 ;           - pyparsing
 ;           - packaging
@@ -67,16 +67,16 @@ packages=pkg_resources
 pypi_wheels=pycryptodome==3.4.3
 
 files=../win32/LICENSE.txt > \$INSTDIR
-      ../build/lib/streamlink > \$INSTDIR\pkgs
-      ../build/lib/streamlink_cli > \$INSTDIR\pkgs
+      ../build/lib/livecli > \$INSTDIR\pkgs
+      ../build/lib/livecli_cli > \$INSTDIR\pkgs
 
-[Command streamlink]
-entry_point=streamlink_cli.main:main
+[Command livecli]
+entry_point=livecli_cli.main:main
 
 [Build]
 directory=nsis
 nsi_template=installer_tmpl.nsi
-installer_name=${dist_dir}/${STREAMLINK_INSTALLER}.exe
+installer_name=${dist_dir}/${LIVECLI_INSTALLER}.exe
 EOF
 
 cat >"${build_dir}/installer_tmpl.nsi" <<EOF
@@ -100,7 +100,7 @@ cat >"${build_dir}/installer_tmpl.nsi" <<EOF
     !undef MULTIUSER_INSTALLMODE_DEFAULT_CURRENTUSER
 
     Function OpenDocs
-        ExecShell "" "https://streamlink.github.io/cli.html"
+        ExecShell "" "https://livecli.github.io/cli.html"
     FunctionEnd
 
     ; add checkbox for editing the configuration file
@@ -111,7 +111,7 @@ cat >"${build_dir}/installer_tmpl.nsi" <<EOF
 
     Function EditConfig
         SetShellVarContext current
-        Exec '"\$WINDIR\notepad.exe" "\$APPDATA\streamlink\streamlinkrc"'
+        Exec '"\$WINDIR\notepad.exe" "\$APPDATA\livecli\liveurlrc"'
         SetShellVarContext all
     FunctionEnd
 
@@ -119,12 +119,12 @@ cat >"${build_dir}/installer_tmpl.nsi" <<EOF
     [[ super() ]]
 
     ; Add the product version information
-    VIProductVersion "${STREAMLINK_VI_VERSION}"
-    VIAddVersionKey /LANG=\${LANG_ENGLISH} "ProductName" "Streamlink"
-    VIAddVersionKey /LANG=\${LANG_ENGLISH} "CompanyName" "Streamlink"
-    VIAddVersionKey /LANG=\${LANG_ENGLISH} "FileDescription" "Streamlink Installer"
+    VIProductVersion "${LIVECLI_VI_VERSION}"
+    VIAddVersionKey /LANG=\${LANG_ENGLISH} "ProductName" "Livecli"
+    VIAddVersionKey /LANG=\${LANG_ENGLISH} "CompanyName" "Livecli"
+    VIAddVersionKey /LANG=\${LANG_ENGLISH} "FileDescription" "Livecli Installer"
     VIAddVersionKey /LANG=\${LANG_ENGLISH} "LegalCopyright" ""
-    VIAddVersionKey /LANG=\${LANG_ENGLISH} "FileVersion" "${STREAMLINK_VERSION}"
+    VIAddVersionKey /LANG=\${LANG_ENGLISH} "FileVersion" "${LIVECLI_VERSION}"
 [% endblock %]
 
 ; UI pages
@@ -144,7 +144,7 @@ SubSection /e "Bundled tools" bundled
         SetOutPath "\$INSTDIR\rtmpdump"
         File /r "rtmpdump\*.*"
         SetShellVarContext current
-        \${ConfigWrite} "\$APPDATA\streamlink\streamlinkrc" "rtmpdump=" "\$INSTDIR\rtmpdump\rtmpdump.exe" \$R0
+        \${ConfigWrite} "\$APPDATA\livecli\liveurlrc" "rtmpdump=" "\$INSTDIR\rtmpdump\rtmpdump.exe" \$R0
         SetShellVarContext all
         SetOutPath -
     SectionEnd
@@ -153,7 +153,7 @@ SubSection /e "Bundled tools" bundled
         SetOutPath "\$INSTDIR\ffmpeg"
         File /r "ffmpeg\*.*"
         SetShellVarContext current
-        \${ConfigWrite} "\$APPDATA\streamlink\streamlinkrc" "ffmpeg-ffmpeg=" "\$INSTDIR\ffmpeg\ffmpeg.exe" \$R0
+        \${ConfigWrite} "\$APPDATA\livecli\liveurlrc" "ffmpeg-ffmpeg=" "\$INSTDIR\ffmpeg\ffmpeg.exe" \$R0
         SetShellVarContext all
         SetOutPath -
     SectionEnd
@@ -165,18 +165,18 @@ SubSectionEnd
     ; Install config file
     SetShellVarContext current # install the config file for the current user
     SetOverwrite off # config file we don't want to overwrite
-    SetOutPath \$APPDATA\streamlink
-    File /r "streamlinkrc"
+    SetOutPath \$APPDATA\livecli
+    File /r "liveurlrc"
     SetOverwrite ifnewer
     SetOutPath -
     SetShellVarContext all
 
     ; Add metadata
     ; hijack the install_files block for this
-    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "DisplayVersion" "${STREAMLINK_VERSION}"
-    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "Publisher" "Streamlink"
-    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "URLInfoAbout" "https://streamlink.github.io/"
-    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "HelpLink" "https://streamlink.github.io/"
+    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "DisplayVersion" "${LIVECLI_VERSION}"
+    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "Publisher" "Livecli"
+    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "URLInfoAbout" "https://livecli.github.io/"
+    WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "HelpLink" "https://livecli.github.io/"
     \${GetSize} "\$INSTDIR" "/S=0K" \$0 \$1 \$2
     IntFmt \$0 "0x%08X" \$0
     WriteRegDWORD HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\\${PRODUCT_NAME}" "EstimatedSize" "\$0"
@@ -198,7 +198,7 @@ SubSectionEnd
 
 [% block install_shortcuts %]
     ; Remove shortcut from previous releases
-    Delete "\$SMPROGRAMS\Streamlink.lnk"
+    Delete "\$SMPROGRAMS\Livecli.lnk"
 [% endblock %]
 
 [% block uninstall_shortcuts %]
@@ -225,15 +225,15 @@ EOF
 
 echo "Building Python 3 installer" 1>&2
 
-# copy the streamlinkrc file to the build dir, we cannot use the Include.files property in the config file
+# copy the liveurlrc file to the build dir, we cannot use the Include.files property in the config file
 # because those files will always overwrite, and for a config file we do not want to overwrite
-cp "win32/streamlinkrc" "${nsis_dir}/streamlinkrc"
+cp "win32/liveurlrc" "${nsis_dir}/liveurlrc"
 
 # copy the ffmpeg and rtmpdump directories to the install build dir
 cp -r "win32/ffmpeg" "${nsis_dir}/"
 cp -r "win32/rtmpdump" "${nsis_dir}/"
 
-pynsist build/streamlink.cfg
+pynsist build/livecli.cfg
 
 echo "Success!" 1>&2
 echo "The installer should be in ${dist_dir}." 1>&2

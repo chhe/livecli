@@ -1,10 +1,10 @@
 from __future__ import print_function
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
 
 
 class TF1(Plugin):

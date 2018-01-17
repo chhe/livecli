@@ -1,9 +1,9 @@
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream
 
 LIVE_STREAM_URL = "rtmp://stream1.cybergame.tv:2936/live/"
 PLAYLIST_URL = "http://api.cybergame.tv/p/playlist.smil"

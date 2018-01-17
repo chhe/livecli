@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
-from streamlink.utils import update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
+from livecli.utils import update_scheme
 
 
 class Dogus(Plugin):

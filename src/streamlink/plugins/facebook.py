@@ -1,7 +1,7 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.stream import HLSStream
 
 _playlist_url = "https://www.facebook.com/video/playback/playlist.m3u8?v={0}"
 

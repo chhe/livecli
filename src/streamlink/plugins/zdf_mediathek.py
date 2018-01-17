@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream
+from livecli.utils import parse_json
 
 API_URL = "https://api.zdf.de"
 

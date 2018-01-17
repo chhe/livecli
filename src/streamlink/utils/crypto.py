@@ -2,7 +2,7 @@ import hashlib
 
 from Crypto.Cipher import AES
 
-from streamlink.compat import is_py3
+from livecli.compat import is_py3
 
 
 def evp_bytestokey(password, salt, key_len, iv_len):

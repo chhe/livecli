@@ -1,11 +1,11 @@
 import re
 
-from streamlink.compat import urlparse, parse_qsl
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_query
-from streamlink.stream import HTTPStream, HLSStream
-from streamlink.stream.ffmpegmux import MuxedStream
+from livecli.compat import urlparse, parse_qsl
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_query
+from livecli.stream import HTTPStream, HLSStream
+from livecli.stream.ffmpegmux import MuxedStream
 
 API_KEY = "AIzaSyBDBi-4roGzWJN4du9TuDMLd_jVTcVkKz4"
 API_BASE = "https://www.googleapis.com/youtube/v3"

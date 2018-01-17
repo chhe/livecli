@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_query
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_query
+from livecli.stream import RTMPStream
 
 
 VIEW_LIVE_API_URL = "http://api.{region}/live/view_live.php"

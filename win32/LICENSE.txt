@@ -1,5 +1,5 @@
-Streamlink is distributed with some bundles python libraries and some compiled binaries.
-Streamlink also makes use of an image (doggo.ico) created by Jinho Jung, distributed under the CC BY-SA 2.0 license.
+Livecli is distributed with some bundles python libraries and some compiled binaries.
+Livecli also makes use of an image (doggo.ico) created by Jinho Jung, distributed under the CC BY-SA 2.0 license.
 
 
 Python 3.5.2 License

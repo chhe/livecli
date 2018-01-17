@@ -8,8 +8,8 @@ try:
 except ImportError:
     from mock import patch, PropertyMock
 
-from streamlink.exceptions import PluginError
-from streamlink.plugin.api.http_session import HTTPSession
+from livecli.exceptions import PluginError
+from livecli.plugin.api.http_session import HTTPSession
 
 
 class TestPluginAPIHTTPSession(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.oldlivestream import OldLivestream
+from livecli.plugins.oldlivestream import OldLivestream
 
 
 class TestPluginOldLivestream(unittest.TestCase):

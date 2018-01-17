@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.webcast_india_gov import WebcastIndiaGov
+from livecli.plugins.webcast_india_gov import WebcastIndiaGov
 
 
 class TestPluginWebcastIndiaGov(unittest.TestCase):

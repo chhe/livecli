@@ -2,9 +2,9 @@ import unittest
 
 import pytest
 from mock import patch
-from streamlink import StreamError
-from streamlink import Streamlink
-from streamlink.stream import StreamProcess
+from livecli import StreamError
+from livecli import Livecli
+from livecli.stream import StreamProcess
 
 
 @pytest.mark.parametrize("parameters,arguments,expected", [
@@ -32,30 +32,30 @@ class TestStreamProcess(unittest.TestCase):
                                             long_option_prefix="/", short_option_prefix="/"))
 
     def test_check_cmd_none(self):
-        s = StreamProcess(Streamlink())
+        s = StreamProcess(Livecli())
         self.assertRaises(StreamError, s._check_cmd)
 
-    @patch('streamlink.stream.streamprocess.which')
+    @patch('livecli.stream.streamprocess.which')
     def test_check_cmd_cat(self, which):
-        s = StreamProcess(Streamlink())
+        s = StreamProcess(Livecli())
         which.return_value = s.cmd = "test"
         self.assertEqual("test", s._check_cmd())
 
-    @patch('streamlink.stream.streamprocess.which')
+    @patch('livecli.stream.streamprocess.which')
     def test_check_cmd_nofound(self, which):
-        s = StreamProcess(Streamlink())
+        s = StreamProcess(Livecli())
         s.cmd = "test"
         which.return_value = None
         self.assertRaises(StreamError, s._check_cmd)
 
-    @patch('streamlink.stream.streamprocess.which')
+    @patch('livecli.stream.streamprocess.which')
     def test_check_cmdline(self, which):
-        s = StreamProcess(Streamlink(), params=dict(help=True))
+        s = StreamProcess(Livecli(), params=dict(help=True))
         which.return_value = s.cmd = "test"
         self.assertEqual("test --help", s.cmdline())
 
-    @patch('streamlink.stream.streamprocess.which')
+    @patch('livecli.stream.streamprocess.which')
     def test_check_cmdline_long(self, which):
-        s = StreamProcess(Streamlink(), params=dict(out_file="test file.txt"))
+        s = StreamProcess(Livecli(), params=dict(out_file="test file.txt"))
         which.return_value = s.cmd = "test"
         self.assertEqual("test --out-file \"test file.txt\"", s.cmdline())

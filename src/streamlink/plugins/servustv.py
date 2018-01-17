@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.stream import HDSStream
+from livecli.plugin import Plugin
+from livecli.stream import HDSStream
 
 _channel = dict(
     at="servustvhd_1@51229",

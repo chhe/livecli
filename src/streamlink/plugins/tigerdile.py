@@ -1,10 +1,10 @@
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream
+from livecli.stream import HLSStream
 
 PAGE_URL = "https://www.tigerdile.com/stream/"
 ROOT_URL = "rtmp://stream.tigerdile.com/live/{0}"

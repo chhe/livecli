@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.vidio import Vidio
+from livecli.plugins.vidio import Vidio
 
 
 class TestPluginVidio(unittest.TestCase):

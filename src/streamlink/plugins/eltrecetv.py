@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 
 class ElTreceTV(Plugin):

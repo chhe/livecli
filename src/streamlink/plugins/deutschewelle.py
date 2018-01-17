@@ -1,10 +1,10 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.compat import urlparse, parse_qsl
-from streamlink.stream import HLSStream, HTTPStream, RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.compat import urlparse, parse_qsl
+from livecli.stream import HLSStream, HTTPStream, RTMPStream
 
 
 class DeutscheWelle(Plugin):

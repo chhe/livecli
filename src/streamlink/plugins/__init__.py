@@ -1,5 +1,5 @@
 """
-    New plugins should use streamlink.plugin.Plugin instead
+    New plugins should use livecli.plugin.Plugin instead
     of this module, but this is kept here for backwards
     compatibility.
 """

@@ -1,11 +1,11 @@
 import re
 
-from streamlink import NoStreamsError
-from streamlink.exceptions import PluginError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import StreamMapper, http, validate
-from streamlink.stream import HDSStream, HLSStream, RTMPStream
-from streamlink.utils import rtmpparse
+from livecli import NoStreamsError
+from livecli.exceptions import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import StreamMapper, http, validate
+from livecli.stream import HDSStream, HLSStream, RTMPStream
+from livecli.utils import rtmpparse
 
 STREAM_API_URL = "https://playapi.mtgx.tv/v3/videos/stream/{0}"
 
@@ -27,7 +27,7 @@ _stream_schema = validate.Schema(
 
 
 class Viasat(Plugin):
-    """Streamlink Plugin for Viasat"""
+    """Livecli Plugin for Viasat"""
 
     _iframe_re = re.compile(r"""<iframe.+src=["'](?P<url>[^"']+)["'].+allowfullscreen""")
     _image_re = re.compile(r"""<meta\sproperty=["']og:image["']\scontent=".+/(?P<stream_id>\d+)/[^/]+\.jpg""")

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.vrtbe import VRTbe
+from livecli.plugins.vrtbe import VRTbe
 
 
 class TestPluginVRTbe(unittest.TestCase):

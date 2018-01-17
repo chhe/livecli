@@ -2,13 +2,13 @@ import re
 
 import time
 
-from streamlink import PluginError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.compat import urlparse, parse_qsl
+from livecli import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.compat import urlparse, parse_qsl
 
 
 class SeeTV(Plugin):

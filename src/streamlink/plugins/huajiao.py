@@ -7,9 +7,9 @@ import json
 
 from requests.adapters import HTTPAdapter
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import (HTTPStream, HLSStream)
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import (HTTPStream, HLSStream)
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
 HUAJIAO_URL = "http://www.huajiao.com/l/{}"

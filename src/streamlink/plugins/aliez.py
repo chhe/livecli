@@ -2,10 +2,10 @@ import re
 
 from os.path import splitext
 
-from streamlink.compat import urlparse, unquote
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HTTPStream, RTMPStream
+from livecli.compat import urlparse, unquote
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HTTPStream, RTMPStream
 
 _url_re = re.compile(r"""
     https?://(\w+\.)?aliez.\w+/

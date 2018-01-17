@@ -2,7 +2,7 @@ import sys
 
 import base64
 
-from streamlink.utils.crypto import evp_bytestokey, decrypt_openssl
+from livecli.utils.crypto import evp_bytestokey, decrypt_openssl
 
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
@@ -18,9 +18,9 @@ class TestUtil(unittest.TestCase):
 
     def test_decrpyt(self):
         # data generated with:
-        #   echo "this is a test" | openssl enc -aes-256-cbc -pass pass:"streamlink" -base64
-        data = base64.b64decode("U2FsdGVkX18nVyJ6Y+ksOASMSHKuRoQ9b4DKHuPbyQc=")
+        #   echo "this is a test" | openssl enc -aes-256-cbc -pass pass:"livecli" -base64
+        data = base64.b64decode("U2FsdGVkX1+nEpemEwoJIuXU949/oRwR+qzhEVVvKNM=")
         self.assertEqual(
             b"this is a test\n",
-            decrypt_openssl(data, b"streamlink")
+            decrypt_openssl(data, b"livecli")
         )

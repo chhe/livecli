@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate, useragents
-from streamlink.stream import HLSStream, RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate, useragents
+from livecli.stream import HLSStream, RTMPStream
 
 _url_re = re.compile(r'''^https?://
     (?:\w*.)?

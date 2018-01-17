@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.canalplus import CanalPlus
+from livecli.plugins.canalplus import CanalPlus
 
 
 class TestPluginCanalPlus(unittest.TestCase):

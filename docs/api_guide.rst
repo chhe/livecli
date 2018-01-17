@@ -3,21 +3,21 @@
 API Guide
 =========
 
-.. module:: streamlink
+.. module:: livecli
 
 This API is what powers the :ref:`cli` but is also available to developers that wish
-to make use of the data Streamlink can retrieve in their own application.
+to make use of the data Livecli can retrieve in their own application.
 
 
 Extracting streams
 ------------------
 
-The simplest use of the Streamlink API looks like this:
+The simplest use of the Livecli API looks like this:
 
 .. code-block:: python
 
-    >>> import streamlink
-    >>> streams = streamlink.streams("http://twitch.tv/day9tv")
+    >>> import livecli
+    >>> streams = livecli.streams("http://twitch.tv/day9tv")
 
 This simply attempts to find a plugin and use it to extract streams from
 the URL. This works great in simple cases but if you want more
@@ -80,12 +80,12 @@ Session object
 
 The session allows you to set various options and is more efficient
 when extracting streams more than once. You start by creating a
-:class:`Streamlink` object:
+:class:`Livecli` object:
 
 .. code-block:: python
 
-    >>> from streamlink import Streamlink
-    >>> session = Streamlink()
+    >>> from livecli import Livecli
+    >>> session = Livecli()
 
 You can then extract streams like this:
 
@@ -100,7 +100,7 @@ or set options like this:
     >>> session.set_option("rtmp-rtmpdump", "/path/to/rtmpdump")
 
 
-See :func:`Streamlink.set_option` to see which options are available.
+See :func:`Livecli.set_option` to see which options are available.
 
 
 Examples

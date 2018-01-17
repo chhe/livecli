@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.stream import StreamIOIterWrapper
+from livecli.stream import StreamIOIterWrapper
 
 
 class TestPluginStream(unittest.TestCase):

@@ -4,7 +4,7 @@ from binascii import unhexlify
 from collections import namedtuple
 from itertools import starmap
 
-from streamlink.compat import urljoin, urlparse
+from livecli.compat import urljoin, urlparse
 
 __all__ = ["load", "M3U8Parser"]
 

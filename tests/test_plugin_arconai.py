@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.arconai import ArconaiTv
+from livecli.plugins.arconai import ArconaiTv
 
 
 class TestPluginArconaiTv(unittest.TestCase):

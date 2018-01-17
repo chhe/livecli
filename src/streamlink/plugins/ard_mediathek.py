@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream
 
 MEDIA_URL = "http://www.ardmediathek.de/play/media/{0}"
 SWF_URL = "http://www.ardmediathek.de/ard/static/player/base/flash/PluginFlash.swf"

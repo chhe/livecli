@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HLSStream
 
 CHANNEL_INFO_URL = "http://live.afreecatv.com:8057/api/get_broad_state_list.php"
 KEEP_ALIVE_URL = "{server}/stream_keepalive.html"

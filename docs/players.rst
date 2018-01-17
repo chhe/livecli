@@ -41,7 +41,7 @@ OMXPlayer                                             No         Yes        Yes 
 .. [1] :option:`--player-continuous-http` must be used.
        Using HTTP with players that rely on Windows' codecs to access HTTP
        streams may have a long startup time since Windows tend to do multiple
-       HTTP requests and Streamlink will attempt to open the stream for each
+       HTTP requests and Livecli will attempt to open the stream for each
        request.
 .. [2] Stdin requires MPC-HC 1.7 or newer.
 

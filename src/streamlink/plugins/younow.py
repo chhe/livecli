@@ -2,9 +2,9 @@
 
 import re
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http
+from livecli.stream import RTMPStream
 
 jsonapi = "https://api.younow.com/php/api/broadcast/info/curId=0/user="
 

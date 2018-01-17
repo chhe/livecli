@@ -6,10 +6,10 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import RTMPStream, HDSStream
-from streamlink.compat import urlparse, unquote
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import RTMPStream, HDSStream
+from livecli.compat import urlparse, unquote
 
 ITV_PLAYER_USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36'
 LIVE_SWF_URL = "http://www.itv.com/mediaplayer/ITVMediaPlayer.swf"

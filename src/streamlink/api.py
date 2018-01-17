@@ -1,4 +1,4 @@
-from .session import Streamlink
+from .session import Livecli
 
 
 def streams(url, **params):
@@ -9,5 +9,5 @@ def streams(url, **params):
     Raises :exc:`NoPluginError` if no plugin is found.
     """
 
-    session = Streamlink()
+    session = Livecli()
     return session.streams(url, **params)

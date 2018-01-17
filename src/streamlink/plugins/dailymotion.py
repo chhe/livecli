@@ -3,12 +3,12 @@ import re
 
 from functools import reduce
 
-from streamlink.compat import urlparse, range
-from streamlink.exceptions import NoStreamsError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream, RTMPStream
-from streamlink.stream.playlist import FLVPlaylist
+from livecli.compat import urlparse, range
+from livecli.exceptions import NoStreamsError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream, RTMPStream
+from livecli.stream.playlist import FLVPlaylist
 
 COOKIES = {
     "family_filter": "off",

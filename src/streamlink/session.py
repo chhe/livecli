@@ -4,8 +4,8 @@ import sys
 import traceback
 import requests
 
-from streamlink.utils import update_scheme
-from streamlink.utils.l10n import Localization
+from livecli.utils import update_scheme
+from livecli.utils.l10n import Localization
 from . import plugins, __version__
 from .compat import is_win32
 from .exceptions import NoPluginError, PluginError
@@ -34,8 +34,8 @@ def print_small_exception(start_after):
     sys.stderr.write("\n")
 
 
-class Streamlink(object):
-    """A Streamlink session is used to keep track of plugins,
+class Livecli(object):
+    """A Livecli session is used to keep track of plugins,
        options and log settings."""
 
     def __init__(self):
@@ -463,4 +463,4 @@ class Streamlink(object):
         return Localization(self.get_option("locale"))
 
 
-__all__ = ["Streamlink"]
+__all__ = ["Livecli"]

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.cyro import Cyro
+from livecli.plugins.cyro import Cyro
 
 
 class TestPluginCyro(unittest.TestCase):

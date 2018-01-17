@@ -1,12 +1,12 @@
 # coding: utf8
-"""Streamlink extracts streams from various services.
+"""Livecli extracts streams from various services.
 
-The main compontent of Streamlink is a command-line utility that
+The main compontent of Livecli is a command-line utility that
 launches the streams in a video player.
 
 An API is also provided that allows direct access to stream data.
 
-Full documentation is available at https://streamlink.github.io.
+Full documentation is available at https://livecli.github.io.
 
 """
 import warnings
@@ -16,7 +16,7 @@ from sys import version_info
 if version_info[:2] == (2, 6):
     warnings.warn(
         "Python 2.6 is no longer supported by the Python core team, please "
-        "upgrade your Python. A future version of streamlink will drop "
+        "upgrade your Python. A future version of livecli will drop "
         "support for Python 2.6",
         DeprecationWarning
     )
@@ -25,10 +25,10 @@ if version_info[:2] == (2, 6):
 from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions
-__title__ = "streamlink"
+__title__ = "livecli"
 __license__ = "Simplified BSD"
-__author__ = "Streamlink"
-__copyright__ = "Copyright 2018 Streamlink"
+__author__ = "Livecli"
+__copyright__ = "Copyright 2018 Livecli"
 __credits__ = [
     "Agustín Carrasco (@asermax)",
     "Andrew Bashore (@bashtech)",
@@ -84,7 +84,7 @@ __credits__ = [
 ]
 
 from .api import streams
-from .exceptions import (StreamlinkError, PluginError, NoStreamsError,
+from .exceptions import (LiveurlError, PluginError, NoStreamsError,
                          NoPluginError, StreamError)
-from .session import Streamlink
+from .session import Livecli
 

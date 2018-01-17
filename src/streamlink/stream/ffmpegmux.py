@@ -6,11 +6,11 @@ import subprocess
 
 import sys
 
-from streamlink import StreamError
-from streamlink.stream import Stream
-from streamlink.stream.stream import StreamIO
-from streamlink.utils import NamedPipe
-from streamlink.compat import devnull, which
+from livecli import StreamError
+from livecli.stream import Stream
+from livecli.stream.stream import StreamIO
+from livecli.utils import NamedPipe
+from livecli.compat import devnull, which
 
 
 class MuxedStream(Stream):

@@ -1,9 +1,9 @@
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream
 
 _url_re = re.compile(r"(http(s)?://(\w+\.)?antenna.gr)/webtv/watch\?cid=.+")
 _playlist_re = re.compile(r"playlist:\s*\"(/templates/data/jplayer\?cid=[^\"]+)")

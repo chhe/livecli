@@ -1,12 +1,12 @@
 import json
 import re
 
-from streamlink.compat import urljoin, urlparse, urlunparse
-from streamlink.exceptions import PluginError, NoStreamsError
-from streamlink.plugin.api import validate, http, useragents
-from streamlink.plugin import Plugin
-from streamlink.stream import HLSStream
-from streamlink.utils import update_scheme
+from livecli.compat import urljoin, urlparse, urlunparse
+from livecli.exceptions import PluginError, NoStreamsError
+from livecli.plugin.api import validate, http, useragents
+from livecli.plugin import Plugin
+from livecli.stream import HLSStream
+from livecli.utils import update_scheme
 
 CONST_AMF_GATEWAY_LOCATION = '/tools/amf.php'
 CONST_AMF_GATEWAY_PARAM = 'x-country'

@@ -1,21 +1,21 @@
 Donating
 --------
 
-Thank you for considering a donation to the Streamlink team! Streamlink is an
+Thank you for considering a donation to the Livecli team! Livecli is an
 organization composed of a geographically diverse group of individuals.
 We accept donations/tips in a variety of ways. If you would like to donate
 directly to a specific user, please review their details in the team section
 below. If you would prefer to donate to the team as a whole, please use our
-`Open Collective <https://opencollective.com/streamlink>`_. Note that
-donations are not tax deductible as Streamlink does not operate as a charitable
+`Open Collective <https://opencollective.com/livecli>`_. Note that
+donations are not tax deductible as Livecli does not operate as a charitable
 organization. Your donation to the team or a team member may be used in any
 way and does not come with expectations of work to be provided or as payment
 for future work. If you would like a specific feature implemented consider
 creating a bounty on
-`Bountysource <https://www.bountysource.com/teams/streamlink>`_.
+`Bountysource <https://www.bountysource.com/teams/livecli>`_.
 
 ---------------
-Streamlink Team
+Livecli Team
 ---------------
 
 Bastimeyer 
@@ -25,7 +25,7 @@ Bastimeyer
 - `Bitcoin <https://blockchain.info/qr?data=1EZg8eBz4RdPb8pEzYD9JEzr9Fyitzj8j8>`__ (`1EZg8eBz4RdPb8pEzYD9JEzr9Fyitzj8j8`)
 - `Dogecoin <https://blockchain.info/qr?data=DGkVP7AMUHr2TbVnWy6QyZqSMvCkeEo1ab>`__ (`DGkVP7AMUHr2TbVnWy6QyZqSMvCkeEo1ab`)
 - `Flattr <https://flattr.com/thing/3956088>`__
-- `Paypal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YUCGRLVALHS8C&item_name=Streamlink%20Twitch%20GUI>`__
+- `Paypal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YUCGRLVALHS8C&item_name=Livecli%20Twitch%20GUI>`__
 
 Beardypig 
 ^^^^^^^^^

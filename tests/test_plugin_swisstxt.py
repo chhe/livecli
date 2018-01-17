@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.swisstxt import Swisstxt
+from livecli.plugins.swisstxt import Swisstxt
 
 
 class TestPluginSwisstxt(unittest.TestCase):

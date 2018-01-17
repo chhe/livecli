@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tv1channel import TV1Channel
+from livecli.plugins.tv1channel import TV1Channel
 
 
 class TestPluginTV1Channel(unittest.TestCase):

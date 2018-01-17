@@ -1,7 +1,7 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.stream import HLSStream
 
 PLAYLIST_URL = "http://x{0}x.api.channel.livestream.com/3.0/playlist.m3u8"
 

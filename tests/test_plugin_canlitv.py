@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.canlitv import Canlitv, _m3u8_re
+from livecli.plugins.canlitv import Canlitv, _m3u8_re
 
 
 class TestPluginCanlitv(unittest.TestCase):

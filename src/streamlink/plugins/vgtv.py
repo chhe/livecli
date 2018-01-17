@@ -2,9 +2,9 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream
 
 # This will have to be set to handle "secure" HDS streams. For now we
 # leave it empty, as the same streams can likely be watched with HLS.

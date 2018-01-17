@@ -3,16 +3,16 @@ import re
 
 from Crypto.Cipher import Blowfish
 
-from streamlink import PluginError
-from streamlink.compat import bytes, is_py3
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
-from streamlink.stream.ffmpegmux import MuxedStream
-from streamlink.utils import parse_xml
+from livecli import PluginError
+from livecli.compat import bytes, is_py3
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream.ffmpegmux import MuxedStream
+from livecli.utils import parse_xml
 
 
 class ZTNRClient(object):

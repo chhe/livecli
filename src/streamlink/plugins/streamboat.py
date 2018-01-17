@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
 
 _RE_URL = re.compile(r'^https?://streamboat.tv/.+')
 _RE_CDN = re.compile(r'"cdn_host"\s*:\s*"([^"]+)"')

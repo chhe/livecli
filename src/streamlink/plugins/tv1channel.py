@@ -1,7 +1,7 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
 
 _url_re = re.compile(r'''https?://(www\.)?tv1channel\.org/''')
 _embed_re = re.compile(r'''<iframe.+src="([^"]+)"''')

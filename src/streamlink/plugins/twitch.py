@@ -4,12 +4,12 @@ import warnings
 from random import random
 
 import requests
-from streamlink.compat import urlparse
-from streamlink.exceptions import NoStreamsError, PluginError, StreamError
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_json, parse_query
-from streamlink.stream import (
+from livecli.compat import urlparse
+from livecli.exceptions import NoStreamsError, PluginError, StreamError
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_json, parse_query
+from livecli.stream import (
     HTTPStream, HLSStream, FLVPlaylist, extract_flv_header_tags
 )
 

@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents, validate
-from streamlink.stream import HLSStream, RTMPStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents, validate
+from livecli.stream import HLSStream, RTMPStream
+from livecli.utils import parse_json
 
 
 class Cam4(Plugin):

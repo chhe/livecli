@@ -27,9 +27,9 @@ Twitch OAuth authentication
     </script>
 
 
-You successfully authenticated Streamlink with Twitch.
+You successfully authenticated Livecli with Twitch.
 
-Paste this into your :ref:`configuration file <cli-streamlinkrc>`:
+Paste this into your :ref:`configuration file <cli-liveurlrc>`:
 
 .. code-block:: bash
 

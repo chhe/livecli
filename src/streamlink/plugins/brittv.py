@@ -1,10 +1,10 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.compat import urljoin
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.compat import urljoin
+from livecli.stream import HLSStream
 
 
 class BritTV(Plugin):

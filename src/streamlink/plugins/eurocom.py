@@ -1,9 +1,9 @@
 from __future__ import print_function
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import RTMPStream
 
 
 class Eurocom(Plugin):

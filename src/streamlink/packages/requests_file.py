@@ -26,7 +26,7 @@ import stat
 import locale
 import io
 
-from streamlink.compat import is_win32, is_py3
+from livecli.compat import is_win32, is_py3
 
 
 class FileAdapter(BaseAdapter):

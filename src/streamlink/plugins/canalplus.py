@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream
 
 
 class CanalPlus(Plugin):

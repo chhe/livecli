@@ -3,9 +3,9 @@ import re
 import time
 
 from requests.adapters import HTTPAdapter
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate, useragents
-from streamlink.stream import HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate, useragents
+from livecli.stream import HTTPStream
 
 API_URL = "http://live.bilibili.com/api/playurl?cid={0}&player=1&quality=0&sign={1}&otype=json"
 ROOM_API = "https://api.live.bilibili.com/room/v1/Room/room_init?id={}"

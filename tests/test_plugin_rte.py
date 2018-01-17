@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.rte import RTE
+from livecli.plugins.rte import RTE
 
 
 class TestPluginRTE(unittest.TestCase):

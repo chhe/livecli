@@ -1,10 +1,10 @@
-# Unit tests accompanying the Huomao Streamlink plugin.
+# Unit tests accompanying the Huomao Livecli plugin.
 
 import unittest
 import re
 
-from streamlink.plugin.api import http
-from streamlink.plugins.huomao import Huomao
+from livecli.plugin.api import http
+from livecli.plugins.huomao import Huomao
 
 
 class TestPluginHuomao(unittest.TestCase):

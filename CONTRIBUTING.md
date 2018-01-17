@@ -1,4 +1,4 @@
-# Contributing to Streamlink
+# Contributing to Livecli
 
 Want to get involved? Thanks! There are plenty of ways to help!
 
@@ -29,7 +29,7 @@ Feature requests are welcome, but take a moment to find out whether your idea fi
 
 ## Plugin requests
 
-Plugin submissions and requests are a great way to improve Streamlink. Requests should be as detailed as possible and dedicated to only a single streaming service. Information about the service as well as explicit URLs for live streams or recordings are encouraged so that the requested plugin can be easily implemented. Please be aware that plugins for streaming services that are using DRM protections will not be implemented.
+Plugin submissions and requests are a great way to improve Livecli. Requests should be as detailed as possible and dedicated to only a single streaming service. Information about the service as well as explicit URLs for live streams or recordings are encouraged so that the requested plugin can be easily implemented. Please be aware that plugins for streaming services that are using DRM protections will not be implemented.
 
 
 ## Pull requests
@@ -45,11 +45,11 @@ Adhering to the following process is the best way to get your work included in t
 1. [Fork][howto-fork] the project, clone your fork, and configure the remotes:
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone git@github.com:<YOUR-USERNAME>/streamlink.git
+   git clone git@github.com:<YOUR-USERNAME>/livecli.git
    # Navigate to the newly cloned directory
-   cd streamlink
+   cd livecli
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/streamlink/streamlink.git
+   git remote add upstream https://github.com/livecli/livecli.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream
@@ -86,14 +86,14 @@ under the terms of the [BSD 2-clause license][license].
 This contributing guide has been adapted from [HTML5 boilerplate's guide][ref-h5bp].
 
 
-  [issues]: https://github.com/streamlink/streamlink/issues
-  [known-issues]: https://github.com/streamlink/streamlink/blob/master/KNOWN_ISSUES.md
-  [issue-template]: https://github.com/streamlink/streamlink/blob/master/ISSUE_TEMPLATE.md
+  [issues]: https://github.com/livecli/livecli/issues
+  [known-issues]: https://github.com/livecli/livecli/blob/master/KNOWN_ISSUES.md
+  [issue-template]: https://github.com/livecli/livecli/blob/master/ISSUE_TEMPLATE.md
   [mastering-markdown]: https://guides.github.com/features/mastering-markdown
   [howto-fork]: https://help.github.com/articles/fork-a-repo
   [howto-rebase]: https://help.github.com/articles/interactive-rebase
   [howto-format-commits]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   [howto-open-pull-requests]: https://help.github.com/articles/using-pull-requests
   [Git]: https://git-scm.com
-  [license]: https://github.com/streamlink/streamlink/blob/master/LICENSE
+  [license]: https://github.com/livecli/livecli/blob/master/LICENSE
   [ref-h5bp]: https://github.com/h5bp/html5-boilerplate/blob/master/CONTRIBUTING.md

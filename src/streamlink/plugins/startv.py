@@ -1,10 +1,10 @@
 from __future__ import print_function
 import re
 
-from streamlink import streams
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
+from livecli import streams
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
 
 
 class StarTV(Plugin):

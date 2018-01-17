@@ -1,6 +1,6 @@
 #!/bin/bash
-UPSTREAM_REPO="streamlink"
-CLI="streamlink"
+UPSTREAM_REPO="livecli"
+CLI="livecli"
 
 usage() {
   echo "This will prepare $CLI for release!"

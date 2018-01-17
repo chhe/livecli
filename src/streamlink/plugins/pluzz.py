@@ -2,11 +2,11 @@ import re
 import sys
 import time
 
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream
-from streamlink.stream.ffmpegmux import MuxedStream
-from streamlink.utils import update_scheme
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream
+from livecli.stream.ffmpegmux import MuxedStream
+from livecli.utils import update_scheme
 
 
 class Pluzz(Plugin):

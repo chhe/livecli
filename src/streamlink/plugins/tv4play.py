@@ -2,10 +2,10 @@
 
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, RTMPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, RTMPStream
 
 ASSET_URL = "http://prima.tv4play.se/api/web/asset/{0}/play"
 SWF_URL = "http://www.tv4play.se/flash/tv4video.swf"

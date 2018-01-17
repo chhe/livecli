@@ -15,7 +15,7 @@ class SupportPlugin(module):
 
     Usage::
 
-      >>> from streamlink.plugin.api.support_plugin import myplugin_extra
+      >>> from livecli.plugin.api.support_plugin import myplugin_extra
 
     """
 
@@ -27,6 +27,6 @@ class SupportPlugin(module):
             return load_support_plugin(name)
 
 
-support_plugin_path = "streamlink.plugin.api.support_plugin"
+support_plugin_path = "livecli.plugin.api.support_plugin"
 sys.modules[support_plugin_path] = SupportPlugin("support_plugin")
 http = None

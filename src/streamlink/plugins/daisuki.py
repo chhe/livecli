@@ -10,14 +10,14 @@ from Crypto.Cipher import AES, PKCS1_v1_5
 from Crypto.PublicKey import RSA
 from Crypto.Util import number
 
-from streamlink.compat import urljoin, urlparse
-from streamlink.exceptions import PluginError
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_json
-from streamlink.stream import HLSStream
-from streamlink.stream.ffmpegmux import MuxedStream, FFMPEGMuxer
-from streamlink.stream.file import FileStream
+from livecli.compat import urljoin, urlparse
+from livecli.exceptions import PluginError
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_json
+from livecli.stream import HLSStream
+from livecli.stream.ffmpegmux import MuxedStream, FFMPEGMuxer
+from livecli.stream.file import FileStream
 
 HDCORE_VERSION = "3.2.0"
 

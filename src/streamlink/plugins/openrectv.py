@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 _url_re = re.compile(r"https?://(?:www\.)?openrec.tv/(live|movie)/")
 _playlist_url_re = re.compile(r"data-(source)?file=\"(?P<url>[^\"]+)\"")

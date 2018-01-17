@@ -1,10 +1,10 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
-from streamlink.plugin.api import useragents
-from streamlink.utils import update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
+from livecli.plugin.api import useragents
+from livecli.utils import update_scheme
 
 HUYA_URL = "http://m.huya.com/%s"
 

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.bloomberg import Bloomberg
+from livecli.plugins.bloomberg import Bloomberg
 
 
 class TestPluginBloomberg(unittest.TestCase):

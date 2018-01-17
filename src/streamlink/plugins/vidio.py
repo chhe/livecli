@@ -5,9 +5,9 @@ Plugin for vidio.com
 '''
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
 
 _url_re = re.compile(r"https?://(?:www\.)?vidio\.com/(?:en/)?(?P<type>live|watch)/(?P<id>\d+)-(?P<name>[^/?#&]+)")
 _playlist_re = re.compile(r'''hls-url=["'](?P<url>[^"']+)["']''')

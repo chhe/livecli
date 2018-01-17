@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.bfmtv import BFMTV
+from livecli.plugins.bfmtv import BFMTV
 
 
 class TestPluginBFMTV(unittest.TestCase):

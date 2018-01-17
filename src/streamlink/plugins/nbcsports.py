@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugins.theplatform import ThePlatform
-from streamlink.utils import update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugins.theplatform import ThePlatform
+from livecli.utils import update_scheme
 
 
 class NBCSports(Plugin):

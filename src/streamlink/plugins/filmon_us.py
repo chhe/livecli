@@ -1,10 +1,10 @@
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_json, parse_query
-from streamlink.stream import RTMPStream, HTTPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_json, parse_query
+from livecli.stream import RTMPStream, HTTPStream
 
 SWF_LIVE_URL = "https://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf"
 SWF_VIDEO_URL = "http://www.filmon.us/application/themes/base/flash/MediaPlayer.swf"

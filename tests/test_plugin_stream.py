@@ -4,14 +4,14 @@ try:
     from unittest.mock import patch, ANY
 except ImportError:
     from mock import patch, ANY
-from streamlink import Streamlink
-from streamlink.plugin.plugin import stream_weight, parse_params
-from streamlink.stream import *
+from livecli import Livecli
+from livecli.plugin.plugin import stream_weight, parse_params
+from livecli.stream import *
 
 
 class TestPluginStream(unittest.TestCase):
     def setUp(self):
-        self.session = Streamlink()
+        self.session = Livecli()
 
     def assertDictHas(self, a, b):
         for key, value in a.items():
@@ -27,7 +27,7 @@ class TestPluginStream(unittest.TestCase):
         self.assertTrue(isinstance(stream, AkamaiHDStream))
         self.assertEqual(stream.url, url)
 
-    @patch('streamlink.stream.HLSStream.parse_variant_playlist')
+    @patch('livecli.stream.HLSStream.parse_variant_playlist')
     def _test_hls(self, surl, url, mock_parse):
         mock_parse.return_value = {}
 
@@ -41,7 +41,7 @@ class TestPluginStream(unittest.TestCase):
         self.assertTrue(isinstance(stream, HLSStream))
         self.assertEqual(stream.url, url)
 
-    @patch('streamlink.stream.HLSStream.parse_variant_playlist')
+    @patch('livecli.stream.HLSStream.parse_variant_playlist')
     def _test_hlsvariant(self, surl, url, mock_parse):
         mock_parse.return_value = {"best": HLSStream(self.session, url)}
 

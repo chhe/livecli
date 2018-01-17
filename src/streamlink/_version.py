@@ -42,8 +42,8 @@ def get_config():
     cfg.VCS = "git"
     cfg.style = "pep440"
     cfg.tag_prefix = ""
-    cfg.parentdir_prefix = "streamlink-"
-    cfg.versionfile_source = "src/streamlink/_version.py"
+    cfg.parentdir_prefix = "livecli-"
+    cfg.versionfile_source = "src/livecli/_version.py"
     cfg.verbose = False
     return cfg
 

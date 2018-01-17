@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_query
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_query
+from livecli.stream import RTMPStream
 
 BALANCER_URL = "http://www.mips.tv:1935/loadbalancer"
 PLAYER_URL = "http://mips.tv/embedplayer/{0}/1/500/400"

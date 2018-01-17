@@ -86,7 +86,7 @@ class HTTPServer(object):
 
         try:
             conn.send(b"HTTP/1.1 200 OK\r\n")
-            conn.send(b"Server: Streamlink\r\n")
+            conn.send(b"Server: Livecli\r\n")
             conn.send(b"Content-Type: video/unknown\r\n")
             conn.send(b"\r\n")
         except socket.error:

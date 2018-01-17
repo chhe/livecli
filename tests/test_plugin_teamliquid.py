@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.teamliquid import Teamliquid
+from livecli.plugins.teamliquid import Teamliquid
 
 
 class TestPluginTeamliquid(unittest.TestCase):

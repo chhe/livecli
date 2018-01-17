@@ -1,7 +1,7 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
 
 YOUTUBE_URL = "https://www.youtube.com/watch?v={0}"
 _url_re = re.compile(r'http(s)?://www\.skai.gr/.*')

@@ -13,10 +13,10 @@ Additionally, videos from iVysilani archive should work as well.
 """
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
-from streamlink.exceptions import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
+from livecli.exceptions import PluginError
 
 _url_re = re.compile(
     r'http(s)?://([^.]*.)?ceskatelevize.cz'

@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
 
 HLS_URL_FORMAT = "https://hls.goodgame.ru/hls/{0}{1}.m3u8"
 QUALITIES = {

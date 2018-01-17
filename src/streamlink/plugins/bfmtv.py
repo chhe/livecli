@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugins.brightcove import BrightcovePlayer
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugins.brightcove import BrightcovePlayer
+from livecli.stream import HLSStream
 
 
 class BFMTV(Plugin):

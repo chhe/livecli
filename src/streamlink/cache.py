@@ -13,7 +13,7 @@ else:
     xdg_cache = os.environ.get("XDG_CACHE_HOME",
                                os.path.expanduser("~/.cache"))
 
-cache_dir = os.path.join(xdg_cache, "streamlink")
+cache_dir = os.path.join(xdg_cache, "livecli")
 
 
 class Cache(object):

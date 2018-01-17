@@ -1,10 +1,10 @@
 from functools import partial
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HDSStream, HLSStream, HTTPStream
-from streamlink.utils import parse_json, update_scheme
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HDSStream, HLSStream, HTTPStream
+from livecli.utils import parse_json, update_scheme
 
 
 class Bloomberg(Plugin):

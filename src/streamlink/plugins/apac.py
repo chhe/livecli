@@ -1,10 +1,10 @@
 import re
 
-from streamlink import NoPluginError
-from streamlink import PluginError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.utils import update_scheme
+from livecli import NoPluginError
+from livecli import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.utils import update_scheme
 
 
 class APac(Plugin):

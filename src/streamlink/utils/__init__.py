@@ -7,9 +7,9 @@ try:
 except ImportError:  # pragma: no cover
     import xml.etree.ElementTree as ET
 
-from streamlink.compat import urljoin, urlparse, parse_qsl, is_py2, urlunparse
-from streamlink.exceptions import PluginError
-from streamlink.utils.named_pipe import NamedPipe
+from livecli.compat import urljoin, urlparse, parse_qsl, is_py2, urlunparse
+from livecli.exceptions import PluginError
+from livecli.utils.named_pipe import NamedPipe
 
 
 def swfdecompress(data):

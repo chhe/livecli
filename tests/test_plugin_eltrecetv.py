@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.eltrecetv import ElTreceTV
+from livecli.plugins.eltrecetv import ElTreceTV
 
 
 class TestPluginElTreceTV(unittest.TestCase):

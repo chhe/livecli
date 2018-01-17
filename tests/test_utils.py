@@ -1,15 +1,15 @@
 import sys
 
-from streamlink.plugin.api.validate import xml_element, text
-from streamlink.utils import update_scheme
+from livecli.plugin.api.validate import xml_element, text
+from livecli.utils import update_scheme
 
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
     import xml.etree.ElementTree as ET
-from streamlink import PluginError
-from streamlink.plugin.api import validate
-from streamlink.utils import *
+from livecli import PluginError
+from livecli.plugin.api import validate
+from livecli.utils import *
 
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest

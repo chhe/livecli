@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HLSStream
 
 STREAMS_URL = "https://piczel.tv:3000/streams/{0}?&page=1&sfw=false&live_only=true"
 HLS_URL = "https://5810b93fdf674.streamlock.net:1936/live/{0}/playlist.m3u8"

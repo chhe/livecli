@@ -9,4 +9,4 @@ prune docs/_build
 recursive-include examples *
 recursive-include tests *py
 include versioneer.py
-include src/streamlink/_version.py
+include src/livecli/_version.py

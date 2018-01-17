@@ -1,7 +1,7 @@
 import unittest
 
-from streamlink.plugins.neulion import Neulion
-from streamlink.plugins.neulion import js_to_json_regex_fallback
+from livecli.plugins.neulion import Neulion
+from livecli.plugins.neulion import js_to_json_regex_fallback
 
 
 class TestRegexFallback(unittest.TestCase):

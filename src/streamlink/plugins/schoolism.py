@@ -3,12 +3,12 @@ from __future__ import print_function
 import re
 from functools import partial
 
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.utils import parse_json
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.utils import parse_json
 
 
 class Schoolism(Plugin):

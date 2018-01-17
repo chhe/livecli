@@ -2,9 +2,9 @@ from __future__ import print_function
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugins.brightcove import BrightcovePlayer
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugins.brightcove import BrightcovePlayer
 
 
 class GardenersWorld(Plugin):

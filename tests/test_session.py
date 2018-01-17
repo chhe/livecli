@@ -1,23 +1,23 @@
 import os
 import unittest
 
-from streamlink.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
+from livecli.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
 
 try:
     from unittest.mock import MagicMock
 except ImportError:
     from mock import MagicMock
 
-from streamlink import Streamlink, NoPluginError
-from streamlink.plugins import Plugin
-from streamlink.stream import *
+from livecli import Livecli, NoPluginError
+from livecli.plugins import Plugin
+from livecli.stream import *
 
 
 class TestSession(unittest.TestCase):
     PluginPath = os.path.join(os.path.dirname(__file__), "plugins")
 
     def setUp(self):
-        self.session = Streamlink()
+        self.session = Livecli()
         self.session.load_plugins(self.PluginPath)
 
     def test_exceptions(self):

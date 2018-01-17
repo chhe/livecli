@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.srgssr import SRGSSR
+from livecli.plugins.srgssr import SRGSSR
 
 
 class TestPluginSRGSSR(unittest.TestCase):

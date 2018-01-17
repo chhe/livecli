@@ -2,10 +2,10 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.stream import RTMPStream, HLSStream
 
-from streamlink.plugin.api import http
+from livecli.plugin.api import http
 
 RTMP_LIVE_URL = "rtmp://ruv{0}livefs.fplive.net/ruv{0}live-live/stream{1}"
 RTMP_SARPURINN_URL = "rtmp://sipvodfs.fplive.net/sipvod/{0}/{1}{2}.{3}"

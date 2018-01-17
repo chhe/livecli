@@ -1,8 +1,8 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.stream import HLSStream
-from streamlink.plugin.api import http
+from livecli.plugin import Plugin
+from livecli.stream import HLSStream
+from livecli.plugin.api import http
 
 
 _stream_url_re = re.compile(r"http(s)?://(www\.)?mediaklikk.hu/([A-Za-z0-9\-]+)/?")

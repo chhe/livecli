@@ -1,12 +1,12 @@
 import re
 
-from streamlink import PluginError
-from streamlink.plugin import Plugin, PluginOptions
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
-from streamlink.stream import RTMPStream
-from streamlink.plugin.api import http
-from streamlink.compat import urljoin
+from livecli import PluginError
+from livecli.plugin import Plugin, PluginOptions
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
+from livecli.stream import RTMPStream
+from livecli.plugin.api import http
+from livecli.compat import urljoin
 
 
 class LiveEdu(Plugin):

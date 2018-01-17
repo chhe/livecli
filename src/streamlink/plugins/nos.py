@@ -9,10 +9,10 @@ Supports:
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api.utils import parse_json
-from streamlink.stream import HTTPStream, HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api.utils import parse_json
+from livecli.stream import HTTPStream, HLSStream
 
 _url_re = re.compile(r"http(s)?://(\w+\.)?nos.nl/")
 _js_re = re.compile(r'\((.*)\)')

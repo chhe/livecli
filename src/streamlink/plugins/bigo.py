@@ -2,10 +2,10 @@ import re
 import socket
 import struct
 
-from streamlink import PluginError
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, useragents
-from streamlink.stream import Stream, HLSStream
+from livecli import PluginError
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, useragents
+from livecli.stream import Stream, HLSStream
 
 
 class BigoStream(Stream):

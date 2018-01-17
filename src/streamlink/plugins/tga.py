@@ -2,10 +2,10 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_query
-from streamlink.stream import HLSStream, HTTPStream, RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_query
+from livecli.stream import HLSStream, HTTPStream, RTMPStream
 
 CHANNEL_INFO_URL = "http://api.plu.cn/tga/streams/%s"
 QQ_STREAM_INFO_URL = "http://info.zb.qq.com/?cnlid=%d&cmd=2&stream=%d&system=1&sdtfrom=113"

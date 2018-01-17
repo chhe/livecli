@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tv5monde import TV5Monde
+from livecli.plugins.tv5monde import TV5Monde
 
 
 class TestPluginTV5Monde(unittest.TestCase):

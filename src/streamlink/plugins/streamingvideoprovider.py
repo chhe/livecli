@@ -2,9 +2,9 @@ import re
 
 from time import time
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HLSStream
 
 SWF_URL = "http://play.streamingvideoprovider.com/player2.swf"
 API_URL = "http://player.webvideocore.net/index.php"

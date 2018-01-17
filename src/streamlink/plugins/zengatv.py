@@ -1,13 +1,13 @@
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import useragents
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
 
 
 class ZengaTV(Plugin):
-    """Streamlink Plugin for livestreams on zengatv.com"""
+    """Livecli Plugin for livestreams on zengatv.com"""
 
     _url_re = re.compile(r"https?://(www\.)?zengatv\.com/\w+")
     _id_re = re.compile(r"""id=(?P<q>["'])dvrid(?P=q)\svalue=(?P=q)(?P<id>[^"']+)(?P=q)""")

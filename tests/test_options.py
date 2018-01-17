@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.options import Options
+from livecli.options import Options
 
 
 class TestOptions(unittest.TestCase):

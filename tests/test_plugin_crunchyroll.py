@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.crunchyroll import Crunchyroll
+from livecli.plugins.crunchyroll import Crunchyroll
 
 
 class TestPluginCrunchyroll(unittest.TestCase):

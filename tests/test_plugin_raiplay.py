@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.raiplay import RaiPlay
+from livecli.plugins.raiplay import RaiPlay
 
 
 class TestPluginRaiPlay(unittest.TestCase):

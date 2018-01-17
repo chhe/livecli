@@ -1,4 +1,4 @@
-from streamlink.stream import HTTPStream
+from livecli.stream import HTTPStream
 
 
 def get_streams(session):

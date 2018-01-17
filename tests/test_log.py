@@ -1,7 +1,7 @@
 import unittest
 
-from streamlink.logger import Logger
-from streamlink.compat import is_py2
+from livecli.logger import Logger
+from livecli.compat import is_py2
 
 # Docs says StringIO is suppose to take non-unicode strings
 # but it doesn't, so let's use BytesIO instead there...

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.cdnbg import CDNBG
+from livecli.plugins.cdnbg import CDNBG
 
 
 class TestPluginCDNBG(unittest.TestCase):

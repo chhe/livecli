@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.playtv import PlayTV
+from livecli.plugins.playtv import PlayTV
 
 
 class TestPluginPlayTV(unittest.TestCase):

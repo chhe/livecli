@@ -1,9 +1,9 @@
 import re
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http, validate
-from streamlink.plugin.api.utils import parse_query
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http, validate
+from livecli.plugin.api.utils import parse_query
+from livecli.stream import RTMPStream
 
 API_URL = "http://weeb.tv/api/setPlayer"
 SWF_URL = "http://static2.weeb.tv/static2/player.swf"

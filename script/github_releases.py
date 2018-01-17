@@ -6,7 +6,7 @@ from re import split, IGNORECASE
 from requests import get, patch
 
 
-RE_LOG_HEADER = r"streamlink\s+(\d+\.\d+\.\d+(?:-\S+)?)\s+\(\d{4}-\d{2}-\d{2}\)\n(?:-|=){3,}\n+"
+RE_LOG_HEADER = r"livecli\s+(\d+\.\d+\.\d+(?:-\S+)?)\s+\(\d{4}-\d{2}-\d{2}\)\n(?:-|=){3,}\n+"
 
 
 def checkEnvVar(v):
@@ -48,7 +48,7 @@ try:
 
     # Update release name and body
     payload = {
-        "name": "Streamlink {0}".format(getenv("TRAVIS_TAG")),
+        "name": "Livecli {0}".format(getenv("TRAVIS_TAG")),
         "body": changelogs[getenv("TRAVIS_TAG")]
     }
     githubAPI("PATCH", data["id"], json=payload)

@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.qq import QQ
+from livecli.plugins.qq import QQ
 
 
 class TestPluginQQ(unittest.TestCase):

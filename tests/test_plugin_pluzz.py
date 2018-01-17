@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.pluzz import Pluzz
+from livecli.plugins.pluzz import Pluzz
 
 
 class TestPluginPluzz(unittest.TestCase):

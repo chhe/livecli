@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.camsoda import Camsoda
+from livecli.plugins.camsoda import Camsoda
 
 
 class TestPluginCamsoda(unittest.TestCase):

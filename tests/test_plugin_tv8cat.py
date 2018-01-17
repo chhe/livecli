@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.tv8cat import TV8cat
+from livecli.plugins.tv8cat import TV8cat
 
 
 class TestPluginTV8cat(unittest.TestCase):

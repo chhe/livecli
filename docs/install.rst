@@ -15,46 +15,46 @@ Distribution                         Installing
 ==================================== ===========================================
 `Arch Linux`_                        .. code-block:: console
 
-                                        # pacman -S streamlink
+                                        # pacman -S livecli
 
 `Arch Linux (aur, git)`_             .. code-block:: console
 
-                                        # pacaur -S streamlink-git
+                                        # pacaur -S livecli-git
 
                                      `Installing AUR packages`_
 `Fedora`_                            .. code-block:: console
 
-                                        # dnf install streamlink
+                                        # dnf install livecli
 `Gentoo Linux`_                      .. code-block:: console
 
-                                        # emerge net-misc/streamlink
+                                        # emerge net-misc/livecli
 `NetBSD (pkgsrc)`_                   .. code-block:: console
 
-                                        $ cd /usr/pkgsrc/multimedia/streamlink
+                                        $ cd /usr/pkgsrc/multimedia/livecli
                                         # make install clean
 `NixOS`_                             `Installing NixOS packages`_
 `Solus`_                             .. code-block:: console
 
-                                        # eopkg install streamlink
+                                        # eopkg install livecli
 `Ubuntu`_                            .. code-block:: console
 
                                         # add-apt-repository ppa:nilarimogard/webupd8
                                         # apt update
-                                        # apt install streamlink
+                                        # apt install livecli
 `Void`_                              .. code-block:: console
 
-                                        # xbps-install streamlink
+                                        # xbps-install livecli
 ==================================== ===========================================
 
-.. _Arch Linux: https://www.archlinux.org/packages/community/any/streamlink/
-.. _Arch Linux (aur, git): https://aur.archlinux.org/packages/streamlink-git/
-.. _Fedora: https://apps.fedoraproject.org/packages/python-streamlink
-.. _Gentoo Linux: https://packages.gentoo.org/package/net-misc/streamlink
-.. _NetBSD (pkgsrc): http://pkgsrc.se/multimedia/streamlink
-.. _NixOS: https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/video/streamlink
-.. _Solus: https://git.solus-project.com/packages/streamlink/
-.. _Ubuntu: http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/s/streamlink/
-.. _Void: https://github.com/voidlinux/void-packages/tree/master/srcpkgs/streamlink
+.. _Arch Linux: https://www.archlinux.org/packages/community/any/livecli/
+.. _Arch Linux (aur, git): https://aur.archlinux.org/packages/livecli-git/
+.. _Fedora: https://apps.fedoraproject.org/packages/python-livecli
+.. _Gentoo Linux: https://packages.gentoo.org/package/net-misc/livecli
+.. _NetBSD (pkgsrc): http://pkgsrc.se/multimedia/livecli
+.. _NixOS: https://github.com/NixOS/nixpkgs/tree/master/pkgs/applications/video/livecli
+.. _Solus: https://git.solus-project.com/packages/livecli/
+.. _Ubuntu: http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/s/livecli/
+.. _Void: https://github.com/voidlinux/void-packages/tree/master/srcpkgs/livecli
 
 .. _Installing AUR packages: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
 .. _Installing NixOS packages: https://nixos.org/wiki/Install/remove_software#How_to_install_software
@@ -67,23 +67,23 @@ Platform                             Installing
 ==================================== ===========================================
 Mac OS X                             .. code-block:: console
 
-                                        # easy_install -U streamlink
+                                        # easy_install -U livecli
 `Homebrew`_                          .. code-block:: console
 
-                                        # brew install streamlink
+                                        # brew install livecli
 
                                      `Installing Homebrew packages`_
 Microsoft Windows                    See `Windows binaries`_ and `Windows portable version`_.
 
 `Chocolatey`_                        .. code-block:: console
 
-                                        C:\> choco install streamlink
+                                        C:\> choco install livecli
 
                                      `Installing Chocolatey packages`_
 ==================================== ===========================================
 
-.. _Homebrew: https://github.com/Homebrew/homebrew-core/blob/master/Formula/streamlink.rb
-.. _Chocolatey: https://chocolatey.org/packages/streamlink
+.. _Homebrew: https://github.com/Homebrew/homebrew-core/blob/master/Formula/livecli.rb
+.. _Chocolatey: https://chocolatey.org/packages/livecli
 
 .. _Installing Homebrew packages: https://brew.sh
 .. _Installing Chocolatey packages: https://chocolatey.org
@@ -112,7 +112,7 @@ Source code
 -----------
 
 If a package is not available for your platform (or it's out of date) you
-can install Streamlink via source.
+can install Livecli via source.
 
 There are a few different methods to do this,
 `pip <http://pip.readthedocs.org/en/latest/installing.html>`_ the Python package
@@ -121,43 +121,43 @@ manager, or by checking out the latest code with
 
 .. note::
 
-    For some Linux distributions the Python headers package needs to be installed before installing streamlink
+    For some Linux distributions the Python headers package needs to be installed before installing livecli
     (``python-devel`` in RedHat, Fedora, etc.).
 
     Ensure that you are using an up-to-date version of :command:`pip`, at least version **6** is recommended.
 
 
-The commands listed here will also upgrade any existing version of Streamlink.
+The commands listed here will also upgrade any existing version of Livecli.
 
 ==================================== ===========================================
 Version                              Installing
 ==================================== ===========================================
 `Latest release (pip)`_              .. code-block:: console
 
-                                        # pip install -U streamlink
+                                        # pip install -U livecli
 `Latest release (easy_install)`_     .. code-block:: console
 
-                                        # easy_install -U streamlink
+                                        # easy_install -U livecli
 `Development version (pip)`_         .. code-block:: console
 
-                                        # pip install -U git+https://github.com/streamlink/streamlink.git
+                                        # pip install -U git+https://github.com/livecli/livecli.git
 
 `Development version (git)`_         .. code-block:: console
 
-                                        $ git clone git://github.com/streamlink/streamlink.git
-                                        $ cd streamlink
+                                        $ git clone git://github.com/livecli/livecli.git
+                                        $ cd livecli
                                         # python setup.py install
 ==================================== ===========================================
 
-.. _Latest release (pip): https://pypi.python.org/pypi/streamlink
-.. _Latest release (easy_install): https://pypi.python.org/pypi/streamlink
-.. _Development version (pip): https://github.com/streamlink/streamlink
-.. _Development version (git): https://github.com/streamlink/streamlink
+.. _Latest release (pip): https://pypi.python.org/pypi/livecli
+.. _Latest release (easy_install): https://pypi.python.org/pypi/livecli
+.. _Development version (pip): https://github.com/livecli/livecli
+.. _Development version (git): https://github.com/livecli/livecli
 
 Dependencies
 ^^^^^^^^^^^^
 
-To install Streamlink from source you will need these dependencies.
+To install Livecli from source you will need these dependencies.
 
 ==================================== ===========================================
 Name                                 Notes
@@ -190,8 +190,8 @@ With these two environment variables it is possible to use `pycrypto`_ instead o
 
 .. code-block:: console
 
-    $ export STREAMLINK_USE_PYCRYPTO="true"
-    $ export STREAMLINK_USE_PYCOUNTRY="true"
+    $ export LIVECLI_USE_PYCRYPTO="true"
+    $ export LIVECLI_USE_PYCOUNTRY="true"
 
 .. _Python: http://python.org/
 .. _python-setuptools: http://pypi.python.org/pypi/setuptools
@@ -211,7 +211,7 @@ With these two environment variables it is possible to use `pycrypto`_ instead o
 Installing without root permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you do not wish to install Streamlink globally on your system it's
+If you do not wish to install Livecli globally on your system it's
 recommended to use `virtualenv`_ to create a user owned Python environment
 instead.
 
@@ -223,17 +223,17 @@ instead.
     Activating the environment
     $ source ~/myenv/bin/activate
 
-    Installing streamlink into the environment
-    (myenv)$ pip install streamlink
+    Installing livecli into the environment
+    (myenv)$ pip install livecli
 
-    Using streamlink in the environment
-    (myenv)$ streamlink ...
+    Using livecli in the environment
+    (myenv)$ livecli ...
 
     Deactivating the environment
     (myenv)$ deactivate
 
-    Using streamlink without activating the environment
-    $ ~/myenv/bin/streamlink ...
+    Using livecli without activating the environment
+    $ ~/myenv/bin/livecli ...
 
 .. note::
 
@@ -263,24 +263,24 @@ Release                              Notes
 ==================================== ====================================
 
 .. _Stable release:
-.. _GitHub releases page: https://github.com/streamlink/streamlink/releases/latest
+.. _GitHub releases page: https://github.com/livecli/livecli/releases/latest
 .. _Development build:
-.. _Bintray: https://bintray.com/streamlink/streamlink-nightly/streamlink/_latestVersion/#files
-.. _list of recent changes: https://bintray.com/streamlink/streamlink-nightly/streamlink/latest#release
+.. _Bintray: https://bintray.com/livecli/livecli-nightly/livecli/_latestVersion/#files
+.. _list of recent changes: https://bintray.com/livecli/livecli-nightly/livecli/latest#release
 
 These installers contain:
 
-- A compiled version of Streamlink that **does not require an existing Python
+- A compiled version of Livecli that **does not require an existing Python
   installation**
 - `RTMPDump`_ for viewing RTMP streams
 - `ffmpeg`_ for muxing streams
 
 and perform the following tasks:
 
-- Add Streamlink to the system's list of installed applications. |br|
+- Add Livecli to the system's list of installed applications. |br|
   An uninstaller will automatically be created during installation.
-- Add Streamlink's installation directory to the system's ``PATH`` environment variable. |br|
-  This allows the user to run the ``streamlink`` command globally
+- Add Livecli's installation directory to the system's ``PATH`` environment variable. |br|
+  This allows the user to run the ``livecli`` command globally
   from the command prompt or powershell without specifying its directory.
 
 To build the installer on your own, ``NSIS`` and ``pynsist`` need to be installed.
@@ -305,10 +305,10 @@ Beardypig                            `Latest precompiled stable release`__
                                      `More info`__
 ==================================== ===========================================
 
-__ https://github.com/streamlink/streamlink-portable/releases/latest
-__ https://github.com/streamlink/streamlink-portable/archive/master.zip
-__ https://github.com/streamlink/streamlink-portable
+__ https://github.com/livecli/livecli-portable/releases/latest
+__ https://github.com/livecli/livecli-portable/archive/master.zip
+__ https://github.com/livecli/livecli-portable
 
-__ https://github.com/beardypig/streamlink-portable/releases/latest
-__ https://github.com/beardypig/streamlink-portable/archive/master.zip
-__ https://github.com/beardypig/streamlink-portable
+__ https://github.com/beardypig/livecli-portable/releases/latest
+__ https://github.com/beardypig/livecli-portable/archive/master.zip
+__ https://github.com/beardypig/livecli-portable

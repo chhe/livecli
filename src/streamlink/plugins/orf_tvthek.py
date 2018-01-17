@@ -1,9 +1,9 @@
 import re
 import json
 
-from streamlink.plugin import Plugin, PluginError
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin, PluginError
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
 
 _stream_url_re = re.compile(r'https?://tvthek\.orf\.at/(index\.php/)?live/(?P<title>[^/]+)/(?P<id>[0-9]+)')
 _vod_url_re = re.compile(r'https?://tvthek\.orf\.at/pro(gram|file)/(?P<showtitle>[^/]+)/(?P<showid>[0-9]+)/(?P<episodetitle>[^/]+)/(?P<epsiodeid>[0-9]+)(/(?P<segmenttitle>[^/]+)/(?P<segmentid>[0-9]+))?')

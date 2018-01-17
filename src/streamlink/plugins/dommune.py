@@ -2,8 +2,8 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
 
 DATA_URL = "http://www.dommune.com/freedommunezero2012/live/data/data.json"
 

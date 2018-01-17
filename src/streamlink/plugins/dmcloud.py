@@ -1,10 +1,10 @@
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HTTPStream, HLSStream
-from streamlink.utils import parse_json, rtmpparse, swfdecompress
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HTTPStream, HLSStream
+from livecli.utils import parse_json, rtmpparse, swfdecompress
 
 _url_re = re.compile(r"http(s)?://api.dmcloud.net/player/embed/[^/]+/[^/]+")
 _rtmp_re = re.compile(br'customURL[^h]+(https://.*?)\\')

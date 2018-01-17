@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.euronews import Euronews
+from livecli.plugins.euronews import Euronews
 
 
 class TestPluginEuronews(unittest.TestCase):

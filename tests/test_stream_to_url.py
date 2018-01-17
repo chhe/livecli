@@ -5,20 +5,20 @@ try:
 except ImportError:
     from mock import MagicMock, patch, PropertyMock
 
-from streamlink import Streamlink
-from streamlink.plugins.filmon import FilmOnHLS
-from streamlink.stream import AkamaiHDStream
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
-from streamlink.stream import RTMPStream
-from streamlink.stream import Stream
-from streamlink_cli.utils import stream_to_url
+from livecli import Livecli
+from livecli.plugins.filmon import FilmOnHLS
+from livecli.stream import AkamaiHDStream
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream import RTMPStream
+from livecli.stream import Stream
+from livecli_cli.utils import stream_to_url
 
 
 class TestStreamToURL(unittest.TestCase):
     def setUp(self):
-        self.session = Streamlink()
+        self.session = Livecli()
 
     def test_base_stream(self):
         stream = Stream(self.session)
@@ -58,7 +58,7 @@ class TestStreamToURL(unittest.TestCase):
         self.assertEqual(expected, stream.to_url())
 
     @patch("time.time")
-    @patch("streamlink.plugins.filmon.FilmOnHLS.url", new_callable=PropertyMock)
+    @patch("livecli.plugins.filmon.FilmOnHLS.url", new_callable=PropertyMock)
     def test_filmon_stream(self, url, time):
         stream = FilmOnHLS(self.session, channel="test")
         url.return_value = "http://filmon.test.se/test.m3u8"
@@ -70,7 +70,7 @@ class TestStreamToURL(unittest.TestCase):
         self.assertEqual(expected, stream.to_url())
 
     @patch("time.time")
-    @patch("streamlink.plugins.filmon.FilmOnHLS.url", new_callable=PropertyMock)
+    @patch("livecli.plugins.filmon.FilmOnHLS.url", new_callable=PropertyMock)
     def test_filmon_expired_stream(self, url, time):
         stream = FilmOnHLS(self.session, channel="test")
         url.return_value = "http://filmon.test.se/test.m3u8"

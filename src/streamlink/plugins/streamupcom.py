@@ -1,9 +1,9 @@
 import re
 
-from streamlink.compat import urljoin
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import RTMPStream, HLSStream
+from livecli.compat import urljoin
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import RTMPStream, HLSStream
 
 _url_re = re.compile(r'http(s)?://(\w+\.)?streamup.com/(?P<channel>[^/?]+)')
 _hls_manifest_re = re.compile(r'HlsManifestUrl:\s*"//"\s*\+\s*response\s*\+\s*"(.+)"')

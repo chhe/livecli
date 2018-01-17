@@ -14,12 +14,12 @@ from socks import __version__ as socks_version
 from time import sleep
 from websocket import __version__ as websocket_version
 
-from streamlink import __version__ as streamlink_version
-from streamlink import (Streamlink, StreamError, PluginError,
+from livecli import __version__ as liveurl_version
+from livecli import (Livecli, StreamError, PluginError,
                         NoPluginError)
-from streamlink.cache import Cache
-from streamlink.stream import StreamProcess
-from streamlink.plugins.twitch import TWITCH_CLIENT_ID
+from livecli.cache import Cache
+from livecli.stream import StreamProcess
+from livecli.plugins.twitch import TWITCH_CLIENT_ID
 
 from .argparser import parser
 from .compat import stdout, is_win32
@@ -35,7 +35,7 @@ except AttributeError:
     pass  # Not windows
 QUIET_OPTIONS = ("json", "stream_url", "subprocess_cmdline", "quiet")
 
-args = console = streamlink = plugin = stream_fd = output = None
+args = console = livecli = plugin = stream_fd = output = None
 
 
 def check_file_output(filename, force):
@@ -81,7 +81,7 @@ def create_output():
                          "executable with --player.")
 
         if args.player_fifo:
-            pipename = "streamlinkpipe-{0}".format(os.getpid())
+            pipename = "liveurlpipe-{0}".format(os.getpid())
             console.logger.info("Creating pipe {0}", pipename)
 
             try:
@@ -480,7 +480,7 @@ def handle_url():
     """
 
     try:
-        plugin = streamlink.resolve_url(args.url)
+        plugin = livecli.resolve_url(args.url)
         console.logger.info("Found matching plugin {0} for URL {1}",
                             plugin.module, args.url)
 
@@ -528,9 +528,9 @@ def handle_url():
 
 
 def print_plugins():
-    """Outputs a list of all plugins Streamlink has loaded."""
+    """Outputs a list of all plugins Livecli has loaded."""
 
-    pluginlist = list(streamlink.get_plugins().keys())
+    pluginlist = list(livecli.get_plugins().keys())
     pluginlist_formatted = ", ".join(sorted(pluginlist))
 
     if console.json:
@@ -540,17 +540,17 @@ def print_plugins():
 
 
 def authenticate_twitch_oauth():
-    """Opens a web browser to allow the user to grant Streamlink
+    """Opens a web browser to allow the user to grant Livecli
        access to their Twitch account."""
 
     client_id = TWITCH_CLIENT_ID
-    redirect_uri = "https://streamlink.github.io/twitch_oauth.html"
+    redirect_uri = "https://livecli.github.io/twitch_oauth.html"
     url = ("https://api.twitch.tv/kraken/oauth2/authorize/"
            "?response_type=token&client_id={0}&redirect_uri="
            "{1}&scope=user_read+user_subscriptions").format(client_id, redirect_uri)
 
     console.msg("Attempting to open a browser to let you authenticate "
-                "Streamlink with Twitch")
+                "Livecli with Twitch")
 
     try:
         if not webbrowser.open_new_tab(url):
@@ -567,7 +567,7 @@ def load_plugins(dirs):
 
     for directory in dirs:
         if os.path.isdir(directory):
-            streamlink.load_plugins(directory)
+            livecli.load_plugins(directory)
         else:
             console.logger.warning("Plugin path {0} does not exist or is not "
                                    "a directory!", directory)
@@ -597,7 +597,7 @@ def setup_config_args():
 
     if args.url:
         with ignored(NoPluginError):
-            plugin = streamlink.resolve_url(args.url)
+            plugin = livecli.resolve_url(args.url)
             config_files += ["{0}.{1}".format(fn, plugin.module) for fn in CONFIG_FILES]
 
     if args.config:
@@ -618,7 +618,7 @@ def setup_console():
     global console
 
     # All console related operations is handled via the ConsoleOutput class
-    console = ConsoleOutput(sys.stdout, streamlink)
+    console = ConsoleOutput(sys.stdout, livecli)
 
     # Console output should be on stderr if we are outputting
     # a stream to stdout.
@@ -648,46 +648,46 @@ def setup_console():
 def setup_http_session():
     """Sets the global HTTP settings, such as proxy and headers."""
     if args.http_proxy:
-        streamlink.set_option("http-proxy", args.http_proxy)
+        livecli.set_option("http-proxy", args.http_proxy)
 
     if args.https_proxy:
-        streamlink.set_option("https-proxy", args.https_proxy)
+        livecli.set_option("https-proxy", args.https_proxy)
 
     if args.http_cookie:
-        streamlink.set_option("http-cookies", dict(args.http_cookie))
+        livecli.set_option("http-cookies", dict(args.http_cookie))
 
     if args.http_header:
-        streamlink.set_option("http-headers", dict(args.http_header))
+        livecli.set_option("http-headers", dict(args.http_header))
 
     if args.http_query_param:
-        streamlink.set_option("http-query-params", dict(args.http_query_param))
+        livecli.set_option("http-query-params", dict(args.http_query_param))
 
     if args.http_ignore_env:
-        streamlink.set_option("http-trust-env", False)
+        livecli.set_option("http-trust-env", False)
 
     if args.http_no_ssl_verify:
-        streamlink.set_option("http-ssl-verify", False)
+        livecli.set_option("http-ssl-verify", False)
 
     if args.http_disable_dh:
-        streamlink.set_option("http-disable-dh", True)
+        livecli.set_option("http-disable-dh", True)
 
     if args.http_ssl_cert:
-        streamlink.set_option("http-ssl-cert", args.http_ssl_cert)
+        livecli.set_option("http-ssl-cert", args.http_ssl_cert)
 
     if args.http_ssl_cert_crt_key:
-        streamlink.set_option("http-ssl-cert", tuple(args.http_ssl_cert_crt_key))
+        livecli.set_option("http-ssl-cert", tuple(args.http_ssl_cert_crt_key))
 
     if args.http_timeout:
-        streamlink.set_option("http-timeout", args.http_timeout)
+        livecli.set_option("http-timeout", args.http_timeout)
 
     if args.http_cookies:
-        streamlink.set_option("http-cookies", args.http_cookies)
+        livecli.set_option("http-cookies", args.http_cookies)
 
     if args.http_headers:
-        streamlink.set_option("http-headers", args.http_headers)
+        livecli.set_option("http-headers", args.http_headers)
 
     if args.http_query_params:
-        streamlink.set_option("http-query-params", args.http_query_params)
+        livecli.set_option("http-query-params", args.http_query_params)
 
 
 def setup_plugins():
@@ -699,101 +699,101 @@ def setup_plugins():
         load_plugins(args.plugin_dirs)
 
 
-def setup_streamlink():
-    """Creates the Streamlink session."""
-    global streamlink
+def setup_liveurl():
+    """Creates the Livecli session."""
+    global livecli
 
-    streamlink = Streamlink()
+    livecli = Livecli()
 
 
 def setup_options():
-    """Sets Streamlink options."""
+    """Sets Livecli options."""
     if args.hls_live_edge:
-        streamlink.set_option("hls-live-edge", args.hls_live_edge)
+        livecli.set_option("hls-live-edge", args.hls_live_edge)
 
     if args.hls_segment_attempts:
-        streamlink.set_option("hls-segment-attempts", args.hls_segment_attempts)
+        livecli.set_option("hls-segment-attempts", args.hls_segment_attempts)
 
     if args.hls_playlist_reload_attempts:
-        streamlink.set_option("hls-playlist-reload-attempts", args.hls_playlist_reload_attempts)
+        livecli.set_option("hls-playlist-reload-attempts", args.hls_playlist_reload_attempts)
 
     if args.hls_segment_threads:
-        streamlink.set_option("hls-segment-threads", args.hls_segment_threads)
+        livecli.set_option("hls-segment-threads", args.hls_segment_threads)
 
     if args.hls_segment_timeout:
-        streamlink.set_option("hls-segment-timeout", args.hls_segment_timeout)
+        livecli.set_option("hls-segment-timeout", args.hls_segment_timeout)
 
     if args.hls_timeout:
-        streamlink.set_option("hls-timeout", args.hls_timeout)
+        livecli.set_option("hls-timeout", args.hls_timeout)
 
     if args.hls_audio_select:
-        streamlink.set_option("hls-audio-select", args.hls_audio_select)
+        livecli.set_option("hls-audio-select", args.hls_audio_select)
 
     if args.hls_start_offset:
-        streamlink.set_option("hls-start-offset", args.hls_start_offset)
+        livecli.set_option("hls-start-offset", args.hls_start_offset)
 
     if args.hls_duration:
-        streamlink.set_option("hls-duration", args.hls_duration)
+        livecli.set_option("hls-duration", args.hls_duration)
 
     if args.hls_live_restart:
-        streamlink.set_option("hls-live-restart", args.hls_live_restart)
+        livecli.set_option("hls-live-restart", args.hls_live_restart)
 
     if args.hds_live_edge:
-        streamlink.set_option("hds-live-edge", args.hds_live_edge)
+        livecli.set_option("hds-live-edge", args.hds_live_edge)
 
     if args.hds_segment_attempts:
-        streamlink.set_option("hds-segment-attempts", args.hds_segment_attempts)
+        livecli.set_option("hds-segment-attempts", args.hds_segment_attempts)
 
     if args.hds_segment_threads:
-        streamlink.set_option("hds-segment-threads", args.hds_segment_threads)
+        livecli.set_option("hds-segment-threads", args.hds_segment_threads)
 
     if args.hds_segment_timeout:
-        streamlink.set_option("hds-segment-timeout", args.hds_segment_timeout)
+        livecli.set_option("hds-segment-timeout", args.hds_segment_timeout)
 
     if args.hds_timeout:
-        streamlink.set_option("hds-timeout", args.hds_timeout)
+        livecli.set_option("hds-timeout", args.hds_timeout)
 
     if args.http_stream_timeout:
-        streamlink.set_option("http-stream-timeout", args.http_stream_timeout)
+        livecli.set_option("http-stream-timeout", args.http_stream_timeout)
 
     if args.ringbuffer_size:
-        streamlink.set_option("ringbuffer-size", args.ringbuffer_size)
+        livecli.set_option("ringbuffer-size", args.ringbuffer_size)
 
     if args.rtmp_proxy:
-        streamlink.set_option("rtmp-proxy", args.rtmp_proxy)
+        livecli.set_option("rtmp-proxy", args.rtmp_proxy)
 
     if args.rtmp_rtmpdump:
-        streamlink.set_option("rtmp-rtmpdump", args.rtmp_rtmpdump)
+        livecli.set_option("rtmp-rtmpdump", args.rtmp_rtmpdump)
 
     if args.rtmp_timeout:
-        streamlink.set_option("rtmp-timeout", args.rtmp_timeout)
+        livecli.set_option("rtmp-timeout", args.rtmp_timeout)
 
     if args.stream_segment_attempts:
-        streamlink.set_option("stream-segment-attempts", args.stream_segment_attempts)
+        livecli.set_option("stream-segment-attempts", args.stream_segment_attempts)
 
     if args.stream_segment_threads:
-        streamlink.set_option("stream-segment-threads", args.stream_segment_threads)
+        livecli.set_option("stream-segment-threads", args.stream_segment_threads)
 
     if args.stream_segment_timeout:
-        streamlink.set_option("stream-segment-timeout", args.stream_segment_timeout)
+        livecli.set_option("stream-segment-timeout", args.stream_segment_timeout)
 
     if args.stream_timeout:
-        streamlink.set_option("stream-timeout", args.stream_timeout)
+        livecli.set_option("stream-timeout", args.stream_timeout)
 
     if args.ffmpeg_ffmpeg:
-        streamlink.set_option("ffmpeg-ffmpeg", args.ffmpeg_ffmpeg)
+        livecli.set_option("ffmpeg-ffmpeg", args.ffmpeg_ffmpeg)
     if args.ffmpeg_verbose:
-        streamlink.set_option("ffmpeg-verbose", args.ffmpeg_verbose)
+        livecli.set_option("ffmpeg-verbose", args.ffmpeg_verbose)
     if args.ffmpeg_verbose_path:
-        streamlink.set_option("ffmpeg-verbose-path", args.ffmpeg_verbose_path)
+        livecli.set_option("ffmpeg-verbose-path", args.ffmpeg_verbose_path)
     if args.ffmpeg_video_transcode:
-        streamlink.set_option("ffmpeg-video-transcode", args.ffmpeg_video_transcode)
+        livecli.set_option("ffmpeg-video-transcode", args.ffmpeg_video_transcode)
     if args.ffmpeg_audio_transcode:
-        streamlink.set_option("ffmpeg-audio-transcode", args.ffmpeg_audio_transcode)
+        livecli.set_option("ffmpeg-audio-transcode", args.ffmpeg_audio_transcode)
 
-    streamlink.set_option("subprocess-errorlog", args.subprocess_errorlog)
-    streamlink.set_option("subprocess-errorlog-path", args.subprocess_errorlog_path)
-    streamlink.set_option("locale", args.locale)
+    livecli.set_option("subprocess-errorlog", args.subprocess_errorlog)
+    livecli.set_option("subprocess-errorlog-path", args.subprocess_errorlog_path)
+    livecli.set_option("locale", args.locale)
 
     # Deprecated options
     if args.hds_fragment_buffer:
@@ -803,25 +803,25 @@ def setup_options():
 
 
 def setup_plugin_options():
-    """Sets Streamlink plugin options."""
+    """Sets Livecli plugin options."""
     if args.twitch_cookie:
-        streamlink.set_plugin_option("twitch", "cookie",
+        livecli.set_plugin_option("twitch", "cookie",
                                      args.twitch_cookie)
 
     if args.twitch_oauth_token:
-        streamlink.set_plugin_option("twitch", "oauth_token",
+        livecli.set_plugin_option("twitch", "oauth_token",
                                      args.twitch_oauth_token)
 
     if args.twitch_disable_hosting:
-        streamlink.set_plugin_option("twitch", "disable_hosting",
+        livecli.set_plugin_option("twitch", "disable_hosting",
                                      args.twitch_disable_hosting)
 
     if args.ustream_password:
-        streamlink.set_plugin_option("ustreamtv", "password",
+        livecli.set_plugin_option("ustreamtv", "password",
                                      args.ustream_password)
 
     if args.crunchyroll_username:
-        streamlink.set_plugin_option("crunchyroll", "username",
+        livecli.set_plugin_option("crunchyroll", "username",
                                      args.crunchyroll_username)
 
     if args.crunchyroll_username and not args.crunchyroll_password:
@@ -830,21 +830,21 @@ def setup_plugin_options():
         crunchyroll_password = args.crunchyroll_password
 
     if crunchyroll_password:
-        streamlink.set_plugin_option("crunchyroll", "password",
+        livecli.set_plugin_option("crunchyroll", "password",
                                      crunchyroll_password)
     if args.crunchyroll_purge_credentials:
-        streamlink.set_plugin_option("crunchyroll", "purge_credentials",
+        livecli.set_plugin_option("crunchyroll", "purge_credentials",
                                      args.crunchyroll_purge_credentials)
     if args.crunchyroll_session_id:
-        streamlink.set_plugin_option("crunchyroll", "session_id",
+        livecli.set_plugin_option("crunchyroll", "session_id",
                                      args.crunchyroll_session_id)
 
     if args.crunchyroll_locale:
-        streamlink.set_plugin_option("crunchyroll", "locale",
+        livecli.set_plugin_option("crunchyroll", "locale",
                                      args.crunchyroll_locale)
 
     if args.btv_username:
-        streamlink.set_plugin_option("btv", "username", args.btv_username)
+        livecli.set_plugin_option("btv", "username", args.btv_username)
 
     if args.btv_username and not args.btv_password:
         btv_password = console.askpass("Enter BTV password: ")
@@ -852,37 +852,37 @@ def setup_plugin_options():
         btv_password = args.btv_password
 
     if btv_password:
-        streamlink.set_plugin_option("btv", "password", btv_password)
+        livecli.set_plugin_option("btv", "password", btv_password)
 
     if args.schoolism_email:
-        streamlink.set_plugin_option("schoolism", "email", args.schoolism_email)
+        livecli.set_plugin_option("schoolism", "email", args.schoolism_email)
     if args.schoolism_email and not args.schoolism_password:
         schoolism_password = console.askpass("Enter Schoolism password: ")
     else:
         schoolism_password = args.schoolism_password
     if schoolism_password:
-        streamlink.set_plugin_option("schoolism", "password", schoolism_password)
+        livecli.set_plugin_option("schoolism", "password", schoolism_password)
 
     if args.schoolism_part:
-        streamlink.set_plugin_option("schoolism", "part", args.schoolism_part)
+        livecli.set_plugin_option("schoolism", "part", args.schoolism_part)
 
     if args.daisuki_mux_subtitles:
-        streamlink.set_plugin_option("daisuki", "mux_subtitles", args.daisuki_mux_subtitles)
+        livecli.set_plugin_option("daisuki", "mux_subtitles", args.daisuki_mux_subtitles)
 
     if args.rtve_mux_subtitles:
-        streamlink.set_plugin_option("rtve", "mux_subtitles", args.rtve_mux_subtitles)
+        livecli.set_plugin_option("rtve", "mux_subtitles", args.rtve_mux_subtitles)
 
     if args.funimation_mux_subtitles:
-        streamlink.set_plugin_option("funimationnow", "mux_subtitles", True)
+        livecli.set_plugin_option("funimationnow", "mux_subtitles", True)
 
     if args.funimation_language:
         # map en->english, ja->japanese
         lang = {"en": "english", "ja": "japanese"}.get(args.funimation_language.lower(),
                                                        args.funimation_language.lower())
-        streamlink.set_plugin_option("funimationnow", "language", lang)
+        livecli.set_plugin_option("funimationnow", "language", lang)
 
     if args.tvplayer_email:
-        streamlink.set_plugin_option("tvplayer", "email", args.tvplayer_email)
+        livecli.set_plugin_option("tvplayer", "email", args.tvplayer_email)
 
     if args.tvplayer_email and not args.tvplayer_password:
         tvplayer_password = console.askpass("Enter TVPlayer password: ")
@@ -890,22 +890,22 @@ def setup_plugin_options():
         tvplayer_password = args.tvplayer_password
 
     if tvplayer_password:
-        streamlink.set_plugin_option("tvplayer", "password", tvplayer_password)
+        livecli.set_plugin_option("tvplayer", "password", tvplayer_password)
 
     if args.pluzz_mux_subtitles:
-        streamlink.set_plugin_option("pluzz", "mux_subtitles", args.pluzz_mux_subtitles)
+        livecli.set_plugin_option("pluzz", "mux_subtitles", args.pluzz_mux_subtitles)
 
     if args.wwenetwork_email:
-        streamlink.set_plugin_option("wwenetwork", "email", args.wwenetwork_email)
+        livecli.set_plugin_option("wwenetwork", "email", args.wwenetwork_email)
     if args.wwenetwork_email and not args.wwenetwork_password:
         wwenetwork_password = console.askpass("Enter WWE Network password: ")
     else:
         wwenetwork_password = args.wwenetwork_password
     if wwenetwork_password:
-        streamlink.set_plugin_option("wwenetwork", "password", wwenetwork_password)
+        livecli.set_plugin_option("wwenetwork", "password", wwenetwork_password)
 
     if args.animelab_email:
-        streamlink.set_plugin_option("animelab", "email", args.animelab_email)
+        livecli.set_plugin_option("animelab", "email", args.animelab_email)
 
     if args.animelab_email and not args.animelab_password:
         animelab_password = console.askpass("Enter AnimeLab password: ")
@@ -913,13 +913,13 @@ def setup_plugin_options():
         animelab_password = args.animelab_password
 
     if animelab_password:
-        streamlink.set_plugin_option("animelab", "password", animelab_password)
+        livecli.set_plugin_option("animelab", "password", animelab_password)
 
     if args.npo_subtitles:
-        streamlink.set_plugin_option("npo", "subtitles", args.npo_subtitles)
+        livecli.set_plugin_option("npo", "subtitles", args.npo_subtitles)
 
     if args.liveedu_email:
-        streamlink.set_plugin_option("liveedu", "email", args.liveedu_email)
+        livecli.set_plugin_option("liveedu", "email", args.liveedu_email)
 
     if args.liveedu_email and not args.liveedu_password:
         liveedu_password = console.askpass("Enter LiveEdu.tv password: ")
@@ -927,10 +927,10 @@ def setup_plugin_options():
         liveedu_password = args.liveedu_password
 
     if liveedu_password:
-        streamlink.set_plugin_option("liveedu", "password", liveedu_password)
+        livecli.set_plugin_option("liveedu", "password", liveedu_password)
 
     if args.bbciplayer_username:
-        streamlink.set_plugin_option("bbciplayer", "username", args.bbciplayer_username)
+        livecli.set_plugin_option("bbciplayer", "username", args.bbciplayer_username)
 
     if args.bbciplayer_username and not args.bbciplayer_password:
         bbciplayer_password = console.askpass("Enter bbc.co.uk account password: ")
@@ -938,10 +938,10 @@ def setup_plugin_options():
         bbciplayer_password = args.bbciplayer_password
 
     if bbciplayer_password:
-        streamlink.set_plugin_option("bbciplayer", "password", bbciplayer_password)
+        livecli.set_plugin_option("bbciplayer", "password", bbciplayer_password)
 
     if args.neulion_username:
-        streamlink.set_plugin_option("neulion", "username", args.neulion_username)
+        livecli.set_plugin_option("neulion", "username", args.neulion_username)
 
     if args.neulion_username and not args.neulion_password:
         neulion_password = console.askpass("Enter ufc.tv account password: ")
@@ -949,19 +949,19 @@ def setup_plugin_options():
         neulion_password = args.neulion_password
 
     if neulion_password:
-        streamlink.set_plugin_option("neulion", "password", neulion_password)
+        livecli.set_plugin_option("neulion", "password", neulion_password)
 
     if args.zattoo_email:
-        streamlink.set_plugin_option("zattoo", "email", args.zattoo_email)
+        livecli.set_plugin_option("zattoo", "email", args.zattoo_email)
     if args.zattoo_email and not args.zattoo_password:
         zattoo_password = console.askpass("Enter zattoo password: ")
     else:
         zattoo_password = args.zattoo_password
     if zattoo_password:
-        streamlink.set_plugin_option("zattoo", "password", zattoo_password)
+        livecli.set_plugin_option("zattoo", "password", zattoo_password)
 
     if args.zattoo_purge_credentials:
-        streamlink.set_plugin_option("zattoo", "purge_credentials",
+        livecli.set_plugin_option("zattoo", "purge_credentials",
                                      args.zattoo_purge_credentials)
 
     # Deprecated options
@@ -993,7 +993,7 @@ def setup_plugin_options():
 def check_root():
     if hasattr(os, "getuid"):
         if os.geteuid() == 0:
-            console.logger.info("streamlink is running as root! Be careful!")
+            console.logger.info("livecli is running as root! Be careful!")
 
 
 def log_current_versions():
@@ -1011,7 +1011,7 @@ def log_current_versions():
 
         console.logger.debug("OS:         {0}".format(os_version))
         console.logger.debug("Python:     {0}".format(platform.python_version()))
-        console.logger.debug("Streamlink: {0}".format(streamlink_version))
+        console.logger.debug("Livecli: {0}".format(liveurl_version))
         console.logger.debug("Requests({0}), Socks({1}), Websocket({2})".format(
             requests.__version__, socks_version, websocket_version))
 
@@ -1021,7 +1021,7 @@ def check_version(force=False):
     latest_version = cache.get("latest_version")
 
     if force or not latest_version:
-        res = requests.get("https://pypi.python.org/pypi/streamlink/json")
+        res = requests.get("https://pypi.python.org/pypi/livecli/json")
         data = res.json()
         latest_version = data.get("info").get("version")
         cache.set("latest_version", latest_version, (60 * 60 * 24))
@@ -1030,15 +1030,15 @@ def check_version(force=False):
     if not force and version_info_printed:
         return
 
-    installed_version = StrictVersion(streamlink.version)
+    installed_version = StrictVersion(livecli.version)
     latest_version = StrictVersion(latest_version)
 
     if latest_version > installed_version:
-        console.logger.info("A new version of Streamlink ({0}) is "
+        console.logger.info("A new version of Livecli ({0}) is "
                             "available!".format(latest_version))
         cache.set("version_info_printed", True, (60 * 60 * 6))
     elif force:
-        console.logger.info("Your Streamlink version ({0}) is up to date!",
+        console.logger.info("Your Livecli version ({0}) is up to date!",
                             installed_version)
 
     if force:
@@ -1049,7 +1049,7 @@ def main():
     error_code = 0
 
     setup_args()
-    setup_streamlink()
+    setup_liveurl()
     setup_plugins()
     setup_config_args()
     setup_console()
@@ -1065,12 +1065,12 @@ def main():
         print_plugins()
     elif args.can_handle_url:
         try:
-            streamlink.resolve_url(args.can_handle_url)
+            livecli.resolve_url(args.can_handle_url)
         except NoPluginError:
             error_code = 1
     elif args.can_handle_url_no_redirect:
         try:
-            streamlink.resolve_url_no_redirect(args.can_handle_url_no_redirect)
+            livecli.resolve_url_no_redirect(args.can_handle_url_no_redirect)
         except NoPluginError:
             error_code = 1
     elif args.url:
@@ -1099,7 +1099,7 @@ def main():
         usage = parser.format_usage()
         msg = (
             "{usage}\nUse -h/--help to see the available options or "
-            "read the manual at https://streamlink.github.io"
+            "read the manual at https://livecli.github.io"
         ).format(usage=usage)
         console.msg(msg)
 

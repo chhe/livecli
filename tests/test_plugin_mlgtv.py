@@ -1,6 +1,6 @@
 import unittest
 
-from streamlink.plugins.mlgtv import MLGTV
+from livecli.plugins.mlgtv import MLGTV
 
 
 class TestPluginMLGTV(unittest.TestCase):

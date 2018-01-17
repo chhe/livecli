@@ -4,13 +4,13 @@ import re
 
 from itertools import chain
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HDSStream
-from streamlink.stream import HLSStream
-from streamlink.stream import HTTPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
 
 JSON_VOD_URL = "https://api.arte.tv/api/player/v1/config/{0}/{1}?platform=ARTE_NEXT"
 JSON_LIVE_URL = "https://api.arte.tv/api/player/v1/livestream/{0}"

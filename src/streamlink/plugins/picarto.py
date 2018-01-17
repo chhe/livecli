@@ -3,10 +3,10 @@ from __future__ import print_function
 import re
 import json
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HLSStream
-from streamlink.stream import RTMPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HLSStream
+from livecli.stream import RTMPStream
 
 
 class Picarto(Plugin):

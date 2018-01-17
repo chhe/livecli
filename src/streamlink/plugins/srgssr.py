@@ -2,12 +2,12 @@ from __future__ import print_function
 
 import re
 
-from streamlink import PluginError
-from streamlink.compat import urlparse, parse_qsl, urlencode, urlunparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.plugin.api import validate
-from streamlink.stream import HLSStream
+from livecli import PluginError
+from livecli.compat import urlparse, parse_qsl, urlencode, urlunparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.plugin.api import validate
+from livecli.stream import HLSStream
 
 
 class SRGSSR(Plugin):

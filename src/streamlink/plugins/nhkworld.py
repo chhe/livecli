@@ -2,9 +2,9 @@
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream
 
 API_URL = "http://{}.nhk.or.jp/nhkworld/app/tv/hlslive_web.xml"
 

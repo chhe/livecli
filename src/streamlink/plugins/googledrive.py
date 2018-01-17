@@ -1,9 +1,9 @@
 import re
 
-from streamlink.compat import parse_qsl
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HTTPStream
+from livecli.compat import parse_qsl
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HTTPStream
 
 
 class GoogleDocs(Plugin):

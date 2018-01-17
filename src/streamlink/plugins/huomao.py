@@ -13,9 +13,9 @@ and return each option to the user.
 
 import re
 
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http
-from streamlink.stream import HTTPStream
+from livecli.plugin import Plugin
+from livecli.plugin.api import http
+from livecli.stream import HTTPStream
 
 # URL pattern for recognizing inputed Huomao.tv / Huomao.com URL.
 url_re = re.compile(r"""

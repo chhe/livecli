@@ -1,9 +1,9 @@
 import re
 
-from streamlink.compat import urlparse
-from streamlink.plugin import Plugin
-from streamlink.plugin.api import http, validate
-from streamlink.stream import HLSStream, HTTPStream
+from livecli.compat import urlparse
+from livecli.plugin import Plugin
+from livecli.plugin.api import http, validate
+from livecli.stream import HLSStream, HTTPStream
 
 _url_re = re.compile(r"http(s)?://(\w+\.)?seemeplay.ru/")
 _player_re = re.compile(r"""
