@@ -99,14 +99,16 @@ class TestPluginResolve(unittest.TestCase):
                 "result": "http&#58;//example.example/live/ABC123ABC"
             },
         ]
-        _iframe_re = Resolve._iframe_regex(self)
+        rr = Resolve("https://example.com")
+        _iframe_re = rr._iframe_regex()
         for test_dict in regex_test_list:
             m = _iframe_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
     def test_regex_iframe_false(self):
-        _iframe_re = Resolve._iframe_regex(self)
+        rr = Resolve("https://example.com")
+        _iframe_re = rr._iframe_regex()
         regex_test_list = [
             """<iframe id="iframe" title="" frameborder="0" width="0" height="0" src="/images/blank.gif"></iframe>""",
             """<iframe name="123" width="70" src="about:blank"></iframe>""",
@@ -142,7 +144,8 @@ class TestPluginResolve(unittest.TestCase):
             },
         ]
         for test_dict in regex_test_list:
-            m = Resolve._window_location_re.search(test_dict.get("data"))
+            rr = Resolve("https://example.com")
+            m = rr._window_location_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
@@ -159,9 +162,10 @@ class TestPluginResolve(unittest.TestCase):
                 "result": "https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
             },
         ]
-        _iframe_re = Resolve._iframe_regex(self)
+        rr = Resolve("https://example.com")
+        _iframe_re = rr._iframe_regex()
         for test_dict in regex_test_list:
-            m = Resolve._unescape_iframe_re.search(test_dict.get("data"))
+            m = rr._unescape_iframe_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             data = unquote(m.group("data"))
             self.assertIsNotNone(m)
@@ -259,7 +263,8 @@ class TestPluginResolve(unittest.TestCase):
             },
         ]
         for test_dict in regex_test_list:
-            m = Resolve._playlist_re.search(test_dict.get("data"))
+            rr = Resolve("https://example.com")
+            m = rr._playlist_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
@@ -275,7 +280,8 @@ class TestPluginResolve(unittest.TestCase):
             self.assertNotRegex = self.assertNotRegexpMatches
 
         for data in regex_test_list:
-            self.assertNotRegex(data, Resolve._playlist_re)
+            rr = Resolve("https://example.com")
+            self.assertNotRegex(data, rr._playlist_re)
 
     def test_regex_ads_path(self):
         regex_test_list = [
@@ -294,5 +300,6 @@ class TestPluginResolve(unittest.TestCase):
             "/static/ads468x60.html",
         ]
         for test_url in regex_test_list:
-            m = Resolve._ads_path.match(test_url)
+            rr = Resolve("https://example.com")
+            m = rr._ads_path.match(test_url)
             self.assertIsNotNone(m)

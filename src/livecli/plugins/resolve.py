@@ -295,13 +295,13 @@ class Resolve(Plugin):
                         yield "live", HLSStream(self.session, url, headers=self.headers)
                     for s in streams:
                         yield s
-                except Exception as e:
+                except Exception:
                     self.logger.error("Skipping hls_url: {0}".format(url))
             elif ".f4m" in url and not url.endswith(endswith_blacklist):
                 try:
                     for s in HDSStream.parse_manifest(self.session, url, headers=self.headers).items():
                         yield s
-                except Exception as e:
+                except Exception:
                     self.logger.error("Skipping hds_url: {0}".format(url))
             elif self.list_in_item(url, [".mp3", ".mp4"]) and not self.list_in_item(url, [".f4m", ".m3u8", ".mpd"]):
                 try:
@@ -310,12 +310,12 @@ class Resolve(Plugin):
                     if m:
                         name = "{0}k".format(m.group("bitrate"))
                     yield name, HTTPStream(self.session, url, headers=self.headers)
-                except Exception as e:
+                except Exception:
                     self.logger.error("Skipping http_url: {0}".format(url))
             elif ".mpd" in url and not url.endswith(endswith_blacklist):
                 try:
                     self.logger.info("Found mpd: {0}".format(url))
-                except Exception as e:
+                except Exception:
                     self.logger.error("Skipping mpd_url: {0}".format(url))
 
     def _resolve_res(self, res):
