@@ -22,7 +22,6 @@ animelab            animelab.com         --    Yes   Requires a login. Streams m
 antenna             antenna.gr           --    Yes
 apac                a-pac.tv             Yes   --
 app17               17app.co             Yes   --
-arconai             arconai.tv           Yes   Yes   Only SD quality streams
 ard_live            daserste.de          Yes   Yes   Streams may be geo-restricted to Germany.
 ard_mediathek       - ardmediathek.de    Yes   Yes   Streams may be geo-restricted to Germany.
                     - mediathek... [5]_
@@ -62,10 +61,8 @@ cinergroup          - showtv.com.tr      Yes   No
                     - showmax.com.tr
                     - showturk.com.tr
                     - bloomberght.com
-connectcast         connectcast.tv       Yes   Yes
 crunchyroll         crunchyroll.com      --    Yes
 cybergame           cybergame.tv         Yes   Yes
-cyro                cyro.se              --    Yes
 dailymotion         dailymotion.com      Yes   Yes
 daisuki             daisuki.net          No    Yes
 deutschewelle       dw.com               Yes   Yes
@@ -102,7 +99,6 @@ filmon_us           filmon.us            Yes   Yes
 foxtr               fox.com.tr           Yes   No
 funimationnow       - funimation.com     --    Yes
                     - funimationnow.uk
-furstream           furstre.am           Yes   No
 gardenersworld      gardenersworld.com   --    Yes
 garena              garena.live          Yes   --
 gomexp              gomexp.com           Yes   No
@@ -203,9 +199,7 @@ streamable          streamable.com       -     Yes
 streamboat          streamboat.tv        Yes   No
 streamingvi... [1]_ streamingvid... [2]_ Yes   --    RTMP streams requires rtmpdump with
                                                      K-S-V patches.
-streamlive          streamlive.to        Yes   --
 streamme            stream.me            Yes   --
-streamupcom         streamup.com         Yes   --
 svtplay             - svtplay.se         Yes   Yes   Streams may be geo-restricted to Sweden.
                     - svtflow.se
                     - oppetarkiv.se
@@ -265,7 +259,6 @@ viasat              - juicyplay.dk       Yes   Yes   Streams may be geo-restrict
 vidio               vidio.com            Yes   Yes
 vk                  vk.com               Yes   Yes
 vrtbe               vrt.be/vrtnu         Yes   Yes
-wattv               wat.tv               --    Yes
 webcast_india_gov   webcast.gov.in       Yes   No    You can use #Channel to indicate CH number.
 webtv               web.tv               Yes   --
 weeb                weeb.tv              Yes   --    Requires rtmpdump with K-S-V patches.
