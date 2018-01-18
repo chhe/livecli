@@ -14,7 +14,6 @@ no longer maintained.
 - Issue tracker: https://github.com/livecli/livecli/issues
 - PyPI: https://pypi.python.org/pypi/livecli
 - Free software: Simplified BSD license
-- Icon: https://www.flickr.com/photos/phploveme/27078045626 (cc-by-sa 2.0)
 
 Features
 --------

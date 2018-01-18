@@ -31,7 +31,7 @@ cat > "${build_dir}/livecli.cfg" <<EOF
 name=Livecli
 version=${LIVECLI_VERSION}
 entry_point=livecli_cli.main:main
-icon=../win32/doggo.ico
+icon=../win32/livecli.ico
 
 [Python]
 version=3.5.2
