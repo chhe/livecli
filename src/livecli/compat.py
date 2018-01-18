@@ -56,6 +56,13 @@ except ImportError:
     from Cryptodome.PublicKey import RSA
     from Cryptodome.Util import number
 
+try:
+    # python 3.4+
+    from html import unescape
+except ImportError:
+    # python 2.7
+    from HTMLParser import HTMLParser
+    unescape = HTMLParser().unescape
 
 __all__ = [
     "AES",
@@ -73,6 +80,7 @@ __all__ = [
     "range",
     "RSA",
     "str",
+    "unescape",
     "unquote",
     "urlencode",
     "urljoin",

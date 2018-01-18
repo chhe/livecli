@@ -144,6 +144,7 @@ npo                 - npo.nl             Yes   Yes   Streams may be geo-restrict
                     - zappelin.nl
 nrk                 - tv.nrk.no          Yes   Yes   Streams may be geo-restricted to Norway.
                     - radio.nrk.no
+okru                ok.ru                Yes   Yes
 oldlivestream       - original.li.. [3]_ Yes   No    Only mobile streams are supported.
                     - cdn.livestream.com
 olympicchannel      olympicchannel.com   Yes   Yes   Only non-premium content is available.
