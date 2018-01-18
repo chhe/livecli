@@ -187,19 +187,16 @@ ruv                 ruv.is               Yes   Yes   Streams may be geo-restrict
 schoolism           schoolism.com        --    Yes   Requires a login and a subscription.
 seemeplay           seemeplay.ru         Yes   Yes
 seetv               seetv.tv             Yes   No    Streams that are embedded from other sites will not work.
-servustv            servustv.com         ?     ?
 showroom            showroom-live.com    Yes   No    Only RTMP streams are available.
 skai                skai.gr              Yes   No    Only embedded youtube live streams are supported
 smashcast           smashcast.tv         Yes   Yes
 speedrunslive       speedrunslive.com    Yes   --    URL forwarder to Twitch channels.
-sportal             sportal.bg           Yes   No
 sportschau          sportschau.de        Yes   No
 srgssr              - srf.ch             Yes   No    Streams are geo-restricted to Switzerland.
                     - rts.ch
                     - rsi.ch
                     - rtr.ch
 ssh101              ssh101.com           Yes   No
-startv              startv.com.tr        Yes   No
 streamable          streamable.com       -     Yes
 streamboat          streamboat.tv        Yes   No
 streamingvi... [1]_ streamingvid... [2]_ Yes   --    RTMP streams requires rtmpdump with
