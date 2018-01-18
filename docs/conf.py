@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import re
 import os
 import sys
 
 from livecli import __version__ as livecli_version
+
+_version_re = re.compile(r'(\d+\.\d+\.\d+)')
+livecli_version = _version_re.search(livecli_version).group(1)
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
