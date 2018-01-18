@@ -18,11 +18,12 @@ from livecli import __version__ as livecli_version
 from livecli import (Livecli, StreamError, PluginError,
                      NoPluginError)
 from livecli.cache import Cache
+from livecli.compat import is_win32
 from livecli.stream import StreamProcess
 from livecli.plugins.twitch import TWITCH_CLIENT_ID
 
 from .argparser import parser
-from .compat import stdout, is_win32
+from .compat import stdout
 from .console import ConsoleOutput
 from .constants import CONFIG_FILES, PLUGINS_DIR, STREAM_SYNONYMS
 from .output import FileOutput, PlayerOutput

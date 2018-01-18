@@ -1,8 +1,7 @@
 import os
 
 from livecli import __version__ as LIVECLI_VERSION
-
-from .compat import is_win32
+from livecli.compat import is_win32
 
 DEFAULT_PLAYER_ARGUMENTS = "{filename}"
 

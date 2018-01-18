@@ -3,7 +3,9 @@ import sys
 from collections import deque
 from time import time
 
-from ..compat import is_win32, get_terminal_size
+from ..compat import get_terminal_size
+
+from livecli.compat import is_win32
 
 PROGRESS_FORMATS = (
     "[download][{prefix}] Written {written} ({elapsed} @ {speed}/s)",

@@ -1,10 +1,8 @@
-import os
 import re
 import sys
 
 is_py2 = (sys.version_info[0] == 2)
 is_py3 = (sys.version_info[0] == 3)
-is_win32 = os.name == "nt"
 
 if is_py2:
     input = raw_input  # noqa
@@ -38,5 +36,5 @@ def shlex_quote(s):
     return "'" + s.replace("'", "'\"'\"'") + "'"
 
 
-__all__ = ["is_py2", "is_py3", "is_win32", "input", "stdout", "file",
+__all__ = ["is_py2", "is_py3", "input", "stdout", "file",
            "shlex_quote", "get_terminal_size"]

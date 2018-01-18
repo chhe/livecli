@@ -4,7 +4,7 @@ import os.path
 import livecli_cli.main
 
 from livecli import Livecli
-from livecli_cli.compat import is_win32
+from livecli.compat import is_win32
 
 try:
     from unittest.mock import patch, ANY

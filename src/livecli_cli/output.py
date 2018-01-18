@@ -3,9 +3,10 @@ import shlex
 import subprocess
 import sys
 
+from livecli.compat import is_win32
 from time import sleep
 
-from .compat import is_win32, stdout
+from .compat import stdout
 from .constants import DEFAULT_PLAYER_ARGUMENTS
 from .utils import ignored
 

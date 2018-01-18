@@ -1,6 +1,6 @@
 # These imports, while unused, are here to provide API compatibility for this module
 from livecli.utils.named_pipe import NamedPipe
-from ..compat import is_win32
+from livecli.compat import is_win32
 
 if is_win32:
     from livecli.utils.named_pipe import (
