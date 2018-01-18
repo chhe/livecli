@@ -153,20 +153,24 @@ def update_scheme(current, target):
         return target
 
 
-_time_re = re.compile(r"""
-    (?:
-        (?P<hours>\d+)h
-    )?
-    (?:
-        (?P<minutes>\d+)m
-    )?
-    (?:
-        (?P<seconds>\d+)s
-    )?
-""", re.VERBOSE)
-
-
 def time_to_offset(t):
+    """
+    converts hours minutes seconds to seconds
+    :param value: 01h22m33s
+    :return: seconds
+    """
+    _time_re = re.compile(r"""
+        (?:
+            (?P<hours>\d+)h
+        )?
+        (?:
+            (?P<minutes>\d+)m
+        )?
+        (?:
+            (?P<seconds>\d+)s
+        )?
+    """, re.VERBOSE)
+
     match = _time_re.match(t)
     if match:
         offset = int(match.group("hours") or "0") * 60 * 60
@@ -176,6 +180,25 @@ def time_to_offset(t):
         offset = 0
 
     return offset
+
+
+def hours_minutes_seconds(value):
+    """
+    converts hours:minutes:seconds to seconds
+    :param value: hh:mm:ss
+    :return: seconds
+    """
+    _hours_minutes_seconds_re = re.compile(r"-?(?P<hours>\d+):(?P<minutes>\d+):(?P<seconds>\d+)")
+    match = _hours_minutes_seconds_re.match(value)
+    if not match:
+        raise ValueError
+    s = 0
+    s += int(match.group("hours")) * 60 * 60
+    s += int(match.group("minutes")) * 60
+    s += int(match.group("seconds"))
+
+    return s
+
 
 def escape_librtmp(value):
     if isinstance(value, bool):
