@@ -10,7 +10,7 @@ DOCS_KEY="deploy-key"
 DOCS_USER="Travis CI"
 
 # deal with private key
-openssl aes-256-cbc -K $encrypted_25fada573976_key -iv $encrypted_25fada573976_iv -in "$DOCS_KEY.enc" -out "$DOCS_KEY" -d
+openssl aes-256-cbc -K $encrypted_ae5de158ecd9_key -iv $encrypted_ae5de158ecd9_iv -in "$DOCS_KEY.enc" -out "$DOCS_KEY" -d
 chmod 600 "$DOCS_KEY"
 eval `ssh-agent -s`
 ssh-add "$DOCS_KEY"
@@ -24,7 +24,7 @@ if bash script/makedocs.sh "$DOCS_REPO_NAME" ; then
     git config user.email "<>"
     git add --all
     # Check if anything changed, and if it's the case, push to origin/master.
-    if git commit -m 'update docs' -m "Commit: https://github.com/livecli/livecli/commit/$TRAVIS_COMMIT" ; then
+    if git commit -m 'Automated docs update' -m "Commit: https://github.com/livecli/livecli/commit/$TRAVIS_COMMIT" ; then
         git push origin master
     fi
 
