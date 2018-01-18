@@ -3,14 +3,12 @@ import unittest
 
 from livecli.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
 
-try:
-    from unittest.mock import MagicMock
-except ImportError:
-    from mock import MagicMock
-
 from livecli import Livecli, NoPluginError
 from livecli.plugins import Plugin
-from livecli.stream import *
+from livecli.stream import AkamaiHDStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream import RTMPStream
 
 
 class TestSession(unittest.TestCase):

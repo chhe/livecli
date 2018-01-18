@@ -1,9 +1,7 @@
 # Unit tests accompanying the Huomao Livecli plugin.
 
 import unittest
-import re
 
-from livecli.plugin.api import http
 from livecli.plugins.huomao import Huomao
 
 

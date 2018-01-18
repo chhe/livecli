@@ -4,12 +4,13 @@ import sys
 import imp
 from livecli import Livecli
 
+import livecli.plugins
+import os.path
+
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
 else:
     import unittest
-import livecli.plugins
-import os.path
 
 
 class PluginTestMeta(type):

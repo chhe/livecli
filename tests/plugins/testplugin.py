@@ -3,7 +3,12 @@ from io import BytesIO
 from livecli import NoStreamsError
 from livecli.plugins import Plugin
 from livecli.options import Options
-from livecli.stream import *
+from livecli.stream import AkamaiHDStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream import RTMPStream
+from livecli.stream import Stream
+
 
 from livecli.plugin.api.support_plugin import testplugin_support
 

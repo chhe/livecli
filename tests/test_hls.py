@@ -1,9 +1,5 @@
 import sys
 import os
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 from Crypto.Cipher import AES
 from binascii import hexlify
@@ -12,6 +8,11 @@ from livecli.stream import hls
 from livecli.session import Livecli
 from functools import partial
 import requests_mock
+
+if sys.version_info[0:2] == (2, 6):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 def pkcs7_encode(data, keySize):
@@ -96,7 +97,7 @@ audio_only.m3u8
     def test_hls_non_encrypted(self):
         streams = [os.urandom(1024) for i in range(4)]
         masterPlaylist = self.getMasterPlaylist()
-        firstSequence = self.mediaSequence
+        # firstSequence = self.mediaSequence
         playlist = self.getPlaylist(None, "stream{0}.ts") + "#EXT-X-ENDLIST\n"
         with requests_mock.Mocker() as mock:
             mock.get("http://mocked/path/master.m3u8", text=masterPlaylist)

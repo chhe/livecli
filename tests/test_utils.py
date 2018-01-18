@@ -9,7 +9,12 @@ except ImportError:
     import xml.etree.ElementTree as ET
 from livecli import PluginError
 from livecli.plugin.api import validate
-from livecli.utils import *
+from livecli.utils import absolute_url
+from livecli.utils import parse_json
+from livecli.utils import parse_qsd
+from livecli.utils import parse_xml
+from livecli.utils import prepend_www
+from livecli.utils import verifyjson
 
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest

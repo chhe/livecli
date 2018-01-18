@@ -1,17 +1,20 @@
 import sys
+
+import os.path
+import livecli_cli.main
+
+from livecli import Livecli
+from livecli_cli.compat import is_win32
+
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
 else:
     import unittest
 
-import os.path
-import livecli_cli.main
 try:
     from unittest.mock import patch, ANY
 except ImportError:
     from mock import patch, ANY
-from livecli import Livecli
-from livecli_cli.compat import is_win32
 
 PluginPath = os.path.join(os.path.dirname(__file__), "plugins")
 

@@ -1,9 +1,9 @@
 import unittest
 
 try:
-    from unittest.mock import MagicMock, patch, PropertyMock
+    from unittest.mock import patch, PropertyMock
 except ImportError:
-    from mock import MagicMock, patch, PropertyMock
+    from mock import patch, PropertyMock
 
 from livecli import Livecli
 from livecli.plugins.filmon import FilmOnHLS

@@ -84,7 +84,7 @@ class MLGTV(Plugin):
         else:
             try:
                 res = http.get(self.url)
-            except Exception as e:
+            except Exception:
                 raise NoStreamsError(self.url)
             channel_id = self._find_channel_id(res.text)
 

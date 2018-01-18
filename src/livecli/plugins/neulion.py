@@ -117,7 +117,7 @@ class Neulion(Plugin):
             try:
                 return_data = js_to_json(js_data)
                 self.logger.debug("js_to_json")
-            except Exception as e:
+            except Exception:
                 self.logger.debug("js_to_json_regex_fallback")
                 return_data = js_to_json_regex_fallback(js_data)
             finally:

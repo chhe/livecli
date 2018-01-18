@@ -8,15 +8,15 @@ except ImportError:
 import livecli.utils.l10n as l10n
 
 try:
-    import iso639
-    import iso3166
+    import iso639  # noqa
+    import iso3166  # noqa
 
     ISO639 = True
 except ImportError:
     ISO639 = False
 
 try:
-    import pycountry
+    import pycountry  # noqa
 
     PYCOUNTRY = True
 except ImportError:
@@ -25,50 +25,50 @@ except ImportError:
 
 class LocalizationTestsMixin(object):
     def test_language_code_us(self):
-        l = l10n.Localization("en_US")
-        self.assertEqual("en_US", l.language_code)
+        lang = l10n.Localization("en_US")
+        self.assertEqual("en_US", lang.language_code)
 
     def test_language_code_kr(self):
-        l = l10n.Localization("ko_KR")
-        self.assertEqual("ko_KR", l.language_code)
+        lang = l10n.Localization("ko_KR")
+        self.assertEqual("ko_KR", lang.language_code)
 
     def test_bad_language_code(self):
         self.assertRaises(LookupError, l10n.Localization, "enUS")
 
     def test_equivalent(self):
-        l = l10n.Localization("en_US")
-        self.assertTrue(l.equivalent(language="eng"))
-        self.assertTrue(l.equivalent(language="en"))
-        self.assertTrue(l.equivalent(language="en", country="US"))
-        self.assertTrue(l.equivalent(language="en", country="United States"))
+        lang = l10n.Localization("en_US")
+        self.assertTrue(lang.equivalent(language="eng"))
+        self.assertTrue(lang.equivalent(language="en"))
+        self.assertTrue(lang.equivalent(language="en", country="US"))
+        self.assertTrue(lang.equivalent(language="en", country="United States"))
 
     def test_equivalent_remap(self):
-        l = l10n.Localization("fr_FR")
-        self.assertTrue(l.equivalent(language="fra"))
-        self.assertTrue(l.equivalent(language="fre"))
+        lang = l10n.Localization("fr_FR")
+        self.assertTrue(lang.equivalent(language="fra"))
+        self.assertTrue(lang.equivalent(language="fre"))
 
     def test_not_equivalent(self):
-        l = l10n.Localization("es_ES")
-        self.assertFalse(l.equivalent(language="eng"))
-        self.assertFalse(l.equivalent(language="en"))
-        self.assertFalse(l.equivalent(language="en", country="US"))
-        self.assertFalse(l.equivalent(language="en", country="United States"))
-        self.assertFalse(l.equivalent(language="en", country="ES"))
-        self.assertFalse(l.equivalent(language="en", country="Spain"))
+        lang = l10n.Localization("es_ES")
+        self.assertFalse(lang.equivalent(language="eng"))
+        self.assertFalse(lang.equivalent(language="en"))
+        self.assertFalse(lang.equivalent(language="en", country="US"))
+        self.assertFalse(lang.equivalent(language="en", country="United States"))
+        self.assertFalse(lang.equivalent(language="en", country="ES"))
+        self.assertFalse(lang.equivalent(language="en", country="Spain"))
 
     @patch("locale.getdefaultlocale")
     def test_default(self, getdefaultlocale):
         getdefaultlocale.return_value = (None, None)
-        l = l10n.Localization()
-        self.assertEqual("en_US", l.language_code)
-        self.assertTrue(l.equivalent(language="en", country="US"))
+        lang = l10n.Localization()
+        self.assertEqual("en_US", lang.language_code)
+        self.assertTrue(lang.equivalent(language="en", country="US"))
 
     @patch("locale.getdefaultlocale")
     def test_default_invalid(self, getdefaultlocale):
         getdefaultlocale.return_value = ("en_150", None)
-        l = l10n.Localization()
-        self.assertEqual("en_US", l.language_code)
-        self.assertTrue(l.equivalent(language="en", country="US"))
+        lang = l10n.Localization()
+        self.assertEqual("en_US", lang.language_code)
+        self.assertTrue(lang.equivalent(language="en", country="US"))
 
     def test_get_country(self):
         self.assertEqual("US",

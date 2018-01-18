@@ -1,12 +1,15 @@
 import unittest
 
 try:
-    from unittest.mock import patch, ANY
+    from unittest.mock import patch
 except ImportError:
-    from mock import patch, ANY
+    from mock import patch
 from livecli import Livecli
 from livecli.plugin.plugin import stream_weight, parse_params
-from livecli.stream import *
+from livecli.stream import AkamaiHDStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
+from livecli.stream import RTMPStream
 
 
 class TestPluginStream(unittest.TestCase):

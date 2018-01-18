@@ -114,13 +114,13 @@ class AfreecaTV(Plugin):
 
     def _login(self, username, password):
         data = {
-           "szWork": "login",
-           "szType": "json",
-           "szUid": username,
-           "szPassword": password,
-           "isSaveId": "true",
-           "isSavePw": "false",
-           "isSaveJoin": "false"
+            "szWork": "login",
+            "szType": "json",
+            "szUid": username,
+            "szPassword": password,
+            "isSaveId": "true",
+            "isSavePw": "false",
+            "isSaveJoin": "false"
         }
 
         res = http.post(self.login_url, data=data)

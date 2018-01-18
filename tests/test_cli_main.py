@@ -1,17 +1,20 @@
 import tempfile
 import sys
+
+import os.path
+import livecli_cli.main
+from livecli_cli.main import check_file_output
+from livecli_cli.output import FileOutput
+
 if sys.version_info[0:2] == (2, 6):
     import unittest2 as unittest
 else:
     import unittest
-import os.path
-import livecli_cli.main
+
 try:
     from unittest.mock import Mock, patch
 except ImportError:
     from mock import Mock, patch
-from livecli_cli.main import check_file_output
-from livecli_cli.output import FileOutput
 
 
 class TestCLIMain(unittest.TestCase):
@@ -32,7 +35,7 @@ class TestCLIMain(unittest.TestCase):
     def test_check_file_output_exists_force(self):
         tmpfile = tempfile.NamedTemporaryFile()
         try:
-            livecli_cli.main.console = console = Mock()
+            livecli_cli.main.console = Mock()
             self.assertTrue(os.path.exists(tmpfile.name))
             self.assertIsInstance(check_file_output(tmpfile.name, True), FileOutput)
         finally:

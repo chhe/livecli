@@ -34,7 +34,7 @@ class TestRegexFallback(unittest.TestCase):
                         type: "video"
                         };
                         """,
-                "result": {"id": "27687", "name": "5/27 Bologna v Juventus highlight",  "type": "video"}
+                "result": {"id": "27687", "name": "5/27 Bologna v Juventus highlight", "type": "video"}
             },
             {
                 "data": """

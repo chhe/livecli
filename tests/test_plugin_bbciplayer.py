@@ -1,5 +1,4 @@
 import json
-import logging
 import unittest
 
 from requests import Response, Request
@@ -44,5 +43,3 @@ class TestPluginBBCiPlayer(unittest.TestCase):
         ]
 
         self.assertEqual(BBCiPlayer._extract_nonce(mock_response), mock_nonce)
-
-
