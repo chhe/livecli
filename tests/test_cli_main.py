@@ -1,15 +1,10 @@
 import tempfile
-import sys
+import unittest
 
 import os.path
 import livecli_cli.main
 from livecli_cli.main import check_file_output
 from livecli_cli.output import FileOutput
-
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 try:
     from unittest.mock import Mock, patch

@@ -1,13 +1,7 @@
-import sys
-
 import base64
+import unittest
 
 from livecli.utils.crypto import evp_bytestokey, decrypt_openssl
-
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 
 class TestUtil(unittest.TestCase):

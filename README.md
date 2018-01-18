@@ -1,7 +1,6 @@
 # [Livecli][livecli-website]
 
-[![TravisCI build status][travisci-build-status-badge]][travisci-build-status]
-[![codecov.io][codecov-coverage-badge]][codecov-coverage]
+[![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![AppVeyor][appveyor-badge]][appveyor] [![codecov.io][codecov-coverage-badge]][codecov-coverage] [![pypi.python.org][pypi-badge]][pypi]
 
 Livecli is a CLI utility that pipes flash videos from online streaming services to a variety of video players such as VLC, or alternatively, a browser.
 
@@ -85,6 +84,10 @@ Please read [CONTRIBUTING.md][contributing] first. Thanks!
   [changelog]: https://github.com/livecli/livecli/blob/master/CHANGELOG.rst
   [contributors]: https://github.com/livecli/livecli/graphs/contributors
   [travisci-build-status]: https://travis-ci.org/livecli/livecli
-  [travisci-build-status-badge]: https://travis-ci.org/livecli/livecli.svg?branch=master
+  [travisci-build-status-badge]: https://img.shields.io/travis/livecli/livecli/master.svg?style=flat-square
+  [appveyor]: https://ci.appveyor.com/project/back-to/livecli
+  [appveyor-badge]: https://img.shields.io/appveyor/ci/back-to/livecli/master.svg?style=flat-square
   [codecov-coverage]: https://codecov.io/github/livecli/livecli?branch=master
-  [codecov-coverage-badge]: https://codecov.io/github/livecli/livecli/coverage.svg?branch=master
+  [codecov-coverage-badge]: https://img.shields.io/codecov/c/github/livecli/livecli/master.svg?style=flat-square
+  [pypi]: https://pypi.python.org/pypi/livecli
+  [pypi-badge]: https://img.shields.io/pypi/v/livecli.svg?style=flat-square

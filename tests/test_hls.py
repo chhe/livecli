@@ -1,5 +1,5 @@
-import sys
 import os
+import unittest
 
 from Crypto.Cipher import AES
 from binascii import hexlify
@@ -8,11 +8,6 @@ from livecli.stream import hls
 from livecli.session import Livecli
 from functools import partial
 import requests_mock
-
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 
 def pkcs7_encode(data, keySize):

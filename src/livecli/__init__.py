@@ -15,14 +15,6 @@ from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions
 
-if version_info[:2] == (2, 6):
-    warnings.warn(
-        "Python 2.6 is no longer supported by the Python core team, please "
-        "upgrade your Python. A future version of livecli will drop "
-        "support for Python 2.6",
-        DeprecationWarning
-    )
-
 __title__ = "livecli"
 __license__ = "Simplified BSD"
 __author__ = "Livecli"

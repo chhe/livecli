@@ -1,10 +1,6 @@
-import sys
+import unittest
 
 from livecli.plugins.adultswim import AdultSwim
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 
 class TestPluginAdultSwim(unittest.TestCase):

@@ -1,13 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
-import sys
+import unittest
 
 from livecli.stream.hls_playlist import load, StreamInfo, Resolution, Media
 
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 M3U8 = """
 #EXTM3U

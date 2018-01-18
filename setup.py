@@ -13,10 +13,6 @@ if version_info[0] == 2:
     # Require backport of concurrent.futures on Python 2
     deps.append("futures")
 
-    if version_info[1] <= 6:
-        # Require backport of argparse on Python 2.6
-        deps.append("argparse")
-
     if version_info[1] < 7 or (version_info[1] == 7 and version_info[2] <= 9):
         deps.append("urllib3[secure]")
 

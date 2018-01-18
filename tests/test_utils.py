@@ -1,4 +1,4 @@
-import sys
+import unittest
 
 from livecli.plugin.api.validate import xml_element, text
 from livecli.utils import update_scheme
@@ -15,11 +15,6 @@ from livecli.utils import parse_qsd
 from livecli.utils import parse_xml
 from livecli.utils import prepend_www
 from livecli.utils import verifyjson
-
-if sys.version_info[0:2] == (2, 6):
-    import unittest2 as unittest
-else:
-    import unittest
 
 
 class TestUtil(unittest.TestCase):
