@@ -8,7 +8,9 @@ import sys
 from livecli import __version__ as livecli_version
 
 _version_re = re.compile(r'(\d+\.\d+\.\d+)')
-livecli_version = _version_re.search(livecli_version).group(1)
+version_m = _version_re.search(livecli_version)
+if version_m:
+    livecli_version = version_m.group(1)
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
