@@ -1,8 +1,8 @@
 import base64
 import re
 
-from Crypto.Cipher import Blowfish
 
+from livecli.compat import Blowfish
 from livecli.compat import bytes, is_py3
 from livecli.plugin import Plugin, PluginOptions
 from livecli.plugin.api import http

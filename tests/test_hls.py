@@ -1,11 +1,11 @@
 import os
 import unittest
 
-from Crypto.Cipher import AES
 from binascii import hexlify
 
-from livecli.stream import hls
+from livecli.compat import AES
 from livecli.session import Livecli
+from livecli.stream import hls
 from functools import partial
 import requests_mock
 

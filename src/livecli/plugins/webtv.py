@@ -3,8 +3,7 @@ import base64
 
 import binascii
 
-from Crypto.Cipher import AES
-
+from livecli.compat import AES
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.plugin.api import validate

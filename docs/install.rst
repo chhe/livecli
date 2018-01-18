@@ -148,7 +148,7 @@ Name                                 Notes
 `pycryptodome`_                      Required to play some encrypted streams
 `pysocks`_
 `python-futures`_                    Only needed on Python **2.x**.
-`python-requests`_                   At least version **1.0**.
+`python-requests`_                   At least version **2.2**.
 `python-singledispatch`_             Only needed on Python versions older than **3.4**.
 `websocket`_
 
@@ -162,12 +162,19 @@ Name                                 Notes
 Using pycrypto and pycountry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With these two environment variables it is possible to use `pycrypto`_ instead of
-`pycryptodome`_ and `pycountry`_ instead of `iso-639`_ and `iso3166`_.
+With these environment variables it is possible to use
+
+`pycrypto`_ or `pycryptodomex`_ instead of `pycryptodome`_
 
 .. code-block:: console
 
     $ export LIVECLI_USE_PYCRYPTO="true"
+    $ export LIVECLI_USE_PYCRYPTODOMEX="true"
+
+`pycountry`_ instead of `iso-639`_ and `iso3166`_
+
+.. code-block:: console
+
     $ export LIVECLI_USE_PYCOUNTRY="true"
 
 .. _Python: http://python.org/
@@ -179,6 +186,7 @@ With these two environment variables it is possible to use `pycrypto`_ instead o
 .. _pycountry: https://pypi.python.org/pypi/pycountry
 .. _pycrypto: https://www.dlitz.net/software/pycrypto/
 .. _pycryptodome: https://pycryptodome.readthedocs.io/en/latest/
+.. _pycryptodomex: https://pycryptodome.readthedocs.io/en/latest/src/introduction.html?highlight=pycryptodomex
 .. _pysocks: https://pypi.python.org/pypi/PySocks
 .. _websocket: https://pypi.python.org/pypi/websocket-client
 .. _ffmpeg: https://www.ffmpeg.org/

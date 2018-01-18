@@ -2,8 +2,7 @@ import re
 import struct
 from collections import defaultdict, namedtuple
 
-from Crypto.Cipher import AES
-
+from livecli.compat import AES
 from livecli.stream import hls_playlist
 from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
 from livecli.stream.http import HTTPStream

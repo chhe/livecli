@@ -6,9 +6,10 @@ import tempfile
 import time
 import warnings
 
-from Crypto.Cipher import AES, PKCS1_v1_5
-from Crypto.PublicKey import RSA
-from Crypto.Util import number
+from livecli.compat import AES
+from livecli.compat import number
+from livecli.compat import PKCS1_v1_5
+from livecli.compat import RSA
 
 from livecli.compat import urljoin, urlparse
 from livecli.exceptions import PluginError

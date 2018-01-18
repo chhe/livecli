@@ -1,7 +1,6 @@
 import hashlib
 
-from Crypto.Cipher import AES
-
+from livecli.compat import AES
 from livecli.compat import is_py3
 
 

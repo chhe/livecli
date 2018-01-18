@@ -25,6 +25,8 @@ deps.append("requests>=2.2,!=2.12.0,!=2.12.1,!=2.16.0,!=2.16.1,!=2.16.2,!=2.16.3
 # for encrypted streams
 if environ.get("LIVECLI_USE_PYCRYPTO"):
     deps.append("pycrypto")
+elif environ.get("LIVECLI_USE_PYCRYPTODOMEX"):
+    deps.append("pycryptodomex>=3.4.3,<4")
 else:
     # this version of pycryptodome is known to work and has a Windows wheel for py2.7, py3.3-3.6
     deps.append("pycryptodome>=3.4.3,<4")

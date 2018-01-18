@@ -2,11 +2,8 @@ import re
 
 from collections import namedtuple
 from io import BytesIO
-try:
-    from Crypto.Cipher import AES
-    CAN_DECRYPT = True
-except ImportError:
-    CAN_DECRYPT = False
+
+from livecli.compat import AES
 
 from livecli.compat import range
 from livecli.exceptions import StreamError
@@ -260,11 +257,6 @@ class BeatStream(Stream):
                     **Stream.__json__(self))
 
     def open(self):
-        if not CAN_DECRYPT:
-            raise StreamError(
-                "pyCrypto or pycryptodome needs to be installed to decrypt this stream"
-            )
-
         reader = BeatStreamReader(self)
         reader.open()
 
