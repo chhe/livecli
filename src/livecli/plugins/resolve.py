@@ -142,11 +142,11 @@ class Resolve(Plugin):
                 new_url = urljoin(stream_base, new_url)
             else:
                 new_url = urljoin(base_url, new_url)
-            # Remove urls with /chat at the end.
-            if new_url.endswith("/chat"):
+            parse_new_url = urlparse(new_url)
+            # Removes images and chatrooms
+            if parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat")):
                 continue
             # Remove obviously ad urls
-            parse_new_url = urlparse(new_url)
             if self._ads_path.match(parse_new_url.path):
                 continue
             # Add url to the list
