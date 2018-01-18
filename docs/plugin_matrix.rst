@@ -69,7 +69,6 @@ deutschewelle       dw.com               Yes   Yes
 dingittv            dingit.tv            Yes   Yes
 disney_de           - video.disney.de    Yes   Yes   Streams may be geo-restricted to Germany.
                     - disneychannel.de
-dmcloud             api.dmcloud.net      Yes   --
 dogan               - teve2.com.tr       Yes   Yes   VOD is supported for teve2 and kanald
                     - kanald.com.tr
                     - dreamtv.com.tr
@@ -106,8 +105,6 @@ goodgame            goodgame.ru          Yes   No    Only HLS streams are availa
 googledrive         - docs.google.com    --    Yes
                     - drive.google.com
 gulli               replay.gulli.fr      Yes   Yes   Streams may be geo-restricted to France.
-hitbox              - hitbox.tv          Yes   Yes
-                    - smashcast.tv
 huajiao             huajiao.com          Yes   No
 huomao              huomao.com           Yes   No
 huya                huya.com             Yes   No    Temporarily only HLS streams available.
@@ -186,6 +183,7 @@ seetv               seetv.tv             Yes   No    Streams that are embedded f
 servustv            servustv.com         ?     ?
 showroom            showroom-live.com    Yes   No    Only RTMP streams are available.
 skai                skai.gr              Yes   No    Only embedded youtube live streams are supported
+smashcast           smashcast.tv         Yes   Yes
 speedrunslive       speedrunslive.com    Yes   --    URL forwarder to Twitch channels.
 sportal             sportal.bg           Yes   No
 sportschau          sportschau.de        Yes   No
