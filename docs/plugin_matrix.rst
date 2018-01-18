@@ -20,7 +20,6 @@ alieztv             aliez.tv             Yes   Yes
 aljazeeraen         aljazeera.com        Yes   Yes   English version of the site.
 animelab            animelab.com         --    Yes   Requires a login. Streams may be geo-restricted to Australia and New Zealand.
 antenna             antenna.gr           --    Yes
-apac                a-pac.tv             Yes   --
 app17               17app.co             Yes   --
 ard_live            daserste.de          Yes   Yes   Streams may be geo-restricted to Germany.
 ard_mediathek       - ardmediathek.de    Yes   Yes   Streams may be geo-restricted to Germany.
@@ -223,7 +222,6 @@ turkuvaz            - atv.com.tr         Yes   No
                     - aspor.com.tr
                     - minikago.com.tr
                     - minikacocuk.com.tr
-tv1channel          tv1channel.org       Yes   Yes
 tv3cat              tv3.cat              Yes   Yes   Streams may be geo-restricted to Spain.
 tv4play             - tv4play.se         Yes   Yes   Streams may be geo-restricted to Sweden.
                                                      Only non-premium streams currently supported.
@@ -235,8 +233,6 @@ tv8                 tv8.com.tr           Yes   No
 tv8cat              tv8.cat              Yes   No    Streams may be geo-restricted to Spain/Catalunya.
 tv360               tv360.com.tr         Yes   No
 tvcatchup           tvcatchup.com        Yes   No    Streams may be geo-restricted to Great Britain.
-tvnbg               - tvn.bg             Yes   -
-                    - live.tvn.bg
 tvplayer            tvplayer.com         Yes   No    Streams may be geo-restricted to Great Britain. Premium streams are not supported.
 tvrby               tvr.by               Yes   No    Streams may be geo-restricted to Belarus.
 tvrplus             tvrplus.ro           Yes   No    Streams may be geo-restricted to Romania.
