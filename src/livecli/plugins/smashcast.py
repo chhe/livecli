@@ -8,12 +8,12 @@ from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 from livecli.utils import absolute_url
 
-HLS_PLAYLIST_BASE = "http://www.smashcast.tv{0}"
-LIVE_API = "http://www.smashcast.tv/api/media/live/{0}?showHidden=true&liveonly=false"
-PLAYER_API = "http://www.smashcast.tv/api/player/config/{0}/{1}?embed=false&showHidden=true"
-SWF_BASE = "http://edge.vie.hitbox.tv/static/player/flowplayer/"
+HLS_PLAYLIST_BASE = "https://www.smashcast.tv{0}"
+LIVE_API = "https://www.smashcast.tv/api/media/live/{0}?showHidden=true&liveonly=false&ssl=true"
+PLAYER_API = "https://www.smashcast.tv/api/player/config/{0}/{1}?embed=false&showHidden=true&ssl=true"
+SWF_BASE = "https://edge.vie.hitbox.tv/static/player/flowplayer/"
 SWF_URL = SWF_BASE + "flowplayer.commercial-3.2.16.swf"
-VOD_BASE_URL = "http://www.smashcast.tv/"
+VOD_BASE_URL = "https://www.smashcast.tv/"
 
 _quality_re = re.compile(r"(\d+p)$")
 _url_re = re.compile(r"""
@@ -76,7 +76,7 @@ _player_schema = validate.Schema(
 )
 
 
-class Hitbox(Plugin):
+class Smashcast(Plugin):
     @classmethod
     def can_handle_url(cls, url):
         return _url_re.match(url)
@@ -200,4 +200,4 @@ class Hitbox(Plugin):
             return self._get_video_streams(player)
 
 
-__plugin__ = Hitbox
+__plugin__ = Smashcast
