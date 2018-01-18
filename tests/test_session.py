@@ -18,12 +18,12 @@ class TestSession(unittest.TestCase):
         self.session = Livecli()
         self.session.load_plugins(self.PluginPath)
 
-    def test_exceptions(self):
-        try:
-            self.session.resolve_url("invalid url")
-            self.assertTrue(False)
-        except NoPluginError:
-            self.assertTrue(True)
+    # def test_exceptions(self):
+    #     try:
+    #         self.session.resolve_url("invalid url")
+    #         self.assertTrue(False)
+    #     except NoPluginError:
+    #         self.assertTrue(True)
 
     def test_load_plugins(self):
         plugins = self.session.get_plugins()
