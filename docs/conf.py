@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import json
 import re
+import requests
 import os
 import sys
 
-from livecli import __version__ as livecli_version
-
-_version_re = re.compile(r'(\d+\.\d+\.\d+)')
-version_m = _version_re.search(livecli_version)
-if version_m:
-    livecli_version = version_m.group(1)
+try:
+    res = requests.get('https://api.github.com/repos/livecli/livecli/tags')
+    res_j = json.loads(res.text)
+    livecli_version = res_j[0]['name']
+except Exception:
+    livecli_version = '0.0.0'
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
