@@ -123,6 +123,7 @@ mips                mips.tv              Yes   --    Requires rtmpdump with K-S-
 mitele              mitele.es            Yes   No    Streams may be geo-restricted to Spain.
 mixer               mixer.com            Yes   Yes
 mlgtv               mlg.tv               Yes   --
+myfreecams          myfreecams.com       Yes   No
 nbc                 nbc.com              No    Yes   Streams are geo-restricted to USA. Authentication is not supported.
 nbcsports           nbcsports.com        No    Yes   Streams maybe be geo-restricted to USA. Authentication is not supported.
 neulion             - fanpass.co.nz      Yes   Yes   Authentication required for premium streams. Streams may be geo-restricted.
