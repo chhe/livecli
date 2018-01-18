@@ -1,3 +1,106 @@
+livecli 3.0.0 (2018-01-18)
+--------------------------
+Livecli 3.0.0 has been released!
+
+I forked streamlink and changed the name to livecli.
+
+- livestreamer = 1.0
+- streamlink = 2.0
+- livecli = 3.0
+
+I updated some plugins and removed dead plugins,
+for more details see below.
+
+::
+
+    Alexis Murzeau <amubtdx@gmail.com> (3):
+          [docs] remove flattr-badge.png image
+          [docs] Fix various typos in comments and documentation
+          [hls] Implement PKCS#7 padding decoding with AES-128 HLS
+
+    BZHDeveloper <inizan.yannick@gmail.com> (1):
+          [canalplus] Update plugin according to website changes
+
+    Drew J. Sonne <drew.sonne@gmail.com> (1):
+          [bbciplayer] Fix authentication failures
+
+    Mohamed El Morabity <melmorabity@fedoraproject.org> (1):
+          [pluzz] Fix video ID regex for France 3 Régions streams
+
+    RosadinTV <rosadintv@outlook.com> (1):
+          [docs] Welcome 2018
+
+    Sean Greenslade <sean@seangreenslade.com> (2):
+          [picarto] Reworked picarto.tv plugin to deal with website changes.
+          [tigerdile] Added tigerdile HLS support and proper API poll for offline streams.
+
+    back-to <backto@protonmail.ch> (36):
+          [afreeca] Plugin update.
+          [BTV] Fixed login return message
+          [build] Added external assets
+          [build] Fixed script/release.sh for versioneer
+          [camsoda] Fixed broken plugin
+          [cli-debug] Show current installed versions with -l debug
+          [Dailymotion] Fixed livestream id from channelpage
+          [docs] changed deploy-key
+          [docs] Removed dead plugins.
+          [docs] Removed doggo.ico
+          [docs] Removed MPlayer2 - Domain expired - Not maintained anymore
+          [docs] Removed opencollective
+          [docs] use normal version for docs
+          [hls] Don't try to skip a stream if the offset is 0, don't raise KeyError if the m3u8 file is empty this allows the file to reload.
+          [hls] New option --hls-segment-ignore-names
+          [mitele] Update for different api response - fallback if not hls_url was found, just the suffix. - added url tests
+          [mixer] moved beam.py to mixer.py file requires two commits, for a proper commit history
+          [mixer] replaced beam.pro with mixer.com
+          [mlgtv] Fixed broken Plugin streamlink/streamlink#1362
+          [neulion] renamed ufctv.py to neulion.py
+          [neulion] Updated the ufctv plugin to make it useable for other domains
+          [periscope] Update for hls variant playlists
+          [qq] New Plugin for live.qq.com
+          [streann] Added headers for post request
+          [tests] Fixed decrypt test and removed DeprecationWarning
+          [travis] disabled bintray
+          [travis] run flake8
+          [tvrplus] hls regex update and send a Referer
+          [twitch and youtube] open hls-start-offset for urls with a time automatically, only for hls streams.
+          [viasat] Added support for urls without a stream_id - removed dead domains from _url_re - added a error message for geo blocking - new regex for stream_id from image url - Removed old embed plugin - try to find an iframe if no stream_id was found. - added tests
+          [youtube] added Audio m4a itag 256 and 258
+          [youtube] New params for get_video_info
+          [zdf] apiToken update
+          [zengatv] New Plugin for zengatv.com
+
+    bastimeyer <mail@bastimeyer.de> (2):
+          nsis: restore old install dir, keep multiuser
+          docs: rewrite Windows binaries install section
+
+    beardypig <beardypig@users.noreply.github.com> (14):
+          plugins.vaughnlive: updated rtmp server map
+          stream.hls: add options to skip some time at the start/end of VOD streams
+          stream.hls: add option to restart live stream, if possible
+          stream.hls: remove the end offset and replace with duration
+          hls: add absolute start offset and duration options to the HLStream API
+          EOL Python 3.3
+          plugins.kanal7: update to stream player URL config
+          plugins.huya: fix stream URL scheme prefix
+          build: use versioneer to set the build number
+          build: remove broken "latest" config for bintray
+
+    fozzy <fozzy@fozzy.co> (1):
+          fix plugin for bilibili to adapt the new API
+
+    hicrop <35128217+hicrop@users.noreply.github.com> (1):
+          PEP8 (#1427)
+
+    schrobby <schrawby@gmail.com> (1):
+          [afreeca] update from github comments
+
+    steven7851 <steven7851@msn.com> (1):
+          [Douyutv] fix API
+
+    xela722 <alex0722@comcast.net> (1):
+          Add plugin for olympicchannel.com
+
 streamlink 0.9.0 (2017-11-14)
 -----------------------------
 Streamlink 0.9.0 has been released!
