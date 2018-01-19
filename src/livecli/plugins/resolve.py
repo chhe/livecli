@@ -129,6 +129,9 @@ class Resolve(Plugin):
         """
         new_list = []
         for url in old_list:
+            # Don't add the same url as self.url to the list.
+            if url == self.url:
+                continue
             # Repair the scheme
             new_url = url.replace("\\", "")
             if new_url.startswith("http&#58;//"):
@@ -170,6 +173,7 @@ class Resolve(Plugin):
         """
         blacklist = [
             "about:blank",
+            "javascript:false",
             "facebook.com/plugins",
             "www.facebook.com/plugins",
             "googletagmanager.com",
@@ -201,7 +205,10 @@ class Resolve(Plugin):
         Raises:
             NoPluginError: if self.url is the same as self._cache_url
         """
-        # TODO: use a list.
+        # TODO: use a list of all used urls
+        #       and remove the urls with self._make_url_list
+        # this is now useless for one url check
+        # because self._make_url_list will remove self.url
         if self._cache_url == self.url:
             self.logger.debug("Abort: Website is already in cache.")
             raise NoPluginError
