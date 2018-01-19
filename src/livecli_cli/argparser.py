@@ -709,6 +709,22 @@ transport.add_argument(
     """
 )
 transport.add_argument(
+    "--hls-segment-ignore-number",
+    type=num(int, min=5),
+    metavar="SEGMENTS",
+    help="""
+    Ignore invalid segment numbers,
+    this option is the max. difference between the valid and invalid number.
+
+    If the valid segment is 100 and this option is set to 20:
+
+    only a segment of 1-80 will be allowed and added,
+    everything between 81-99 will be invalid and not added.
+
+    Default is Disabled.
+    """
+)
+transport.add_argument(
     "--hls-audio-select",
     type=str,
     metavar="CODE",

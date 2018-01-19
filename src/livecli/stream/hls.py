@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import re
 import struct
 from collections import defaultdict, namedtuple
@@ -152,6 +154,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
         self.duration_offset_start = int(self.stream.start_offset + (self.session.options.get("hls-start-offset") or 0))
         self.duration_limit = self.stream.duration or (int(self.session.options.get("hls-duration")) if self.session.options.get("hls-duration") else None)
         self.hls_live_restart = self.stream.force_restart or self.session.options.get("hls-live-restart")
+        self.sequence_ignore_number = self.session.options.get("hls-segment-ignore-number") or False
 
         self.reload_playlist()
 
@@ -230,7 +233,13 @@ class HLSStreamWorker(SegmentedStreamWorker):
                 self.playlist_sequence = first_sequence.num
 
     def valid_sequence(self, sequence):
-        return sequence.num >= self.playlist_sequence
+        if sequence.num >= self.playlist_sequence:
+            return True
+        elif self.sequence_ignore_number and sequence.num <= (self.playlist_sequence - self.sequence_ignore_number):
+            self.logger.warning("Added invalid segment number.")
+            return True
+        else:
+            return False
 
     def duration_to_sequence(self, duration, sequences):
         d = 0

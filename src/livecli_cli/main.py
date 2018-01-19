@@ -727,6 +727,9 @@ def setup_options():
     if args.hls_segment_ignore_names:
         livecli.set_option("hls-segment-ignore-names", args.hls_segment_ignore_names)
 
+    if args.hls_segment_ignore_number:
+        livecli.set_option("hls-segment-ignore-number", args.hls_segment_ignore_number)
+
     if args.hls_timeout:
         livecli.set_option("hls-timeout", args.hls_timeout)
 
