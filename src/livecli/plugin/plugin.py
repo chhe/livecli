@@ -266,22 +266,6 @@ class Plugin(object):
         :param sorting_excludes: Specify which streams to exclude from
                                  the best/worst synonyms.
 
-
-        .. versionchanged:: 1.4.2
-           Added *priority* parameter.
-
-        .. versionchanged:: 1.5.0
-           Renamed *priority* to *stream_types* and changed behaviour
-           slightly.
-
-        .. versionchanged:: 1.5.0
-           Added *sorting_excludes* parameter.
-
-        .. versionchanged:: 1.6.0
-           *sorting_excludes* can now be a list of filter expressions
-           or a function that is passed to filter().
-
-
         """
 
         try:

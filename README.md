@@ -18,14 +18,15 @@ services when they are available for the content you consume and enjoy.
 #### Installation via Python pip
 
 ```bash
-sudo pip install livecli
+pip install livecli
 ```
 
 #### Manual installation via Python
 
 ```bash
 git clone https://github.com/livecli/livecli
-sudo python setup.py install
+cd livecli
+pip install -U .
 ```
 
 #### Windows, MacOS, Linux and BSD specific installation methods
