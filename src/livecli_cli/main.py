@@ -1025,7 +1025,7 @@ def log_current_versions():
 
         console.logger.debug("OS:         {0}".format(os_version))
         console.logger.debug("Python:     {0}".format(platform.python_version()))
-        console.logger.debug("Livecli: {0}".format(livecli_version))
+        console.logger.debug("Livecli:    {0}".format(livecli_version))
         console.logger.debug("Requests({0}), Socks({1}), Websocket({2})".format(
             requests.__version__, socks_version, websocket_version))
 

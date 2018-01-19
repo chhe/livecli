@@ -177,6 +177,7 @@ radionet            - radio.net          Yes   --
                     - radio.pt
                     - radio.se
 raiplay             raiplay.it           Yes   No    Most streams are geo-restricted to Italy.
+rtbf                rtbf.be              Yes   No    Streams may be geo-restricted to Belgium.
 rtlxl               rtlxl.nl             No    Yes   Streams may be geo-restricted to The Netherlands. Livestreams not supported.
 rte                 rte.ie/player        Yes   Yes
 rtpplay             rtp.pt/play          Yes   Yes   Streams may be geo-restricted to Portugal.
