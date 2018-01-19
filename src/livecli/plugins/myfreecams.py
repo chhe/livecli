@@ -117,7 +117,7 @@ class MyFreeCams(Plugin):
                 ws.send("1 0 0 20071025 0 {0}@guest:guest\n".format(r_id))
                 self.logger.debug("Websocket server {0} connected".format(xchat))
                 try_to_connect = 3
-            except Exception as e:
+            except Exception:
                 try_to_connect = try_to_connect + 1
                 self.logger.debug("Failed to connect to WS server: {0} - try {1}".format(xchat, try_to_connect))
                 if try_to_connect == 5:
