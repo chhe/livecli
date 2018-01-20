@@ -19,6 +19,17 @@ try:
 except ImportError:
     pass
 
+__livecli_docs__ = {
+    "domains": [
+        "twitch.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
+
 QUALITY_WEIGHTS = {
     "source": 1080,
     "1080": 1080,

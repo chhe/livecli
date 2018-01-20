@@ -10,6 +10,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "mixer.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-11-30",
+}
+
 _url_re = re.compile(r"http(s)?://(\w+.)?mixer\.com/(?P<channel>[^/?]+)")
 
 

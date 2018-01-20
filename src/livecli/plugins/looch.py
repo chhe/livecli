@@ -9,6 +9,17 @@ from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "looch.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-06-08",
+}
+
 
 class Looch(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?looch\.tv/channel/(?P<name>[^/]+)(/videos/(?P<video_id>\d+))?")

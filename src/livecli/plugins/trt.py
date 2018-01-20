@@ -8,6 +8,19 @@ from livecli.compat import urlparse, parse_qsl
 from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "trt.net.tr",
+    ],
+    "geo_blocked": [
+        "TR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-03-03",
+}
+
 
 class TRT(Plugin):
     """

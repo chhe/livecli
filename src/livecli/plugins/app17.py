@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, useragents
 from livecli.stream import HLSStream, RTMPStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "17.live",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-06-14",
+}
+
 API_URL = "https://api-dsa.17app.co/api/v1/liveStreams/getLiveStreamInfo"
 
 _url_re = re.compile(r"https://17.live/live/(?P<channel>[^/&?]+)")

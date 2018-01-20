@@ -6,6 +6,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "nhk.or.jp",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-11-24",
+}
+
 API_URL = "http://{}.nhk.or.jp/nhkworld/app/tv/hlslive_web.xml"
 
 _url_re = re.compile(r"http(?:s)?://(?:(\w+)\.)?nhk.or.jp/nhkworld")

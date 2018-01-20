@@ -10,6 +10,17 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream, HTTPStream, RTMPStream
 from livecli.stream.playlist import FLVPlaylist
 
+__livecli_docs__ = {
+    "domains": [
+        "dailymotion.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-30",
+}
+
 COOKIES = {
     "family_filter": "off",
     "ff": "off"

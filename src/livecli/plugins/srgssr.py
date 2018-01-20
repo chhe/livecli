@@ -9,6 +9,22 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "rsi.ch",
+        "rtr.ch",
+        "rts.ch",
+        "srf.ch",
+    ],
+    "geo_blocked": [
+        "CH",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-20",
+}
+
 
 class SRGSSR(Plugin):
     url_re = re.compile(r"""https?://(?:www\.)?

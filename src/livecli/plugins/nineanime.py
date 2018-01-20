@@ -6,6 +6,18 @@ from livecli.plugin.api import validate
 from livecli.stream import HTTPStream
 from livecli.compat import urlparse
 
+__livecli_docs__ = {
+    "domains": [
+        "9anime.ch",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "",
+    "broken": True,
+}
+
 
 class NineAnime(Plugin):
     _episode_info_url = "//9anime.to/ajax/episode/info"

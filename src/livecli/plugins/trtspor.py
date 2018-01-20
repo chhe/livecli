@@ -6,6 +6,19 @@ from livecli.plugin.api import http
 from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "trtspor.com",
+    ],
+    "geo_blocked": [
+        "TR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-03",
+}
+
 
 class TRTSpor(Plugin):
     """

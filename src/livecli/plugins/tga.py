@@ -6,6 +6,18 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "star.longzhu.tv",
+        "star.longzhu.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-17",
+}
+
 CHANNEL_INFO_URL = "http://api.plu.cn/tga/streams/%s"
 QQ_STREAM_INFO_URL = "http://info.zb.qq.com/?cnlid=%d&cmd=2&stream=%d&system=1&sdtfrom=113"
 PLU_STREAM_INFO_URL = "http://livestream.plu.cn/live/getlivePlayurl?roomId=%d"

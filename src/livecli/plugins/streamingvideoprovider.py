@@ -6,6 +6,17 @@ from livecli.plugin import Plugin, PluginError
 from livecli.plugin.api import http, validate
 from livecli.stream import RTMPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "streamingvideoprovider.co.uk",
+    ],
+    "geo_blocked": [],
+    "notes": "rtmpdump K-S-V",
+    "live": True,
+    "vod": False,
+    "last_update": "2014-07-13",
+}
+
 SWF_URL = "http://play.streamingvideoprovider.com/player2.swf"
 API_URL = "http://player.webvideocore.net/index.php"
 

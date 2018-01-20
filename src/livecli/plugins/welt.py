@@ -8,6 +8,19 @@ from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "welt.de",
+    ],
+    "geo_blocked": [
+        "DE",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
+
 
 class Welt(Plugin):
     """Livecli Plugin for welt.de"""

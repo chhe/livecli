@@ -11,13 +11,24 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "mitele.es",
+    ],
+    "geo_blocked": [
+        "ES",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-06",
+}
+
 
 class Mitele(Plugin):
     _url_re = re.compile(r"https?://(?:www\.)?mitele\.es/directo/(?P<channel>\w+)")
     _suffix_re = re.compile(r"""acl=(?P<path>[^"'*]+)""")
 
-    # For more informations see:
-    # https://github.com/livecli/livecli/issues/1337
     livehlsdai = "https://livehlsdai-i.akamaihd.net"
     mdslivehls = "https://mdslivehls-i.akamaihd.net"
 

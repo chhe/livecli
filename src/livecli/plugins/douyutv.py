@@ -8,6 +8,18 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate, useragents
 from livecli.stream import HTTPStream, HLSStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "douyu.com",
+        "v.douyu.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-28",
+}
+
 API_URL = "https://capi.douyucdn.cn/api/v1/{0}&auth={1}"
 VAPI_URL = "https://vmobile.douyu.com/video/getInfo?vid={0}"
 API_SECRET = "zNzMV1y4EMxOHS6I5WKm"

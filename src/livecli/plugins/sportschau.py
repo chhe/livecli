@@ -5,6 +5,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "sportschau.de",
+    ],
+    "geo_blocked": [
+        "DE",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-09-18",
+}
+
 _url_re = re.compile(r"http(s)?://(\w+\.)?sportschau.de/")
 _player_js = re.compile(r"https?://deviceids-medp.wdr.de/ondemand/.*\.js")
 

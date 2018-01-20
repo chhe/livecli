@@ -4,6 +4,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvcatchup.com",
+    ],
+    "geo_blocked": [
+        "UK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-11-01",
+}
+
 USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 _url_re = re.compile(r"http://(?:www\.)?tvcatchup.com/watch/\w+")
 _stream_re = re.compile(r'''source.*?(?P<q>["'])(?P<stream_url>https?://.*m3u8\?.*clientKey=.*?)(?P=q)''')

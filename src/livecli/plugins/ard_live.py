@@ -6,6 +6,19 @@ from livecli.stream import HLSStream, HDSStream
 from livecli.compat import urljoin
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "daserste.de",
+    ],
+    "geo_blocked": [
+        "DE"
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-05-03",
+}
+
 
 class ard_live(Plugin):
     swf_url = "http://live.daserste.de/lib/br-player/swf/main.swf"

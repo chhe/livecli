@@ -5,6 +5,17 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json, update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "streamable.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-05-10",
+}
+
 
 class Streamable(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?streamable\.com/(.+)")

@@ -7,6 +7,20 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tv4play.se",
+        "fotbollskanalen.se",
+    ],
+    "geo_blocked": [
+        "SE",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-03",
+}
+
 ASSET_URL = "http://prima.tv4play.se/api/web/asset/{0}/play"
 SWF_URL = "http://www.tv4play.se/flash/tv4video.swf"
 

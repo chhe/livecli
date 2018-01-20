@@ -8,6 +8,21 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import useragents
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "breakers.tv",
+        "instagib.tv",
+        "pearltime.tv",
+        "vapers.tv",
+        "vaughnlive.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-10-14",
+}
+
 _url_re = re.compile(r"""
     http(s)?://(\w+\.)?
     (?P<domain>vaughnlive|breakers|instagib|vapers|pearltime).tv

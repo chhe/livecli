@@ -5,6 +5,17 @@ from livecli import PluginError
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
 
+__livecli_docs__ = {
+    "domains": [
+        "ellobo106.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-05-05",
+}
+
 
 class ElLobo(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?ellobo106\.com/")

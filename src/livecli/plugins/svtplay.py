@@ -4,6 +4,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HLSStream, HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "svtplay.se",
+        "svtflow.se",
+        "oppetarkiv.se",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-07-01",
+}
+
 API_URL = "http://www.svt.se/videoplayer-api/video/{0}"
 
 _url_re = re.compile(r"""

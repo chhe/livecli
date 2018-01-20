@@ -18,6 +18,19 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 from livecli.exceptions import PluginError
 
+__livecli_docs__ = {
+    "domains": [
+        "ceskatelevize.cz",
+    ],
+    "geo_blocked": [
+        "CZ",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-02-02",
+}
+
 _url_re = re.compile(
     r'http(s)?://([^.]*.)?ceskatelevize.cz'
 )

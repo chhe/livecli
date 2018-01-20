@@ -5,6 +5,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate, useragents
 from livecli.stream import HLSStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "showroom-live.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-11-08",
+}
+
 _url_re = re.compile(r'''^https?://
     (?:\w*.)?
     showroom-live.com/

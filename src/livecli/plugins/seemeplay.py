@@ -5,6 +5,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "seemeplay.ru",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-08-27",
+}
+
 _url_re = re.compile(r"http(s)?://(\w+\.)?seemeplay.ru/")
 _player_re = re.compile(r"""
     SMP.(channel|video).player.init\({

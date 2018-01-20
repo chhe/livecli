@@ -6,6 +6,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "vgtv.no",
+    ],
+    "geo_blocked": [
+        "NO",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-17",
+}
+
 # This will have to be set to handle "secure" HDS streams. For now we
 # leave it empty, as the same streams can likely be watched with HLS.
 # SWF_URL = ""

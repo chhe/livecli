@@ -5,6 +5,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "cybergame.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-24",
+}
+
 LIVE_STREAM_URL = "rtmp://stream1.cybergame.tv:2936/live/"
 PLAYLIST_URL = "http://api.cybergame.tv/p/playlist.smil"
 

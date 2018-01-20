@@ -17,6 +17,18 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "huomao.com",
+        "huomao.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-14",
+}
+
 # URL pattern for recognizing inputed Huomao.tv / Huomao.com URL.
 url_re = re.compile(r"""
     (http(s)?://)?

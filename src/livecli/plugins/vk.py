@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.compat import urlparse, unquote
 from livecli.stream import HTTPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "vk.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-07-05",
+}
+
 
 class VK(Plugin):
     _url_re = re.compile(r"http(?:s)?://(\w+\.)?vk.com/video-[0-9]*_[0-9]*")

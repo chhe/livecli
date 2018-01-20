@@ -10,6 +10,17 @@ from livecli.plugin.api import http
 from livecli.stream import HLSStream
 from websocket import create_connection
 
+__livecli_docs__ = {
+    "domains": [
+        "myfreecams.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-19",
+}
+
 
 class MyFreeCams(Plugin):
     """Livecli Plugin for MyFreeCams

@@ -7,6 +7,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "atresplayer.com",
+    ],
+    "geo_blocked": [
+        "ES",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-12-15",
+}
+
 
 class AtresPlayer(Plugin):
     url_re = re.compile(r"https?://(?:www.)?atresplayer.com/directos/television/(\w+)/?")

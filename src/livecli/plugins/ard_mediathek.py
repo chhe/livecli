@@ -4,6 +4,20 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "ardmediathek.de",
+        "mediathek.daserste.de"
+    ],
+    "geo_blocked": [
+        "DE"
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-05-03",
+}
+
 MEDIA_URL = "http://www.ardmediathek.de/play/media/{0}"
 SWF_URL = "http://www.ardmediathek.de/ard/static/player/base/flash/PluginFlash.swf"
 HDCORE_PARAMETER = "?hdcore=3.3.0"

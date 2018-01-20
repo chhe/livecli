@@ -5,6 +5,19 @@ from livecli.plugin.api import http, useragents
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "eltrecetv.com.ar",
+    ],
+    "geo_blocked": [
+        "AR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-09-13",
+}
+
 
 class ElTreceTV(Plugin):
     _url_re = re.compile(r'https?://(?:www\.)?eltrecetv.com.ar/.+')

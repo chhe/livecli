@@ -5,6 +5,19 @@ from livecli.plugin.api import http, useragents
 from livecli.stream import HLSStream, HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "telefe.com",
+    ],
+    "geo_blocked": [
+        "AR",
+    ],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-04-20",
+}
+
 
 class Telefe(Plugin):
     _url_re = re.compile(r'https?://telefe.com/.+')

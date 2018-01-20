@@ -5,6 +5,21 @@ from livecli.plugin.api import http
 from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "canlitv.com",
+        "canlitv.life",
+        "canlitvlive.co",
+        "canlitvlive.live",
+        "ecanlitvizle.net",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-10-29",
+}
+
 EMBED_URL_1 = "http://www.canlitv.plus/kanallar.php?kanal={0}"
 EMBED_URL_2 = "http://www.ecanlitvizle.net/embed.php?kanal={0}"
 

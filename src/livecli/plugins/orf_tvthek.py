@@ -5,6 +5,19 @@ from livecli.plugin import Plugin, PluginError
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvthek.orf.at",
+    ],
+    "geo_blocked": [
+        "AT",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2016-11-01",
+}
+
 _stream_url_re = re.compile(r'https?://tvthek\.orf\.at/(index\.php/)?live/(?P<title>[^/]+)/(?P<id>[0-9]+)')
 _vod_url_re = re.compile(r'https?://tvthek\.orf\.at/pro(gram|file)/(?P<showtitle>[^/]+)/(?P<showid>[0-9]+)/(?P<episodetitle>[^/]+)/(?P<epsiodeid>[0-9]+)(/(?P<segmenttitle>[^/]+)/(?P<segmentid>[0-9]+))?')
 _json_re = re.compile(r'<div class="jsb_ jsb_VideoPlaylist" data-jsb="(?P<json>[^"]+)">')

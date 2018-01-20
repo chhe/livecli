@@ -8,6 +8,23 @@ from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "1tv.ru",
+        "chetv.ru",
+        "ctc.ru",
+        "ctclove.ru",
+        "domashny.ru",
+    ],
+    "geo_blocked": [
+        "RU",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-18",
+}
+
 
 class PerviyKanal(Plugin):
     """Livecli Plugin for Livestreams of

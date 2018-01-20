@@ -14,6 +14,17 @@ from livecli.stream import HLSStream
 from livecli.utils import parse_qsd
 from livecli.utils.crypto import decrypt_openssl
 
+__livecli_docs__ = {
+    "domains": [
+        "stream.me",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-12-23",
+}
+
 
 class Streann(Plugin):
     url_re = re.compile(r"https?://ott\.streann.com/streaming/player\.html")

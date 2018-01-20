@@ -6,6 +6,26 @@ from livecli.plugin.api import validate
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "radio.net",
+        "radio.at",
+        "radio.de",
+        "radio.dk",
+        "radio.es",
+        "radio.fr",
+        "radio.it",
+        "radio.pl",
+        "radio.pt",
+        "radio.se",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-06-04",
+}
+
 
 class RadioNet(Plugin):
     _url_re = re.compile(r"https?://(\w+)\.radio\.(net|at|de|dk|es|fr|it|pl|pt|se)")

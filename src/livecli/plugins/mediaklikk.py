@@ -4,6 +4,18 @@ from livecli.plugin import Plugin
 from livecli.stream import HLSStream
 from livecli.plugin.api import http
 
+__livecli_docs__ = {
+    "domains": [
+        "mediaklikk.hu",
+    ],
+    "geo_blocked": [
+        "HU",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-06-10",
+}
 
 _stream_url_re = re.compile(r"http(s)?://(www\.)?mediaklikk.hu/([A-Za-z0-9\-]+)/?")
 _id_re = re.compile(r'.*data\-streamid="([a-z0-9]+)".*')

@@ -6,6 +6,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream, HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "dr.dk",
+    ],
+    "geo_blocked": [
+        "DK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-03",
+}
+
 LIVE_CHANNELS_API_URL = "http://www.dr.dk/tv/external/channels?mediaType=tv"
 VOD_API_URL = "http://www.dr.dk/mu/programcard/expanded/{0}"
 

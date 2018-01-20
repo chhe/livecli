@@ -11,6 +11,19 @@ from livecli.plugin.api import http
 from livecli.stream import RTMPStream, HDSStream
 from livecli.compat import urlparse, unquote
 
+__livecli_docs__ = {
+    "domains": [
+        "itv.com",
+    ],
+    "geo_blocked": [
+        "UK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2016-10-07",
+}
+
 ITV_PLAYER_USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36'
 LIVE_SWF_URL = "http://www.itv.com/mediaplayer/ITVMediaPlayer.swf"
 ONDEMAND_SWF_URL = "http://www.itv.com/mercury/Mercury_VideoPlayer.swf"

@@ -5,6 +5,19 @@ from livecli.plugin.api import http
 from livecli.plugins.theplatform import ThePlatform
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "nbcsports.com",
+    ],
+    "geo_blocked": [
+        "US",
+    ],
+    "notes": "Login not supported",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-04-04",
+}
+
 
 class NBCSports(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?nbcsports\.com")

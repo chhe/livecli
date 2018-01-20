@@ -6,6 +6,17 @@ from livecli.plugin.api import http
 from livecli.stream import RTMPStream
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tigerdile.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-12-11",
+}
+
 PAGE_URL = "https://www.tigerdile.com/stream/"
 ROOT_URL = "rtmp://stream.tigerdile.com/live/{0}"
 API_URL = "https://api.tigerdile.com/video?key={channel}"

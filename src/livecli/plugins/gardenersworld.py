@@ -6,6 +6,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.plugins.brightcove import BrightcovePlayer
 
+__livecli_docs__ = {
+    "domains": [
+        "gardenersworld.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-04-07",
+}
+
 
 class GardenersWorld(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?gardenersworld\.com/")

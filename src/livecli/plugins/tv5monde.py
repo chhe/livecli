@@ -6,6 +6,23 @@ from livecli.stream import HLSStream, HTTPStream, RTMPStream
 from livecli.utils import parse_json
 from livecli.plugins.common_jwplayer import _js_to_json
 
+__livecli_docs__ = {
+    "domains": [
+        "tv5monde.com",
+        "tv5mondeplus.com",
+        "tv5mondeplusafrique.com",
+    ],
+    "geo_blocked": [
+        "BE",
+        "CH",
+        "FR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-06-02",
+}
+
 
 class TV5Monde(Plugin):
     _url_re = re.compile(r'http://(.+\.)?(tv|tivi)5monde(plus(afrique)?)?\.com')

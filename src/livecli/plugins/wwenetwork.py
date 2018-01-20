@@ -10,6 +10,17 @@ from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "network.wwe.com",
+    ],
+    "geo_blocked": [],
+    "notes": "Requires an account",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-03-02",
+}
+
 
 class WWENetwork(Plugin):
     url_re = re.compile(r"https?://network.wwe.com")

@@ -14,6 +14,19 @@ from livecli.plugin.api import http
 from livecli.plugin.api.utils import parse_json
 from livecli.stream import HTTPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "nos.nl",
+    ],
+    "geo_blocked": [
+        "NL",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2015-01-25",
+}
+
 _url_re = re.compile(r"http(s)?://(\w+\.)?nos.nl/")
 _js_re = re.compile(r'\((.*)\)')
 _data_stream_re = re.compile(r'data-stream="(.*?)"', re.DOTALL | re.IGNORECASE)

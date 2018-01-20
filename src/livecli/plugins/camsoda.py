@@ -7,6 +7,17 @@ from livecli.plugin.api import validate
 from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "camsoda.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-11-18",
+}
+
 _url_re = re.compile(r"http(s)?://(www\.)?camsoda\.com/(?P<username>[^\"\']+)")
 
 _api_user_schema = validate.Schema(

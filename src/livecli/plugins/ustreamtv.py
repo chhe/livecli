@@ -14,6 +14,17 @@ from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.stream.hls import HLSStreamReader
 
+__livecli_docs__ = {
+    "domains": [
+        "ustream.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-03",
+}
+
 
 class ModuleInfoNoStreams(Exception):
     pass

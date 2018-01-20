@@ -9,6 +9,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "vidio.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-07-05",
+}
+
 _url_re = re.compile(r"https?://(?:www\.)?vidio\.com/(?:en/)?(?P<type>live|watch)/(?P<id>\d+)-(?P<name>[^/?#&]+)")
 _playlist_re = re.compile(r'''hls-url=["'](?P<url>[^"']+)["']''')
 

@@ -10,6 +10,25 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "tv.bnt.bg",
+        "bitelevision.com",
+        "nova.bg",
+        "kanal3.bg",
+        "bgonair.bg",
+        "tvevropa.com",
+        "bloombergtv.bg",
+    ],
+    "geo_blocked": [
+        "BG",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-08-14",
+}
+
 
 class CDNBG(Plugin):
     url_re = re.compile(r"""

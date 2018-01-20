@@ -7,6 +7,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "panda.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-15",
+}
+
 ROOM_API = "https://www.panda.tv/api_room_v3?token=&hostid={0}&roomid={1}&roomkey={2}&_={3}&param={4}&time={5}&sign={6}"
 ROOM_API_V2 = "https://www.panda.tv/api_room_v2?roomid={0}&_={1}"
 SD_URL_PATTERN = "https://pl{0}.live.panda.tv/live_panda/{1}.flv?sign={2}&ts={3}&rid={4}"

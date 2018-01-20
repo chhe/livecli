@@ -3,6 +3,17 @@ import re
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 
+__livecli_docs__ = {
+    "domains": [
+        "skai.gr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-08-15",
+}
+
 YOUTUBE_URL = "https://www.youtube.com/watch?v={0}"
 _url_re = re.compile(r'http(s)?://www\.skai.gr/.*')
 _youtube_id = re.compile(r'<span\s+itemprop="contentUrl"\s+href="(.*)"></span>', re.MULTILINE)

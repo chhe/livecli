@@ -5,6 +5,16 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "periscope.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
 
 STREAM_INFO_URL = "https://api.periscope.tv/api/v2/getAccessPublic"
 

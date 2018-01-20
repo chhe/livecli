@@ -5,6 +5,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "kanal7.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-06-16",
+}
+
 
 class Kanal7(Plugin):
     url_re = re.compile(r"https?://(?:www.)?kanal7.com/canli-izle")

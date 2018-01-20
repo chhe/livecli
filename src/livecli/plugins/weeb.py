@@ -5,6 +5,17 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api.utils import parse_query
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "weeb.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "rtmpdump K-S-V",
+    "live": True,
+    "vod": False,
+    "last_update": "2014-07-13",
+}
+
 API_URL = "http://weeb.tv/api/setPlayer"
 SWF_URL = "http://static2.weeb.tv/static2/player.swf"
 HEADERS = {

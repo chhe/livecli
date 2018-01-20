@@ -5,6 +5,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "nrk.no",
+    ],
+    "geo_blocked": [
+        "NO",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-05-04",
+}
+
 COOKIE_PARAMS = (
     "devicetype=desktop&"
     "preferred-player-odm=hlslink&"

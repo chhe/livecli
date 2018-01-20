@@ -9,6 +9,18 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "gomexp.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "",
+    "broken": True,
+}
+
 API_BASE = "http://gox.gomexp.com/cgi-bin"
 API_URL_APP = API_BASE + "/app_api.cgi"
 API_URL_LIVE = API_BASE + "/gox_live.cgi"

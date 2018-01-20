@@ -5,6 +5,18 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "docs.google.com",
+        "drive.google.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-05-21",
+}
+
 
 class GoogleDocs(Plugin):
     url_re = re.compile(r"https?://(?:drive|docs).google.com/file/d/([^/]+)/?")

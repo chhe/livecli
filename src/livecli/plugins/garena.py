@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "garena.live",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-03-19",
+}
+
 _url_re = re.compile(r"https?\:\/\/garena\.live\/(?:(?P<channel_id>\d+)|(?P<alias>\w+))")
 
 

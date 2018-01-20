@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "player.theplatform.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-04-04",
+}
+
 
 class ThePlatform(Plugin):
     """

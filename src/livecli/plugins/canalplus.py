@@ -4,6 +4,20 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, useragents, validate
 from livecli.stream import HDSStream, HLSStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "mycanal.fr",
+        "cnews.fr",
+    ],
+    "geo_blocked": [
+        "FR",
+    ],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-12-26",
+}
+
 
 class CanalPlus(Plugin):
     # NOTE : no live url for the moment

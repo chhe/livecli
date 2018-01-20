@@ -8,6 +8,17 @@ from livecli.compat import urlparse, parse_qsl
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "liveme.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-10-31",
+}
+
 
 class LiveMe(Plugin):
     url_re = re.compile(r"https?://(www.)?liveme\.com/live\.html\?videoid=(\d+)")

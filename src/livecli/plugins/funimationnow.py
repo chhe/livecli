@@ -10,6 +10,18 @@ from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.stream.ffmpegmux import MuxedStream
 
+__livecli_docs__ = {
+    "domains": [
+        "funimation.com",
+        "funimationnow.uk",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-02-28",
+}
+
 
 class Experience(object):
     api_base = "https://prod-api-funimationnow.dadcdigital.com/api"

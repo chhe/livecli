@@ -12,6 +12,19 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "bbc.co.uk",
+    ],
+    "geo_blocked": [
+        "UK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-06",
+}
+
 
 class BBCiPlayer(Plugin):
     """

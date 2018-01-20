@@ -12,6 +12,17 @@ from livecli.stream import HLSStream
 from livecli.compat import urlparse
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "ovva.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-16",
+}
+
 
 class ovvaTV(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?ovva.tv/(?:ua/)?tvguide/.*?/online")

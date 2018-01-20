@@ -6,6 +6,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "younow.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2015-07-21",
+}
+
 jsonapi = "https://api.younow.com/php/api/broadcast/info/curId=0/user="
 
 # http://younow.com/channel/

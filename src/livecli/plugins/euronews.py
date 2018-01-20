@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "euronews.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-05-10",
+}
+
 
 class Euronews(Plugin):
     _url_re = re.compile(r"http(?:s)?://(\w+)\.?euronews.com/(live|.*)")

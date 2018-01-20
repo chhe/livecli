@@ -8,6 +8,18 @@ from livecli.stream import RTMPStream
 from livecli.plugin.api import http
 from livecli.compat import urljoin
 
+__livecli_docs__ = {
+    "domains": [
+        "liveedu.tv",
+        "livecoding.tv"
+    ],
+    "geo_blocked": [],
+    "notes": "Some streams require a login.",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-04-03",
+}
+
 
 class LiveEdu(Plugin):
     login_url = "https://www.liveedu.tv/accounts/login/"

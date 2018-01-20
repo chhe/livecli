@@ -5,6 +5,17 @@ import re
 from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 
+__livecli_docs__ = {
+    "domains": [
+        "dommune.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2014-12-27",
+}
+
 DATA_URL = "http://www.dommune.com/freedommunezero2012/live/data/data.json"
 
 _url_re = re.compile(r"http(s)?://(\w+\.)?dommune.com")

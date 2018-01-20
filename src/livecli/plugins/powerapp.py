@@ -6,6 +6,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "powerapp.com.tr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-12-16",
+}
+
 
 class PowerApp(Plugin):
     url_re = re.compile(r"https?://(?:www.)?powerapp.com.tr/tv/(\w+)")

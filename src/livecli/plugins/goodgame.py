@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "goodgame.ru",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-05-07",
+}
+
 HLS_URL_FORMAT = "https://hls.goodgame.ru/hls/{0}{1}.m3u8"
 QUALITIES = {
     "1080p": "",

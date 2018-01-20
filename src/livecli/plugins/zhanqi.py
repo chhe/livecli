@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HTTPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "zhanqi.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-21",
+}
+
 API_URL = "https://www.zhanqi.tv/api/static/v2.1/room/domain/{0}.json"
 
 STATUS_ONLINE = 4

@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.plugins.brightcove import BrightcovePlayer
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "aljazeera.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-04",
+}
+
 
 class AlJazeeraEnglish(Plugin):
     url_re = re.compile(r"https?://(?:\w+\.)?aljazeera\.com")

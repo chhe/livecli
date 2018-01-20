@@ -6,6 +6,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "chaturbate.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-04-05",
+}
+
 API_HLS = "https://chaturbate.com/get_edge_hls_url_ajax/"
 
 _url_re = re.compile(r"https?://(\w+\.)?chaturbate\.com/(?P<username>\w+)")

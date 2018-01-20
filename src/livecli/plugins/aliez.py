@@ -7,6 +7,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HTTPStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "aliez.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-03-26",
+}
+
 _url_re = re.compile(r"""
     https?://(\w+\.)?aliez.\w+/
     (?:live/[^/]+|video/\d+/[^/]+)

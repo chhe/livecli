@@ -5,6 +5,18 @@ from livecli.plugin.api import http
 from livecli.plugins.brightcove import BrightcovePlayer
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "bfmtv.com",
+        "01net.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-14",
+}
+
 
 class BFMTV(Plugin):
     _url_re = re.compile(r'http://.+\.(?:bfmtv|01net)\.com')

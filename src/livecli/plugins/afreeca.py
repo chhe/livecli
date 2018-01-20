@@ -6,6 +6,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "afreeca.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-17",
+}
+
 CHANNEL_API_URL = "http://live.afreecatv.com:8057/afreeca/player_live_api.php"
 STREAM_INFO_URLS = "{rmd}/broad_stream_assign.html"
 

@@ -7,6 +7,26 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "fanpass.co.nz",
+        "nba.com",
+        "rugbypass.com",
+        "elevensports.be",
+        "elevensports.lu",
+        "elevensports.pl",
+        "elevensports.sg",
+        "elevensports.tw",
+        "tennischanneleverywhere.com",
+        "ufc.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "GEO-Blocked",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-03",
+}
+
 
 def js_to_json(data):
     js_re = re.compile(r'(?!<")(\w+):(?!/)')

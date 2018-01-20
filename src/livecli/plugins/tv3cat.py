@@ -6,6 +6,19 @@ from livecli.plugin.api import http
 from livecli.stream import HLSStream
 from livecli.plugin.api import validate
 
+__livecli_docs__ = {
+    "domains": [
+        "tv3.cat",
+    ],
+    "geo_blocked": [
+        "ES",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2015-03-13",
+}
+
 STREAM_INFO_URL = "http://dinamics.ccma.cat/pvideo/media.jsp?media=video&version=0s&idint={ident}&profile=pc&desplacament=0"
 _url_re = re.compile(r"http://(?:www.)?ccma.cat/tv3/directe/(.+?)/")
 _media_schema = validate.Schema({

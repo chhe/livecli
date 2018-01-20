@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "olympicchannel.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-09",
+}
+
 
 class OlympicChannel(Plugin):
     _url_re = re.compile(r"http(?:s)?://(\w+)\.?olympicchannel.com/../(?P<type>tv|playback)/(livestream-.\d|.*)/")

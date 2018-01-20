@@ -9,10 +9,23 @@ from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json, parse_xml
 
+__livecli_docs__ = {
+    "domains": [
+        "adultswim.com",
+    ],
+    "geo_blocked": [
+        "US",
+    ],
+    "notes": "some VOD are DRM protected",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-07-30",
+}
+
 
 class AdultSwim(Plugin):
     API_URL = "http://www.adultswim.com/videos/api/v2/videos/{id}?fields=stream"
-    vod_api = " http://www.adultswim.com/videos/api/v0/assets"
+    vod_api = "http://www.adultswim.com/videos/api/v0/assets"
 
     url_re = re.compile(r"""https?://(?:www\.)?adultswim\.com/videos
             (?:/(streams))?

@@ -7,6 +7,19 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvr.by",
+    ],
+    "geo_blocked": [
+        "BY",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-16",
+}
+
 
 class TVRBy(Plugin):
     url_re = re.compile(r"""https?://(?:www\.)?tvr.by/televidenie/belarus""")

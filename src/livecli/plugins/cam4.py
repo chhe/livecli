@@ -5,6 +5,17 @@ from livecli.plugin.api import http, useragents, validate
 from livecli.stream import HLSStream, RTMPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "cam4.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-04-14",
+}
+
 
 class Cam4(Plugin):
     _url_re = re.compile(r'https?://([a-z]+\.)?cam4.com/.+')

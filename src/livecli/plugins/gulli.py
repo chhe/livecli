@@ -5,6 +5,19 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream, HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "replay.gulli.fr",
+    ],
+    "geo_blocked": [
+        "FR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-02-01",
+}
+
 
 class Gulli(Plugin):
     LIVE_PLAYER_URL = 'http://replay.gulli.fr/jwplayer/embedstreamtv'

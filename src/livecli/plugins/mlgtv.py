@@ -8,6 +8,17 @@ from livecli.plugin.api.utils import parse_json
 from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "mixer.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-10",
+}
+
 
 class MLGTV(Plugin):
     """Livecli Plugin for Livestreams on mlg.tv / majorleaguegaming.com"""

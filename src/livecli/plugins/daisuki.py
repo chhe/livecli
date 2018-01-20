@@ -20,6 +20,17 @@ from livecli.stream import HLSStream
 from livecli.stream.ffmpegmux import MuxedStream, FFMPEGMuxer
 from livecli.stream.file import FileStream
 
+__livecli_docs__ = {
+    "domains": [
+        "daisuki.net",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-02-21",
+}
+
 HDCORE_VERSION = "3.2.0"
 
 _url_re = re.compile(r"https?://www.daisuki.net/[^/]+/[^/]+/anime/watch\..+")

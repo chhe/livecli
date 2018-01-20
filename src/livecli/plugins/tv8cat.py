@@ -10,6 +10,19 @@ from livecli.stream import HLSStream
 from livecli.stream import RTMPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "tv8.cat",
+    ],
+    "geo_blocked": [
+        "ES",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-09",
+}
+
 
 class TV8cat(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?tv8\.cat/directe/?")

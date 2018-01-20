@@ -5,6 +5,19 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvrplus.ro",
+    ],
+    "geo_blocked": [
+        "RO",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-18",
+}
+
 
 class TVRPlus(Plugin):
     url_re = re.compile(r"https?://(?:www\.)tvrplus.ro/live-")

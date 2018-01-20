@@ -6,6 +6,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "aftonbladet.se",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-03",
+}
+
 PLAYLIST_URL_FORMAT = "http://{address}/{path}/{filename}"
 STREAM_TYPES = {
     "hds": HDSStream.parse_manifest,

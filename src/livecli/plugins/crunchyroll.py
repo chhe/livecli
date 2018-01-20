@@ -7,6 +7,17 @@ from livecli.plugin import Plugin, PluginError, PluginOptions
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "crunchyroll.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-02-10",
+}
+
 API_URL = "https://api.crunchyroll.com/{0}.0.json"
 API_DEFAULT_LOCALE = "en_US"
 API_USER_AGENT = "Mozilla/5.0 (iPhone; iPhone OS 8.3.0; {0})"

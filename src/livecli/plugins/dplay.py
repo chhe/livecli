@@ -9,6 +9,23 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HLSStream, HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "dplay.se",
+        "dplay.no",
+        "dplay.dk",
+    ],
+    "geo_blocked": [
+        "DK",
+        "SE",
+        "NO",
+    ],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2016-01-31",
+}
+
 # Interface URLs for Dplay
 GENERAL_API_URL = 'http://www.{0}/api/v2/ajax/videos?video_id={1}'
 STREAM_API_URL = 'https://secure.{0}/secure/api/v2/user/authorization/stream/{1}?stream_type={2}'

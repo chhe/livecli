@@ -5,6 +5,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "zengatv.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-01-11",
+}
+
 
 class ZengaTV(Plugin):
     """Livecli Plugin for livestreams on zengatv.com"""

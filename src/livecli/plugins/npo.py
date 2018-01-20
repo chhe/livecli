@@ -20,6 +20,21 @@ from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "npo.nl",
+        "zapp.nl",
+        "zappelin.nl",
+    ],
+    "geo_blocked": [
+        "NL",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-07-07",
+}
+
 
 class NPO(Plugin):
     api_url = "http://ida.omroep.nl/app.php/{endpoint}"

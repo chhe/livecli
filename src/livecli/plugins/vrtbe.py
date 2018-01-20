@@ -7,6 +7,19 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "vrt.be",
+    ],
+    "geo_blocked": [
+        "BE",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-13",
+}
+
 _url_re = re.compile(r'''https?://www\.vrt\.be/vrtnu/(?:kanalen/(?P<channel>[^/]+)|\S+)''')
 _json_re = re.compile(r'''(\173[^\173\175]+\175)''')
 

@@ -10,6 +10,17 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.compat import urlparse, parse_qsl
 
+__livecli_docs__ = {
+    "domains": [
+        "seetv.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-17",
+}
+
 
 class SeeTV(Plugin):
     _url_re = re.compile(r"""(http://seetv.tv/vse-tv-online/.*?)(#|$)""")

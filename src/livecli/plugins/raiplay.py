@@ -6,6 +6,19 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "raiplay.it",
+    ],
+    "geo_blocked": [
+        "IT",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-08",
+}
+
 
 class RaiPlay(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?raiplay\.it/dirette/(\w+)/?")

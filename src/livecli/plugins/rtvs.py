@@ -4,6 +4,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import RTMPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "rtvs.sk",
+    ],
+    "geo_blocked": [
+        "SK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-02",
+}
+
 RUURL = "b=chrome&p=win&v=56&f=0&d=1"
 
 _url_re = re.compile(r"https?://www.rtvs.sk/televizia/live-[\w-]+")

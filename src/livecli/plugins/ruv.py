@@ -3,9 +3,21 @@
 import re
 
 from livecli.plugin import Plugin
+from livecli.plugin.api import http
 from livecli.stream import RTMPStream, HLSStream
 
-from livecli.plugin.api import http
+__livecli_docs__ = {
+    "domains": [
+        "ruv.is",
+    ],
+    "geo_blocked": [
+        "IS",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2015-06-14",
+}
 
 RTMP_LIVE_URL = "rtmp://ruv{0}livefs.fplive.net/ruv{0}live-live/stream{1}"
 RTMP_SARPURINN_URL = "rtmp://sipvodfs.fplive.net/sipvod/{0}/{1}{2}.{3}"

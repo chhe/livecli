@@ -4,6 +4,19 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "playtv.fr",
+    ],
+    "geo_blocked": [
+        "FR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-04-09",
+}
+
 
 class PlayTV(Plugin):
     FORMATS_URL = 'http://playtv.fr/player/initialize/{0}/'

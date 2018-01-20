@@ -6,6 +6,17 @@ from livecli.plugin import Plugin, PluginError
 from livecli.plugin.api import http, validate
 from livecli.stream import HTTPStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "bambuser.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-22",
+}
+
 API_CLIENT_NAME = "Bambuser AS2"
 API_CONTEXT = "b_broadcastpage"
 API_KEY = "005f64509e19a868399060af746a00aa"

@@ -8,6 +8,19 @@ from livecli.stream import HTTPStream, HLSStream
 from livecli.stream.ffmpegmux import MuxedStream
 from livecli.utils import time_to_offset
 
+__livecli_docs__ = {
+    "domains": [
+        "youtu.be",
+        "youtube-nocookie.com",
+        "youtube.com",
+    ],
+    "geo_blocked": [],
+    "notes": "Protected videos are not supported.",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
+
 API_KEY = "AIzaSyBDBi-4roGzWJN4du9TuDMLd_jVTcVkKz4"
 API_BASE = "https://www.googleapis.com/youtube/v3"
 API_SEARCH_URL = API_BASE + "/search"

@@ -4,6 +4,16 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HDSStream, HLSStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "expressen.se",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2015-06-25",
+}
 
 STREAMS_INFO_URL = "http://www.expressen.se/Handlers/WebTvHandler.ashx?id={0}"
 

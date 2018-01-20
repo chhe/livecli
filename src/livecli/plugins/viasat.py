@@ -7,6 +7,30 @@ from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HDSStream, HLSStream, RTMPStream
 from livecli.utils import rtmpparse
 
+__livecli_docs__ = {
+    "domains": [
+        "juicyplay.dk",
+        "play.nova.bg",
+        "skaties.lv",
+        "tv3.dk",
+        "tv3.ee",
+        "tv3.lt",
+        "tv6play.no",
+        "viafree.dk",
+        "viafree.no",
+        "viafree.se",
+    ],
+    "geo_blocked": [
+        "DK",
+        "SE",
+        "NO",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-19",
+}
+
 STREAM_API_URL = "https://playapi.mtgx.tv/v3/videos/stream/{0}"
 
 _swf_url_re = re.compile(r"data-flashplayer-url=\"([^\"]+)\"")

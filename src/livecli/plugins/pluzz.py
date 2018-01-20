@@ -8,6 +8,24 @@ from livecli.stream import HDSStream, HLSStream, HTTPStream
 from livecli.stream.ffmpegmux import MuxedStream
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "france.tv",
+        "francetvinfo.fr",
+        "ludo.fr",
+        "zouzous.fr",
+    ],
+    "geo_blocked": [
+        "AD",
+        "FR",
+        "MC",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-12-06",
+}
+
 
 class Pluzz(Plugin):
     GEO_URL = 'http://geo.francetv.fr/ws/edgescape.json'

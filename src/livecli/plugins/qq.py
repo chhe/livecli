@@ -8,6 +8,17 @@ from livecli.plugin.api import validate
 from livecli.plugin.api.utils import parse_json
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "live.qq.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-12-10",
+}
+
 
 class QQ(Plugin):
     """Livecli Plugin for live.qq.com"""

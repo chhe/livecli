@@ -5,6 +5,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "rte.ie",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-22",
+}
+
 
 class RTE(Plugin):
     VOD_API_URL = 'http://www.rte.ie/rteavgen/getplaylist/?type=web&format=json&id={0}'

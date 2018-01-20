@@ -10,6 +10,19 @@ from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "nettv.netcologne.de",
+        "tvonline.ewe.de",
+        "zattoo.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-07-01",
+}
+
 
 class Zattoo(Plugin):
     API_HELLO = '{0}/zapi/session/hello'

@@ -10,6 +10,17 @@ from livecli.plugin.api import http, validate, useragents
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 from livecli.compat import urlparse, parse_qsl
 
+__livecli_docs__ = {
+    "domains": [
+        "players.brightcove.net",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-04-07",
+}
+
 
 @AMF3ObjectBase.register("com.brightcove.experience.ViewerExperienceRequest")
 class ViewerExperienceRequest(AMF3ObjectBase):

@@ -8,6 +8,17 @@ from livecli.plugin import Plugin
 from livecli.stream import HLSStream
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "bongacams.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-09-05",
+}
+
 CONST_AMF_GATEWAY_LOCATION = '/tools/amf.php'
 CONST_AMF_GATEWAY_PARAM = 'x-country'
 CONST_DEFAULT_COUNTRY_CODE = 'en'

@@ -9,6 +9,21 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.compat import unquote
 
+__livecli_docs__ = {
+    "domains": [
+        "showtv.com.tr",
+        "haberturk.com",
+        "showmax.com.tr",
+        "showturk.com.tr",
+        "bloomberght.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-12-15",
+}
+
 
 class CinerGroup(Plugin):
     """

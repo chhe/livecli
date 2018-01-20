@@ -6,6 +6,17 @@ from livecli.plugin.api import validate
 from livecli.compat import urlparse, parse_qsl
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "dw.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-06-04",
+}
+
 
 class DeutscheWelle(Plugin):
     default_channel = "1"

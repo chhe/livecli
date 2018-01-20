@@ -6,6 +6,18 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api.utils import parse_json, parse_query
 from livecli.stream import RTMPStream, HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "filmon.us",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-06-15",
+    "broken": True,
+}
+
 SWF_LIVE_URL = "https://www.filmon.com/tv/modules/FilmOnTV/files/flashapp/filmon/FilmonPlayer.swf"
 SWF_VIDEO_URL = "http://www.filmon.us/application/themes/base/flash/MediaPlayer.swf"
 

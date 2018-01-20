@@ -7,6 +7,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "filmon.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-02-10",
+}
+
 
 class FilmOnHLS(HLSStream):
     __shortname__ = "hls-filmon"

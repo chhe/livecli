@@ -2,6 +2,17 @@ import re
 
 from livecli.plugin import Plugin
 
+__livecli_docs__ = {
+    "domains": [
+        "speedrunslive.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2014-06-06",
+}
+
 TWITCH_URL_FORMAT = "http://www.twitch.tv/{0}"
 
 _url_re = re.compile(r"http://(?:www\.)?speedrunslive.com/#!/(?P<user>\w+)")

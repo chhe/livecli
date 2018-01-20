@@ -25,6 +25,17 @@ from livecli.plugin import Plugin, PluginError
 from livecli.plugin.api import http
 from livecli.stream import HTTPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "media.ccc.de",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2015-04-10",
+}
+
 API_URL_MEDIA = "https://api.media.ccc.de"
 API_URL_STREAMING_MEDIA = "https://streaming.media.ccc.de/streams/v1.json"
 

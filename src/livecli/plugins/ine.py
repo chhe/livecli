@@ -8,6 +8,17 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "streaming.ine.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-02-06",
+}
+
 
 class INE(Plugin):
     url_re = re.compile(r"""https://streaming.ine.com/play\#?/

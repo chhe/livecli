@@ -8,6 +8,17 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream, RTMPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "earthcam.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-03-02",
+}
+
 
 class EarthCam(Plugin):
     url_re = re.compile(r"https?://(?:www.)?earthcam.com/.*")

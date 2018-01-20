@@ -8,6 +8,17 @@ from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HLSStream, HTTPStream, RTMPStream
 from livecli.utils import absolute_url
 
+__livecli_docs__ = {
+    "domains": [
+        "smashcast.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
+
 HLS_PLAYLIST_BASE = "https://www.smashcast.tv{0}"
 LIVE_API = "https://www.smashcast.tv/api/media/live/{0}?showHidden=true&liveonly=false&ssl=true"
 PLAYER_API = "https://www.smashcast.tv/api/player/config/{0}/{1}?embed=false&showHidden=true&ssl=true"

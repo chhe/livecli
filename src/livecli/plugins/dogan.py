@@ -9,6 +9,21 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "teve2.com.tr",
+        "kanald.com.tr",
+        "dreamtv.com.tr",
+        "cnnturk.com",
+        "dreamturk.com.tr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-10-16",
+}
+
 
 class Dogan(Plugin):
     """

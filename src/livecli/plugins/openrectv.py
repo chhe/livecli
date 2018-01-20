@@ -5,6 +5,17 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "openrec.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-02-09",
+}
+
 _url_re = re.compile(r"https?://(?:www\.)?openrec.tv/(live|movie)/")
 _playlist_url_re = re.compile(r"data-(source)?file=\"(?P<url>[^\"]+)\"")
 _movie_data_re = re.compile(r'''<script type="application/ld\+json">(.*?)</script>''', re.DOTALL | re.M)

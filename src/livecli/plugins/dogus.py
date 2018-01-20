@@ -5,6 +5,20 @@ from livecli.plugin.api import http
 from livecli.stream import HLSStream
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "ntvspor.net",
+        "kralmuzik.com.tr",
+        "ntv.com.tr",
+        "eurostartv.com.tr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-12-15",
+}
+
 
 class Dogus(Plugin):
     """

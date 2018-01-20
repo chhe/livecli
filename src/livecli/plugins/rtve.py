@@ -13,6 +13,17 @@ from livecli.stream import HTTPStream
 from livecli.stream.ffmpegmux import MuxedStream
 from livecli.utils import parse_xml
 
+__livecli_docs__ = {
+    "domains": [
+        "rtve.es",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-02-27",
+}
+
 
 class ZTNRClient(object):
     base_url = "http://ztnr.rtve.es/ztnr/res/"

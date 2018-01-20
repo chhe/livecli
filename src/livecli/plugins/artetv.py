@@ -12,6 +12,17 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "arte.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-06-29",
+}
+
 JSON_VOD_URL = "https://api.arte.tv/api/player/v1/config/{0}/{1}?platform=ARTE_NEXT"
 JSON_LIVE_URL = "https://api.arte.tv/api/player/v1/livestream/{0}"
 

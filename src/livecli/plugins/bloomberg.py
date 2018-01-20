@@ -6,6 +6,17 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream, HTTPStream
 from livecli.utils import parse_json, update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "bloomberg.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-09-01",
+}
+
 
 class Bloomberg(Plugin):
     VOD_API_URL = 'https://www.bloomberg.com/api/embed?id={0}'

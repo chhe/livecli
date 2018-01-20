@@ -6,6 +6,17 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api.utils import parse_json
 from livecli.stream import AkamaiHDStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "new.livestream.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-11-21",
+}
+
 _url_re = re.compile(r"http(s)?://(www\.)?livestream.com/")
 _stream_config_schema = validate.Schema({
     "event": {

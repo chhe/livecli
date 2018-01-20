@@ -10,6 +10,17 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "schoolism.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-01-09",
+}
+
 
 class Schoolism(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?schoolism\.com/watchLesson.php")

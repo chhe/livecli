@@ -5,6 +5,18 @@ from livecli.plugin.api import http
 from livecli.stream import HLSStream
 from livecli.compat import urljoin
 
+__livecli_docs__ = {
+    "domains": [
+        "ssh101.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "",
+    "broken": True,
+}
+
 
 class SSH101(Plugin):
     url_re = re.compile(r"https?://(?:\w+\.)?ssh101\.com/(.+)(/vod)?")

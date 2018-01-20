@@ -7,6 +7,20 @@ from livecli.plugin.api import validate
 from livecli.stream import HTTPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "animelab.com",
+    ],
+    "geo_blocked": [
+        "AU",
+        "NZ",
+    ],
+    "notes": "Requires a login",
+    "live": False,
+    "vod": True,
+    "last_update": "2017-05-02",
+}
+
 
 class AnimeLab(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?animelab\.com/player/")

@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate
 from livecli.stream import RTMPStream, HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "picarto.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2016-11-02",
+}
+
 STREAMS_URL = "https://piczel.tv:3000/streams/{0}?&page=1&sfw=false&live_only=true"
 HLS_URL = "https://5810b93fdf674.streamlock.net:1936/live/{0}/playlist.m3u8"
 RTMP_URL = "rtmp://piczel.tv:1935/live/{0}"

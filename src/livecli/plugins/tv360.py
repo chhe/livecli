@@ -8,6 +8,17 @@ from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "tv360.com.tr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2016-12-16",
+}
+
 
 class TV360(Plugin):
     url_re = re.compile(r"https?://(?:www.)?tv360.com.tr/CanliYayin")

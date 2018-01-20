@@ -6,6 +6,19 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvplayer.com",
+    ],
+    "geo_blocked": [
+        "UK",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-04-26",
+}
+
 
 class TVPlayer(Plugin):
     context_url = "http://tvplayer.com/watch/context"

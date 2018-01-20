@@ -4,6 +4,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HDSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "antenna.gr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": False,
+    "vod": True,
+    "last_update": "2015-11-24",
+}
+
 _url_re = re.compile(r"(http(s)?://(\w+\.)?antenna.gr)/webtv/watch\?cid=.+")
 _playlist_re = re.compile(r"playlist:\s*\"(/templates/data/jplayer\?cid=[^\"]+)")
 _manifest_re = re.compile(r"jwplayer:source\s+file=\"([^\"]+)\"")

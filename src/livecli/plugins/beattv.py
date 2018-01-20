@@ -26,6 +26,17 @@ from livecli.stream.segmented import (
     SegmentedStreamReader, SegmentedStreamWriter, SegmentedStreamWorker
 )
 
+__livecli_docs__ = {
+    "domains": [
+        "be-at.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "Playlist not implemented yet",
+    "live": True,
+    "vod": True,
+    "last_update": "2014-09-29",
+}
+
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 BEAT_PROGRAM = "http://www.be-at.tv/{0}.program"
 BEAT_URL = "http://www.be-at.tv/{0}/{1}/{2}.{3}"

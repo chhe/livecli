@@ -6,6 +6,20 @@ from livecli.plugin.api import http, useragents
 from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tf1.fr",
+        "lci.fr",
+    ],
+    "geo_blocked": [
+        "FR",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-01-09",
+}
+
 
 class TF1(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?(?:tf1\.fr/(\w+)/direct|(lci).fr/direct)/?")

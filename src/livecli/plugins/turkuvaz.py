@@ -5,6 +5,22 @@ from livecli.plugin.api import useragents
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "atv.com.tr",
+        "a2tv.com.tr",
+        "ahaber.com.tr",
+        "aspor.com.tr",
+        "minikago.com.tr",
+        "minikacocuk.com.tr",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-10-16",
+}
+
 
 class Turkuvaz(Plugin):
     """

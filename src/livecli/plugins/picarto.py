@@ -8,6 +8,17 @@ from livecli.plugin.api import http
 from livecli.stream import HLSStream
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "picarto.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-01-06",
+}
+
 
 class Picarto(Plugin):
     CHANNEL_API_URL = "https://api.picarto.tv/v1/channel/name/{channel}"

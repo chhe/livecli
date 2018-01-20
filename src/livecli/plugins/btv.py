@@ -9,6 +9,19 @@ from livecli.stream import HLSStream
 from livecli.utils import parse_json
 from livecli.plugin import PluginOptions
 
+__livecli_docs__ = {
+    "domains": [
+        "btv.bg",
+    ],
+    "geo_blocked": [
+        "BG",
+    ],
+    "notes": "Requires login",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-12-07",
+}
+
 
 class BTV(Plugin):
     options = PluginOptions({

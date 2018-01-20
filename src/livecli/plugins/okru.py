@@ -12,6 +12,17 @@ from livecli.stream import HTTPStream
 from livecli.stream import RTMPStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "ok.ru",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2018-01-18",
+}
+
 
 class OKru(Plugin):
     """Livecli Plugin for ok.ru"""

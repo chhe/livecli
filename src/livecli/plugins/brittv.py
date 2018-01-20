@@ -6,6 +6,17 @@ from livecli.plugin.api import useragents
 from livecli.compat import urljoin
 from livecli.stream import HLSStream
 
+__livecli_docs__ = {
+    "domains": [
+        "brittv.co.uk",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-07-02",
+}
+
 
 class BritTV(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?brittv\.co.uk/watch/")

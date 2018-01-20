@@ -5,6 +5,18 @@ from livecli.plugin.api import http, validate
 from livecli.plugin.api.utils import parse_query
 from livecli.stream import RTMPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "mips.tv",
+    ],
+    "geo_blocked": [],
+    "notes": "only with K-S-V",
+    "live": True,
+    "vod": False,
+    "last_update": "",
+    "broken": True,
+}
+
 BALANCER_URL = "http://www.mips.tv:1935/loadbalancer"
 PLAYER_URL = "http://mips.tv/embedplayer/{0}/1/500/400"
 SWF_URL = "http://mips.tv/content/scripts/eplayer.swf"

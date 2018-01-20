@@ -5,6 +5,19 @@ from livecli.plugin.api import http, validate
 from livecli.stream import HDSStream, HLSStream
 from livecli.utils import parse_json
 
+__livecli_docs__ = {
+    "domains": [
+        "zdf.de",
+    ],
+    "geo_blocked": [
+        "DE",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": True,
+    "last_update": "2017-11-16",
+}
+
 API_URL = "https://api.zdf.de"
 
 QUALITY_WEIGHTS = {

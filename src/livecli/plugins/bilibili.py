@@ -7,6 +7,17 @@ from livecli.plugin import Plugin
 from livecli.plugin.api import http, validate, useragents
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "live.bilibili.com",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2017-11-29",
+}
+
 API_URL = "http://live.bilibili.com/api/playurl?cid={0}&player=1&quality=0&sign={1}&otype=json"
 ROOM_API = "https://api.live.bilibili.com/room/v1/Room/room_init?id={}"
 API_SECRET = "95acd7f6cc3392f3"
