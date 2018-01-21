@@ -1416,37 +1416,6 @@ transport.add_argument(
     metavar="fragments",
     help=argparse.SUPPRESS
 )
-plugin.add_argument(
-    "--jtv-legacy-names", "--twitch-legacy-names",
-    action="store_true",
-    help=argparse.SUPPRESS
-)
-plugin.add_argument(
-    "--gomtv-cookie",
-    metavar="cookie",
-    help=argparse.SUPPRESS
-)
-plugin.add_argument(
-    "--gomtv-username",
-    metavar="username",
-    help=argparse.SUPPRESS
-)
-plugin.add_argument(
-    "--gomtv-password",
-    metavar="password",
-    nargs="?",
-    const=True,
-    default=None,
-    help=argparse.SUPPRESS
-)
-plugin.add_argument(
-    "--jtv-cookie",
-    help=argparse.SUPPRESS
-)
-plugin.add_argument(
-    "--jtv-password", "--twitch-password",
-    help=argparse.SUPPRESS
-)
 http.add_argument(
     "--http-cookies",
     metavar="COOKIES",

@@ -992,31 +992,6 @@ def setup_plugin_options():
     if afreeca_password:
         livecli.set_plugin_option("afreeca", "password", afreeca_password)
 
-    # Deprecated options
-    if args.jtv_legacy_names:
-        console.logger.warning("The option --jtv/twitch-legacy-names is "
-                               "deprecated and will be removed in the future.")
-
-    if args.jtv_cookie:
-        console.logger.warning("The option --jtv-cookie is deprecated and "
-                               "will be removed in the future.")
-
-    if args.jtv_password:
-        console.logger.warning("The option --jtv-password is deprecated "
-                               "and will be removed in the future.")
-
-    if args.gomtv_username:
-        console.logger.warning("The option --gomtv-username is deprecated "
-                               "and will be removed in the future.")
-
-    if args.gomtv_password:
-        console.logger.warning("The option --gomtv-password is deprecated "
-                               "and will be removed in the future.")
-
-    if args.gomtv_cookie:
-        console.logger.warning("The option --gomtv-cookie is deprecated "
-                               "and will be removed in the future.")
-
 
 def check_root():
     if hasattr(os, "getuid"):
