@@ -1,11 +1,10 @@
 import re
-import socket
-import struct
 
-from livecli import PluginError
+from livecli.cache import Cache
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, useragents
-from livecli.stream import Stream, HLSStream
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
 
 __livecli_docs__ = {
     "domains": [
@@ -15,70 +14,43 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-07-02",
+    "last_update": "2018-01-21",
 }
 
 
-class BigoStream(Stream):
-    """
-    Custom streaming protocol for Bigo
-
-    The stream is started by sending the uid and sid as little-endian unsigned longs
-    after connecting to the server. The video stream is FLV.
-    """
-
-    def __init__(self, session, sid, uid, ip, port):
-        super(BigoStream, self).__init__(session)
-        try:
-            self.sid = int(sid)
-            self.uid = int(uid)
-        except ValueError:
-            raise PluginError("invalid sid or uid parameter for Bigo Stream: {0}/{1}".format(self.sid, self.uid))
-        self.ip = ip
-        try:
-            self.port = int(port)
-        except ValueError:
-            raise PluginError("invalid port number for Bigo Stream: {0}:{1}".format(self.ip, self.port))
-        self.con = None
-
-    def open(self):
-        try:
-            self.con = socket.create_connection((self.ip, self.port))
-            self.con.send(struct.pack("<LL", self.uid, self.sid))
-        except IOError:
-            raise PluginError("could not connect to Bigo Stream")
-        return self
-
-    def read(self, size):
-        return self.con.recv(size)
-
-    def close(self):
-        if self.con:
-            self.con.close()
-
-
 class Bigo(Plugin):
-    _url_re = re.compile(r"^https?://(www\.)?(bigo\.tv|bigoweb\.co/show)/[\w\d]+$")
-    _flashvars_re = flashvars = re.compile(
-        r'''^\s*(?<!<!--)<param.*value="tmp=(\d+)&channel=(\d+)&srv=(\d+\.\d+\.\d+\.\d+)&port=(\d+)"''',
-        re.M)
-    _video_re = re.compile(
-        r'^\s*(?<!<!--)<source id="videoSrc" src="(http://.*\.m3u8)"',
-        re.M)
+    _url_re = re.compile(r"https?://(www\.)?bigo\.tv/[\w\d]+")
+    _video_re = re.compile(r"""videoSrc:\s?["'](?P<url>[^"']+)["']""")
 
     @classmethod
     def can_handle_url(cls, url):
         return cls._url_re.match(url) is not None
 
+    def _check_options(self):
+        if not self.session.get_option("hls-segment-ignore-number"):
+            self.session.set_option("hls-segment-ignore-number", 20)
+        if not self.session.get_option("hls-session-reload"):
+            self.session.set_option("hls-session-reload", 30)
+
+    def _update_cache(self, hls_url):
+        cache = Cache(
+            filename="streamdata.json",
+            key_prefix="cache:{0}".format(hls_url)
+        )
+        cache.set("cache_stream_name", "live", (self.session.get_option("hls-session-reload") + 60))
+        cache.set("cache_url", self.url, (self.session.get_option("hls-session-reload") + 60))
+
     def _get_streams(self):
-        page = http.get(self.url,
-                        allow_redirects=True,
-                        headers={"User-Agent": useragents.IPHONE_6})
-        videomatch = self._video_re.search(page.text)
-        if not videomatch:
+        res = http.get(self.url,
+                       allow_redirects=True,
+                       headers={"User-Agent": useragents.IPHONE_6})
+        m = self._video_re.search(res.text)
+        if not m:
             return
 
-        videourl = videomatch.group(1)
+        self._check_options()
+        videourl = m.group("url")
+        self._update_cache(videourl)
         yield "live", HLSStream(self.session, videourl)
 
 
