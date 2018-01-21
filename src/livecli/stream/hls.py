@@ -3,7 +3,9 @@ from __future__ import print_function
 import re
 import struct
 from collections import defaultdict, namedtuple
+from time import time
 
+from livecli.cache import Cache
 from livecli.compat import AES
 from livecli.stream import hls_playlist
 from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
@@ -155,6 +157,8 @@ class HLSStreamWorker(SegmentedStreamWorker):
         self.duration_limit = self.stream.duration or (int(self.session.options.get("hls-duration")) if self.session.options.get("hls-duration") else None)
         self.hls_live_restart = self.stream.force_restart or self.session.options.get("hls-live-restart")
         self.sequence_ignore_number = self.session.options.get("hls-segment-ignore-number") or False
+        self.session_time = int(time())
+        self.session_reload = self.session.options.get("hls-session-reload") or False
 
         self.reload_playlist()
 
@@ -177,6 +181,49 @@ class HLSStreamWorker(SegmentedStreamWorker):
                               self.duration_offset_start, self.duration_limit, self.playlist_sequence,
                               self.playlist_end)
 
+    def reload_session(self):
+        """ Replace the current stream with a new stream,
+            the new stream will be generated from _get_streams()
+            after the given reload time.
+        """
+        self.logger.debug("Reloading session for playlist")
+        cache = Cache(
+            filename="streamdata.json",
+            key_prefix="cache:{0}".format(self.stream.url)
+        )
+        cache_stream_name = cache.get("cache_stream_name", "best")
+        cache_url = cache.get("cache_url")
+        if not cache_url:
+            # corrupt cache data
+            # if more than one instance of streamlink
+            # with the same stream_url and hls-session-reload is running
+            self.logger.warning("Missing cache data, hls-session-reload is now deactivated")
+            self.session_time = int(time() + time())
+            return
+
+        channel = self.session.resolve_url(cache_url)
+        streams = channel._get_streams()
+        try:
+            # HLSStream with parse_variant_playlist
+            self.stream = streams[cache_stream_name]
+        except KeyError:
+            # if stream_name is '1080p source' but the cache is '1080p'
+            for source_stream_name in streams.keys():
+                if cache_stream_name in source_stream_name:
+                    self.stream = streams[source_stream_name]
+        except TypeError:
+            # HLSStream without parse_variant_playlist
+            for name, hls_stream in streams:
+                self.stream = hls_stream
+
+        new_cache = Cache(
+            filename="streamdata.json",
+            key_prefix="cache:{0}".format(self.stream.url)
+        )
+        new_cache.set("cache_stream_name", cache_stream_name, (self.session_reload + 60))
+        new_cache.set("cache_url", cache_url, (self.session_reload + 60))
+        self.session_time = int(time())
+
     def reload_playlist(self):
         if self.closed:
             return
@@ -194,7 +241,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
 
         if playlist.is_master:
             raise StreamError("Attempted to play a variant playlist, use "
-                              "'hlsvariant://{0}' instead".format(self.stream.url))
+                              "'hls://{0}' instead".format(self.stream.url))
 
         if playlist.iframes_only:
             raise StreamError("Streams containing I-frames only is not playable")
@@ -258,6 +305,8 @@ class HLSStreamWorker(SegmentedStreamWorker):
 
     def iter_segments(self):
         while not self.closed:
+            if self.session_reload and (self.session_time + self.session_reload) < int(time()):
+                self.reload_session()
             for sequence in filter(self.valid_sequence, self.playlist_sequences):
                 self.logger.debug("Adding segment {0} to queue", sequence.num)
                 yield sequence
@@ -274,6 +323,9 @@ class HLSStreamWorker(SegmentedStreamWorker):
                     self.reload_playlist()
                 except StreamError as err:
                     self.logger.warning("Failed to reload playlist: {0}", err)
+                    if self.session_reload():
+                        self.logger.warning("Unexpected session reload")
+                        self.reload_session()
 
 
 class HLSStreamReader(SegmentedStreamReader):

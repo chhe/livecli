@@ -725,6 +725,18 @@ transport.add_argument(
     """
 )
 transport.add_argument(
+    "--hls-session-reload",
+    type=hours_minutes_seconds,
+    metavar="HH:MM:SS",
+    default=None,
+    help="""
+    Reloads a livecli session after the given time.
+
+    Useful for playlists that expire after an amount of time.
+
+    Default is False
+    """)
+transport.add_argument(
     "--hls-audio-select",
     type=str,
     metavar="CODE",

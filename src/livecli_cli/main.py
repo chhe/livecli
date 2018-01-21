@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import errno
 import os
 import platform
@@ -185,6 +187,8 @@ def output_stream_http(plugin, initial_streams, external=False, port=0):
                 continue
 
             try:
+                if args.hls_session_reload:
+                    cache_stream_data(stream_name, stream.url)
                 console.logger.info("Opening stream: {0} ({1})", stream_name,
                                     type(stream).shortname())
                 stream_fd, prebuffer = open_stream(stream)
@@ -379,6 +383,8 @@ def handle_stream(plugin, streams, stream_name):
             stream_type = type(stream).shortname()
 
             if stream_type in args.player_passthrough and not file_output:
+                if args.hls_session_reload:
+                    cache_stream_data(stream_name, stream.url)
                 console.logger.info("Opening stream: {0} ({1})", stream_name,
                                     stream_type)
                 success = output_stream_passthrough(stream)
@@ -388,6 +394,8 @@ def handle_stream(plugin, streams, stream_name):
             elif args.player_continuous_http and not file_output:
                 return output_stream_http(plugin, streams)
             else:
+                if args.hls_session_reload:
+                    cache_stream_data(stream_name, stream.url)
                 console.logger.info("Opening stream: {0} ({1})", stream_name,
                                     stream_type)
                 success = output_stream(stream)
@@ -730,6 +738,9 @@ def setup_options():
     if args.hls_segment_ignore_number:
         livecli.set_option("hls-segment-ignore-number", args.hls_segment_ignore_number)
 
+    if args.hls_session_reload:
+        livecli.set_option("hls-session-reload", args.hls_session_reload)
+
     if args.hls_timeout:
         livecli.set_option("hls-timeout", args.hls_timeout)
 
@@ -1060,6 +1071,19 @@ def check_version(force=False):
 
     if force:
         sys.exit()
+
+
+def cache_stream_data(cache_stream_name, cache_stream_url):
+    """Caches data for hls-session-reload
+    :param cache_stream_name: stream quality name
+    :param cache_stream_url: stream url
+    """
+    cache = Cache(
+        filename="streamdata.json",
+        key_prefix="cache:{0}".format(cache_stream_url)
+    )
+    cache.set("cache_stream_name", cache_stream_name, (args.hls_session_reload + 60))
+    cache.set("cache_url", args.url, (args.hls_session_reload + 60))
 
 
 def main():
