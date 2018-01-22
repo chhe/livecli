@@ -42,6 +42,14 @@ class Resolve(Plugin):
 
     _url_re = re.compile(r"""(resolve://)?(?P<url>.+)""")
 
+    # Regex for: Iframes
+    _iframe_re = re.compile(r"""
+        <ifr(?:["']\s?\+\s?["'])?ame
+        (?!\sname=["']g_iFrame).*?src=
+        ["'](?P<url>[^"']+)["']
+        .*?(?:/>|>(?:[^<>]+)?
+        </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
+        """, re.VERBOSE | re.IGNORECASE)
     # Regex for: .f4m and .m3u8 files
     _playlist_re = re.compile(r"""(?:["']|=|&quot;)(?P<url>
         (?:https?:)?(?://|\\/\\/)?
@@ -118,6 +126,7 @@ class Resolve(Plugin):
 
     def _make_url_list(self, old_list, base_url, stream_base=""):
         """Creates a list of validate urls from a list of broken urls
+           and removes every blacklisted url
 
         Args:
             old_list: List of broken urls
@@ -127,6 +136,18 @@ class Resolve(Plugin):
         Returns:
             List of validate urls
         """
+        blacklist_netloc = (
+            "about:blank",
+            "adfox.ru",
+            "googletagmanager.com",
+            "javascript:false",
+        )
+
+        blacklist_path = [
+            ("facebook.com", "/plugins"),
+            ("vesti.ru", "/native_widget.html"),
+        ]
+
         new_list = []
         for url in old_list:
             # Don't add the same url as self.url to the list.
@@ -145,59 +166,32 @@ class Resolve(Plugin):
                 new_url = urljoin(stream_base, new_url)
             else:
                 new_url = urljoin(base_url, new_url)
+            # Parse the url and remove not wanted urls
             parse_new_url = urlparse(new_url)
+            REMOVE = False
+            # Removes blacklisted domains
+            if REMOVE is False and parse_new_url.netloc.endswith(blacklist_netloc):
+                REMOVE = True
+            # Removes blacklisted paths from a domain
+            if REMOVE is False:
+                for netloc, path in blacklist_path:
+                    if parse_new_url.netloc.endswith(netloc) and parse_new_url.path.startswith(path):
+                        REMOVE = True
+                        continue
             # Removes images and chatrooms
-            if parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat")):
-                continue
+            if REMOVE is False and parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat")):
+                REMOVE = True
             # Remove obviously ad urls
-            if self._ads_path.match(parse_new_url.path):
+            if REMOVE is False and self._ads_path.match(parse_new_url.path):
+                REMOVE = True
+            if REMOVE is True:
+                self.logger.debug("Removed url: {0}".format(new_url))
                 continue
             # Add url to the list
             new_list += [new_url]
         # Remove duplicates
         new_list = list(set(new_list))
         return new_list
-
-    def _iframe_regex(self):
-        """Create a regex for iframes with blacklisted domains.
-
-        !!! - DOES NOT WORK WITHOUT A LIVECLI PATCH - !!!
-
-        Domains can be added in the livecli config file.
-        Use , to split different domains.
-        Example:
-            resolve-blacklist=example1.com,example2.com,example3.com
-
-        Returns:
-            iframe Regex
-        """
-        blacklist = [
-            "about:blank",
-            "javascript:false",
-            "facebook.com/plugins",
-            "www.facebook.com/plugins",
-            "googletagmanager.com",
-            "www.googletagmanager.com"
-        ]
-        try:
-            # blacklist_from_config = self.get_option("blacklist")
-            # blacklist += blacklist_from_config.split(",")
-            blacklist = list(set(blacklist))
-            blacklist = "|".join(list(map(re.escape, blacklist)))
-        except Exception as e:
-            raise e
-
-        # TODO: move blacklist to _make_url_list
-        _iframe_re = re.compile(r"""
-            <ifr(?:["']\s?\+\s?["'])?ame
-            (?!\sname=["']g_iFrame).*?src=
-            ["']
-            (?P<url>(?!(?:https?:)?(?://)?(?:{blacklist}))[^"']+)
-            (?<!\.gif)["']
-            .*?(?:/>|>(?:[^<>]+)?
-            </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
-            """.format(blacklist=blacklist), re.VERBOSE | re.IGNORECASE)
-        return _iframe_re
 
     def _cache_self_url(self):
         """Cache self.url
@@ -233,8 +227,7 @@ class Resolve(Plugin):
             None
                 if no iframe was found.
         """
-        _iframe_re = self._iframe_regex()
-        iframe_all = _iframe_re.findall(res)
+        iframe_all = self._iframe_re.findall(res)
 
         # Fallback for unescape('%3Ciframe%20
         unescape_iframe = self._unescape_iframe_re.findall(res)
@@ -243,7 +236,7 @@ class Resolve(Plugin):
             for data in unescape_iframe:
                 unescape_text += [unquote(data)]
             unescape_text = ",".join(unescape_text)
-            unescape_iframe = _iframe_re.findall(unescape_text)
+            unescape_iframe = self._iframe_re.findall(unescape_text)
             if unescape_iframe:
                 iframe_all = iframe_all + unescape_iframe
 

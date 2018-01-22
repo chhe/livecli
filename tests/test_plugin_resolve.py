@@ -100,29 +100,22 @@ class TestPluginResolve(unittest.TestCase):
             },
         ]
         rr = Resolve("https://example.com")
-        _iframe_re = rr._iframe_regex()
         for test_dict in regex_test_list:
-            m = _iframe_re.search(test_dict.get("data"))
+            m = rr._iframe_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
     def test_regex_iframe_false(self):
         rr = Resolve("https://example.com")
-        _iframe_re = rr._iframe_regex()
         regex_test_list = [
-            """<iframe id="iframe" title="" frameborder="0" width="0" height="0" src="/images/blank.gif"></iframe>""",
-            """<iframe name="123" width="70" src="about:blank"></iframe>""",
+            """<iframe id="iframe" title="" frameborder="0" width="0" height="0" src=""></iframe>""",
             """<iframe name="g_iFrame1" width="70" src="logo"></iframe>""",
-            """<iframe name="567" width="70" src="facebook.com/plugins"></iframe>""",
-            """<iframe height="600px" src="//googletagmanager.com/"></iframe>""",
-            """<iframe height="600px" src="http://googletagmanager.com/test123"></iframe>""",
-            """<iframe height="600px" src="https://googletagmanager.com/test"></iframe>"""
         ]
         if not hasattr(self, 'assertNotRegex'):
             self.assertNotRegex = self.assertNotRegexpMatches
 
         for data in regex_test_list:
-            self.assertNotRegex(data, _iframe_re)
+            self.assertNotRegex(data, rr._iframe_re)
 
     def test_window_location(self):
         regex_test_list = [
@@ -163,13 +156,12 @@ class TestPluginResolve(unittest.TestCase):
             },
         ]
         rr = Resolve("https://example.com")
-        _iframe_re = rr._iframe_regex()
         for test_dict in regex_test_list:
             m = rr._unescape_iframe_re.search(test_dict.get("data"))
             self.assertIsNotNone(m)
             data = unquote(m.group("data"))
             self.assertIsNotNone(m)
-            m = _iframe_re.search(data)
+            m = rr._iframe_re.search(data)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
     def test_regex_playlist_re(self):
