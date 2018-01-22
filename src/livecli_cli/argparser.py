@@ -1398,6 +1398,19 @@ plugin.add_argument(
     A afreecatv.com account password to use with --afreeca-username.
     """
 )
+plugin.add_argument(
+    "--resolve-blacklist-netloc",
+    metavar="NETLOC",
+    type=comma_list,
+    help="""
+    Blacklist domains that should not be played with the Resolve plugin,
+    by using a comma-separated list:
+
+      "example.com,localhost,google.com"
+
+    Useful for websites with lots of iframes.
+    """
+)
 
 # Deprecated options
 stream.add_argument(

@@ -992,6 +992,10 @@ def setup_plugin_options():
     if afreeca_password:
         livecli.set_plugin_option("afreeca", "password", afreeca_password)
 
+    if args.resolve_blacklist_netloc:
+        livecli.set_plugin_option("resolve", "blacklist_netloc",
+                                  args.resolve_blacklist_netloc)
+
 
 def check_root():
     if hasattr(os, "getuid"):

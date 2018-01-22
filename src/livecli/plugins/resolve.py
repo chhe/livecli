@@ -8,7 +8,7 @@ from livecli.compat import unquote
 from livecli.compat import urljoin
 from livecli.compat import urlparse
 from livecli.plugin import Plugin
-# from livecli.plugin import PluginOptions
+from livecli.plugin import PluginOptions
 from livecli.plugin.api import http
 from livecli.plugin.api import useragents
 from livecli.plugin.plugin import HIGH_PRIORITY
@@ -69,9 +69,9 @@ class Resolve(Plugin):
     _unescape_iframe_re = re.compile(r"""unescape\(["'](?P<data>%3Ciframe%20[^"']+)["']""")
     # Regex for obviously ad paths
     _ads_path = re.compile(r"""(?:/static)?/ads/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
-    # options = PluginOptions({
-    #    "blacklist": ""
-    # })
+    options = PluginOptions({
+        "blacklist_netloc": None,
+    })
 
     def __init__(self, url):
         """Inits Resolve with default settings"""
@@ -136,6 +136,7 @@ class Resolve(Plugin):
         Returns:
             List of validate urls
         """
+        blacklist_netloc_user = self.get_option("blacklist_netloc")
         blacklist_netloc = (
             "about:blank",
             "adfox.ru",
@@ -171,6 +172,9 @@ class Resolve(Plugin):
             REMOVE = False
             # Removes blacklisted domains
             if REMOVE is False and parse_new_url.netloc.endswith(blacklist_netloc):
+                REMOVE = True
+            # Removes blacklisted domains from --resolve-blacklist-netloc
+            if REMOVE is False and blacklist_netloc_user is not None and parse_new_url.netloc.endswith(tuple(blacklist_netloc_user)):
                 REMOVE = True
             # Removes blacklisted paths from a domain
             if REMOVE is False:
