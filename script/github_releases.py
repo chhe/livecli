@@ -6,7 +6,7 @@ from re import split, IGNORECASE
 from requests import get, patch
 
 
-RE_LOG_HEADER = r"livecli\s+(\d+\.\d+\.\d+(?:-\S+)?)\s+\(\d{4}-\d{2}-\d{2}\)\n(?:-|=){3,}\n+"
+RE_LOG_HEADER = r"(?:livecli|streamlink)\s+(\d+\.\d+\.\d+(?:-\S+)?)\s+\(\d{4}-\d{2}-\d{2}\)\n(?:-|=){3,}\n+"
 
 
 def checkEnvVar(v):

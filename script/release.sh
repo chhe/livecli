@@ -20,26 +20,30 @@ usage() {
 requirements() {
   if [ ! -f /usr/bin/git ] && [ ! -f /usr/local/bin/git ]; then
     echo "No git. What's wrong with you?"
-    return 1
+    exit 1
   fi
 
   if [ ! -f /usr/bin/gpg ] && [ ! -f /usr/local/bin/gpg ]; then
     echo "No gpg. What's wrong with you?"
-    return 1
+    exit 1
   fi
 
   if [ ! -f $GOPATH/bin/github-release ]; then
     echo "No $GOPATH/bin/github-release. Please run 'go get -v github.com/aktau/github-release'"
-    return 1
+    echo "or run"
+    echo "export GOPATH=$HOME/go"
+    echo "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin"
+    exit 1
   fi
 
   if [ ! -f /usr/bin/hub ]; then
     echo "No hub. Please run install hub @ github.com/github/hub"
-    return 1
+    exit 1
   fi
 
   if [[ -z "$GITHUB_TOKEN" ]]; then
     echo "export GITHUB_TOKEN=yourtoken needed for using github-release"
+    exit 1
   fi
 }
 
@@ -197,6 +201,7 @@ clean() {
 main() {
   local cmd=$1
   usage
+  requirements
 
   echo "What is your Github username? (location of your $CLI fork)"
   read ORIGIN_REPO
