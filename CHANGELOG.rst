@@ -1,3 +1,47 @@
+livecli 3.1.0 (2018-01-23)
+--------------------------
+Livecli 3.1.0 has been released!
+
+- Added a resolve plugin that will try to find a valid url on every website,
+it has a built in blacklist feature.
+- pycryptodomex can now be used
+- Removes bug of an invisible terminal after ffmpeg got killed.
+- Added some new Plugins
+
+For more details see below.
+
+::
+
+    back-to <backto@protonmail.ch> (34):
+          [bigo] hls-session-reload and hls-segment-ignore-number will be used
+          [docs] get the latest version from github tags
+          [docs] plugin_matrix automation part 1/2
+          [docs] plugin_matrix automation part 2/2
+          [docs] Removed dead plugin moved hitbox.py to smashcast.py
+          [docs] Removed python 2.6 and readme update.
+          [ffmpeg] Removes bug of an invisible terminal after ffmpeg got killed.
+          [hls] New option --hls-segment-ignore-number
+          [hls] New option --hls-session-reload
+          [myfreecams] New Plugin for myfreecams.com
+          [okru] New Plugin for ok.ru
+          [PerviyKanal] New Plugin for 1tv.ru/live
+          [resolve] Added Plugin that will try to resolve every website.
+          [resolve] don't add self.url to _make_url_list
+          [resolve] moved the netloc/path blacklist into _make_url_list
+          [resolve] New Plugin option --resolve-blacklist-netloc
+          [resolve] New Plugin option --resolve-blacklist-path
+          [resolve] removes .jpg .png and .svg at the end of a path as a valid url
+          [rtbf] New Plugin for rtbf.be
+          [scripts] exit the release script properly if something is missing
+          [smashcast] fixed http urls
+          [tests] Fixed tests temporarily.
+          [welt] New Plugin for welt.de
+          Allow flake8 to fail, README pip update and removed old livestreamer versionchanges.
+          Allow the use of pycryptodomex and removed is_py33 from compat
+          is_win32: use 'from livecli.compat import is_win32'
+          Moved hours_minutes_seconds into livecli.utils
+          Removed deprecated functions
+
 livecli 3.0.0 (2018-01-18)
 --------------------------
 Livecli 3.0.0 has been released!
