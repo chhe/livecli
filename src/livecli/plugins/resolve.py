@@ -71,6 +71,7 @@ class Resolve(Plugin):
     _ads_path = re.compile(r"""(?:/static)?/ads/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
     options = PluginOptions({
         "blacklist_netloc": None,
+        "blacklist_path": None,
     })
 
     def __init__(self, url):
@@ -148,6 +149,15 @@ class Resolve(Plugin):
             ("facebook.com", "/plugins"),
             ("vesti.ru", "/native_widget.html"),
         ]
+        # Add --resolve-blacklist-path to blacklist_path
+        blacklist_path_user = self.get_option("blacklist_path")
+        if blacklist_path_user is not None:
+            for _path_url in blacklist_path_user:
+                if not _path_url.startswith(("http", "//")):
+                    _path_url = update_scheme("http://", _path_url)
+                _parsed_path_url = urlparse(_path_url)
+                if _parsed_path_url.netloc and _parsed_path_url.path:
+                    blacklist_path += [(_parsed_path_url.netloc, _parsed_path_url.path)]
 
         new_list = []
         for url in old_list:

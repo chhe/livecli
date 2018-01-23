@@ -1411,6 +1411,19 @@ plugin.add_argument(
     Useful for websites with lots of iframes.
     """
 )
+plugin.add_argument(
+    "--resolve-blacklist-path",
+    metavar="NETLOC",
+    type=comma_list,
+    help="""
+    Blacklist the path of a domain that should not be played with the Resolve plugin,
+    by using a comma-separated list:
+
+      "example.com/mypath,localhost/example,google.com/folder"
+
+    Useful for websites with different iframes of the same domain.
+    """
+)
 
 # Deprecated options
 stream.add_argument(
