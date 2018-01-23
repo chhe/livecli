@@ -1,9 +1,9 @@
-livecli 3.1.0 (2018-01-23)
+livecli 3.1.1 (2018-01-23)
 --------------------------
-Livecli 3.1.0 has been released!
+Livecli 3.1.1 has been released!
 
 - Added a resolve plugin that will try to find a valid url on every website,
-it has a built in blacklist feature.
+  it has a built in blacklist feature.
 - pycryptodomex can now be used
 - Removes bug of an invisible terminal after ffmpeg got killed.
 - Added some new Plugins
