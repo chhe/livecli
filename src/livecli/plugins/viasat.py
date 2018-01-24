@@ -1,7 +1,6 @@
 import re
 
 from livecli import NoStreamsError
-from livecli.exceptions import PluginError
 from livecli.plugin import Plugin
 from livecli.plugin.api import StreamMapper, http, validate
 from livecli.stream import HDSStream, HLSStream, RTMPStream
@@ -78,7 +77,7 @@ class Viasat(Plugin):
             |
                 embed\?id=
             )
-            (?P<stream_id>\d+)
+            (?P<stream_id>\d+)(?![\w-]+)
         )?
     """, re.VERBOSE)
 
@@ -90,7 +89,7 @@ class Viasat(Plugin):
         res = http.get(self.url)
         match = _swf_url_re.search(res.text)
         if not match:
-            raise PluginError("Unable to find SWF URL in the HTML")
+            return
 
         return match.group(1)
 
@@ -102,11 +101,16 @@ class Viasat(Plugin):
             self.logger.error("Failed to extract {0} streams: {1}", stream_type, err)
 
     def _create_rtmp_stream(self, video):
+        swf_url = self._get_swf_url()
+        if not swf_url:
+            self.logger.debug("Unable to find SWF URL in the HTML")
+            return
+
         name, stream_url = video
         params = {
             "rtmp": stream_url,
             "pageUrl": self.url,
-            "swfVfy": self._get_swf_url(),
+            "swfVfy": swf_url,
         }
 
         if stream_url.endswith(".mp4"):
