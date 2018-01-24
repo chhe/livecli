@@ -3,7 +3,8 @@ from operator import itemgetter
 
 from livecli.stream import Stream
 from livecli.stream.wrappers import StreamIOThreadWrapper
-from livecli.compat import devnull, which
+from livecli.compat import devnull
+from livecli.compat import compat_which
 from livecli.exceptions import StreamError
 
 import time
@@ -154,7 +155,7 @@ class StreamProcess(Stream):
         if not self.cmd:
             raise StreamError("`cmd' attribute not set")
 
-        cmd = which(self.cmd)
+        cmd = compat_which(self.cmd)
 
         if not cmd:
             raise StreamError("Unable to find `{0}' command".format(self.cmd))

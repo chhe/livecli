@@ -39,9 +39,9 @@ except ImportError:
     import Queue as queue
 
 try:
-    from shutil import which
+    from shutil import which as compat_which
 except ImportError:
-    from backports.shutil_which import which
+    from backports.shutil_which import which as compat_which
 
 try:
     from Crypto.Cipher import AES as crypto_AES
@@ -66,6 +66,7 @@ except ImportError:
 
 __all__ = [
     "bytes",
+    "compat_which",
     "crypto_AES",
     "crypto_Blowfish",
     "crypto_number",
@@ -86,5 +87,4 @@ __all__ = [
     "urljoin",
     "urlparse",
     "urlunparse",
-    "which",
 ]

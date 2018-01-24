@@ -3,8 +3,7 @@ import sys
 from collections import deque
 from time import time
 
-from ..compat import get_terminal_size
-
+from livecli_cli.compat import compat_get_terminal_size
 from livecli.compat import is_win32
 
 PROGRESS_FORMATS = (
@@ -29,7 +28,7 @@ def terminal_len(value):
 
 def print_inplace(msg):
     """Clears out the previous line and prints a new one."""
-    term_width = get_terminal_size().columns
+    term_width = compat_get_terminal_size().columns
     spacing = term_width - terminal_len(msg)
 
     # On windows we need one less space or we overflow the line for some reason.
@@ -72,7 +71,7 @@ def format_time(elapsed):
 
 def create_status_line(**params):
     """Creates a status line with appropriate size."""
-    max_size = get_terminal_size().columns - 1
+    max_size = compat_get_terminal_size().columns - 1
 
     for fmt in PROGRESS_FORMATS:
         status = fmt.format(**params)

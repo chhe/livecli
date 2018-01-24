@@ -10,7 +10,8 @@ from livecli import StreamError
 from livecli.stream import Stream
 from livecli.stream.stream import StreamIO
 from livecli.utils import NamedPipe
-from livecli.compat import devnull, which
+from livecli.compat import devnull
+from livecli.compat import compat_which
 
 
 class MuxedStream(Stream):
@@ -140,7 +141,7 @@ class FFMPEGMuxer(StreamIO):
         if session.options.get("ffmpeg-ffmpeg"):
             command.append(session.options.get("ffmpeg-ffmpeg"))
         for cmd in command or cls.__commands__:
-            if which(cmd):
+            if compat_which(cmd):
                 return cmd
 
     def read(self, size=-1):

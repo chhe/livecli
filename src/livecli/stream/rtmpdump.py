@@ -4,7 +4,8 @@ import subprocess
 from operator import itemgetter
 
 from livecli.stream.streamprocess import StreamProcess
-from livecli.compat import str, which
+from livecli.compat import str
+from livecli.compat import compat_which
 from livecli.exceptions import StreamError
 from livecli.utils import rtmpparse, escape_librtmp
 
@@ -124,7 +125,7 @@ class RTMPStream(StreamProcess):
     def is_usable(cls, session):
         cmd = session.options.get("rtmp-rtmpdump")
 
-        return which(cmd) is not None
+        return compat_which(cmd) is not None
 
     def to_url(self):
         stream_params = dict(self.params)
