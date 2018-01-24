@@ -13,13 +13,13 @@ matrix:
   - python: '3.7-dev'
 
 before_install:
-  - pip install --disable-pip-version-check --upgrade pip
+  - pip install -U pip setuptools
   - pip install -r dev-requirements.txt
   - pip install pycountry
   - pip install -r docs-requirements.txt
 
 install:
-  - python setup.py install
+  - pip install -U .
 
 script:
   - python -m pytest tests/
