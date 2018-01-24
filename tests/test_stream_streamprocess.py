@@ -35,27 +35,27 @@ class TestStreamProcess(unittest.TestCase):
         s = StreamProcess(Livecli())
         self.assertRaises(StreamError, s._check_cmd)
 
-    @patch('livecli.stream.streamprocess.which')
-    def test_check_cmd_cat(self, which):
+    @patch('livecli.stream.streamprocess.compat_which')
+    def test_check_cmd_cat(self, compat_which):
         s = StreamProcess(Livecli())
-        which.return_value = s.cmd = "test"
+        compat_which.return_value = s.cmd = "test"
         self.assertEqual("test", s._check_cmd())
 
-    @patch('livecli.stream.streamprocess.which')
-    def test_check_cmd_nofound(self, which):
+    @patch('livecli.stream.streamprocess.compat_which')
+    def test_check_cmd_nofound(self, compat_which):
         s = StreamProcess(Livecli())
         s.cmd = "test"
-        which.return_value = None
+        compat_which.return_value = None
         self.assertRaises(StreamError, s._check_cmd)
 
-    @patch('livecli.stream.streamprocess.which')
-    def test_check_cmdline(self, which):
+    @patch('livecli.stream.streamprocess.compat_which')
+    def test_check_cmdline(self, compat_which):
         s = StreamProcess(Livecli(), params=dict(help=True))
-        which.return_value = s.cmd = "test"
+        compat_which.return_value = s.cmd = "test"
         self.assertEqual("test --help", s.cmdline())
 
-    @patch('livecli.stream.streamprocess.which')
-    def test_check_cmdline_long(self, which):
+    @patch('livecli.stream.streamprocess.compat_which')
+    def test_check_cmdline_long(self, compat_which):
         s = StreamProcess(Livecli(), params=dict(out_file="test file.txt"))
-        which.return_value = s.cmd = "test"
+        compat_which.return_value = s.cmd = "test"
         self.assertEqual("test --out-file \"test file.txt\"", s.cmdline())
