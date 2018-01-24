@@ -1,18 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json
-import re
-import requests
 import os
 import sys
 
-try:
-    res = requests.get('https://api.github.com/repos/livecli/livecli/tags')
-    res_j = json.loads(res.text)
-    livecli_version = res_j[0]['name']
-except Exception:
-    livecli_version = '0.0.0'
+from livecli import __version__ as livecli_version
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -50,7 +42,7 @@ copyright = '2018, Livecli'
 
 #
 # The short X.Y version.
-version = livecli_version
+version = livecli_version.split('+')[0]
 # The full version, including alpha/beta/rc tags.
 release = livecli_version
 

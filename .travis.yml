@@ -30,6 +30,7 @@ script:
   - if [[ $BUILD_INSTALLER == 'yes' ]]; then ./script/makeinstaller.sh; fi
 
 after_success:
+  - livecli --version
   # push the docs only if the build was successful
   - bash script/pushdocs.sh
   - codecov
