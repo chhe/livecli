@@ -1,6 +1,6 @@
 import hashlib
 
-from livecli.compat import AES
+from livecli.compat import crypto_AES
 from livecli.compat import is_py3
 
 
@@ -22,10 +22,10 @@ def evp_bytestokey(password, salt, key_len, iv_len):
 
 def decrypt_openssl(data, passphrase, key_length=32):
     if data.startswith(b"Salted__"):
-        salt = data[len(b"Salted__"):AES.block_size]
-        key, iv = evp_bytestokey(passphrase, salt, key_length, AES.block_size)
-        d = AES.new(key, AES.MODE_CBC, iv)
-        out = d.decrypt(data[AES.block_size:])
+        salt = data[len(b"Salted__"):crypto_AES.block_size]
+        key, iv = evp_bytestokey(passphrase, salt, key_length, crypto_AES.block_size)
+        d = crypto_AES.new(key, crypto_AES.MODE_CBC, iv)
+        out = d.decrypt(data[crypto_AES.block_size:])
         return unpad_pkcs5(out)
 
 

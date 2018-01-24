@@ -6,10 +6,10 @@ import tempfile
 import time
 import warnings
 
-from livecli.compat import AES
-from livecli.compat import number
-from livecli.compat import PKCS1_v1_5
-from livecli.compat import RSA
+from livecli.compat import crypto_AES
+from livecli.compat import crypto_number
+from livecli.compat import crypto_PKCS1_v1_5
+from livecli.compat import crypto_RSA
 
 from livecli.compat import urljoin, urlparse
 from livecli.exceptions import PluginError
@@ -124,22 +124,22 @@ _init_schema = validate.Schema(
 
 def aes_encrypt(key, plaintext):
     plaintext = plaintext.encode("utf-8")
-    aes = AES.new(key, AES.MODE_CBC, number.long_to_bytes(0, AES.block_size))
-    if len(plaintext) % AES.block_size != 0:
-        plaintext += b"\0" * (AES.block_size - len(plaintext) % AES.block_size)
+    aes = crypto_AES.new(key, crypto_AES.MODE_CBC, crypto_number.long_to_bytes(0, crypto_AES.block_size))
+    if len(plaintext) % crypto_AES.block_size != 0:
+        plaintext += b"\0" * (crypto_AES.block_size - len(plaintext) % crypto_AES.block_size)
     return base64.b64encode(aes.encrypt(plaintext))
 
 
 def aes_decrypt(key, ciphertext):
-    aes = AES.new(key, AES.MODE_CBC, number.long_to_bytes(0, AES.block_size))
+    aes = crypto_AES.new(key, crypto_AES.MODE_CBC, crypto_number.long_to_bytes(0, crypto_AES.block_size))
     plaintext = aes.decrypt(base64.b64decode(ciphertext))
     plaintext = plaintext.strip(b"\0")
     return plaintext.decode("utf-8")
 
 
 def rsa_encrypt(key, plaintext):
-    pubkey = RSA.importKey(key)
-    cipher = PKCS1_v1_5.new(pubkey)
+    pubkey = crypto_RSA.importKey(key)
+    cipher = crypto_PKCS1_v1_5.new(pubkey)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return base64.b64encode(cipher.encrypt(plaintext))
@@ -202,7 +202,7 @@ class Daisuki(Plugin):
             if flashvars.get(key, ""):
                 api_params[key] = flashvars[key]
 
-        aeskey = number.long_to_bytes(random.getrandbits(8 * 32), 32)
+        aeskey = crypto_number.long_to_bytes(random.getrandbits(8 * 32), 32)
 
         params = {
             "s": flashvars["s"],

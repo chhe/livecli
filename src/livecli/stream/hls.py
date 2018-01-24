@@ -6,7 +6,7 @@ from collections import defaultdict, namedtuple
 from time import time
 
 from livecli.cache import Cache
-from livecli.compat import AES
+from livecli.compat import crypto_AES
 from livecli.stream import hls_playlist
 from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
 from livecli.stream.http import HTTPStream
@@ -73,7 +73,7 @@ class HLSStreamWriter(SegmentedStreamWriter):
         # Pad IV if needed
         iv = b"\x00" * (16 - len(iv)) + iv
 
-        return AES.new(self.key_data, AES.MODE_CBC, iv)
+        return crypto_AES.new(self.key_data, crypto_AES.MODE_CBC, iv)
 
     def create_request_params(self, sequence):
         request_params = dict(self.reader.request_params)

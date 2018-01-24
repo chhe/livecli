@@ -3,7 +3,7 @@ import re
 from collections import namedtuple
 from io import BytesIO
 
-from livecli.compat import AES
+from livecli.compat import crypto_AES
 
 from livecli.compat import range
 from livecli.exceptions import StreamError
@@ -80,7 +80,7 @@ class BeatFLVTagConcat(FLVTagConcat):
         FLVTagConcat.__init__(self, *args, **kwargs)
 
     def decrypt_data(self, key, iv, data):
-        decryptor = AES.new(key, AES.MODE_CBC, iv)
+        decryptor = crypto_AES.new(key, crypto_AES.MODE_CBC, iv)
         return decryptor.decrypt(data)
 
     def iter_tags(self, fd=None, buf=None, skip_header=None):

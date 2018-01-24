@@ -2,7 +2,7 @@ import base64
 import re
 
 
-from livecli.compat import Blowfish
+from livecli.compat import crypto_Blowfish
 from livecli.compat import bytes, is_py3
 from livecli.plugin import Plugin, PluginOptions
 from livecli.plugin.api import http
@@ -30,7 +30,7 @@ class ZTNRClient(object):
     block_size = 16
 
     def __init__(self, key):
-        self.cipher = Blowfish.new(key, Blowfish.MODE_ECB)
+        self.cipher = crypto_Blowfish.new(key, crypto_Blowfish.MODE_ECB)
 
     @classmethod
     def pad(cls, data):

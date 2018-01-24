@@ -3,7 +3,7 @@ import base64
 
 import binascii
 
-from livecli.compat import AES
+from livecli.compat import crypto_AES
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.plugin.api import validate
@@ -50,8 +50,8 @@ class WebTV(Plugin):
         data = base64.b64decode(encoded_url)
         cipher_text = binascii.unhexlify(data[96:])
 
-        decryptor = AES.new(binascii.unhexlify(data[32:96]),
-                            AES.MODE_CBC,
+        decryptor = crypto_AES.new(binascii.unhexlify(data[32:96]),
+                            crypto_AES.MODE_CBC,
                             binascii.unhexlify(data[:32]))
 
         return unpad_pkcs5(decryptor.decrypt(cipher_text)).decode("utf8")

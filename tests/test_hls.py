@@ -3,7 +3,7 @@ import unittest
 
 from binascii import hexlify
 
-from livecli.compat import AES
+from livecli.compat import crypto_AES
 from livecli.session import Livecli
 from livecli.stream import hls
 from functools import partial
@@ -16,7 +16,7 @@ def pkcs7_encode(data, keySize):
 
 
 def encrypt(data, key, iv):
-    aesCipher = AES.new(key, AES.MODE_CBC, iv)
+    aesCipher = crypto_AES.new(key, crypto_AES.MODE_CBC, iv)
     encrypted_data = aesCipher.encrypt(pkcs7_encode(data, len(key)))
     return encrypted_data
 
