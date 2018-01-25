@@ -3,14 +3,19 @@ import locale
 from livecli.compat import is_py2
 
 try:
-    from iso639 import languages
     from iso3166 import countries
-
+    from iso639 import languages
     PYCOUNTRY = False
-except ImportError:  # pragma: no cover
-    from pycountry import languages, countries
-
-    PYCOUNTRY = True
+except ImportError:
+    try:
+        from pycountry import countries
+        from pycountry import languages
+        PYCOUNTRY = True
+    except ImportError:
+        # Kodi - script.module.livecli
+        from livecli.packages.iso3166 import countries
+        from livecli.packages.iso639 import languages
+        PYCOUNTRY = False
 
 DEFAULT_LANGUAGE = "en"
 DEFAULT_COUNTRY = "US"

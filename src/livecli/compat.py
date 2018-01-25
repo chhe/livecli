@@ -41,7 +41,12 @@ except ImportError:
 try:
     from shutil import which as compat_which
 except ImportError:
-    from backports.shutil_which import which as compat_which
+    # python 2.7
+    try:
+        from backports.shutil_which import which as compat_which
+    except ImportError:
+        # Kodi - script.module.livecli
+        from livecli.packages.shutil_which import which as compat_which
 
 try:
     from Crypto.Cipher import AES as crypto_AES

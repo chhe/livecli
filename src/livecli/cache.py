@@ -6,14 +6,32 @@ import tempfile
 from time import time
 from .compat import is_win32
 
-if is_win32:
+try:
+    import xbmc
+    import xbmcvfs
+    is_kodi = True
+except ImportError:
+    is_kodi = False
+
+if is_win32 and not is_kodi:
     xdg_cache = os.environ.get("APPDATA",
                                os.path.expanduser("~"))
+elif is_kodi:
+    xdg_cache = xbmc.translatePath("special://profile/addon_data/script.module.livecli").encode("utf-8")
+    temp_dir = xbmc.translatePath("special://temp").encode("utf-8")
 else:
     xdg_cache = os.environ.get("XDG_CACHE_HOME",
                                os.path.expanduser("~/.cache"))
 
 cache_dir = os.path.join(xdg_cache, "livecli")
+
+if is_kodi:
+    # Kodi - script.module.livecli
+    temp_livecli = os.path.join(temp_dir, "script.module.livecli")
+    if not xbmcvfs.exists(cache_dir):
+        xbmcvfs.mkdirs(cache_dir)
+    if not xbmcvfs.exists(temp_livecli):
+        xbmcvfs.mkdirs(temp_livecli)
 
 
 class Cache(object):
@@ -50,7 +68,10 @@ class Cache(object):
         return len(pruned) > 0
 
     def _save(self):
-        fd, tempname = tempfile.mkstemp()
+        if is_kodi:
+            fd, tempname = tempfile.mkstemp(dir=temp_livecli)
+        else:
+            fd, tempname = tempfile.mkstemp()
         fd = os.fdopen(fd, "w")
         json.dump(self._cache, fd, indent=2, separators=(",", ": "))
         fd.close()
