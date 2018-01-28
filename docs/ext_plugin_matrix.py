@@ -1,20 +1,20 @@
+import os
+
 from importlib import import_module
-from os import listdir
-from os import makedirs
-from os import path
 
 
 def create_dict_from_plugins():
-    git_path = path.join("src", "livecli", "plugins")
-    path_1 = path.join("..")
-    path_2 = path.join("livecli")
-    path_3 = path.join("src", "livecli")
-    for _path in (path_1, path_2, path_3):
-        plugins_path = path.join(_path, git_path)
-        if path.isdir(plugins_path) is False:
+    git_path = os.path.join("src", "livecli", "plugins")
+    path_2 = os.path.join("livecli")
+    path_3 = os.path.join("src", "livecli")
+    for _path in ("", path_2, path_3):
+        if os.getcwd().endswith("/docs"):
+            os.chdir("..")
+        plugins_path = os.path.join(os.getcwd(), _path, git_path)
+        if os.path.isdir(plugins_path) is False:
             continue
         break
-    modules = sorted(listdir(plugins_path))
+    modules = sorted(os.listdir(plugins_path))
 
     exclude = [
         "__init__.py",
@@ -54,8 +54,8 @@ def setup(app):
     length_all = 80
 
     build_path = "_build"
-    if not path.exists(build_path):
-        makedirs(build_path)
+    if not os.path.exists(build_path):
+        os.makedirs(build_path)
 
     final_list = []
 
@@ -158,7 +158,7 @@ def setup(app):
     # End of list.
     final_list.append(table_1)
     # open file
-    file_name = path.join(build_path, "plugin_matrix.txt")
+    file_name = os.path.join(build_path, "plugin_matrix.txt")
     f = open(file_name, "w+")
     for x in final_list:
         f.write(x)
