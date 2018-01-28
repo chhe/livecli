@@ -56,7 +56,7 @@ class Resolve(Plugin):
             (?<!title=["'])
                 [^"'<>\s\;]+\.(?:m3u8|f4m|mp3|mp4|mpd)
             (?:[^"'<>\s\\]+)?)
-        (?:["']|\s|>|\\&quot;)
+        (?:["']|(?<!;)\s|>|\\&quot;)
         """, re.DOTALL | re.VERBOSE)
     # Regex for: rtmp
     _rtmp_re = re.compile(r"""["'](?P<url>rtmp(?:e|s|t|te)?://[^"']+)["']""")

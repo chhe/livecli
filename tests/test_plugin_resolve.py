@@ -275,6 +275,14 @@ class TestPluginResolve(unittest.TestCase):
             """meta title="broken_title_url.mp4">""",
             """video">broken_title_url22.mp4</span></div><div style="float""",
             """video">broken_title_url22.mp4"float""",
+            """if(options.livestream==true){
+                 PlayerSetup.source.hls=options.m3u8;
+               }
+            """,
+            """getCurrentVideoSrc: function(){
+                 return $("#player").data("player").mp4;
+               },
+            """,
         ]
         if not hasattr(self, 'assertNotRegex'):
             self.assertNotRegex = self.assertNotRegexpMatches
