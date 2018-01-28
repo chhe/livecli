@@ -5,7 +5,15 @@ from os import path
 
 
 def create_dict_from_plugins():
-    plugins_path = path.join("..", "src", "livecli", "plugins")
+    git_path = path.join("src", "livecli", "plugins")
+    path_1 = path.join("..")
+    path_2 = path.join("livecli")
+    path_3 = path.join("src", "livecli")
+    for _path in (path_1, path_2, path_3):
+        plugins_path = path.join(_path, git_path)
+        if path.isdir(plugins_path) is False:
+            continue
+        break
     modules = sorted(listdir(plugins_path))
 
     exclude = [
