@@ -8,7 +8,7 @@ def create_dict_from_plugins():
     path_2 = os.path.join("livecli")
     path_3 = os.path.join("src", "livecli")
     for _path in ("", path_2, path_3):
-        if os.getcwd().endswith("/docs"):
+        if os.getcwd().endswith("docs"):
             os.chdir("..")
         plugins_path = os.path.join(os.getcwd(), _path, git_path)
         if os.path.isdir(plugins_path) is False:
@@ -52,10 +52,6 @@ def setup(app):
     length_notes = 28
     # max 80
     length_all = 80
-
-    build_path = "_build"
-    if not os.path.exists(build_path):
-        os.makedirs(build_path)
 
     final_list = []
 
@@ -157,6 +153,19 @@ def setup(app):
 
     # End of list.
     final_list.append(table_1)
+    # get build dir
+    build_path = ""
+    docs_dir = os.path.join("docs")
+    path_2 = os.path.join("livecli")
+    path_3 = os.path.join("src", "livecli")
+    for _path in ("", path_2, path_3):
+        docs_path = os.path.join(os.getcwd(), _path, docs_dir)
+        if os.path.isdir(docs_path) is False:
+            continue
+        build_path = os.path.join(docs_path, "_build")
+        if not os.path.exists(build_path):
+            os.makedirs(build_path)
+        break
     # open file
     file_name = os.path.join(build_path, "plugin_matrix.txt")
     f = open(file_name, "w+")
