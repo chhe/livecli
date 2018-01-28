@@ -92,6 +92,7 @@ _config_schema = validate.Schema(
         validate.optional("hlsvp"): validate.text,
         validate.optional("live_playback"): validate.transform(bool),
         validate.optional("reason"): validate.text,
+        validate.optional("title"): validate.text,
         "status": validate.text
     }
 )
@@ -246,6 +247,7 @@ class YouTube(Plugin):
                     count, info_parsed.get("reason"))
                 )
                 continue
+            self.stream_title = info_parsed.get("title")
             self.logger.debug("get_video_info - {0}: Found data".format(count))
             break
 

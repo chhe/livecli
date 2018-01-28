@@ -165,6 +165,7 @@ class Plugin(object):
     module = "unknown"
     options = Options()
     session = None
+    stream_title = None
 
     @classmethod
     def bind(cls, session, module):
@@ -370,6 +371,19 @@ class Plugin(object):
 
     def _get_streams(self):
         raise NotImplementedError
+
+    def _get_title(self):
+        """
+        Returns a title for the current stream.
+
+        Does only work as expected, if :func:`Plugin._get_streams` was used before,
+        if this is not done it will only return the current url as a title.
+        """
+        title = self.stream_title
+        if title is not None:
+            return title
+        else:
+            return self.url
 
 
 __all__ = ["Plugin"]

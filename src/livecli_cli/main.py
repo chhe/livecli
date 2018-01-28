@@ -3,12 +3,14 @@ from __future__ import print_function
 import errno
 import os
 import platform
+import re
 import requests
-import sys
 import signal
+import sys
 import webbrowser
 
 from contextlib import closing
+from datetime import datetime
 from distutils.version import StrictVersion
 from functools import partial
 from itertools import chain
@@ -16,18 +18,24 @@ from socks import __version__ as socks_version
 from time import sleep
 from websocket import __version__ as websocket_version
 
+from livecli_cli.utils.downloads import get_id_for_filename
+from livecli_cli.utils.downloads import get_output_format
+from livecli_cli.utils.downloads import get_url_re_from_module
+
 from livecli import __version__ as livecli_version
 from livecli import (Livecli, StreamError, PluginError,
                      NoPluginError)
 from livecli.cache import Cache
+from livecli.compat import is_py2
 from livecli.compat import is_win32
+from livecli.compat import str
 from livecli.stream import StreamProcess
 from livecli.plugins.twitch import TWITCH_CLIENT_ID
 
 from .argparser import parser
 from .compat import stdout
 from .console import ConsoleOutput
-from .constants import CONFIG_FILES, PLUGINS_DIR, STREAM_SYNONYMS
+from .constants import CONFIG_FILES, PLUGINS_DIR, STREAM_SYNONYMS, DOWNLOAD_DIR
 from .output import FileOutput, PlayerOutput
 from .utils import NamedPipe, HTTPServer, ignored, progress, stream_to_url
 
@@ -57,7 +65,7 @@ def check_file_output(filename, force):
     return FileOutput(filename)
 
 
-def create_output():
+def create_output(plugin, output_shortname):
     """Decides where to write the stream.
 
     Depending on arguments it can be one of these:
@@ -67,6 +75,38 @@ def create_output():
      - A regular file
 
     """
+    if args.auto_output:
+        filename_id = ""
+        filename_time = ""
+
+        download_path = args.download_dir or DOWNLOAD_DIR
+        output_format = get_output_format(output_shortname)
+
+        if args.auto_output_id or args.auto_output_only_id:
+            _found_url_re = get_url_re_from_module(plugin)
+            m = _found_url_re.match(args.url)
+            if m:
+                filename_id = get_id_for_filename(m, args.url)
+
+        if args.auto_output_time:
+            filename_time = datetime.utcnow().strftime("_%Y_%m_%d_%Hh%Mm%Ss")
+
+        file_endname = filename_id + filename_time + output_format
+
+        if args.auto_output_only_id and filename_id:
+            full_download_path = os.path.join(download_path, file_endname)
+        else:
+            normal_title = plugin._get_title()
+            normal_title = re.sub(r"[\\/:?\"'\s]", "_", normal_title)
+            if is_py2:
+                # python 2.7 - UnicodeDecodeError
+                # https://unicode.org/reports/tr15/
+                from unicodedata import normalize
+                normal_title = normalize("NFKD", str(normal_title))
+            full_download_path = os.path.join(download_path, normal_title + file_endname)
+
+        console.logger.info("Download path: \"{0}\"".format(full_download_path))
+        args.output = full_download_path
 
     if args.output:
         if args.output == "-":
@@ -253,7 +293,7 @@ def open_stream(stream):
     return stream_fd, prebuffer
 
 
-def output_stream(stream):
+def output_stream(plugin, stream):
     """Open stream, create output and finally write the stream to output."""
     global output
 
@@ -269,7 +309,7 @@ def output_stream(stream):
     if not success_open:
         console.exit("Could not open stream {0}, tried {1} times, exiting", stream, args.retry_open)
 
-    output = create_output()
+    output = create_output(plugin, stream.__shortname__)
 
     try:
         output.open()
@@ -376,7 +416,7 @@ def handle_stream(plugin, streams, stream_name):
         # to use these in case the main stream is not usable.
         alt_streams = list(filter(lambda k: stream_name + "_alt" in k,
                                   sorted(streams.keys())))
-        file_output = args.output or args.stdout
+        file_output = args.output or args.stdout or args.auto_output
 
         for stream_name in [stream_name] + alt_streams:
             stream = streams[stream_name]
@@ -398,7 +438,7 @@ def handle_stream(plugin, streams, stream_name):
                     cache_stream_data(stream_name, stream.url)
                 console.logger.info("Opening stream: {0} ({1})", stream_name,
                                     stream_type)
-                success = output_stream(stream)
+                success = output_stream(plugin, stream)
 
             if success:
                 break
@@ -523,14 +563,20 @@ def handle_url():
                "found".format(", ".join(args.stream)))
 
         if console.json:
-            console.msg_json(dict(streams=streams, plugin=plugin.module,
+            console.msg_json(dict(streams=streams,
+                                  plugin=plugin.module,
+                                  stream_title=plugin._get_title(),
                                   error=err))
         else:
             console.exit("{0}.\n       Available streams: {1}",
                          err, validstreams)
     else:
         if console.json:
-            console.msg_json(dict(streams=streams, plugin=plugin.module))
+            console.msg_json(dict(
+                streams=streams,
+                plugin=plugin.module,
+                stream_title=plugin._get_title(),
+            ))
         else:
             validstreams = format_valid_streams(plugin, streams)
             console.msg("Available streams: {0}", validstreams)
@@ -631,7 +677,7 @@ def setup_console():
 
     # Console output should be on stderr if we are outputting
     # a stream to stdout.
-    if args.stdout or args.output == "-":
+    if args.stdout or args.output or args.auto_output == "-":
         console.set_output(sys.stderr)
 
     # We don't want log output when we are printing JSON or a command-line.

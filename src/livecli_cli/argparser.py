@@ -477,7 +477,7 @@ output.add_argument(
     "-f", "--force",
     action="store_true",
     help="""
-    When using -o, always write to file even if it already exists.
+    When using -o or -ao, always write to file even if it already exists.
     """
 )
 output.add_argument(
@@ -485,6 +485,47 @@ output.add_argument(
     action="store_true",
     help="""
     Write stream data to stdout instead of playing it.
+    """
+)
+output.add_argument(
+    "-ao", "--auto-output",
+    action="store_true",
+    help="""
+    Write stream data to the default Downloads folder instead of playing it.
+
+    The folder can be changed with --download-dir
+
+    You will be prompted if the file already exists.
+    """
+)
+output.add_argument(
+    "--auto-output-time",
+    action="store_true",
+    help="""
+    Add's an UTC Timestamp at the end of the filename for --auto-output
+    """
+)
+output.add_argument(
+    "--auto-output-id",
+    action="store_true",
+    help="""
+    Add's the best match of _url_re at the end of the filename for --auto-output
+    """
+)
+output.add_argument(
+    "--auto-output-only-id",
+    action="store_true",
+    help="""
+    The best match of _url_re will be the filename for --auto-output
+
+    Can be used with --auto-output-time
+    """
+)
+output.add_argument(
+    "--download-dir",
+    metavar="DIRECTORY",
+    help="""
+    Download directory for --auto-output
     """
 )
 
