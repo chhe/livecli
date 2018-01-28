@@ -154,6 +154,14 @@ class TestPluginResolve(unittest.TestCase):
                         """,
                 "result": "https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
             },
+            {
+                "data": """
+                        <div id="player">
+                            <script language='javascript'> document.write(unescape('%3C%69%66%72%61%6d%65%20width%3D%22730%22%20height%3D%22440%22%20src%3D%22https%3A%2F%2Fwww.youtube.com%2Fembed%2Faqz-KE-bpKQ%3Fautoplay%3D1%22%20frameborder%3D%220%22%20gesture%3D%22media%22%20allow%3D%22encrypted-media%22%20allowfullscreen%3E%3C%2Fiframe%3E'));</script>
+                        </div>
+                        """,
+                "result": "https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
+            },
         ]
         rr = Resolve("https://example.com")
         for test_dict in regex_test_list:
