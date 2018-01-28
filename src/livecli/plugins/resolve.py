@@ -112,19 +112,6 @@ class Resolve(Plugin):
         if m:
             return m.group("url") is not None
 
-    def list_in_item(self, main_item, list_of_items):
-        """Check a list of items if they are in another item.
-        Args:
-            main_item - string that will get checked
-            list_of_items - list of strings
-        Returns
-            True
-                if a item of list_of_items in main_item
-            False
-                if no item of list_of_items in main_item
-        """
-        return any(k in main_item for k in list_of_items)
-
     def _make_url_list(self, old_list, base_url, stream_base=""):
         """Creates a list of validate urls from a list of broken urls
            and removes every blacklisted url
@@ -300,9 +287,9 @@ class Resolve(Plugin):
 
         playlist_list = self._make_url_list(playlist_all, self.url, stream_base)
         self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
-        endswith_blacklist = (".mp3", ".mp4", ".vtt")
         for url in playlist_list:
-            if ".m3u8" in url and not url.endswith(endswith_blacklist):
+            parsed_url = urlparse(url)
+            if parsed_url.path.endswith((".m3u8")):
                 try:
                     streams = HLSStream.parse_variant_playlist(self.session, url, headers=self.headers).items()
                     if not streams:
@@ -311,13 +298,13 @@ class Resolve(Plugin):
                         yield s
                 except Exception:
                     self.logger.error("Skipping hls_url: {0}".format(url))
-            elif ".f4m" in url and not url.endswith(endswith_blacklist):
+            elif parsed_url.path.endswith((".f4m")):
                 try:
                     for s in HDSStream.parse_manifest(self.session, url, headers=self.headers).items():
                         yield s
                 except Exception:
                     self.logger.error("Skipping hds_url: {0}".format(url))
-            elif self.list_in_item(url, [".mp3", ".mp4"]) and not self.list_in_item(url, [".f4m", ".m3u8", ".mpd"]):
+            elif parsed_url.path.endswith((".mp3", ".mp4")):
                 try:
                     name = "live"
                     m = self._httpstream_bitrate_re.search(url)
@@ -326,7 +313,7 @@ class Resolve(Plugin):
                     yield name, HTTPStream(self.session, url, headers=self.headers)
                 except Exception:
                     self.logger.error("Skipping http_url: {0}".format(url))
-            elif ".mpd" in url and not url.endswith(endswith_blacklist):
+            elif parsed_url.path.endswith((".mpd")):
                 try:
                     self.logger.info("Found mpd: {0}".format(url))
                 except Exception:
@@ -354,7 +341,8 @@ class Resolve(Plugin):
 
         if playlist_all:
             for url in playlist_all:
-                if self.list_in_item(url, [".jpg", ".png"]):
+                parsed_url = urlparse(url)
+                if parsed_url.path.endswith((".gif", ".jpg", ".png", ".vtt")):
                     playlist_all.remove(url)
             if playlist_all:
                 return self._resolve_playlist(res, playlist_all)

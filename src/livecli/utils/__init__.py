@@ -213,9 +213,24 @@ def escape_librtmp(value):
     return value
 
 
+def list_in_item(self, main_item, list_of_items):
+    """Check a list of items if they are in another item.
+    Args:
+        main_item - string that will get checked
+        list_of_items - list of strings
+    Returns
+        True
+            if a item of list_of_items in main_item
+        False
+            if no item of list_of_items in main_item
+    """
+    return any(k in main_item for k in list_of_items)
+
+
 __all__ = [
     "absolute_url",
     "escape_librtmp",
+    "list_in_item",
     "NamedPipe",
     "parse_json",
     "parse_qsd",
