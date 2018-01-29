@@ -32,11 +32,15 @@ try:
     from urllib.parse import (
         urlparse, urlunparse, urljoin, quote, unquote, parse_qsl, urlencode
     )
-    import queue
 except ImportError:
     from urlparse import urlparse, urlunparse, urljoin, parse_qsl
     from urllib import quote, unquote, urlencode
-    import Queue as queue
+
+try:
+    import queue as compat_queue
+except ImportError:
+    # python 2.7
+    import Queue as compat_queue
 
 try:
     from shutil import which as compat_which
@@ -72,6 +76,7 @@ except ImportError:
 __all__ = [
     "bytes",
     "compat_devnull",
+    "compat_queue",
     "compat_unescape",
     "compat_which",
     "crypto_AES",
@@ -83,7 +88,6 @@ __all__ = [
     "is_py3",
     "is_win32",
     "parse_qsl",
-    "queue",
     "quote",
     "range",
     "str",

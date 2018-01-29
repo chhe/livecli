@@ -3,7 +3,8 @@ from threading import Thread, Event
 
 from .stream import StreamIO
 from ..buffers import RingBuffer
-from ..compat import queue
+
+from livecli.compat import compat_queue
 
 
 class SegmentedStreamWorker(Thread):
@@ -88,7 +89,7 @@ class SegmentedStreamWriter(Thread):
         self.timeout = timeout
         self.ignore_names = ignore_names
         self.executor = futures.ThreadPoolExecutor(max_workers=threads)
-        self.futures = queue.Queue(size)
+        self.futures = compat_queue.Queue(size)
 
         Thread.__init__(self)
         self.daemon = True
@@ -121,7 +122,7 @@ class SegmentedStreamWriter(Thread):
             try:
                 queue_.put(value, block=True, timeout=1)
                 break
-            except queue.Full:
+            except compat_queue.Full:
                 continue
 
     def fetch(self, segment):
@@ -142,7 +143,7 @@ class SegmentedStreamWriter(Thread):
         while not self.closed:
             try:
                 segment, future = self.futures.get(block=True, timeout=0.5)
-            except queue.Empty:
+            except compat_queue.Empty:
                 continue
 
             # End of stream
