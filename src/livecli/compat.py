@@ -63,15 +63,16 @@ except ImportError:
 
 try:
     # python 3.4+
-    from html import unescape
+    from html import unescape as compat_unescape
 except ImportError:
     # python 2.7
     from HTMLParser import HTMLParser
-    unescape = HTMLParser().unescape
+    compat_unescape = HTMLParser().unescape
 
 __all__ = [
     "bytes",
     "compat_devnull",
+    "compat_unescape",
     "compat_which",
     "crypto_AES",
     "crypto_Blowfish",
@@ -86,7 +87,6 @@ __all__ = [
     "quote",
     "range",
     "str",
-    "unescape",
     "unquote",
     "urlencode",
     "urljoin",

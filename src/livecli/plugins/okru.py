@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from livecli.compat import unescape
+from livecli.compat import compat_unescape
 from livecli.compat import unquote
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
@@ -53,7 +53,7 @@ class OKru(Plugin):
         validate.all(
             validate.transform(_data_re.search),
             validate.get("data"),
-            validate.transform(unescape),
+            validate.transform(compat_unescape),
             validate.transform(parse_json),
             validate.get("flashvars"),
             validate.any(
