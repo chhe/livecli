@@ -3,7 +3,7 @@ from operator import itemgetter
 
 from livecli.stream import Stream
 from livecli.stream.wrappers import StreamIOThreadWrapper
-from livecli.compat import devnull
+from livecli.compat import compat_devnull
 from livecli.compat import compat_which
 from livecli.exceptions import StreamError
 
@@ -49,7 +49,7 @@ class StreamProcess(Stream):
         elif self.errorlog:
             self.stderr = tempfile.NamedTemporaryFile(prefix="livecli", suffix=".err", delete=False)
         else:
-            self.stderr = devnull()
+            self.stderr = compat_devnull()
 
     @property
     def params(self):

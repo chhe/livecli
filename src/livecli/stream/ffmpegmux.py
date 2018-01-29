@@ -10,7 +10,7 @@ from livecli import StreamError
 from livecli.stream import Stream
 from livecli.stream.stream import StreamIO
 from livecli.utils import NamedPipe
-from livecli.compat import devnull
+from livecli.compat import compat_devnull
 from livecli.compat import compat_which
 
 
@@ -121,7 +121,7 @@ class FFMPEGMuxer(StreamIO):
             self.errorlog = open(session.options.get("ffmpeg-verbose-path"), "w")
             self.close_errorlog = True
         else:
-            self.errorlog = devnull()
+            self.errorlog = compat_devnull()
 
     def open(self):
         for t in self.pipe_threads:

@@ -9,10 +9,10 @@ is_win32 = os.name == "nt"
 try:
     from subprocess import DEVNULL
 
-    def devnull():
+    def compat_devnull():
         return DEVNULL
 except ImportError:
-    def devnull():
+    def compat_devnull():
         return open(os.path.devnull, 'w')
 
 if is_py2:
@@ -71,13 +71,13 @@ except ImportError:
 
 __all__ = [
     "bytes",
+    "compat_devnull",
     "compat_which",
     "crypto_AES",
     "crypto_Blowfish",
     "crypto_number",
     "crypto_PKCS1_v1_5",
     "crypto_RSA",
-    "devnull",
     "is_py2",
     "is_py3",
     "is_win32",
