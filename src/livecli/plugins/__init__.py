@@ -6,3 +6,10 @@
 
 from ..exceptions import PluginError, NoStreamsError, NoPluginError
 from ..plugin import Plugin
+
+__all__ = [
+    "PluginError",
+    "NoStreamsError",
+    "NoPluginError",
+    "Plugin",
+]

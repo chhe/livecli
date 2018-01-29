@@ -73,7 +73,29 @@ __credits__ = [
     "@yeeeargh"
 ]
 
-from .api import streams
-from .exceptions import (LivecliError, PluginError, NoStreamsError,
-                         NoPluginError, StreamError)
-from .session import Livecli
+from livecli.api import streams  # noqa
+from livecli.exceptions import (
+    LivecliError,
+    NoPluginError,
+    NoStreamsError,
+    PluginError,
+    StreamError,
+)  # noqa
+from livecli.session import Livecli  # noqa
+
+__all__ = [
+    "warnings",
+    "version_info",
+    "__title__",
+    "__license__",
+    "__author__",
+    "__copyright__",
+    "__credits__",
+    "streams",
+    "LivecliError",
+    "NoPluginError",
+    "NoStreamsError",
+    "PluginError",
+    "StreamError",
+    "Livecli",
+]

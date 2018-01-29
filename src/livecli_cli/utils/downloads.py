@@ -88,7 +88,7 @@ def get_id_for_filename(m, url):
     return "" if filename is None else filename
 
 
-all = [
+__all__ = [
     "get_id_for_filename",
     "get_output_format",
     "get_url_re_from_module",

@@ -3,7 +3,8 @@ import unittest
 
 from livecli.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
 
-from livecli import Livecli, NoPluginError
+from livecli import Livecli
+# from livecli import NoPluginError
 from livecli.plugins import Plugin
 from livecli.stream import AkamaiHDStream
 from livecli.stream import HLSStream

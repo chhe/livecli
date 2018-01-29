@@ -10,3 +10,13 @@ if is_win32:
         PIPE_WAIT,
         PIPE_UNLIMITED_INSTANCES,
         INVALID_HANDLE_VALUE)
+
+__all__ = [
+    "NamedPipe",
+    "PIPE_ACCESS_OUTBOUND",
+    "PIPE_TYPE_BYTE",
+    "PIPE_READMODE_BYTE",
+    "PIPE_WAIT",
+    "PIPE_UNLIMITED_INSTANCES",
+    "INVALID_HANDLE_VALUE",
+]
