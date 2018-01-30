@@ -7,6 +7,7 @@ from time import time
 
 from livecli.cache import Cache
 from livecli.compat import crypto_AES
+from livecli.compat import urlparse
 from livecli.stream import hls_playlist
 from livecli.stream.ffmpegmux import FFMPEGMuxer, MuxedStream
 from livecli.stream.http import HTTPStream
@@ -41,6 +42,7 @@ class HLSStreamWriter(SegmentedStreamWriter):
         kwargs["threads"] = options.get("hls-segment-threads")
         kwargs["timeout"] = options.get("hls-segment-timeout")
         kwargs["ignore_names"] = options.get("hls-segment-ignore-names")
+        kwargs["user_key_uri"] = options.get("hls-key-uri")
         SegmentedStreamWriter.__init__(self, reader, *args, **kwargs)
 
         self.byterange_offsets = defaultdict(int)
@@ -62,7 +64,23 @@ class HLSStreamWriter(SegmentedStreamWriter):
             raise StreamError("Missing URI to decryption key")
 
         if self.key_uri != key.uri:
-            res = self.session.http.get(key.uri, exception=StreamError,
+            new_key_uri = key.uri
+            if self.user_key_uri is not None:
+                # Repair a broken key-uri
+                self.logger.debug("Old key-uri: {0}".format(new_key_uri))
+                parsed_uri = urlparse(new_key_uri)
+                new_key_uri = self.user_key_uri
+                new_data_list = [
+                    (r"@scheme@", "{0}://".format(parsed_uri.scheme)),
+                    (r"@netloc@", parsed_uri.netloc),
+                    (r"@path@", parsed_uri.path),
+                    (r"@query@", "?{0}".format(parsed_uri.query)),
+                ]
+                for _at_re, _old_data in new_data_list:
+                    new_key_uri = re.sub(_at_re, _old_data, new_key_uri)
+                self.logger.debug("New key-uri: {0}".format(new_key_uri))
+
+            res = self.session.http.get(new_key_uri, exception=StreamError,
                                         retries=self.retries,
                                         **self.reader.request_params)
             self.key_data = res.content

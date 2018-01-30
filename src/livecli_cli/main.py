@@ -802,6 +802,9 @@ def setup_options():
     if args.hls_live_restart:
         livecli.set_option("hls-live-restart", args.hls_live_restart)
 
+    if args.hls_key_uri:
+        livecli.set_option("hls-key-uri", args.hls_key_uri)
+
     if args.hds_live_edge:
         livecli.set_option("hds-live-edge", args.hds_live_edge)
 

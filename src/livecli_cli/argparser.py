@@ -826,6 +826,23 @@ transport.add_argument(
     Skip to the beginning of a live stream, or as far back as possible.
     """)
 transport.add_argument(
+    "--hls-key-uri",
+    metavar="DATA",
+    help="""
+    Repair a broken key-uri.
+
+    You can reuse the none broken items:
+
+      @scheme@ @netloc@ @path@ @query@
+      livecli --hls-key-uri '@scheme@@netloc@@path@@query@'
+
+    Replace the broken part, like:
+
+      livecli --hls-key-uri 'https://@netloc@@path@@query@'
+
+    """
+)
+transport.add_argument(
     "--http-stream-timeout",
     type=num(float, min=0),
     metavar="TIMEOUT",

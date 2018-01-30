@@ -69,7 +69,7 @@ class SegmentedStreamWriter(Thread):
     and finally writing the data to the buffer.
     """
 
-    def __init__(self, reader, size=20, retries=None, threads=None, timeout=None, ignore_names=None):
+    def __init__(self, reader, size=20, retries=None, threads=None, timeout=None, ignore_names=None, user_key_uri=None):
         self.closed = False
         self.reader = reader
         self.stream = reader.stream
@@ -88,6 +88,7 @@ class SegmentedStreamWriter(Thread):
         self.retries = retries
         self.timeout = timeout
         self.ignore_names = ignore_names
+        self.user_key_uri = user_key_uri
         self.executor = futures.ThreadPoolExecutor(max_workers=threads)
         self.futures = compat_queue.Queue(size)
 
