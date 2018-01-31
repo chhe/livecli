@@ -344,6 +344,8 @@ class Resolve(Plugin):
                 parsed_url = urlparse(url)
                 if parsed_url.path.endswith((".gif", ".jpg", ".png", ".vtt")):
                     playlist_all.remove(url)
+                if parsed_url.netloc.startswith(("127.0.0.1")):
+                    playlist_all.remove(url)
             if playlist_all:
                 return self._resolve_playlist(res, playlist_all)
         return False
