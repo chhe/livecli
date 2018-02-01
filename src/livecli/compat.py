@@ -53,17 +53,17 @@ except ImportError:
         from livecli.packages.shutil_which import which as compat_which
 
 try:
-    from Crypto.Cipher import AES as crypto_AES
-    from Crypto.Cipher import Blowfish as crypto_Blowfish
-    from Crypto.Cipher import PKCS1_v1_5 as crypto_PKCS1_v1_5
-    from Crypto.PublicKey import RSA as crypto_RSA
-    from Crypto.Util import number as crypto_number
-except ImportError:
     from Cryptodome.Cipher import AES as crypto_AES
     from Cryptodome.Cipher import Blowfish as crypto_Blowfish
     from Cryptodome.Cipher import PKCS1_v1_5 as crypto_PKCS1_v1_5
     from Cryptodome.PublicKey import RSA as crypto_RSA
     from Cryptodome.Util import number as crypto_number
+except ImportError:
+    from Crypto.Cipher import AES as crypto_AES
+    from Crypto.Cipher import Blowfish as crypto_Blowfish
+    from Crypto.Cipher import PKCS1_v1_5 as crypto_PKCS1_v1_5
+    from Crypto.PublicKey import RSA as crypto_RSA
+    from Crypto.Util import number as crypto_number
 
 try:
     import websocket as compat_websocket
