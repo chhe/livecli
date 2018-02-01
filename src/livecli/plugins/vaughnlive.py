@@ -2,8 +2,8 @@ import random
 import re
 import itertools
 import ssl
-import websocket
 
+from livecli.compat import compat_websocket as websocket
 from livecli.plugin import Plugin
 from livecli.plugin.api import useragents
 from livecli.stream import RTMPStream

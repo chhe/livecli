@@ -66,6 +66,12 @@ except ImportError:
     from Cryptodome.Util import number as crypto_number
 
 try:
+    import websocket as compat_websocket
+except Exception as e:
+    # Kodi - script.module.livecli
+    import livecli.packages.websocket as compat_websocket
+
+try:
     # python 3.4+
     from html import unescape as compat_unescape
 except ImportError:
@@ -78,6 +84,7 @@ __all__ = [
     "compat_devnull",
     "compat_queue",
     "compat_unescape",
+    "compat_websocket",
     "compat_which",
     "crypto_AES",
     "crypto_Blowfish",
