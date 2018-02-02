@@ -208,9 +208,9 @@ class Resolve(Plugin):
             self.logger.debug("Abort: Website is already in cache.")
             raise NoPluginError
 
-        """ set a 5 sec cache to avoid loops with the same url """
+        """ set a 2 sec cache to avoid loops with the same url """
         self.logger.debug("Old cache: {0}".format(self._session_attributes.get("cache_url")))
-        self._session_attributes.set("cache_url", self.url, expires=5)
+        self._session_attributes.set("cache_url", self.url, expires=2)
         self.logger.debug("New cache: {0}".format(self._session_attributes.get("cache_url")))
         return
 
