@@ -341,7 +341,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
                     self.reload_playlist()
                 except StreamError as err:
                     self.logger.warning("Failed to reload playlist: {0}", err)
-                    if self.session_reload():
+                    if self.session_reload:
                         self.logger.warning("Unexpected session reload")
                         self.reload_session()
 
