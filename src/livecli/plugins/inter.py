@@ -62,7 +62,11 @@ class Inter(Plugin):
         if not m:
             return
 
-        hls_url = m.group("url")
+        res = http.get(m.group("url"), headers=headers)
+        if not res.text.startswith("#EXTM3U"):
+            hls_url = http.json(res).get("redir")
+        else:
+            hls_url = m.group("url")
 
         if hls_url is not None:
             self.logger.debug("HLS URL: {0}".format(hls_url))
