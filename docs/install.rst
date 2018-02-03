@@ -28,6 +28,8 @@ manager, or by checking out the latest code with
 
 The commands listed here will also upgrade any existing version of Livecli.
 
+.. rst-class:: table-custom-layout
+
 ==================================== ===========================================
 Version                              Installing
 ==================================== ===========================================
@@ -53,6 +55,8 @@ Dependencies
 ^^^^^^^^^^^^
 
 To install Livecli from source you will need these dependencies.
+
+.. rst-class:: table-custom-layout
 
 ==================================== ===========================================
 Name                                 Notes
@@ -146,6 +150,8 @@ instead.
 
 Windows binaries
 ----------------
+
+.. rst-class:: table-custom-layout
 
 ==================================== ====================================
 Release                              Notes
