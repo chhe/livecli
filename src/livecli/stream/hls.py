@@ -211,6 +211,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
         )
         cache_stream_name = cache.get("cache_stream_name", "best")
         cache_url = cache.get("cache_url")
+        self.logger.debug("Current stream_name: {0}".format(cache_stream_name))
         if not cache_url:
             # corrupt cache data
             # if more than one instance of streamlink
@@ -219,21 +220,12 @@ class HLSStreamWorker(SegmentedStreamWorker):
             self.session_time = int(time() + time())
             return
 
-        channel = self.session.resolve_url(cache_url)
-        streams = channel._get_streams()
-        try:
-            # HLSStream with parse_variant_playlist
-            self.stream = streams[cache_stream_name]
-        except KeyError:
-            # if stream_name is '1080p source' but the cache is '1080p'
-            for source_stream_name in streams.keys():
-                if cache_stream_name in source_stream_name:
-                    self.stream = streams[source_stream_name]
-        except TypeError:
-            # HLSStream without parse_variant_playlist
-            for name, hls_stream in streams:
-                self.stream = hls_stream
+        streams = self.session.streams(cache_url)
+        if not streams:
+            self.logger.debug("No stream found for reload_session, stream might be offline.")
+            return
 
+        self.stream = streams[cache_stream_name]
         new_cache = Cache(
             filename="streamdata.json",
             key_prefix="cache:{0}".format(self.stream.url)
