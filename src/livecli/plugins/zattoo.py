@@ -1,4 +1,5 @@
 import re
+import requests
 import time
 import uuid
 
@@ -86,7 +87,11 @@ class Zattoo(Plugin):
 
     def _hello(self):
         self.logger.debug('_hello ...')
-        res = http.get(self.base_url)
+        headers = {
+            'User-Agent': useragents.CHROME,
+            'Referer': self.base_url
+        }
+        res = requests.get("{0}/login".format(self.base_url), headers=headers)
         match = self._app_token_re.search(res.text)
 
         app_token = match.group(1)
