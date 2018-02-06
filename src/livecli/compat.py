@@ -45,12 +45,13 @@ except ImportError:
 try:
     from shutil import which as compat_which
 except ImportError:
-    # python 2.7
     try:
-        from backports.shutil_which import which as compat_which
-    except ImportError:
         # Kodi - script.module.livecli
-        from livecli.packages.shutil_which import which as compat_which
+        from shutil_which.shutil_which import which as compat_which
+    except ImportError:
+        # python 2.7
+        from backports.shutil_which import which as compat_which
+
 
 try:
     from Cryptodome.Cipher import AES as crypto_AES
@@ -66,12 +67,6 @@ except ImportError:
     from Crypto.Util import number as crypto_number
 
 try:
-    import websocket as compat_websocket
-except Exception as e:
-    # Kodi - script.module.livecli
-    import livecli.packages.websocket as compat_websocket
-
-try:
     # python 3.4+
     from html import unescape as compat_unescape
 except ImportError:
@@ -84,7 +79,6 @@ __all__ = [
     "compat_devnull",
     "compat_queue",
     "compat_unescape",
-    "compat_websocket",
     "compat_which",
     "crypto_AES",
     "crypto_Blowfish",

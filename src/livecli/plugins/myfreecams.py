@@ -8,9 +8,8 @@ from livecli.exceptions import NoStreamsError
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
-from livecli.compat import compat_websocket
 
-create_connection = compat_websocket.create_connection
+from websocket import create_connection
 
 __livecli_docs__ = {
     "domains": [
