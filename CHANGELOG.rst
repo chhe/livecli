@@ -1,3 +1,37 @@
+livecli 3.2.0 (2018-02-07)
+--------------------------
+Livecli 3.2.0 has been released!
+
+- New option --hls-key-uri
+- resolve plugin updates
+- Kodi version will be released now on https://github.com/livecli/repo
+
+For more details see below.
+
+::
+
+    back-to <backto@protonmail.ch> (32):
+          [compat] Renamed imports to compat_X
+          [compat] use a crypto prefix for Crypto and Cryptodome
+          [compat] use Cryptodome before Crypto
+          [docs] made the path detection for build_path better
+          [docs] Removed message.
+          [flake8] __all__
+          [hls] Fixed bug TypeError: 'bool' object is not callable
+          [hls] New option --hls-key-uri
+          [hls] ression reload better update
+          [inter] New Plugin for - inter.ua - k1.ua - ntn.ua
+          [Kodi] support different Importpaths for Kodi and Flake8 for webtv
+          [output] New options to download a stream --auto-output
+          [resolve] _unescape_iframe_re improved
+          [resolve] playlist url's with ;\s after the filetype are now invalid
+          [resolve] Remove 127.0.0.1 from valid playlist urls.
+          [resolve] use only 2 sec for cache url
+          [resolve] use urlparse to filter the correct playlist url
+          [travis] use pip install -U .
+          [viasat] don't close if swf_url is invalid, regex update
+          [zattoo] use requests instead of http, so no session will be used.
+
 livecli 3.1.1 (2018-01-23)
 --------------------------
 Livecli 3.1.1 has been released!
