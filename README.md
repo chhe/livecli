@@ -1,17 +1,31 @@
 # [Livecli][livecli-website]
 
-[![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![AppVeyor][appveyor-badge]][appveyor] [![codecov.io][codecov-coverage-badge]][codecov-coverage] [![pypi.python.org][pypi-badge]][pypi]
+[![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![pypi.python.org][pypi-badge]][pypi]
 
-Livecli is a CLI utility that pipes flash videos from online streaming services to a variety of video players such as VLC, or alternatively, a browser.
+Livecli is a _Command-line interface_ utility that pipes videos from online streaming services to a variety of video players.
 
-The main purpose of livecli is to convert CPU-heavy flash plugins to a less CPU-intensive format.
+The main purpose of livecli is to convert CPU-heavy flash plugins to a less CPU-intensive format,
+also allow to watch livestreams on less powerful devices.
 
-Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreamer] project.
+Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreamer] project,
 
-Please note that by using this application you're bypassing ads run by
-sites such as Twitch.tv. Please consider donating or paying for subscription
-services when they are available for the content you consume and enjoy.
+#### The advantages of Livecli:
 
+- **build in plugin** that will try to **open** a stream **on every website**.
+  - [`--resolve-blacklist-path`](https://livecli.github.io/cli.html#cmdoption-resolve-blacklist-netloc)
+  - [`--resolve-blacklist-netloc`](https://livecli.github.io/cli.html#cmdoption-resolve-blacklist-path)
+- fully compatible with [**Kodi** Leia](https://github.com/livecli/livecli#kodi)
+- **pycryptodomex** can be used **instead of pycryptodome**
+- **some other plugins**
+- **more options**
+  - [`--auto-output`](https://livecli.github.io/cli.html#cmdoption-ao)
+  - [`--auto-output-time`](https://livecli.github.io/cli.html#cmdoption-auto-output-time)
+  - [`--auto-output-id`](https://livecli.github.io/cli.html#cmdoption-auto-output-id)
+  - [`--auto-output-only-id`](https://livecli.github.io/cli.html#cmdoption-auto-output-only-id)
+  - [`--download-dir`](https://livecli.github.io/cli.html#cmdoption-download-dir)
+  - [`--hls-key-uri`](https://livecli.github.io/cli.html#cmdoption-hls-key-uri)
+  - [`--hls-session-reload`](https://livecli.github.io/cli.html#cmdoption-hls-session-reload)
+  - [`--hls-segment-ignore-number`](https://livecli.github.io/cli.html#cmdoption-hls-segment-ignore-number)
 
 # [Installation][livecli-installation]
 
@@ -28,14 +42,6 @@ git clone https://github.com/livecli/livecli
 cd livecli
 pip install -U .
 ```
-
-#### Windows, MacOS, Linux and BSD specific installation methods
-
-- [Windows][livecli-installation-windows]
-- [Windows portable version][livecli-installation-windows-portable]
-- [MacOS][livecli-installation-others]
-- [Linux and BSD][livecli-installation-linux]
-
 
 # Features
 
@@ -61,8 +67,17 @@ livecli STREAMURL best
 ```
 
 Livecli will automatically open the stream in its default video player!
-See [Livecli's detailed documentation][livecli-documentation] for all available configuration options, CLI parameters and usage examples.
+See [Livecli's detailed documentation][livecli-documentation] for all available configuration options,
+CLI parameters and usage examples.
 
+# Kodi
+
+Livecli can be used with Kodi Leia,
+it can be installed from the [Livecli Kodi Repository](https://github.com/livecli/repo).
+
+All Livecli specified commands should work there aswell.
+
+For more information see [service.livecli.proxy](https://github.com/livecli/service.livecli.proxy#servicelivecliproxy)
 
 # Contributing
 
@@ -85,10 +100,7 @@ Please read [CONTRIBUTING.md][contributing] first. Thanks!
   [changelog]: https://github.com/livecli/livecli/blob/master/CHANGELOG.rst
   [contributors]: https://github.com/livecli/livecli/graphs/contributors
   [travisci-build-status]: https://travis-ci.org/livecli/livecli
-  [travisci-build-status-badge]: https://img.shields.io/travis/livecli/livecli/master.svg?style=flat-square
-  [appveyor]: https://ci.appveyor.com/project/back-to/livecli
-  [appveyor-badge]: https://img.shields.io/appveyor/ci/back-to/livecli/master.svg?style=flat-square
-  [codecov-coverage]: https://codecov.io/github/livecli/livecli?branch=master
-  [codecov-coverage-badge]: https://img.shields.io/codecov/c/github/livecli/livecli/master.svg?style=flat-square
+  [travisci-build-status-badge]: https://api.travis-ci.org/livecli/livecli.svg?branch=master
   [pypi]: https://pypi.python.org/pypi/livecli
   [pypi-badge]: https://img.shields.io/pypi/v/livecli.svg?style=flat-square
+  [service.livecli.proxy]: https://github.com/livecli/service.livecli.proxy

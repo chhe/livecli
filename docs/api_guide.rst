@@ -17,7 +17,7 @@ The simplest use of the Livecli API looks like this:
 .. code-block:: python
 
     >>> import livecli
-    >>> streams = livecli.streams("http://twitch.tv/twitch")
+    >>> streams = livecli.streams("https://twitch.tv/twitch")
 
 This simply attempts to find a plugin and use it to extract streams from
 the URL. This works great in simple cases but if you want more
@@ -91,7 +91,7 @@ You can then extract streams like this:
 
 .. code-block:: python
 
-    >>> streams = session.streams("http://twitch.tv/twitch")
+    >>> streams = session.streams("https://twitch.tv/twitch")
 
 or set options like this:
 

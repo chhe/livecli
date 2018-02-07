@@ -3,8 +3,10 @@ Overview
 
 Livecli is a :ref:`command-line utility <cli>` that pipes video streams
 from various services into a video player, such as `VLC <http://videolan.org/>`_.
+
 The main purpose of Livecli is to allow the user to avoid buggy and CPU
 heavy flash plugins but still be able to enjoy various streamed content.
+
 There is also an :ref:`API <api_guide>` available for developers who want access
 to the video stream data. This project was forked from Livestreamer, which is
 no longer maintained.
@@ -22,26 +24,28 @@ Livecli is built upon a plugin system which allows support for new services
 to be easily added. Currently most of the big streaming services are supported,
 such as:
 
-- `Dailymotion <http://dailymotion.com/live>`_
-- `Livestream <http://livestream.com>`_
-- `Twitch <http://twitch.tv>`_
+- `Dailymotion <https://dailymotion.com/live>`_
+- `Livestream <https://livestream.com>`_
+- `Twitch <https://twitch.tv>`_
 - `UStream <http://ustream.tv>`_
-- `YouTube Live <http://youtube.com>`_
+- `YouTube Live <https://youtube.com>`_
 
 ... and many more. A full list of plugins currently included can be found
 on the :ref:`plugin_matrix` page.
+
+Also a plugin that will try to open a livestream on every website.
 
 Quickstart
 ----------
 
 The default behaviour of Livecli is to playback a stream in the default
-player (`VLC <http://videolan.org/>`_).
+player (`VLC`_).
 
 .. sourcecode:: console
 
     # pip install livecli
-    $ livecli twitch.tv/day9tv best
-    [cli][info] Found matching plugin twitch for URL twitch.tv/day9tv
+    $ livecli twitch.tv/twitch best
+    [cli][info] Found matching plugin twitch for URL twitch.tv/twitch
     [cli][info] Opening stream: source (hls)
     [cli][info] Starting player: vlc
 
@@ -64,3 +68,4 @@ See their respective sections for more information on how to use them.
     api_guide
     api
     changelog
+    applications

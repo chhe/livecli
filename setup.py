@@ -2,6 +2,8 @@
 
 import os
 import versioneer
+
+from codecs import open
 from os import environ
 from os.path import abspath, dirname, join
 from setuptools import setup, find_packages
@@ -58,6 +60,10 @@ if os.name == "nt" and version_info < (3, 0):
 if environ.get("NO_DEPS"):
     deps = []
 
+here = abspath(dirname(__file__))
+with open(join(here, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
+
 srcdir = join(dirname(abspath(__file__)), "src/")
 sys_path.insert(0, srcdir)
 
@@ -66,7 +72,8 @@ setup(name="livecli",
       cmdclass=versioneer.get_cmdclass(),
       description="Livecli is command-line utility that extracts streams "
                   "from various services and pipes them into a video player of "
-                  "choice.",
+                  "your choice.",
+      long_description=long_description,
       url="https://github.com/livecli/livecli",
       author="Livecli",
       author_email="backto@protonmail.ch",

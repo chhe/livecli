@@ -7,83 +7,6 @@
 Installation
 ============
 
-Linux and BSD packages
-----------------------
-
-==================================== ===========================================
-Distribution                         Installing
-==================================== ===========================================
-`Arch Linux`_                        .. code-block:: console
-
-                                        #
-
-`Arch Linux (aur, git)`_             .. code-block:: console
-
-                                        #
-
-                                     `Installing AUR packages`_
-`Fedora`_                            .. code-block:: console
-
-                                        #
-`Ubuntu`_                            .. code-block:: console
-
-                                        #
-                                        #
-                                        #
-==================================== ===========================================
-
-.. _Arch Linux:
-.. _Arch Linux (aur, git):
-.. _Fedora:
-.. _Ubuntu:
-
-.. _Installing AUR packages: https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages
-.. _Installing NixOS packages: https://nixos.org/wiki/Install/remove_software#How_to_install_software
-
-Other platforms
----------------
-
-==================================== ===========================================
-Platform                             Installing
-==================================== ===========================================
-Mac OS X                             .. code-block:: console
-
-                                        #
-`Homebrew`_                          .. code-block:: console
-
-                                        #
-
-                                     `Installing Homebrew packages`_
-Microsoft Windows                    See `Windows binaries`_ and `Windows portable version`_.
-
-`Chocolatey`_                        .. code-block:: console
-
-                                        C:\>
-
-                                     `Installing Chocolatey packages`_
-==================================== ===========================================
-
-.. _Homebrew:
-.. _Chocolatey:
-
-.. _Installing Homebrew packages: https://brew.sh
-.. _Installing Chocolatey packages: https://chocolatey.org
-
-Package maintainers
--------------------
-==================================== ===========================================
-Distribution/Platform                Maintainer
-==================================== ===========================================
-Arch
-Arch (aur, git)
-Chocolatey
-Fedora
-Ubuntu
-Windows binaries
-Windows port. version
-==================================== ===========================================
-
-
 Source code
 -----------
 
@@ -93,7 +16,7 @@ can install Livecli via source.
 There are a few different methods to do this,
 `pip <https://pip.readthedocs.io/en/latest/installing/>`_ the Python package
 manager, or by checking out the latest code with
-`Git <https://git-scm.com/downloads>`_. Using :command:`easy_install` is no longer recommended.
+`Git <https://git-scm.com/downloads>`_.
 
 .. note::
 
@@ -111,9 +34,6 @@ Version                              Installing
 `Latest release (pip)`_              .. code-block:: console
 
                                         # pip install -U livecli
-`Latest release (easy_install)`_     .. code-block:: console
-
-                                        # easy_install -U livecli
 `Development version (pip)`_         .. code-block:: console
 
                                         # pip install -U git+https://github.com/livecli/livecli.git
@@ -122,11 +42,10 @@ Version                              Installing
 
                                         $ git clone git://github.com/livecli/livecli.git
                                         $ cd livecli
-                                        # python setup.py install
+                                        # pip install -U .
 ==================================== ===========================================
 
 .. _Latest release (pip): https://pypi.python.org/pypi/livecli
-.. _Latest release (easy_install): https://pypi.python.org/pypi/livecli
 .. _Development version (pip): https://github.com/livecli/livecli
 .. _Development version (git): https://github.com/livecli/livecli
 
@@ -198,13 +117,13 @@ Installing without root permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you do not wish to install Livecli globally on your system it's
-recommended to use `virtualenv`_ to create a user owned Python environment
+recommended to use `venv`_ to create a user owned Python environment
 instead.
 
 .. code-block:: console
 
     Creating an environment
-    $ virtualenv ~/myenv
+    $ python3 -m venv ~/myenv
 
     Activating the environment
     $ source ~/myenv/bin/activate
@@ -222,32 +141,20 @@ instead.
     $ ~/myenv/bin/livecli ...
 
 
-.. _virtualenv: http://virtualenv.readthedocs.org/en/latest/
+.. _venv: https://docs.python.org/3/library/venv.html
 
 
 Windows binaries
 ----------------
 
-.. important::
-
-    Windows XP is not supported. |br|
-    Windows Vista requires at least SP2 to be installed.
-
 ==================================== ====================================
 Release                              Notes
 ==================================== ====================================
 `Stable release`_                    Download the installer from the `GitHub releases page`_.
-
-`Development build`_                 For testing purposes only! Updated once per day. |br|
-                                     Download the installer from `Bintray`_. |br|
-                                     See the `list of recent changes`_ since the last stable release.
 ==================================== ====================================
 
 .. _Stable release:
 .. _GitHub releases page: https://github.com/livecli/livecli/releases/latest
-.. _Development build:
-.. _Bintray:
-.. _list of recent changes:
 
 These installers contain:
 
@@ -265,31 +172,3 @@ and perform the following tasks:
   from the command prompt or powershell without specifying its directory.
 
 To build the installer on your own, ``NSIS`` and ``pynsist`` need to be installed.
-
-
-Windows portable version
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-==================================== ===========================================
-Maintainer                           Links
-==================================== ===========================================
-RosadinTV                            `Latest precompiled stable release`__
-
-                                     `Latest builder`__
-
-                                     `More info`__
-
-Beardypig                            `Latest precompiled stable release`__
-
-                                     `Latest builder`__
-
-                                     `More info`__
-==================================== ===========================================
-
-__ https://github.com/livecli/livecli-portable/releases/latest
-__ https://github.com/livecli/livecli-portable/archive/master.zip
-__ https://github.com/livecli/livecli-portable
-
-__ https://github.com/beardypig/livecli-portable/releases/latest
-__ https://github.com/beardypig/livecli-portable/archive/master.zip
-__ https://github.com/beardypig/livecli-portable

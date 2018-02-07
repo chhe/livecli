@@ -22,3 +22,7 @@
 .. |Linux| raw:: html
 
     <i class="fa fa-fw fa-linux"></i>
+
+.. |Android| raw:: html
+
+    <i class="fa fa-fw fa-android"></i>
