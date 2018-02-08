@@ -6,7 +6,7 @@ from livecli.stream import HLSStream
 
 __livecli_docs__ = {
     "domains": [
-        "",
+        "stream.me",
     ],
     "geo_blocked": [],
     "notes": "",

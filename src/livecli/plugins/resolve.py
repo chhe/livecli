@@ -68,7 +68,7 @@ class Resolve(Plugin):
     _window_location_re = re.compile(r"""<script[^<]+window\.location\.href\s?=\s?["'](?P<url>[^"']+)["'];[^<>]+""", re.DOTALL)
     _unescape_iframe_re = re.compile(r"""unescape\(["'](?P<data>%3C(?:iframe|%69%66%72%61%6d%65)%20[^"']+)["']""", re.IGNORECASE)
     # Regex for obviously ad paths
-    _ads_path = re.compile(r"""(?:/static)?/ads/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
+    _ads_path = re.compile(r"""(?:/static)?/ads?/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
     options = PluginOptions({
         "blacklist_netloc": None,
         "blacklist_path": None,

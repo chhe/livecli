@@ -16,7 +16,7 @@ from livecli.utils.crypto import decrypt_openssl
 
 __livecli_docs__ = {
     "domains": [
-        "stream.me",
+        "ott.streann.com",
     ],
     "geo_blocked": [],
     "notes": "",

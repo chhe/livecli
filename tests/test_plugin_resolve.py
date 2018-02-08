@@ -293,6 +293,9 @@ class TestPluginResolve(unittest.TestCase):
 
     def test_regex_ads_path(self):
         regex_test_list = [
+            "/ad.php",
+            "/ad20.php",
+            "/ad5.php",
             "/ads.htm",
             "/ads.html",
             "/ads/ads300x250.php",
