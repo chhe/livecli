@@ -72,6 +72,8 @@ class Resolve(Plugin):
     options = PluginOptions({
         "blacklist_netloc": None,
         "blacklist_path": None,
+        "whitelist_netloc": None,
+        "whitelist_path": None,
     })
 
     def __init__(self, url):
@@ -112,13 +114,54 @@ class Resolve(Plugin):
         if m:
             return m.group("url") is not None
 
-    def _make_url_list(self, old_list, base_url, stream_base=""):
+    def compare_url_path(self, parsed_url, check_list):
+        """compare if the parsed url matches a url in the check list
+
+        Args:
+           parsed_url: a url that was used with urlparse
+           check_list: a list of urls that should get checked
+
+        Returns:
+            True
+                if parsed_url in check_list
+            False
+                if parsed_url not in check_list
+        """
+        for netloc, path in check_list:
+            if parsed_url.netloc.endswith(netloc) and parsed_url.path.startswith(path):
+                return True
+            else:
+                return False
+
+    def merge_path_list(self, static_list, user_list):
+        """merge the static list from resolve.py with a user list
+
+        Args:
+           static_list: static list from this plugin
+           user_list: list from a user command
+
+        Returns:
+            A new valid static_list
+        """
+        for _path_url in user_list:
+            if not _path_url.startswith(("http", "//")):
+                _path_url = update_scheme("http://", _path_url)
+            _parsed_path_url = urlparse(_path_url)
+            if _parsed_path_url.netloc and _parsed_path_url.path:
+                static_list += [(_parsed_path_url.netloc, _parsed_path_url.path)]
+        return static_list
+
+    def _make_url_list(self, old_list, base_url, url_type="", stream_base=""):
         """Creates a list of validate urls from a list of broken urls
            and removes every blacklisted url
 
         Args:
             old_list: List of broken urls
             base_url: url that will get used for scheme and netloc
+            url_type: can be iframe or playlist
+                - iframe is used for
+                    --resolve-whitelist-netloc
+                - playlist is not used at the moment
             stream_base: basically same as base_url, but used for .f4m files.
 
         Returns:
@@ -131,6 +174,7 @@ class Resolve(Plugin):
             "googletagmanager.com",
             "javascript:false",
         )
+        whitelist_netloc_user = self.get_option("whitelist_netloc")
 
         blacklist_path = [
             ("facebook.com", "/plugins"),
@@ -139,12 +183,12 @@ class Resolve(Plugin):
         # Add --resolve-blacklist-path to blacklist_path
         blacklist_path_user = self.get_option("blacklist_path")
         if blacklist_path_user is not None:
-            for _path_url in blacklist_path_user:
-                if not _path_url.startswith(("http", "//")):
-                    _path_url = update_scheme("http://", _path_url)
-                _parsed_path_url = urlparse(_path_url)
-                if _parsed_path_url.netloc and _parsed_path_url.path:
-                    blacklist_path += [(_parsed_path_url.netloc, _parsed_path_url.path)]
+            blacklist_path = self.merge_path_list(blacklist_path, blacklist_path_user)
+
+        whitelist_path = []
+        whitelist_path_user = self.get_option("whitelist_path")
+        if whitelist_path_user is not None:
+            whitelist_path = self.merge_path_list(whitelist_path, whitelist_path_user)
 
         new_list = []
         for url in old_list:
@@ -166,27 +210,42 @@ class Resolve(Plugin):
                 new_url = urljoin(base_url, new_url)
             # Parse the url and remove not wanted urls
             parse_new_url = urlparse(new_url)
+
             REMOVE = False
-            # Removes blacklisted domains
-            if REMOVE is False and parse_new_url.netloc.endswith(blacklist_netloc):
-                REMOVE = True
-            # Removes blacklisted domains from --resolve-blacklist-netloc
-            if REMOVE is False and blacklist_netloc_user is not None and parse_new_url.netloc.endswith(tuple(blacklist_netloc_user)):
-                REMOVE = True
-            # Removes blacklisted paths from a domain
+
+            # sorted after the way livecli will try to remove an url
+            status_remove = [
+                "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
+                "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
+                "BL-static",  # - Removes blacklisted domains
+                "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
+                "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
+                "IMG/CHAT",   # - Removes images and chatrooms
+                "ADS",        # - Remove obviously ad urls
+            ]
+
             if REMOVE is False:
-                for netloc, path in blacklist_path:
-                    if parse_new_url.netloc.endswith(netloc) and parse_new_url.path.startswith(path):
+                count = 0
+                for url_status in ((url_type == "iframe" and
+                                    whitelist_netloc_user is not None and
+                                    parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
+                                   (url_type == "iframe" and
+                                    whitelist_path_user is not None and
+                                    self.compare_url_path(parse_new_url, whitelist_path) is False),
+                                   (parse_new_url.netloc.endswith(blacklist_netloc)),
+                                   (blacklist_netloc_user is not None and
+                                    parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
+                                   (self.compare_url_path(parse_new_url, blacklist_path) is True),
+                                   (parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat", "/chat.html"))),
+                                   (self._ads_path.match(parse_new_url.path))):
+
+                    count += 1
+                    if url_status:
                         REMOVE = True
-                        continue
-            # Removes images and chatrooms
-            if REMOVE is False and parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat")):
-                REMOVE = True
-            # Remove obviously ad urls
-            if REMOVE is False and self._ads_path.match(parse_new_url.path):
-                REMOVE = True
+                        break
+
             if REMOVE is True:
-                self.logger.debug("Removed url: {0}".format(new_url))
+                self.logger.debug("{0} - Removed url: {1}".format(status_remove[count - 1], new_url))
                 continue
             # Add url to the list
             new_list += [new_url]
@@ -209,9 +268,9 @@ class Resolve(Plugin):
             raise NoPluginError
 
         """ set a 2 sec cache to avoid loops with the same url """
-        self.logger.debug("Old cache: {0}".format(self._session_attributes.get("cache_url")))
+        # self.logger.debug("Old cache: {0}".format(self._session_attributes.get("cache_url")))
         self._session_attributes.set("cache_url", self.url, expires=2)
-        self.logger.debug("New cache: {0}".format(self._session_attributes.get("cache_url")))
+        # self.logger.debug("New cache: {0}".format(self._session_attributes.get("cache_url")))
         return
 
     def _iframe_src(self, res):
@@ -242,7 +301,7 @@ class Resolve(Plugin):
                 iframe_all = iframe_all + unescape_iframe
 
         if iframe_all:
-            iframe_list = self._make_url_list(iframe_all, self.url)
+            iframe_list = self._make_url_list(iframe_all, self.url, url_type="iframe")
             if iframe_list:
                 self.logger.info("Found iframes: {0}".format(", ".join(iframe_list)))
                 self.url = iframe_list[0]
@@ -285,7 +344,7 @@ class Resolve(Plugin):
         else:
             stream_base = ""
 
-        playlist_list = self._make_url_list(playlist_all, self.url, stream_base)
+        playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
         self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
         for url in playlist_list:
             parsed_url = urlparse(url)

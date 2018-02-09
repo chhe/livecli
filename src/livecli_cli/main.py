@@ -1049,6 +1049,14 @@ def setup_plugin_options():
         livecli.set_plugin_option("resolve", "blacklist_path",
                                   args.resolve_blacklist_path)
 
+    if args.resolve_whitelist_netloc:
+        livecli.set_plugin_option("resolve", "whitelist_netloc",
+                                  args.resolve_whitelist_netloc)
+
+    if args.resolve_whitelist_path:
+        livecli.set_plugin_option("resolve", "whitelist_path",
+                                  args.resolve_whitelist_path)
+
 
 def check_root():
     if hasattr(os, "getuid"):

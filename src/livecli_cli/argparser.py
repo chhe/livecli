@@ -1471,7 +1471,7 @@ plugin.add_argument(
 )
 plugin.add_argument(
     "--resolve-blacklist-path",
-    metavar="NETLOC",
+    metavar="PATH",
     type=comma_list,
     help="""
     Blacklist the path of a domain that should not be played with the Resolve plugin,
@@ -1480,6 +1480,32 @@ plugin.add_argument(
       "example.com/mypath,localhost/example,google.com/folder"
 
     Useful for websites with different iframes of the same domain.
+    """
+)
+plugin.add_argument(
+    "--resolve-whitelist-netloc",
+    metavar="NETLOC",
+    type=comma_list,
+    help="""
+    Whitelist domains that should be searched for the iframe search with the Resolve plugin,
+    by using a comma-separated list:
+
+      "example.com,localhost,google.com"
+
+    Useful for websites with lots of iframes, where the main iframe always has the same hosting domain.
+    """
+)
+plugin.add_argument(
+    "--resolve-whitelist-path",
+    metavar="PATH",
+    type=comma_list,
+    help="""
+    Whitelist the path of a domain that should be searched for the iframe search with the Resolve plugin,
+    by using a comma-separated list:
+
+      "example.com/mypath,localhost/example,google.com/folder"
+
+    Useful for websites with different iframes of the same domain, where the main iframe always has the same path.
     """
 )
 
