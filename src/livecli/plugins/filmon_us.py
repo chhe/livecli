@@ -120,6 +120,7 @@ class Filmon_us(Plugin):
 
         return streams
 
+    @Plugin.broken()
     def _get_streams(self):
         res = http.get(self.url, schema=_schema)
 

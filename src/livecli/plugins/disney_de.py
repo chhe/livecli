@@ -39,6 +39,7 @@ class DisneyDE(Plugin):
     def can_handle_url(cls, url):
         return _url_re.match(url)
 
+    @Plugin.broken()
     def _get_streams(self):
         res = http.get(self.url)
         match = (_stream_hls_re.search(res.text) or
