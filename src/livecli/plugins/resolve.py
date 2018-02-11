@@ -169,6 +169,7 @@ class Resolve(Plugin):
         """
         blacklist_netloc_user = self.get_option("blacklist_netloc")
         blacklist_netloc = (
+            "127.0.0.1",
             "about:blank",
             "adfox.ru",
             "googletagmanager.com",
@@ -177,6 +178,7 @@ class Resolve(Plugin):
         whitelist_netloc_user = self.get_option("whitelist_netloc")
 
         blacklist_path = [
+            ("expressen.se", "/_livetvpreview/"),
             ("facebook.com", "/plugins"),
             ("vesti.ru", "/native_widget.html"),
         ]
@@ -189,6 +191,16 @@ class Resolve(Plugin):
         whitelist_path_user = self.get_option("whitelist_path")
         if whitelist_path_user is not None:
             whitelist_path = self.merge_path_list(whitelist_path, whitelist_path_user)
+
+        blacklist_endswith = (
+            ".gif",
+            ".jpg",
+            ".png",
+            ".svg",
+            ".vtt",
+            "/chat.html",
+            "/chat",
+        )
 
         new_list = []
         for url in old_list:
@@ -220,7 +232,7 @@ class Resolve(Plugin):
                 "BL-static",  # - Removes blacklisted domains
                 "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
                 "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
-                "IMG/CHAT",   # - Removes images and chatrooms
+                "BL-ew",      # - Removes images and chatrooms
                 "ADS",        # - Remove obviously ad urls
             ]
 
@@ -236,7 +248,7 @@ class Resolve(Plugin):
                                    (blacklist_netloc_user is not None and
                                     parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
                                    (self.compare_url_path(parse_new_url, blacklist_path) is True),
-                                   (parse_new_url.path.endswith((".jpg", ".png", ".svg", "/chat", "/chat.html"))),
+                                   (parse_new_url.path.endswith(blacklist_endswith)),
                                    (self._ads_path.match(parse_new_url.path))):
 
                     count += 1
@@ -337,16 +349,7 @@ class Resolve(Plugin):
         Returns:
             yield every stream
         """
-        # m_base is used for .f4m files that doesn't have a base_url
-        m_base = self._stream_base_re.search(res)
-        if m_base:
-            stream_base = m_base.group("base")
-        else:
-            stream_base = ""
-
-        playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
-        self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
-        for url in playlist_list:
+        for url in playlist_all:
             parsed_url = urlparse(url)
             if parsed_url.path.endswith((".m3u8")):
                 try:
@@ -399,14 +402,17 @@ class Resolve(Plugin):
             self.logger.info("Found RTMP: {0}".format(m_rtmp.group("url")))
 
         if playlist_all:
-            for url in playlist_all:
-                parsed_url = urlparse(url)
-                if parsed_url.path.endswith((".gif", ".jpg", ".png", ".vtt")):
-                    playlist_all.remove(url)
-                if parsed_url.netloc.startswith(("127.0.0.1")):
-                    playlist_all.remove(url)
-            if playlist_all:
-                return self._resolve_playlist(res, playlist_all)
+            # m_base is used for .f4m files that doesn't have a base_url
+            m_base = self._stream_base_re.search(res)
+            if m_base:
+                stream_base = m_base.group("base")
+            else:
+                stream_base = ""
+
+            playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
+            if playlist_list:
+                self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
+                return self._resolve_playlist(res, playlist_list)
         return False
 
     def _res_text(self, url):
