@@ -33,16 +33,16 @@ Version                              Installing
 ==================================== ===========================================
 `Latest release (pip)`_              .. code-block:: console
 
-                                        # pip install -U livecli
+                                        $ pip install --user livecli
 `Development version (pip)`_         .. code-block:: console
 
-                                        # pip install -U git+https://github.com/livecli/livecli.git
+                                        $ pip install --user -U git+https://github.com/livecli/livecli.git
 
 `Development version (git)`_         .. code-block:: console
 
-                                        $ git clone git://github.com/livecli/livecli.git
+                                        $ git clone git+https://github.com/livecli/livecli.git
                                         $ cd livecli
-                                        # pip install -U .
+                                        $ pip install --user -U .
 ==================================== ===========================================
 
 .. _Latest release (pip): https://pypi.python.org/pypi/livecli
@@ -113,8 +113,8 @@ With these environment variables it is possible to use
 .. _iso3166: https://pypi.python.org/pypi/iso3166
 
 
-Installing without root permissions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing within a virtual environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you do not wish to install Livecli globally on your system it's
 recommended to use `venv`_ to create a user owned Python environment

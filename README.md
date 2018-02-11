@@ -2,6 +2,13 @@
 
 [![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![pypi.python.org][pypi-badge]][pypi]
 
+- Website: https://livecli.github.io/index.html
+- Latest release: https://github.com/livecli/livecli/releases/latest
+- GitHub: https://github.com/livecli/livecli
+- Issue tracker: https://github.com/livecli/livecli/issues
+- PyPI: https://pypi.python.org/pypi/livecli
+- Free software: Simplified BSD license
+
 Livecli is a _Command-line interface_ utility that pipes videos from online streaming services to a variety of video players.
 
 The main purpose of livecli is to convert CPU-heavy flash plugins to a less CPU-intensive format,
@@ -11,28 +18,27 @@ Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreame
 
 #### The advantages of Livecli:
 
-- **build in plugin** that will try to **open** a stream **on every website**.
-  - [`--resolve-blacklist-path`](https://livecli.github.io/cli.html#cmdoption-resolve-blacklist-netloc)
-  - [`--resolve-blacklist-netloc`](https://livecli.github.io/cli.html#cmdoption-resolve-blacklist-path)
-- fully compatible with [**Kodi** Leia](https://github.com/livecli/livecli#kodi)
-- **pycryptodomex** can be used **instead of pycryptodome**
-- **some other plugins**
-- **more options**
-  - [`--auto-output`](https://livecli.github.io/cli.html#cmdoption-ao)
-  - [`--auto-output-time`](https://livecli.github.io/cli.html#cmdoption-auto-output-time)
-  - [`--auto-output-id`](https://livecli.github.io/cli.html#cmdoption-auto-output-id)
-  - [`--auto-output-only-id`](https://livecli.github.io/cli.html#cmdoption-auto-output-only-id)
-  - [`--download-dir`](https://livecli.github.io/cli.html#cmdoption-download-dir)
-  - [`--hls-key-uri`](https://livecli.github.io/cli.html#cmdoption-hls-key-uri)
-  - [`--hls-session-reload`](https://livecli.github.io/cli.html#cmdoption-hls-session-reload)
-  - [`--hls-segment-ignore-number`](https://livecli.github.io/cli.html#cmdoption-hls-segment-ignore-number)
+- build in plugin that will try to open a stream on every website.
+- fully compatible with [Kodi Leia](https://github.com/livecli/livecli#kodi)
+- pycryptodomex can be used
+- some new plugins
+- [more commands](https://livecli.github.io/cli.html#command-line-usage)
 
 # [Installation][livecli-installation]
 
 #### Installation via Python pip
 
 ```bash
-pip install livecli
+pip install --user livecli
+```
+
+This will install livecli as a normal user, not as root.
+You might have to add `$HOME/.local/bin` to your `$PATH`
+
+open `~/.bashrc` or `~/.bash_profile` or `~/.profile` and add
+
+```sh
+PATH="$HOME/.local/bin:$PATH"
 ```
 
 #### Manual installation via Python
@@ -40,7 +46,16 @@ pip install livecli
 ```bash
 git clone https://github.com/livecli/livecli
 cd livecli
-pip install -U .
+pip install --user -U .
+```
+
+This will install livecli as a normal user, not as root.
+You might have to add `$HOME/.local/bin` to your `$PATH`
+
+open `~/.bashrc` or `~/.bash_profile` or `~/.profile` and add
+
+```sh
+PATH="$HOME/.local/bin:$PATH"
 ```
 
 # Features
@@ -72,12 +87,9 @@ CLI parameters and usage examples.
 
 # Kodi
 
-Livecli can be used with Kodi Leia,
-it can be installed from the [Livecli Kodi Repository](https://github.com/livecli/repo).
+Livecli can be used with Kodi Leia, it can be installed from the [Livecli Kodi Repository][kodi-repo].
 
-All Livecli specified commands should work there aswell.
-
-For more information see [service.livecli.proxy](https://github.com/livecli/service.livecli.proxy#servicelivecliproxy)
+For more information see [service.livecli.proxy][service.livecli.proxy]
 
 # Contributing
 
@@ -104,3 +116,4 @@ Please read [CONTRIBUTING.md][contributing] first. Thanks!
   [pypi]: https://pypi.python.org/pypi/livecli
   [pypi-badge]: https://img.shields.io/pypi/v/livecli.svg?style=flat-square
   [service.livecli.proxy]: https://github.com/livecli/service.livecli.proxy
+  [kodi-repo]: https://github.com/livecli/repo
