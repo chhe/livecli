@@ -349,6 +349,16 @@ class Livecli(object):
         """
         self.logger.set_output(output)
 
+    def set_logprefix(self, text):
+        """Sets the log prefix message used by this session.
+
+        Useful for multiple instances of livecli
+
+        :param text: string with custom prefix text
+
+        """
+        self.logger.set_prefix(text)
+
     def resolve_url(self, url, follow_redirect=True):
         """Attempts to find a plugin that can use this URL.
 

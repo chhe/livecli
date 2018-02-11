@@ -31,6 +31,12 @@ class TestSession(unittest.TestCase):
         self.logger.debug("test")
         self.assertEqual(self.output.getvalue(), "[test][debug] test\n")
 
+    def test_prefix(self):
+        self.manager.set_prefix("[0]")
+        self.manager.set_level("debug")
+        self.logger.debug("test")
+        self.assertEqual(self.output.getvalue(), "[0][test][debug] test\n")
+
 
 if __name__ == "__main__":
     unittest.main()

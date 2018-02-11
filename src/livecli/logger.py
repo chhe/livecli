@@ -10,6 +10,7 @@ class Logger(object):
     def __init__(self):
         self.output = sys.stdout
         self.level = 0
+        self.prefix = ""
         self.lock = Lock()
 
     def new_module(self, module):
@@ -26,6 +27,9 @@ class Logger(object):
     def set_output(self, output):
         self.output = output
 
+    def set_prefix(self, text):
+        self.prefix = str(text)
+
     def msg(self, module, level, msg, *args, **kwargs):
         if self.level < level or level > len(Logger.Levels):
             return
@@ -33,9 +37,10 @@ class Logger(object):
         msg = msg.format(*args, **kwargs)
 
         with self.lock:
-            self.output.write(Logger.Format.format(module=module,
-                                                   level=Logger.Levels[level],
-                                                   msg=msg))
+            self.output.write(self.prefix + Logger.Format.format(
+                module=module,
+                level=Logger.Levels[level],
+                msg=msg))
             if hasattr(self.output, "flush"):
                 self.output.flush()
 
