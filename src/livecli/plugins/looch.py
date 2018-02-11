@@ -22,7 +22,7 @@ __livecli_docs__ = {
 
 
 class Looch(Plugin):
-    url_re = re.compile(r"https?://(?:www\.)?looch\.tv/channel/(?P<name>[^/]+)(/videos/(?P<video_id>\d+))?")
+    url_re = re.compile(r"https?://(?:www\.)?looch\.tv/(?P<name>[^/]+)(/videos/(?P<video_id>\d+))?")
 
     api_base = "https://api.looch.tv"
     channel_api = api_base + "/channels/{name}"
