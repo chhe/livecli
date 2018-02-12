@@ -2,6 +2,7 @@ import pkgutil
 import unittest
 
 import imp
+import six
 from livecli import Livecli
 
 import livecli.plugins
@@ -32,8 +33,10 @@ class PluginTestMeta(type):
         return type.__new__(mcs, name, bases, dict)
 
 
+# Python 2.7 and Python 3
+# https://pythonhosted.org/six/#six.add_metaclass
+@six.add_metaclass(PluginTestMeta)
 class TestPlugins(unittest.TestCase):
     """
     Test that an instance of each plugin can be created.
     """
-    __metaclass__ = PluginTestMeta
