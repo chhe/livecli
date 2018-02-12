@@ -3,7 +3,7 @@ from .util import pack_bytes_into
 
 from collections import namedtuple
 from struct import Struct, error as struct_error
-from inspect import getargspec
+from livecli.compat import compat_getargspec as getargspec
 
 (SCRIPT_DATA_TYPE_NUMBER, SCRIPT_DATA_TYPE_BOOLEAN,
  SCRIPT_DATA_TYPE_STRING, SCRIPT_DATA_TYPE_OBJECT,

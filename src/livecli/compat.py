@@ -1,3 +1,4 @@
+import inspect
 import os
 import sys
 
@@ -74,9 +75,20 @@ except ImportError:
     from HTMLParser import HTMLParser
     compat_unescape = HTMLParser().unescape
 
+if hasattr(inspect, "getfullargspec"):
+    # python 3
+    def compat_getargspec(func):
+        return inspect.getfullargspec(func)
+else:
+    # python 2.7
+    def compat_getargspec(func):
+        return inspect.getargspec(func)
+
+
 __all__ = [
     "bytes",
     "compat_devnull",
+    "compat_getargspec",
     "compat_queue",
     "compat_unescape",
     "compat_which",

@@ -1,9 +1,8 @@
-import inspect
-
 import requests
 
 from .stream import Stream
 from .wrappers import StreamIOThreadWrapper, StreamIOIterWrapper
+from ..compat import compat_getargspec
 from ..exceptions import StreamError
 
 
@@ -15,7 +14,7 @@ def normalize_key(keyval):
 
 
 def valid_args(args):
-    argspec = inspect.getargspec(requests.Request.__init__)
+    argspec = compat_getargspec(requests.Request.__init__)
 
     return dict(filter(lambda kv: kv[0] in argspec.args, args.items()))
 
