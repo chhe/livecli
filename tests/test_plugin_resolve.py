@@ -9,6 +9,46 @@ class TestPluginResolve(unittest.TestCase):
         self.assertTrue(Resolve.can_handle_url("resolve://local.local"))
         self.assertTrue(Resolve.can_handle_url("local.local"))
 
+    def test_compare_url_path(self):
+        from livecli.compat import urlparse
+
+        blacklist_path = [
+            ("expressen.se", "/_livetvpreview/"),
+            ("facebook.com", "/plugins"),
+            ("vesti.ru", "/native_widget.html"),
+        ]
+
+        url_true = "https://www.facebook.com/plugins/123.html"
+        url_false = "https://example.com/123.html"
+
+        parse_new_url = urlparse(url_true)
+        self.assertTrue(Resolve.compare_url_path(Resolve, parse_new_url, blacklist_path))
+
+        parse_new_url = urlparse(url_false)
+        self.assertFalse(Resolve.compare_url_path(Resolve, parse_new_url, blacklist_path))
+
+    def test_merge_path_list(self):
+        blacklist_path = [
+            ("expressen.se", "/_livetvpreview/"),
+            ("facebook.com", "/plugins"),
+            ("vesti.ru", "/native_widget.html"),
+        ]
+
+        blacklist_path_user = [
+            "example.com/plugins",
+            "example.com/myplugins",
+        ]
+
+        blacklist_path = Resolve.merge_path_list(Resolve, blacklist_path, blacklist_path_user)
+
+        blacklist_path_user_test = [
+            ("example.com", "/plugins"),
+            ("example.com", "/myplugins"),
+        ]
+
+        for test_url in blacklist_path_user_test:
+            self.assertIn(test_url, blacklist_path)
+
     def test_iframe_regex(self):
         regex_test_list = [
             {

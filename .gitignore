@@ -17,6 +17,7 @@ dist
 .mr.developer.cfg
 .hg
 .bzr
+.pytest_cache
 .svn
 *.pyc
 *.pyo

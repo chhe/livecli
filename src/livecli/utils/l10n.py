@@ -7,15 +7,9 @@ try:
     from iso639 import languages
     PYCOUNTRY = False
 except ImportError:
-    try:
-        from pycountry import countries
-        from pycountry import languages
-        PYCOUNTRY = True
-    except ImportError:
-        # Kodi - script.module.livecli
-        from livecli.packages.iso3166 import countries
-        from livecli.packages.iso639 import languages
-        PYCOUNTRY = False
+    from pycountry import countries
+    from pycountry import languages
+    PYCOUNTRY = True
 
 DEFAULT_LANGUAGE = "en"
 DEFAULT_COUNTRY = "US"
