@@ -10,6 +10,8 @@ class TestPluginTF1(unittest.TestCase):
         self.assertTrue(TF1.can_handle_url("http://lci.fr/direct"))
         self.assertTrue(TF1.can_handle_url("http://www.lci.fr/direct"))
         self.assertTrue(TF1.can_handle_url("http://tf1.fr/tmc/direct"))
+        self.assertTrue(TF1.can_handle_url("https://www.tf1.fr/tf1-series-films/direct"))
+        self.assertTrue(TF1.can_handle_url("https://www.tf1.fr/tfx/direct"))
 
         # shouldn't match
         self.assertFalse(TF1.can_handle_url("http://tf1.fr/direct"))

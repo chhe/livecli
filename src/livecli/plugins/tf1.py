@@ -17,18 +17,28 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-01-09",
+    "last_update": "2018-02-12",
 }
 
 
 class TF1(Plugin):
-    url_re = re.compile(r"https?://(?:www\.)?(?:tf1\.fr/(\w+)/direct|(lci).fr/direct)/?")
+    url_re = re.compile(r"https?://(?:www\.)?(?:tf1\.fr/([^/]+)/direct|(lci).fr/direct)/?")
     embed_url = "http://www.wat.tv/embedframe/live{0}"
     embed_re = re.compile(r"urlLive.*?:.*?\"(http.*?)\"", re.MULTILINE)
     api_url = "http://www.wat.tv/get/{0}/591997"
     swf_url = "http://www.wat.tv/images/v70/PlayerLite.swf"
-    hds_channel_remap = {"tf1": "androidliveconnect", "lci": "androidlivelci"}
-    hls_channel_remap = {"lci": "LCI", "tf1": "V4"}
+    hds_channel_remap = {
+        "lci": "androidlivelci",
+        "tf1-series-films": "hd1live",
+        "tf1": "androidliveconnect",
+        "tfx": "nt1live",
+    }
+    hls_channel_remap = {
+        "lci": "LCI",
+        "tf1-series-films": "hd1",
+        "tf1": "V4",
+        "tfx": "nt1",
+    }
 
     @classmethod
     def can_handle_url(cls, url):
