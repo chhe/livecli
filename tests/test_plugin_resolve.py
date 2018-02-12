@@ -10,6 +10,7 @@ class TestPluginResolve(unittest.TestCase):
         self.assertTrue(Resolve.can_handle_url("local.local"))
 
     def test_compare_url_path(self):
+        rr = Resolve("https://example.com")
         from livecli.compat import urlparse
 
         blacklist_path = [
@@ -22,12 +23,13 @@ class TestPluginResolve(unittest.TestCase):
         url_false = "https://example.com/123.html"
 
         parse_new_url = urlparse(url_true)
-        self.assertTrue(Resolve.compare_url_path(Resolve, parse_new_url, blacklist_path))
+        self.assertTrue(rr.compare_url_path(parse_new_url, blacklist_path))
 
         parse_new_url = urlparse(url_false)
-        self.assertFalse(Resolve.compare_url_path(Resolve, parse_new_url, blacklist_path))
+        self.assertFalse(rr.compare_url_path(parse_new_url, blacklist_path))
 
     def test_merge_path_list(self):
+        rr = Resolve("https://example.com")
         blacklist_path = [
             ("expressen.se", "/_livetvpreview/"),
             ("facebook.com", "/plugins"),
@@ -39,7 +41,7 @@ class TestPluginResolve(unittest.TestCase):
             "example.com/myplugins",
         ]
 
-        blacklist_path = Resolve.merge_path_list(Resolve, blacklist_path, blacklist_path_user)
+        blacklist_path = rr.merge_path_list(blacklist_path, blacklist_path_user)
 
         blacklist_path_user_test = [
             ("example.com", "/plugins"),
