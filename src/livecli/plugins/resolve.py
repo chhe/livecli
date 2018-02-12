@@ -127,11 +127,11 @@ class Resolve(Plugin):
             False
                 if parsed_url not in check_list
         """
+        status = False
         for netloc, path in check_list:
             if parsed_url.netloc.endswith(netloc) and parsed_url.path.startswith(path):
-                return True
-            else:
-                return False
+                status = True
+        return status
 
     def merge_path_list(self, static_list, user_list):
         """merge the static list from resolve.py with a user list
