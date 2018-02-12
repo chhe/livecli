@@ -23,7 +23,7 @@ install:
 
 script:
   - python -m pytest tests/
-  - coverage run -m pytest tests/
+  - coverage run setup.py test
   - flake8 src/ --show-source --statistic --exit-zero
   # test building the docs
   - if [[ $BUILD_DOCS == 'yes' ]]; then make --directory=docs html; fi

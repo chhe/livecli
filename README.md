@@ -1,6 +1,6 @@
 # [Livecli][livecli-website]
 
-[![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![pypi.python.org][pypi-badge]][pypi]
+[![TravisCI build status][travisci-build-status-badge]][travisci-build-status] [![codecov.io][codecov-coverage-badge]][codecov-coverage] [![pypi.python.org][pypi-badge]][pypi]
 
 - Website: https://livecli.github.io/index.html
 - Latest release: https://github.com/livecli/livecli/releases/latest
@@ -117,3 +117,5 @@ Please read [CONTRIBUTING.md][contributing] first. Thanks!
   [pypi-badge]: https://img.shields.io/pypi/v/livecli.svg?style=flat-square
   [service.livecli.proxy]: https://github.com/livecli/service.livecli.proxy
   [kodi-repo]: https://github.com/livecli/repo
+  [codecov-coverage]: https://codecov.io/gh/livecli/livecli
+  [codecov-coverage-badge]: https://codecov.io/gh/livecli/livecli/branch/master/graph/badge.svg
