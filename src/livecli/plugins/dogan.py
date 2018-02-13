@@ -21,7 +21,7 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": True,
-    "last_update": "2017-10-16",
+    "last_update": "2018-02-13",
 }
 
 
@@ -38,6 +38,7 @@ class Dogan(Plugin):
            dreamturk.com.tr/canli)
     """, re.VERBOSE)
     playerctrl_re = re.compile(r'''<div[^>]*?ng-controller=(?P<quote>["'])(?:Live)?PlayerCtrl(?P=quote).*?>''', re.DOTALL)
+    videoelement_re = re.compile(r'''<div[^>]*?id=(?P<quote>["'])video-element(?P=quote).*?>''', re.DOTALL)
     data_id_re = re.compile(r'''data-id=(?P<quote>["'])(?P<id>\w+)(?P=quote)''')
     content_id_re = re.compile(r'"content(?:I|i)d", "(\w+)"')
     content_api = "/actions/content/media/{id}"
@@ -70,6 +71,15 @@ class Dogan(Plugin):
             # extract the content id from the player control data
             player_ctrl_div = player_ctrl_m.group(0)
             content_id_m = self.data_id_re.search(player_ctrl_div)
+            if content_id_m:
+                return content_id_m.group("id")
+
+        # find <div id="video-element"
+        videoelement_m = self.videoelement_re.search(res.text)
+        if videoelement_m:
+            # extract the content id from the player control data
+            videoelement_div = videoelement_m.group(0)
+            content_id_m = self.data_id_re.search(videoelement_div)
             if content_id_m:
                 return content_id_m.group("id")
 
