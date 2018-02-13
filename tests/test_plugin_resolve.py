@@ -1,5 +1,6 @@
 import unittest
 
+from livecli.logger import Logger
 from livecli.plugins.resolve import Resolve
 
 
@@ -50,6 +51,97 @@ class TestPluginResolve(unittest.TestCase):
 
         for test_url in blacklist_path_user_test:
             self.assertIn(test_url, blacklist_path)
+
+    def test_make_url_list(self):
+        self_url = "https://example.com"
+        rr = Resolve(url=self_url)
+        rr.manager = Logger()
+        rr.logger = rr.manager.new_module("test")
+
+        test_all_removed = [
+            "http://about:blank",
+            "http://expressen.se/_livetvpreview/123.html",
+            "https://127.0.0.1",
+            "https://adfox.ru",
+            "https://example.com",
+            "https://facebook.com/plugins123",
+            "https://googletagmanager.com",
+            "https://javascript:false",
+            "https://vesti.ru/native_widget.html",
+            "https://example.com/test"
+            "https://example.com/test.gif",
+            "https://example.com/test.jpg",
+            "https://example.com/test.png",
+            "https://example.com/test.svg",
+            "https://example.com/test.vtt",
+            "https://example.com/test/chat.html",
+            "https://example.com/test/chat",
+            "https://example.com/ad.php",
+            "https://example.com/ad20.php",
+            "https://example.com/ad5.php",
+            "https://example.com/ads.htm",
+            "https://example.com/ads.html",
+            "https://example.com/ads/ads300x250.php",
+            "https://example.com/ads468x60.htm",
+            "https://example.com/ads468x60.html",
+            "https://example.com/static/ads.htm",
+            "https://example.com/static/ads.html",
+            "https://example.com/static/ads/300x250_1217n.htm",
+            "https://example.com/static/ads/300x250_1217n.html"
+            "https://example.com/static/ads/468x60.htm",
+            "https://example.com/static/ads/468x60.html",
+            "https://example.com/static/ads468x60.htm",
+            "https://example.com/static/ads468x60.html",
+        ]
+
+        test_all_valid = [
+            "\/\/example.com/true1",
+            "http&#58;//example.com/true2",
+            "https&#58;//example.com/true3",
+            "/true4_no_base/123.html",
+            "//example.com/true5",
+            "//example.com/true6",
+            "//example.com/true6",
+            "https://example.com/true7",
+            "https://example.com/true7",
+            "https://example.com/true7",
+        ]
+        test_all = test_all_removed + test_all_valid
+        test_list = rr._make_url_list(test_all, self_url, url_type="iframe")
+
+        test_all_result = [
+            "https://example.com/true1",
+            "http://example.com/true2",
+            "https://example.com/true3",
+            "https://example.com/true4_no_base/123.html",
+            "https://example.com/true5",
+            "https://example.com/true6",
+            "https://example.com/true7",
+        ]
+
+        for test_url in test_all_result:
+            self.assertIn(test_url, test_list)
+        self.assertListEqual(sorted(test_all_result), sorted(test_list))
+
+        # Test 2 stream_base
+        test_all_valid_2 = [
+            "\/\/example.com/true1",
+            "/true4_no_base/123.html",
+            "//example.com/true5",
+        ]
+
+        stream_base = "http://example.com/base/stream/"
+        test_list_2 = rr._make_url_list(test_all_valid_2, self_url, url_type="playlist", stream_base=stream_base)
+
+        test_all_result_2 = [
+            "https://example.com/true1",
+            "http://example.com/base/stream/true4_no_base/123.html",
+            "https://example.com/true5",
+        ]
+
+        for test_url in test_all_result_2:
+            self.assertIn(test_url, test_list_2)
+        self.assertListEqual(sorted(test_all_result_2), sorted(test_list_2))
 
     def test_iframe_regex(self):
         regex_test_list = [
