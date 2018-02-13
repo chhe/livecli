@@ -4,6 +4,7 @@ import re
 from livecli.plugin import Plugin
 from livecli.plugin.api import http
 from livecli.stream import HLSStream
+from livecli.utils import update_scheme
 
 __livecli_docs__ = {
     "domains": [
@@ -13,14 +14,14 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-06-16",
+    "last_update": "2018-02-13",
 }
 
 
 class Kanal7(Plugin):
     url_re = re.compile(r"https?://(?:www.)?kanal7.com/canli-izle")
-    iframe_re = re.compile(r'iframe .*?src="(http://[^"]*?)"')
-    stream_re = re.compile(r'''tp_file\s+=\s+['"](http[^"]*?)['"]''')
+    iframe_re = re.compile(r'iframe .*?src="((?:https?:)?//[^"]*?)"')
+    stream_re = re.compile(r"""src:\s?["'](?P<url>[^"']+\.m3u8)["']""")
 
     @classmethod
     def can_handle_url(cls, url):
@@ -32,6 +33,7 @@ class Kanal7(Plugin):
         iframe = self.iframe_re.search(res.text)
         iframe_url = iframe and iframe.group(1)
         if iframe_url:
+            iframe_url = update_scheme(self.url, iframe_url)
             self.logger.debug("Found iframe: {}", iframe_url)
         return iframe_url
 
