@@ -529,6 +529,36 @@ output.add_argument(
     """
 )
 
+server = parser.add_argument_group("Server options")
+server.add_argument(
+    "--server",
+    action="store_true",
+    help="""
+    Run Livecli as a local server and open streams from a playlist,
+    all parameters should be encoded.
+
+    Example:
+
+        http://127.0.0.1:53473/play/?url=https%253A%252F%252Fde.euronews.com%252Flive
+        http://127.0.0.1:53473/play/?url=https%253A%252F%252Ftvonline.ewe.de%252Fwatch%252Fard&zattoo-email=EMAIL&zattoo-password=PASSWORD
+
+    An IPTV M3U Playlist Generator for Livecli can be found at https://github.com/livecli/iptv
+
+    Note: This command should be only used on a local network!
+    """
+)
+server.add_argument(
+    "--server-port",
+    metavar="PORT",
+    type=num(int, min=0, max=65535),
+    default=53473,
+    help="""
+    A fixed port to use for the --server command.
+
+    Default is 53473.
+    """
+)
+
 stream = parser.add_argument_group("Stream options")
 stream.add_argument(
     "--url",

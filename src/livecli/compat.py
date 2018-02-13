@@ -38,6 +38,12 @@ except ImportError:
     from urllib import quote, unquote, urlencode
 
 try:
+    from urllib.parse import unquote_plus
+except ImportError:
+    # python 2.7
+    from urllib import unquote_plus
+
+try:
     import queue as compat_queue
 except ImportError:
     # python 2.7
@@ -104,6 +110,7 @@ __all__ = [
     "quote",
     "range",
     "str",
+    "unquote_plus",
     "unquote",
     "urlencode",
     "urljoin",

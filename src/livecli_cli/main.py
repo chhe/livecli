@@ -38,6 +38,8 @@ from .console import ConsoleOutput
 from .constants import CONFIG_FILES, PLUGINS_DIR, STREAM_SYNONYMS, DOWNLOAD_DIR
 from .output import FileOutput, PlayerOutput
 from .utils import NamedPipe, HTTPServer, ignored, progress, stream_to_url
+from .utils import server_HTTPRequest
+from .utils import server_ThreadedHTTPServer
 
 ACCEPTABLE_ERRNO = (errno.EPIPE, errno.EINVAL, errno.ECONNRESET)
 try:
@@ -1126,6 +1128,42 @@ def cache_stream_data(cache_stream_name, cache_stream_url):
     cache.set("cache_url", args.url, (args.hls_session_reload + 60))
 
 
+def main_server():
+    """ class used for --server """
+    error_code = 0
+
+    HOST = "127.0.0.1"
+    PORT = int(args.server_port)
+
+    console.logger.info("Starting server: {0} on port {1}".format(HOST, PORT))
+
+    server_class = server_ThreadedHTTPServer
+    server_class.allow_reuse_address = True
+    try:
+        httpd = server_class((HOST, PORT), server_HTTPRequest)
+    except OSError as err:
+        console.exit("Failed to create HTTP server: {0}", err)
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        # Close server
+        if httpd:
+            httpd.shutdown()
+            httpd.server_close()
+        console.msg("Interrupted! Exiting...")
+        error_code = 130
+    finally:
+        if httpd:
+            try:
+                console.logger.info("Closing server {0} on port {1}...".format(HOST, PORT))
+                httpd.shutdown()
+                httpd.server_close()
+            except KeyboardInterrupt:
+                error_code = 130
+
+    sys.exit(error_code)
+
+
 def main():
     error_code = 0
 
@@ -1144,6 +1182,8 @@ def main():
 
     if args.plugins:
         print_plugins()
+    elif args.server:
+        return main_server()
     elif args.can_handle_url:
         try:
             livecli.resolve_url(args.can_handle_url)
