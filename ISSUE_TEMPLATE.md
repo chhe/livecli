@@ -8,13 +8,6 @@
 
 ----
 
-### Checklist
-
-- [x] This is a bug report.
-- [ ] This is a feature request.
-- [ ] This is a plugin (improvement) request.
-- [ ] I have read the contribution guidelines.
-
 ### Description
 
 ...

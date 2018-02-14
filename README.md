@@ -6,6 +6,7 @@
 - Latest release: https://github.com/livecli/livecli/releases/latest
 - GitHub: https://github.com/livecli/livecli
 - Issue tracker: https://github.com/livecli/livecli/issues
+- Kodi version: https://github.com/livecli/repo
 - PyPI: https://pypi.python.org/pypi/livecli
 - Free software: Simplified BSD license
 
@@ -19,9 +20,10 @@ Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreame
 #### The advantages of Livecli:
 
 - build in plugin that will try to open a stream on every website.
+- build in local server command
 - fully compatible with [Kodi Leia](https://github.com/livecli/livecli#kodi)
 - pycryptodomex can be used
-- some new plugins
+- some new plugins and some broken plugins are fixed
 - [more commands](https://livecli.github.io/cli.html#command-line-usage)
 
 # [Installation][livecli-installation]
