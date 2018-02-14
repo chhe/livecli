@@ -1,100 +1,89 @@
-"""Plugin for swedish news paper Aftonbladet's streaming service."""
-
 import re
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
-from livecli.stream import HDSStream, HLSStream
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
 
 __livecli_docs__ = {
     "domains": [
-        "aftonbladet.se",
+        "tv.aftonbladet.se",
     ],
     "geo_blocked": [],
     "notes": "",
     "live": True,
     "vod": True,
-    "last_update": "2014-06-03",
+    "last_update": "2018-02-14",
 }
-
-PLAYLIST_URL_FORMAT = "http://{address}/{path}/{filename}"
-STREAM_TYPES = {
-    "hds": HDSStream.parse_manifest,
-    "hls": HLSStream.parse_variant_playlist
-}
-STREAM_FORMATS = ("m3u8", "f4m")
-VIDEO_INFO_URL = "http://aftonbladet-play-static-ext.cdn.drvideo.aptoma.no/actions/video"
-METADATA_URL = "http://aftonbladet-play-metadata.cdn.drvideo.aptoma.no/video/{0}.json"
-
-_embed_re = re.compile(r"<iframe src=\"(http://tv.aftonbladet.se[^\"]+)\"")
-_aptoma_id_re = re.compile(r"<div id=\"drvideo\".+data-aptomaId=\"([^\"]+)\"")
-_live_re = re.compile(r"data-isLive=\"true\"")
-_url_re = re.compile(r"http(s)?://(\w+.)?.aftonbladet.se")
-
-_video_schema = validate.Schema(
-    {
-        "formats": validate.all(
-            {
-                validate.text: {
-                    validate.text: validate.all(
-                        dict,
-                        validate.filter(lambda k, v: k in STREAM_FORMATS),
-                        {
-                            validate.text: [{
-                                "address": validate.text,
-                                "filename": validate.text,
-                                "path": validate.text
-                            }]
-                        },
-                    )
-                }
-            },
-            validate.filter(lambda k, v: k in STREAM_TYPES)
-        )
-    }
-)
 
 
 class Aftonbladet(Plugin):
+    """Plugin for swedish news paper Aftonbladet's streaming service."""
+
+    _url_re = re.compile(r"https?://tv\.aftonbladet\.se/[^/]+/[^/]+/(?P<id>\d+)")
+
+    api_url = "https://svp.vg.no/svp/api/v1/ab/assets/{0}?appName=svp-player"
+
+    _video_schema = validate.Schema(
+        {
+            validate.optional("title"): validate.text,
+            validate.optional("assetType"): validate.text,
+            validate.optional("streamType"): validate.text,
+            validate.optional("status"): validate.text,
+            "streamUrls": {
+                validate.optional("hls"): validate.any(validate.text, None),
+                validate.optional("hds"): validate.any(validate.text, None),
+                validate.optional("mp4"): validate.any(validate.text, None),
+            },
+        }
+    )
+
     @classmethod
     def can_handle_url(cls, url):
-        return _url_re.match(url)
+        return cls._url_re.match(url)
 
     def _get_streams(self):
-        res = http.get(self.url)
-        match = _embed_re.search(res.text)
-        if match:
-            res = http.get(match.group(1))
-
-        match = _aptoma_id_re.search(res.text)
-        if not match:
+        m_url = self._url_re.match(self.url)
+        if not m_url:
             return
 
-        aptoma_id = match.group(1)
-        if not _live_re.search(res.text):
-            res = http.get(METADATA_URL.format(aptoma_id))
-            metadata = http.json(res)
-            video_id = metadata["videoId"]
-        else:
-            video_id = aptoma_id
+        video_id = m_url.group("id")
 
-        res = http.get(VIDEO_INFO_URL, params=dict(id=video_id))
-        video = http.json(res, schema=_video_schema)
-        streams = {}
-        for fmt, providers in video["formats"].items():
-            for name, provider in providers.items():
-                for ext, playlists in provider.items():
-                    for playlist in playlists:
-                        url = PLAYLIST_URL_FORMAT.format(**playlist)
-                        parser = STREAM_TYPES[fmt]
+        headers = {
+            "User-Agent": useragents.FIREFOX,
+            "Referer": self.url
+        }
 
-                        try:
-                            streams.update(parser(self.session, url))
-                        except IOError as err:
-                            self.logger.error("Failed to extract {0} streams: {1}",
-                                              fmt.upper(), err)
+        res = http.get(self.api_url.format(video_id), headers=headers)
+        data = http.json(res, schema=self._video_schema)
 
-        return streams
+        title = data.get("title")
+        streamurls = data.get("streamUrls")
+
+        if title:
+            self.stream_title = title
+
+        if streamurls:
+            hls_url = streamurls.get("hls")
+            if hls_url:
+                streams = HLSStream.parse_variant_playlist(self.session, hls_url, headers=headers).items()
+                if not streams:
+                    yield "live", HLSStream(self.session, hls_url, headers=headers)
+                for s in streams:
+                    yield s
+
+            hds_url = streamurls.get("hds")
+            if hds_url:
+                for s in HDSStream.parse_manifest(self.session, hds_url, headers=headers).items():
+                    yield s
+
+            mp4_url = streamurls.get("mp4")
+            if mp4_url:
+                name = "live"
+                yield name, HTTPStream(self.session, mp4_url, headers=headers)
 
 
 __plugin__ = Aftonbladet
