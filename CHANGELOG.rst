@@ -1,3 +1,42 @@
+livecli 3.3.0 (2018-02-14)
+--------------------------
+Livecli 3.3.0 has been released!
+
+- New command --server to start a local Livecli server
+- New option --resolve-whitelist-netloc for iframes
+- New option --resolve-whitelist-path for iframes
+- Plugins updates
+
+For more details see below.
+
+::
+
+    back-to <backto@protonmail.ch> (25):
+          [bigo] remove session-reload, playlists are working again
+          [docs] small updates on .md files
+          [docs] use always the last release version not the git tag, meta data
+          [dogan] Fix for teve2.com.tr/canli-yayin
+          [install] recommend pip install --user instead of sudo and README update
+          [kanal7] Fix for kanal7.com/canli-izle
+          [logger] allow a prefix message for the log output
+          [looch] url_re update
+          [mediaklikk] Fixed plugin livestream, vod and radio
+          [plugins] marked some plugins as broken and removed expressen plugin ...
+          [resolve] Fixed compare_url_path
+          [resolve] made the playlist removal better and fixed expressen.se
+          [resolve] update ad regex and small plugin docs update.
+          [resolve] whitelist commands, _make_url_list cleanup with better debug log
+          [server] New command to start a local Livecli server
+          [tests] Fixed metaclass for test_plugins.py on python 3
+          [tests] resolve - _make_url_list
+          [tests] resolve and log tests, removed not used Kodi import
+          [TF1] channel maps update.
+          [travis] fixed Codevov for travis
+          [tv3cat] fixed url validate schema
+          [zattoo] Added support for zattoo recordings
+          Removed DeprecationWarning: inspect.getargspec() is deprecated
+          Removed Plugins, all of them should be covered by resolve.py
+
 livecli 3.2.0 (2018-02-07)
 --------------------------
 Livecli 3.2.0 has been released!
