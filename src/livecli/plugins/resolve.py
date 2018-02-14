@@ -114,6 +114,12 @@ class Resolve(Plugin):
         if m:
             return m.group("url") is not None
 
+    def help_info_e(self, e):
+        if "CERTIFICATE_VERIFY_FAILED" in str(e):
+            self.logger.info("A workaround for this error is --http-no-ssl-verify "
+                             "https://livecli.github.io/cli.html#cmdoption-http-no-ssl-verify")
+        return
+
     def compare_url_path(self, parsed_url, check_list):
         """compare if the parsed url matches a url in the check list
 
@@ -358,14 +364,16 @@ class Resolve(Plugin):
                         yield "live", HLSStream(self.session, url, headers=self.headers)
                     for s in streams:
                         yield s
-                except Exception:
-                    self.logger.error("Skipping hls_url: {0}".format(url))
+                except Exception as e:
+                    self.logger.error("Skipping hls_url - {0}".format(str(e)))
+                    self.help_info_e(e)
             elif parsed_url.path.endswith((".f4m")):
                 try:
                     for s in HDSStream.parse_manifest(self.session, url, headers=self.headers).items():
                         yield s
-                except Exception:
-                    self.logger.error("Skipping hds_url: {0}".format(url))
+                except Exception as e:
+                    self.logger.error("Skipping hds_url - {0}".format(str(e)))
+                    self.help_info_e(e)
             elif parsed_url.path.endswith((".mp3", ".mp4")):
                 try:
                     name = "live"
@@ -373,13 +381,15 @@ class Resolve(Plugin):
                     if m:
                         name = "{0}k".format(m.group("bitrate"))
                     yield name, HTTPStream(self.session, url, headers=self.headers)
-                except Exception:
-                    self.logger.error("Skipping http_url: {0}".format(url))
+                except Exception as e:
+                    self.logger.error("Skipping http_url - {0}".format(str(e)))
+                    self.help_info_e(e)
             elif parsed_url.path.endswith((".mpd")):
                 try:
                     self.logger.info("Found mpd: {0}".format(url))
-                except Exception:
-                    self.logger.error("Skipping mpd_url: {0}".format(url))
+                except Exception as e:
+                    self.logger.error("Skipping mpd_url - {0}".format(str(e)))
+                    self.help_info_e(e)
 
     def _resolve_res(self, res):
         """Tries to find every .f4m or .m3u8 url on this website,
