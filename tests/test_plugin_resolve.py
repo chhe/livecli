@@ -232,6 +232,21 @@ class TestPluginResolve(unittest.TestCase):
                         """,
                 "result": "http&#58;//example.example/live/ABC123ABC"
             },
+            {
+                "data": """
+                    <iframe     id="random"
+                        name="iframe"
+                        src="https://example.com/dotall/iframe"
+                        width="100%"
+                        height="500"
+                        scrolling="auto"
+                        frameborder="1"
+                        class="wrapper">
+                        </iframe>
+                    </div></div></div>
+                    """,
+                "result": "https://example.com/dotall/iframe",
+            },
         ]
         rr = Resolve("https://example.com")
         for test_dict in regex_test_list:

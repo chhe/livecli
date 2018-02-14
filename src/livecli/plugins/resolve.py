@@ -49,7 +49,7 @@ class Resolve(Plugin):
         ["'](?P<url>[^"']+)["']
         .*?(?:/>|>(?:[^<>]+)?
         </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
-        """, re.VERBOSE | re.IGNORECASE)
+        """, re.VERBOSE | re.IGNORECASE | re.DOTALL)
     # Regex for: .f4m and .m3u8 files
     _playlist_re = re.compile(r"""(?:["']|=|&quot;)(?P<url>
         (?:https?:)?(?://|\\/\\/)?
@@ -177,6 +177,7 @@ class Resolve(Plugin):
         blacklist_netloc = (
             "127.0.0.1",
             "about:blank",
+            "abv.bg",
             "adfox.ru",
             "googletagmanager.com",
             "javascript:false",
