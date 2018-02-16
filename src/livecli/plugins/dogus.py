@@ -8,8 +8,6 @@ from livecli.utils import update_scheme
 __livecli_docs__ = {
     "domains": [
         "ntvspor.net",
-        "kralmuzik.com.tr",
-        "ntv.com.tr",
         "eurostartv.com.tr",
     ],
     "geo_blocked": [],
