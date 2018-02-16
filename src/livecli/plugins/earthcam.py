@@ -7,6 +7,7 @@ from livecli.plugin.api import http
 from livecli.plugin.api import validate
 from livecli.stream import HLSStream, RTMPStream
 from livecli.utils import parse_json
+from livecli.utils import update_scheme
 
 __livecli_docs__ = {
     "domains": [
@@ -16,7 +17,7 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": True,
-    "last_update": "2017-03-02",
+    "last_update": "2018-02-16",
 }
 
 
@@ -97,6 +98,7 @@ class EarthCam(Plugin):
         # HLS stream
         if hls_playpath and is_live:
             hls_url = hls_domain + hls_playpath
+            hls_url = update_scheme(self.url, hls_url)
 
             self.logger.debug("HLS URL: {0}", hls_url)
 
