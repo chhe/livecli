@@ -31,16 +31,7 @@ Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreame
 #### Installation via Python pip
 
 ```bash
-pip install --user livecli
-```
-
-This will install livecli as a normal user, not as root.
-You might have to add `$HOME/.local/bin` to your `$PATH`
-
-open `~/.bashrc` or `~/.bash_profile` or `~/.profile` and add
-
-```sh
-PATH="$HOME/.local/bin:$PATH"
+pip install livecli
 ```
 
 #### Manual installation via Python
@@ -48,16 +39,7 @@ PATH="$HOME/.local/bin:$PATH"
 ```bash
 git clone https://github.com/livecli/livecli
 cd livecli
-pip install --user -U .
-```
-
-This will install livecli as a normal user, not as root.
-You might have to add `$HOME/.local/bin` to your `$PATH`
-
-open `~/.bashrc` or `~/.bash_profile` or `~/.profile` and add
-
-```sh
-PATH="$HOME/.local/bin:$PATH"
+pip install -U .
 ```
 
 # Features
@@ -89,7 +71,9 @@ CLI parameters and usage examples.
 
 # Kodi
 
-Livecli can be used with Kodi Leia, it can be installed from the [Livecli Kodi Repository][kodi-repo].
+Livecli can be used with Kodi Leia
+
+- [Livecli Kodi Repository][kodi-repo].
 
 For more information see [service.livecli.proxy][service.livecli.proxy]
 
@@ -99,6 +83,8 @@ All contributions are welcome.
 Feel free to open a new thread on the issue tracker or submit a new pull request.
 Please read [CONTRIBUTING.md][contributing] first. Thanks!
 
+Please be aware that plugins for streaming services that are using DRM protections or
+there main focus is to provide copyrighted content **will not be implemented**.
 
   [livecli-website]: https://livecli.github.io
   [livecli-plugins]: https://livecli.github.io/plugin_matrix.html

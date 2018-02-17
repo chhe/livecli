@@ -5,7 +5,7 @@ Want to get involved? Thanks! There are plenty of ways to help!
 
 ## Reporting issues
 
-A bug is a *demonstrable problem* that is caused by the **latest version** of the code in the repository. Good bug reports are extremely helpful - thank you!
+A bug is a *demonstrable problem* that is caused by the **latest version** of the code in the repository.
 
 Please read the following guidelines before you [report an issue][issues]:
 
@@ -17,20 +17,17 @@ Please read the following guidelines before you [report an issue][issues]:
 
 4. **Isolate the demonstrable problem** — make sure that the code in the project's repository is *definitely* responsible for the issue.
 
-5. **Format your issue report** — [well formatted texts][mastering-markdown] will make it much easier for developers to understand your report.
-
-Please try to be as detailed as possible in your report too. What is your environment? What steps will reproduce the issue? What would you expect the outcome to be? All these details will help people to assess and fix any potential bugs. The [issue template][issue-template] will aid you in structuring your report when submitting a new issue. If your report includes log output, please provide it as text in multi-line code blocks if possible for better readability. Thank you!
-
-
 ## Feature requests
 
-Feature requests are welcome, but take a moment to find out whether your idea fits with the scope and aims of the project. It's up to *you* to make a strong case to convince the project's developers of the merits of this feature. Please provide as much detail and context as possible.
+Feature requests are welcome, but take a moment to find out whether your idea fits with the scope and aims of the project.
 
 
 ## Plugin requests
 
-Plugin submissions and requests are a great way to improve Livecli. Requests should be as detailed as possible and dedicated to only a single streaming service. Information about the service as well as explicit URLs for live streams or recordings are encouraged so that the requested plugin can be easily implemented. Please be aware that plugins for streaming services that are using DRM protections will not be implemented.
+Plugin submissions and requests are a great way to improve Livecli. Requests should be as detailed as possible and dedicated to only a single streaming service.
 
+Please be aware that plugins for streaming services that are using DRM protections or
+there main focus is to provide copyrighted content **will not be implemented**.
 
 ## Pull requests
 

@@ -33,16 +33,16 @@ Version                              Installing
 ==================================== ===========================================
 `Latest release (pip)`_              .. code-block:: console
 
-                                        $ pip install --user livecli
+                                        # pip install livecli
 `Development version (pip)`_         .. code-block:: console
 
-                                        $ pip install --user -U git+https://github.com/livecli/livecli.git
+                                        # pip install -U git+https://github.com/livecli/livecli.git
 
 `Development version (git)`_         .. code-block:: console
 
                                         $ git clone git+https://github.com/livecli/livecli.git
                                         $ cd livecli
-                                        $ pip install --user -U .
+                                        # pip install -U .
 ==================================== ===========================================
 
 .. _Latest release (pip): https://pypi.python.org/pypi/livecli
