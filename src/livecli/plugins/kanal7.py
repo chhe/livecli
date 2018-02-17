@@ -21,7 +21,7 @@ __livecli_docs__ = {
 class Kanal7(Plugin):
     url_re = re.compile(r"https?://(?:www.)?kanal7.com/canli-izle")
     iframe_re = re.compile(r'iframe .*?src="((?:https?:)?//[^"]*?)"')
-    stream_re = re.compile(r"""src:\s?["'](?P<url>[^"']+\.m3u8)["']""")
+    stream_re = re.compile(r"""video-source=\s?["'](?P<url>[^"']+\.m3u8)["']""")
 
     @classmethod
     def can_handle_url(cls, url):
