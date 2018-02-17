@@ -187,6 +187,7 @@ class Resolve(Plugin):
         blacklist_path = [
             ("expressen.se", "/_livetvpreview/"),
             ("facebook.com", "/plugins"),
+            ("haber7.com", "/radyohome/station-widget/"),
             ("vesti.ru", "/native_widget.html"),
         ]
         # Add --resolve-blacklist-path to blacklist_path
@@ -356,6 +357,7 @@ class Resolve(Plugin):
         Returns:
             yield every stream
         """
+        self.headers.update({"Referer": self.url})
         for url in playlist_all:
             parsed_url = urlparse(url)
             if parsed_url.path.endswith((".m3u8")):
