@@ -1,174 +1,122 @@
-"""Plugin for VGTV, Norwegian newspaper VG Nett's streaming service."""
-
 import re
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
-from livecli.stream import HDSStream, HLSStream, HTTPStream
+from livecli.plugin.api import http
+from livecli.plugin.api import useragents
+from livecli.plugin.api import validate
+from livecli.stream import HDSStream
+from livecli.stream import HLSStream
+from livecli.stream import HTTPStream
 
 __livecli_docs__ = {
     "domains": [
+        "ap.vgtv.no",
+        "tv.aftonbladet.se",
         "vgtv.no",
     ],
     "geo_blocked": [
         "NO",
+        "SE",
     ],
     "notes": "",
     "live": True,
-    "vod": False,
-    "last_update": "2017-01-17",
+    "vod": True,
+    "last_update": "2018-02-18",
 }
-
-# This will have to be set to handle "secure" HDS streams. For now we
-# leave it empty, as the same streams can likely be watched with HLS.
-# SWF_URL = ""
-STREAM_TYPES = {
-    "hds": {
-        "parser": HDSStream.parse_manifest,
-        #         "params": { "pvswf": SWF_URL },
-        "file": "manifest.f4m"
-    },
-    "hls": {
-        "parser": HLSStream.parse_variant_playlist,
-        "file": "master.m3u8"
-    },
-    "http": {}
-}
-
-# For now we only handle MP4.
-STREAM_FORMATS = ("mp4")
-
-INFO_URL = "http://www.vgtv.no/data/actions/videostatus/"
-
-_url_re = re.compile(r"https?://(www\.)?(vgtv|vg).no")
-_content_id_re = re.compile(r"(?:data-videoid=\"|videostatus/\?id=)(\d+)")
-_url_id_re = re.compile((
-    r"https?://(?:www\.)?vgtv.no/"
-    r"(?:(?:#!/)?video/|(?:#!|\?)id=)(\d+)"
-))
-
-_video_schema = validate.Schema({
-    "status": 200,
-    "formats": validate.all(
-        dict,
-        validate.filter(lambda k, v: k in STREAM_TYPES),
-        {
-            validate.text: validate.all(
-                dict,
-                validate.filter(lambda k, v: k in STREAM_FORMATS),
-                {
-                    validate.text: [{
-                        "bitrate": int,
-                        "paths": [{
-                            "address": validate.text,
-                            "port": int,
-                            "path": validate.text,
-                            "filename": validate.text,
-                            "application": validate.text,
-                        }],
-                    }]
-                }
-            )
-        }
-    )
-})
 
 
 class VGTV(Plugin):
-    @classmethod
-    def can_handle_url(self, url):
-        return _url_re.match(url)
+    """
+        Plugin for VGTV, Norwegian newspaper VG Nett's streaming service.
+        Plugin for swedish news paper Aftonbladet's streaming service.
+    """
 
-    def _build_url(self, **kwargs):
-        kwargs["scheme"] = "https" if kwargs["port"] == 443 else "http"
-        return "{scheme}://{address}:{port}/{path}".format(**kwargs)
+    _url_re = re.compile(r"""https?://(?:www\.)?
+        (?P<host>
+            tv\.aftonbladet\.se/abtv
+            |
+            (?:ap\.)?vgtv\.no
+        )
+        (?:/webtv(?:[^/]+)?)?
+        /[^/]+/(?P<id>\d+)
+        """, re.VERBOSE)
+
+    appname_map = {
+        "ap.vgtv.no": "aptv",
+        "tv.aftonbladet.se/abtv": "abtv",
+        "vgtv.no": "vgtv",
+    }
+
+    apiname_map = {
+        "abtv": "ab",
+        "aptv": "ap",
+        "vgtv": "vgtv",
+    }
+
+    api_url = "https://svp.vg.no/svp/api/v1/{0}/assets/{1}?appName={2}-website"
+
+    _video_schema = validate.Schema(
+        {
+            validate.optional("title"): validate.text,
+            validate.optional("assetType"): validate.text,
+            validate.optional("streamType"): validate.text,
+            validate.optional("status"): validate.text,
+            "streamUrls": {
+                validate.optional("hls"): validate.any(validate.text, None),
+                validate.optional("hds"): validate.any(validate.text, None),
+                validate.optional("mp4"): validate.any(validate.text, None),
+            },
+        }
+    )
+
+    @classmethod
+    def can_handle_url(cls, url):
+        return cls._url_re.match(url)
 
     def _get_streams(self):
-        match = _url_id_re.search(self.url)
-
-        video_id = None
-
-        # We can get the VGTV ID directly from vgtv.no URLs
-        if match:
-            video_id = match.group(1)
-
-        # If we can't, we need to get the VGTV ID from the page content
-        else:
-            res = http.get(self.url)
-            match = _content_id_re.search(res.text)
-            if match:
-                video_id = match.group(1)
-
-        if not video_id:
+        m_url = self._url_re.match(self.url)
+        if not m_url:
             return
 
-        # Now fetch video information
-        self.logger.debug("Fetching video info for ID {0}", video_id)
-        res = http.get(INFO_URL, params=dict(id=video_id))
-        info = http.json(res, schema=_video_schema)
+        video_id = m_url.group("id")
+        appname = self.appname_map[m_url.group("host")]
+        apiname = self.apiname_map[appname]
 
-        streams = {}
+        headers = {
+            "User-Agent": useragents.FIREFOX,
+            "Referer": self.url
+        }
 
-        # At the time of writing, The previously fetched JSON doesn't
-        # point to playlist/manifest files, but to individual stream
-        # variants. Based on the provided variants, however, we can
-        # build the playlist URLs ourselves.
+        res = http.get(self.api_url.format(apiname, video_id, appname), headers=headers)
+        data = http.json(res, schema=self._video_schema)
 
-        # HDS/HLS: Get all variants and produce a playlist URL.
-        for f in ('hds', 'hls'):
-            if f not in info["formats"]:
-                next
+        title = data.get("title")
+        streamurls = data.get("streamUrls")
 
-            if "mp4" not in info["formats"][f]:
-                next
+        if title:
+            self.stream_title = title
 
-            streamtype = STREAM_TYPES[f]
-            f_streams = {}
-            hmac = ""
+        if streamurls:
+            hls_url = streamurls.get("hls")
+            if hls_url:
+                self.logger.debug("HLS URL: {0}".format(hls_url))
+                streams = HLSStream.parse_variant_playlist(self.session, hls_url, headers=headers).items()
+                if not streams:
+                    yield "live", HLSStream(self.session, hls_url, headers=headers)
+                for s in streams:
+                    yield s
 
-            # Get variants.
-            for stream in info["formats"][f]["mp4"]:
-                for p in stream["paths"]:
-                    url = self._build_url(**p)
-                    variant = p["filename"][:-4]  # strip ".mp4"
+            hds_url = streamurls.get("hds")
+            if hds_url:
+                self.logger.debug("HDS URL: {0}".format(hds_url))
+                for s in HDSStream.parse_manifest(self.session, hds_url, headers=headers).items():
+                    yield s
 
-                    if url in f_streams:
-                        f_streams[url].append(variant)
-                    else:
-                        f_streams[url] = [variant]
-
-                    if p["application"]:
-                        hmac = "?hdnea={0}&hdcore?3.1.0".format(
-                            p["application"]
-                        )
-
-            # Make playlist URL and pass to parser.
-            for url, variants in f_streams.items():
-                playlist = "{0}/,{1},.mp4.csmil/{2}{3}".format(
-                    url,
-                    ",".join(variants),
-                    streamtype["file"],
-                    hmac
-                )
-                parser = streamtype["parser"]
-                params = streamtype.get("params") or {}
-
-                try:
-                    streams.update(parser(self.session, playlist, **params))
-                except IOError as err:
-                    self.logger.error("Failed to extract {0} streams: {1}",
-                                      f.upper(), err)
-
-        # HTTP: Also make direct content URLs available for use.
-        http_formats = info["formats"].get("http")
-        if http_formats and "mp4" in http_formats:
-            for stream in http_formats["mp4"]:
-                p = stream["paths"][0]
-                url = "{0}/{1}".format(self._build_url(**p), p["filename"])
-                stream_name = "http_{0}k".format(stream["bitrate"])
-                streams[stream_name] = HTTPStream(self.session, url)
-
-        return streams
+            mp4_url = streamurls.get("mp4")
+            if mp4_url:
+                self.logger.debug("MP4 URL: {0}".format(mp4_url))
+                name = "live"
+                yield name, HTTPStream(self.session, mp4_url, headers=headers)
 
 
 __plugin__ = VGTV
