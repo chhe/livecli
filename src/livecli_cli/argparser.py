@@ -1318,13 +1318,6 @@ plugin.add_argument(
     """
 )
 plugin.add_argument(
-    "--daisuki-mux-subtitles",
-    action="store_true",
-    help="""
-    Automatically mux available subtitles in to the output stream.
-    """
-)
-plugin.add_argument(
     "--rtve-mux-subtitles",
     action="store_true",
     help="""

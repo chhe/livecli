@@ -935,9 +935,6 @@ def setup_plugin_options():
     if args.schoolism_part:
         livecli.set_plugin_option("schoolism", "part", args.schoolism_part)
 
-    if args.daisuki_mux_subtitles:
-        livecli.set_plugin_option("daisuki", "mux_subtitles", args.daisuki_mux_subtitles)
-
     if args.rtve_mux_subtitles:
         livecli.set_plugin_option("rtve", "mux_subtitles", args.rtve_mux_subtitles)
 

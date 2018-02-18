@@ -138,7 +138,6 @@ def command_session(session, old_data):
         "resolve-whitelist-netloc": "set_plugin_option_comma_list",
         "resolve-whitelist-path": "set_plugin_option_comma_list",
         # set_plugin_option_store_true
-        "daisuki-mux-subtitles": "set_plugin_option_store_true",
         "funimation-mux-subtitles": "set_plugin_option_store_true",
         "npo-subtitles": "set_plugin_option_store_true",
         "pluzz-mux-subtitles": "set_plugin_option_store_true",
