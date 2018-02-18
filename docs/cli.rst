@@ -28,11 +28,6 @@ command :command:`livecli` as the first argument:
     Available streams: audio, high, low, medium, mobile (worst), source (best)
 
 
-.. note::
-    You don't need to include the protocol when dealing with HTTP URLs,
-    e.g. just ``twitch.tv/twitch`` is enough and quicker to type.
-
-
 This command will tell Livecli to attempt to extract streams from the URL
 specified, and if it's successful, print out a list of available streams to choose
 from.

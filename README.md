@@ -19,8 +19,8 @@ Livecli is a fork of the [Streamlink][streamlink] and [Livestreamer][livestreame
 
 #### The advantages of Livecli:
 
-- build in plugin that will try to open a stream on every website.
-- build in local server command
+- built in plugin that will try to open a stream on every website.
+- built in local server command
 - fully compatible with [Kodi Leia](https://github.com/livecli/livecli#kodi)
 - pycryptodomex can be used
 - some new plugins and some broken plugins are fixed
