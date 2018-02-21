@@ -27,7 +27,7 @@ Feature requests are welcome, but take a moment to find out whether your idea fi
 Plugin submissions and requests are a great way to improve Livecli. Requests should be as detailed as possible and dedicated to only a single streaming service.
 
 Please be aware that plugins for streaming services that are using DRM protections or
-there main focus is to provide copyrighted content **will not be implemented**.
+websites from not official or not authored third party **will not be implemented**.
 
 ## Pull requests
 

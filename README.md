@@ -84,7 +84,7 @@ Feel free to open a new thread on the issue tracker or submit a new pull request
 Please read [CONTRIBUTING.md][contributing] first. Thanks!
 
 Please be aware that plugins for streaming services that are using DRM protections or
-there main focus is to provide copyrighted content **will not be implemented**.
+websites from not official or not authored third party **will not be implemented**.
 
   [livecli-website]: https://livecli.github.io
   [livecli-plugins]: https://livecli.github.io/plugin_matrix.html
