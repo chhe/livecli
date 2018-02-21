@@ -186,8 +186,10 @@ class Resolve(Plugin):
 
         blacklist_path = [
             ("expressen.se", "/_livetvpreview/"),
+            ("facebook.com", "/connect"),
             ("facebook.com", "/plugins"),
             ("haber7.com", "/radyohome/station-widget/"),
+            ("static.tvr.by", "/upload/video/atn/promo"),
             ("twitter.com", "/widgets"),
             ("vesti.ru", "/native_widget.html"),
         ]
