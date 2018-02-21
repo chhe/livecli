@@ -1,3 +1,36 @@
+livecli 3.4.0 (2018-02-21)
+--------------------------
+Livecli 3.4.0 has been released!
+
+- some Plugins fixed
+- cleanup / changes to docs
+
+For more details see below.
+
+::
+
+    back-to <backto@protonmail.ch> (24):
+          [aftonbladet] Fix for tv.aftonbladet.se
+          [artetv] update for some languages
+          [docs] removed unnecessary text from CONTRIBUTING.md, revert pip --user
+          [dplay] Fixed Plugin.
+          [earthcam] Fix for HLS streams
+          [kanal7] Fix for kanal7.com/canli-izle, website changed again
+          [ovvatv] Fix for new domain, resolve.py will now search for the iframe
+          [plugins] Removed Plugins, most of them will now use resolve.py
+          [resolve] Add twitter widgets to blacklist and livecli_docs update
+          [resolve] better debug message for an invalid playlist url
+          [resolve] re.DOTALL for iframe regex and new domain for blacklist
+          [resolve] use the last self.url as a Referer for the playlist urls.
+          [ruv] Fixed Plugin, use api for livestreams and use resolve.py for vods
+          [server] allow only http based streams: HDS HLS HTTP
+          [server] Fixed TypeError: unhashable type: 'list' for custom Plugins
+          [vaughnlive] Fix for rtmp_server
+          [vgtv] moved aftonbladet.se into vgtv.py and fixed vgtv.no
+          [younow] cleanup python code
+          New Plugin for balticlivecam.com
+          Removed dead or not wanted plugins
+
 livecli 3.3.0 (2018-02-14)
 --------------------------
 Livecli 3.3.0 has been released!
