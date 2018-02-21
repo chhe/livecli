@@ -39,7 +39,7 @@ except ImportError:
 try:
     # service.livecli.proxy
     import xbmc
-    PLUGINS_DIR = xbmc.translatePath("special://profile/addon_data/service.livecli.proxy/plugins").encode("utf-8")
+    PLUGINS_DIR = xbmc.translatePath("special://profile/addon_data/service.livecli.proxy/plugins/").encode("utf-8")
     is_kodi = True
 except ImportError:
     from livecli_cli.constants import PLUGINS_DIR
@@ -59,7 +59,7 @@ def _play_stream(HTTPBase):
 
     # Load custom user plugins
     if os.path.isdir(PLUGINS_DIR):
-        session.load_plugins([PLUGINS_DIR])
+        session.load_plugins(PLUGINS_DIR)
 
     old_data = parse_qsl(urlparse(HTTPBase.path).query)
     data = []
