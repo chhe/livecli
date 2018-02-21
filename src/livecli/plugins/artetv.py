@@ -20,7 +20,7 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": True,
-    "last_update": "2017-06-29",
+    "last_update": "2018-02-21",
 }
 
 JSON_VOD_URL = "https://api.arte.tv/api/player/v1/config/{0}/{1}?platform=ARTE_NEXT"
@@ -64,15 +64,15 @@ class ArteTV(Plugin):
         stream_language = stream["versionShortLibelle"]
 
         if language == "de":
-            language = ["DE", "VOST-DE", "VA", "VOA", "Dt. Live", "OV", "OmU"]
+            language = ["DE", "VOST-DE", "VA", "VOA", "Dt. Live", "OV", "OmU", "VO-STA"]
         elif language == "en":
-            language = ["ANG", "VOST-ANG"]
+            language = ["ANG", "VOST-ANG", "VO"]
         elif language == "es":
-            language = ["ESP", "VOST-ESP"]
+            language = ["ESP", "VOST-ESP", "VO"]
         elif language == "fr":
-            language = ["FR", "VOST-FR", "VF", "VOF", "Frz. Live", "VO", "ST mal"]
+            language = ["FR", "VOST-FR", "VF", "VOF", "Frz. Live", "VO", "ST mal", "VO-STF"]
         elif language == "pl":
-            language = ["POL", "VOST-POL"]
+            language = ["POL", "VOST-POL", "VO"]
 
         if stream_language in language:
             if stream_type in ("hls", "mp4"):
