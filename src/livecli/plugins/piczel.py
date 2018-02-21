@@ -6,7 +6,7 @@ from livecli.stream import RTMPStream, HLSStream
 
 __livecli_docs__ = {
     "domains": [
-        "picarto.tv",
+        "piczel.tv",
     ],
     "geo_blocked": [],
     "notes": "",

@@ -188,6 +188,7 @@ class Resolve(Plugin):
             ("expressen.se", "/_livetvpreview/"),
             ("facebook.com", "/plugins"),
             ("haber7.com", "/radyohome/station-widget/"),
+            ("twitter.com", "/widgets"),
             ("vesti.ru", "/native_widget.html"),
         ]
         # Add --resolve-blacklist-path to blacklist_path
