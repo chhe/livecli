@@ -171,8 +171,6 @@ for more details see below.
           [mixer] moved beam.py to mixer.py file requires two commits, for a proper commit history
           [mixer] replaced beam.pro with mixer.com
           [mlgtv] Fixed broken Plugin streamlink/streamlink#1362
-          [neulion] renamed ufctv.py to neulion.py
-          [neulion] Updated the ufctv plugin to make it useable for other domains
           [periscope] Update for hls variant playlists
           [qq] New Plugin for live.qq.com
           [streann] Added headers for post request
@@ -374,10 +372,6 @@ If you think that this application is helpful, please consider supporting the ma
           add eol
           remove unused importing
 
-    jgilf <james.gilfillan92@gmail.com> (2):
-          Update ufctv.py
-          Update ufctv.py
-
     sdfwv <sdfwv@protonmail.ch> (1):
           [bongacams] replace RTMP with HLS Fixed streamlink/streamlink#1074
 
@@ -485,7 +479,6 @@ Many thanks to those who've contributed in this release!
           plugins.canlitv: simplified and fixed the m3u8 regex
           plugins.picarto: support for VOD
           plugins.ine: update to extract the relocated jwplayer config
-          plugin.ufctv: support for free and premium vod/live streams
 
     cirrus <nailzuk@gmail.com> (3):
           Create arconia.py
