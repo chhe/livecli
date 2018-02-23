@@ -17,6 +17,9 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import update_scheme
+from livecli.utils.common import _iframe_re
+from livecli.utils.common import _playlist_re
+from livecli.utils.common import _rtmp_re
 
 
 class Resolve(Plugin):
@@ -27,8 +30,8 @@ class Resolve(Plugin):
         - website with an unencrypted fileurl in there source code
              - .m3u8
              - .f4m
-             - .mp3 - only none broken urls
-             - .mp4 - only none broken urls
+             - .mp3
+             - .mp4
 
     Unsupported
         - websites with dash, rtmp or other.
@@ -41,25 +44,6 @@ class Resolve(Plugin):
     """
 
     _url_re = re.compile(r"""(resolve://)?(?P<url>.+)""")
-
-    # Regex for: Iframes
-    _iframe_re = re.compile(r"""
-        <ifr(?:["']\s?\+\s?["'])?ame
-        (?!\sname=["']g_iFrame).*?src=
-        ["'](?P<url>[^"']+)["']
-        .*?(?:/>|>(?:[^<>]+)?
-        </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
-        """, re.VERBOSE | re.IGNORECASE | re.DOTALL)
-    # Regex for: .f4m and .m3u8 files
-    _playlist_re = re.compile(r"""(?:["']|=|&quot;)(?P<url>
-        (?:https?:)?(?://|\\/\\/)?
-            (?<!title=["'])
-                [^"'<>\s\;]+\.(?:m3u8|f4m|mp3|mp4|mpd)
-            (?:[^"'<>\s\\]+)?)
-        (?:["']|(?<!;)\s|>|\\&quot;)
-        """, re.DOTALL | re.VERBOSE)
-    # Regex for: rtmp
-    _rtmp_re = re.compile(r"""["'](?P<url>rtmp(?:e|s|t|te)?://[^"']+)["']""")
     # Regex for: .mp3 and mp4 files
     _httpstream_bitrate_re = re.compile(r"""_(?P<bitrate>\d{1,4})\.mp(?:3|4)""")
     # Regex for: streamBasePath for .f4m urls
@@ -310,7 +294,7 @@ class Resolve(Plugin):
             None
                 if no iframe was found.
         """
-        iframe_all = self._iframe_re.findall(res)
+        iframe_all = _iframe_re.findall(res)
 
         # Fallback for unescape('%3Ciframe%20
         unescape_iframe = self._unescape_iframe_re.findall(res)
@@ -319,7 +303,7 @@ class Resolve(Plugin):
             for data in unescape_iframe:
                 unescape_text += [unquote(data)]
             unescape_text = ",".join(unescape_text)
-            unescape_iframe = self._iframe_re.findall(unescape_text)
+            unescape_iframe = _iframe_re.findall(unescape_text)
             if unescape_iframe:
                 iframe_all = iframe_all + unescape_iframe
 
@@ -410,10 +394,10 @@ class Resolve(Plugin):
             False
               - if no stream got added
         """
-        playlist_all = self._playlist_re.findall(res)
+        playlist_all = _playlist_re.findall(res)
 
         # experimental rtmp search, will only print the url.
-        m_rtmp = self._rtmp_re.search(res)
+        m_rtmp = _rtmp_re.search(res)
         if m_rtmp:
             self.logger.info("Found RTMP: {0}".format(m_rtmp.group("url")))
 
