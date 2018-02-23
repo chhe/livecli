@@ -1,9 +1,9 @@
 import re
 
 from livecli.plugin import Plugin
-from livecli.plugin.api import http, validate
-from livecli.stream import HLSStream
+from livecli.plugin.api import http
 from livecli.plugin.api import useragents
+from livecli.stream import HLSStream
 from livecli.utils import update_scheme
 
 __livecli_docs__ = {
@@ -14,42 +14,32 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-10-24",
+    "last_update": "2018-02-24",
 }
-
-HUYA_URL = "http://m.huya.com/%s"
-
-_url_re = re.compile(r'http(s)?://(www\.)?huya.com/(?P<channel>[^/]+)', re.VERBOSE)
-_hls_re = re.compile(r'^\s*<video\s+id="html5player-video"\s+src="(?P<url>[^"]+)"', re.MULTILINE)
-
-_hls_schema = validate.Schema(
-    validate.all(
-        validate.transform(_hls_re.search),
-        validate.any(
-            None,
-            validate.all(
-                validate.get('url'),
-                validate.transform(str)
-            )
-        )
-    )
-)
 
 
 class Huya(Plugin):
+
+    _url_re = re.compile(r'https?://(?:www\.)?huya\.com/(?P<channel>[^/]+)', re.VERBOSE)
+    _hls_re = re.compile(r'''^\s*<video\s+id=["']html5player-video["']\s+src=["'](?P<url>[^"']+)["']''', re.MULTILINE)
+
     @classmethod
-    def can_handle_url(self, url):
-        return _url_re.match(url)
+    def can_handle_url(cls, url):
+        return cls._url_re.match(url) is not None
 
     def _get_streams(self):
-        match = _url_re.match(self.url)
-        channel = match.group("channel")
+        headers = {'User-Agent': useragents.IPAD}
+        channel = self._url_re.match(self.url).group('channel')
 
-        http.headers.update({"User-Agent": useragents.IPAD})
-        # Some problem with SSL on huya.com now, do not use https
+        res = http.get('https://m.huya.com/{0}'.format(channel), headers=headers)
+        m = self._hls_re.search(res.text)
+        if not m:
+            self.logger.debug('No m3u8 url found.')
+            return
 
-        hls_url = http.get(HUYA_URL % channel, schema=_hls_schema)
-        yield "live", HLSStream(self.session, update_scheme("http://", hls_url))
+        hls_url = update_scheme('https://', m.group('url'))
+        self.logger.debug('URL={0}'.format(hls_url))
+        return {'live': HLSStream(self.session, hls_url, headers=headers)}
 
 
 __plugin__ = Huya
