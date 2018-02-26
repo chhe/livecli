@@ -22,12 +22,12 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-12-23",
+    "last_update": "2018-02-26",
 }
 
 
 class Streann(Plugin):
-    url_re = re.compile(r"https?://ott\.streann.com/streaming/player\.html")
+    url_re = re.compile(r"https?://ott\.streann\.com/streaming/player\.html")
     base_url = "https://ott.streann.com"
     get_time_url = base_url + "/web/services/public/get-server-time"
     token_url = base_url + "/loadbalancer/services/web-players/{playerId}/token/{type}/{dataId}/{deviceId}"
@@ -71,6 +71,7 @@ class Streann(Plugin):
         headers = {
             "User-Agent": useragents.FIREFOX,
             "Referer": self.url,
+            "Origin": "https://ott.streann.com",
             "X-Requested-With": "XMLHttpRequest",
             "Content-Type": "application/x-www-form-urlencoded"
         }
