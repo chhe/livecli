@@ -10,12 +10,13 @@ except ImportError:
 from livecli import PluginError
 from livecli.plugin.api import validate
 from livecli.utils import absolute_url
+from livecli.utils import hours_minutes_seconds
 from livecli.utils import parse_json
 from livecli.utils import parse_qsd
 from livecli.utils import parse_xml
 from livecli.utils import prepend_www
+from livecli.utils import time_to_offset
 from livecli.utils import verifyjson
-
 
 class TestUtil(unittest.TestCase):
     def test_verifyjson(self):
@@ -98,3 +99,10 @@ class TestUtil(unittest.TestCase):
             "https://example.com/foo",  # becomes https
             update_scheme("https://other.com/bar", "example.com/foo")
         )
+
+    def test_time_to_offset(self):
+        self.assertEqual(4953, time_to_offset("01h22m33s"))
+        self.assertEqual(0, time_to_offset("123123fail"))
+
+    def test_hours_minutes_seconds(self):
+        self.assertEqual(4815, hours_minutes_seconds("01:20:15"))
