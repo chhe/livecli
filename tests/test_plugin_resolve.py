@@ -2,7 +2,7 @@ import unittest
 
 from livecli.logger import Logger
 from livecli.plugins.resolve import Resolve
-from livecli.utils.common import _iframe_re
+from livecli.plugin.api.common import _iframe_re
 
 
 class TestPluginResolve(unittest.TestCase):

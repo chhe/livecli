@@ -17,9 +17,9 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import update_scheme
-from livecli.utils.common import _iframe_re
-from livecli.utils.common import _playlist_re
-from livecli.utils.common import _rtmp_re
+from livecli.plugin.api.common import _iframe_re
+from livecli.plugin.api.common import _playlist_re
+from livecli.plugin.api.common import _rtmp_re
 
 
 class Resolve(Plugin):
