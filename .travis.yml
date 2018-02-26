@@ -19,11 +19,10 @@ before_install:
   - pip install -r docs-requirements.txt
 
 install:
-  - pip install -U .
+  - pip install -e .
 
 script:
-  - python -m pytest tests/
-  - coverage run setup.py test
+  - pytest --cov
   - flake8 src/ --show-source --statistic --exit-zero
   # test building the docs
   - if [[ $BUILD_DOCS == 'yes' ]]; then make --directory=docs html; fi
