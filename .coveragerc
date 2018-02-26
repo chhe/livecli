@@ -5,8 +5,6 @@ source =
 
 [report]
 omit =
-  */python?.?/*
-  *__init__*
   src/livecli/packages/*
   src/livecli_cli/packages/*
   src/livecli/_version.py

@@ -32,4 +32,6 @@ share/
 pip-selfcheck.json
 
 # coverage
+.coverage
+coverage.xml
 htmlcov
