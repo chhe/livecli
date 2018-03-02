@@ -17,3 +17,21 @@ class TestPluginBalticLivecam(unittest.TestCase):
         ]
         for url in should_not_match:
             self.assertFalse(BalticLivecam.can_handle_url(url))
+
+    def test_js_to_json_regex(self):
+        test_data = """<script>
+                var data = {
+                    action: 'token',
+                    id: 123,
+                    embed:0,
+                    referer: document
+                    };</script>"""
+
+        expected_data = {
+            "action": "token",
+            "embed": "0",
+            "id": "123",
+            "referer": "document",
+        }
+
+        self.assertDictEqual(BalticLivecam.js_to_json_regex(test_data), expected_data)

@@ -21,6 +21,7 @@ class BalticLivecam(Plugin):
 
     _url_re = re.compile(r"https://(?:\w+)?balticlivecam\.com")
     _data_re = re.compile(r"""data\s*=\s*(?P<data>\{.*?});""", re.DOTALL)
+    _data_2_re = re.compile(r"""(?P<name>\w+):\s?["']?(?P<data>[^"',\s]+)["']?(?:,|(?:\s+)?})""")
 
     _iframe_re = re.compile(r"""<iframe[^><]+src=["'](?P<url>[^"']+)["']""")
     _hls_re = re.compile(r"""["'](?P<url>[^"']+\.m3u8(?:[^"']+)?)["']""")
@@ -31,9 +32,9 @@ class BalticLivecam(Plugin):
     def can_handle_url(cls, url):
         return cls._url_re.match(url) is not None
 
-    def js_to_json_regex(self, js_data):
-        data_re = re.compile(r"""(?<!\w)(?P<name>action|id|embed|main_referer|ads)["']?:\s?["']?(?P<data>[^"',\s]+)["']?(?:,|(?:\s+)?})""")
-        data_all = data_re.findall(js_data)
+    @classmethod
+    def js_to_json_regex(cls, js_data):
+        data_all = cls._data_2_re.findall(js_data)
         data_new = {}
         for name, data in data_all:
             data_new[name] = data
@@ -44,10 +45,12 @@ class BalticLivecam(Plugin):
 
         data = self._data_re.search(res.text)
         if data:
+            self.logger.debug("Found _data_re")
             data = self.js_to_json_regex(data.group(1))
             res = http.post(self.api_url, data=data)
             m = self._hls_re.search(res.text)
             if m:
+                self.logger.debug("Found _hls_re")
                 hls_url = m.group("url")
                 hls_url = update_scheme("http://", hls_url)
                 self.logger.debug("URL={0}".format(hls_url))
@@ -59,6 +62,7 @@ class BalticLivecam(Plugin):
 
         iframe = self._iframe_re.search(res.text)
         if iframe:
+            self.logger.debug("Found _iframe_re")
             iframe_url = iframe.group("url")
             iframe_url = update_scheme("http://", iframe_url)
             self.logger.debug("URL={0}".format(iframe_url))
