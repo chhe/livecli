@@ -62,16 +62,13 @@ except ImportError:
 
 try:
     from Cryptodome.Cipher import AES as crypto_AES
-    from Cryptodome.Cipher import Blowfish as crypto_Blowfish
-    from Cryptodome.Cipher import PKCS1_v1_5 as crypto_PKCS1_v1_5
-    from Cryptodome.PublicKey import RSA as crypto_RSA
-    from Cryptodome.Util import number as crypto_number
 except ImportError:
     from Crypto.Cipher import AES as crypto_AES
+
+try:
+    from Cryptodome.Cipher import Blowfish as crypto_Blowfish
+except ImportError:
     from Crypto.Cipher import Blowfish as crypto_Blowfish
-    from Crypto.Cipher import PKCS1_v1_5 as crypto_PKCS1_v1_5
-    from Crypto.PublicKey import RSA as crypto_RSA
-    from Crypto.Util import number as crypto_number
 
 try:
     # python 3.4+
@@ -100,9 +97,6 @@ __all__ = [
     "compat_which",
     "crypto_AES",
     "crypto_Blowfish",
-    "crypto_number",
-    "crypto_PKCS1_v1_5",
-    "crypto_RSA",
     "is_py2",
     "is_py3",
     "is_win32",
