@@ -21,7 +21,17 @@ data_plugin = '''import re\n
 from {pkg}.plugin import Plugin
 from {pkg}.plugin.api import http
 from {pkg}.plugin.api import useragents
-from {pkg}.stream import HLSStream\n\n
+from {pkg}.stream import HLSStream\n
+__livecli_docs__ = {{
+    "domains": [
+        "",
+    ],
+    "geo_blocked": [],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018",
+}}\n\n
 class {classname}(Plugin):\n
     _url_re = re.compile(r'https?://(?:www\.)?example\.com/[^/]+')
     _hls_re = re.compile(r\'\'\'["'](?P<url>[^"']+\.m3u8)["']\'\'\')\n
