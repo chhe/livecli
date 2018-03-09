@@ -124,20 +124,24 @@ class TestPluginResolve(unittest.TestCase):
             self.assertIn(test_url, test_list)
         self.assertListEqual(sorted(test_all_result), sorted(test_list))
 
-        # Test 2 stream_base
+        # Test 2 stream_base and whitelist_endswith playlists
         test_all_valid_2 = [
-            "\/\/example.com/true1",
-            "/true4_no_base/123.html",
-            "//example.com/true5",
+            "\/\/example.com/true1.mp4",
+            "/true4_no_base/123.mp3",
+            "//example.com/true5.m3u8",
+            "http://example.com/master.gif",
+            "http://example.com/master",
+            "http://example.com/master.hls",
         ]
 
         stream_base = "http://example.com/base/stream/"
         test_list_2 = rr._make_url_list(test_all_valid_2, self_url, url_type="playlist", stream_base=stream_base)
 
         test_all_result_2 = [
-            "https://example.com/true1",
-            "http://example.com/base/stream/true4_no_base/123.html",
-            "https://example.com/true5",
+            "https://example.com/true1.mp4",
+            "http://example.com/base/stream/true4_no_base/123.mp3",
+            "https://example.com/true5.m3u8",
+            "http://example.com/master.hls",
         ]
 
         for test_url in test_all_result_2:

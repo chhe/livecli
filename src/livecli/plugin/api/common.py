@@ -13,8 +13,8 @@ _iframe_re = re.compile(r"""
 _playlist_re = re.compile(r"""
     (?:["']|=|&quot;)(?P<url>
         (?<!title=["'])
-            [^"'<>\s\;]+\.(?:m3u8|f4m|mp3|mp4|mpd)
-        (?:[^"'<>\s\\]+)?)
+            [^"'<>\s\;{}]+\.(?:m3u8|f4m|mp3|mp4|mpd)
+        (?:[^"'<>\s\\{}]+)?)
     (?:["']|(?<!;)\s|>|\\&quot;)
     """, re.DOTALL | re.VERBOSE)
 

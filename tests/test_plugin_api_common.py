@@ -237,6 +237,9 @@ class TestUtilCommon(unittest.TestCase):
                  return $("#player").data("player").mp4;
                },
             """,
+            """
+                data-u="{upload_url=https://example.com/mobile.mp4,poster=https://example.com/mobile.jpg,id=123,flow=full}"
+            """,
         ]
         if not hasattr(self, 'assertNotRegex'):
             self.assertNotRegex = self.assertNotRegexpMatches

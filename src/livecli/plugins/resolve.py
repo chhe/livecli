@@ -151,7 +151,8 @@ class Resolve(Plugin):
             url_type: can be iframe or playlist
                 - iframe is used for
                     --resolve-whitelist-netloc
-                - playlist is not used at the moment
+                - playlist is used for
+                    whitelist_endswith
             stream_base: basically same as base_url, but used for .f4m files.
 
         Returns:
@@ -197,6 +198,17 @@ class Resolve(Plugin):
             "/chat",
         )
 
+        # Allow only valid file formats for playlists
+        whitelist_endswith = (
+            ".f4m",
+            ".hls",
+            ".m3u",
+            ".m3u8",
+            ".mp3",
+            ".mp4",
+            ".mpd",
+        )
+
         new_list = []
         for url in old_list:
             # Don't add the same url as self.url to the list.
@@ -228,6 +240,7 @@ class Resolve(Plugin):
                 "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
                 "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
                 "BL-ew",      # - Removes images and chatrooms
+                "WL-ew",      # - Allow only valid file formats for playlists
                 "ADS",        # - Remove obviously ad urls
             ]
 
@@ -244,6 +257,8 @@ class Resolve(Plugin):
                                     parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
                                    (self.compare_url_path(parse_new_url, blacklist_path) is True),
                                    (parse_new_url.path.endswith(blacklist_endswith)),
+                                   ((url_type == "playlist" and
+                                     not parse_new_url.path.endswith(whitelist_endswith))),
                                    (self._ads_path.match(parse_new_url.path))):
 
                     count += 1
