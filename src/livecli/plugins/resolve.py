@@ -349,11 +349,10 @@ class Resolve(Plugin):
             return True
         return None
 
-    def _resolve_playlist(self, res, playlist_all):
+    def _resolve_playlist(self, playlist_all):
         """ yield for _resolve_res
 
         Args:
-            res: Content from self._res_text
             playlist_all: List of streams
 
         Returns:
@@ -427,7 +426,7 @@ class Resolve(Plugin):
             playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
             if playlist_list:
                 self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
-                return self._resolve_playlist(res, playlist_list)
+                return self._resolve_playlist(playlist_list)
         return False
 
     def _res_text(self, url):

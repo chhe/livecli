@@ -173,6 +173,35 @@ class TestPluginResolve(unittest.TestCase):
             self.assertIsNotNone(m)
             self.assertEqual(test_dict.get("result"), m.group("url"))
 
+        res_test_list = [
+            """
+            <script type="text/javascript">
+            window.location.href = 'https://www.youtube.com/embed/aqz-KE-bpKQ';
+            </script>
+            """,
+        ]
+
+        rr = Resolve("https://example.com")
+        rr.manager = Logger()
+        rr.logger = rr.manager.new_module("test")
+
+        for test_res in res_test_list:
+            m = rr._window_location(test_res)
+            self.assertTrue(m)
+
+        res_test_list_false = [
+            """<!DOCTYPE html><html><body><h1>ABC</h1><p>123</p></body></html>
+            """,
+        ]
+
+        rr = Resolve("https://example.com")
+        rr.manager = Logger()
+        rr.logger = rr.manager.new_module("test")
+
+        for test_res in res_test_list_false:
+            m = rr._window_location(test_res)
+            self.assertFalse(m)
+
     def test_unescape_iframe_re(self):
         from livecli.compat import unquote
 
@@ -226,3 +255,48 @@ class TestPluginResolve(unittest.TestCase):
             rr = Resolve("https://example.com")
             m = rr._ads_path.match(test_url)
             self.assertIsNotNone(m)
+
+    def test_iframe_src(self):
+        res_test_list = [
+            """
+            <iframe src="https://example.com/123.php" width="720" height="500" allowtransparency="true"/>
+            """,
+            """
+            <div id="player">
+                <script language='javascript'> document.write(unescape('%3Ciframe%20width%3D%22730%22%20height%3D%22440%22%20src%3D%22https%3A%2F%2Fwww.youtube.com%2Fembed%2Faqz-KE-bpKQ%3Fautoplay%3D1%22%20frameborder%3D%220%22%20gesture%3D%22media%22%20allow%3D%22encrypted-media%22%20allowfullscreen%3E%3C%2Fiframe%3E'));</script>
+            </div>
+            """,
+        ]
+
+        rr = Resolve("https://example.com")
+        rr.manager = Logger()
+        rr.logger = rr.manager.new_module("test")
+
+        for test_res in res_test_list:
+            m = rr._iframe_src(test_res)
+            self.assertTrue(m)
+
+        # test_iframe_src_false
+        res_test_list_false = [
+            """<!DOCTYPE html><html><body><h1>ABC</h1><p>123</p></body></html>
+            """,
+        ]
+
+        for test_res in res_test_list_false:
+            m = rr._iframe_src(test_res)
+            self.assertFalse(m)
+
+    def test_resolve_res(self):
+        rr = Resolve("https://example.com")
+        rr.manager = Logger()
+        rr.logger = rr.manager.new_module("test")
+
+        # Test for no items
+        res_test_list_false = [
+            """<!DOCTYPE html><html><body><h1>ABC</h1><p>123</p></body></html>
+            """,
+        ]
+
+        for test_res in res_test_list_false:
+            m = rr._resolve_res(test_res)
+            self.assertFalse(m)
