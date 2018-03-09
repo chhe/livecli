@@ -27,15 +27,18 @@ __livecli_docs__ = {
 
 class Dogan(Plugin):
     """
-    Support for the live streams from Doğan Media Group channels
+    Support for the live streams from Dogan Media Group channels
     """
     url_re = re.compile(r"""
-        https?://(?:www.)?
-        (?:teve2.com.tr/(?:canli-yayin|filmler/.*|programlar/.*)|
-           kanald.com.tr/.*|
-           cnnturk.com/canli-yayin|
-           dreamtv.com.tr/canli-yayin|
-           dreamturk.com.tr/canli)
+        https?://(?:www\.)?(?:
+            teve2\.com\.tr/(?:canli-yayin|filmler/.*|programlar/.*)
+            |
+            kanald\.com\.tr/.*
+            |
+            cnnturk\.com/canli-yayin
+            |
+            dreamt(?:urk|v)\.com\.tr/canli(?:-yayin)?
+        )
     """, re.VERBOSE)
     playerctrl_re = re.compile(r'''<div[^>]*?ng-controller=(?P<quote>["'])(?:Live)?PlayerCtrl(?P=quote).*?>''', re.DOTALL)
     videoelement_re = re.compile(r'''<div[^>]*?id=(?P<quote>["'])video-element(?P=quote).*?>''', re.DOTALL)
@@ -63,11 +66,13 @@ class Dogan(Plugin):
         # find the contentId
         content_id_m = self.content_id_re.search(res.text)
         if content_id_m:
+            self.logger.debug("Found content_id_re")
             return content_id_m.group(1)
 
         # find the PlayerCtrl div
         player_ctrl_m = self.playerctrl_re.search(res.text)
         if player_ctrl_m:
+            self.logger.debug("Found playerctrl_re")
             # extract the content id from the player control data
             player_ctrl_div = player_ctrl_m.group(0)
             content_id_m = self.data_id_re.search(player_ctrl_div)
@@ -77,6 +82,7 @@ class Dogan(Plugin):
         # find <div id="video-element"
         videoelement_m = self.videoelement_re.search(res.text)
         if videoelement_m:
+            self.logger.debug("Found videoelement_re")
             # extract the content id from the player control data
             videoelement_div = videoelement_m.group(0)
             content_id_m = self.data_id_re.search(videoelement_div)
@@ -100,11 +106,11 @@ class Dogan(Plugin):
     def _get_streams(self):
         content_id = self._get_content_id()
         if content_id:
-            self.logger.debug(u"Loading content: {}", content_id)
+            self.logger.debug("Loading content: {0}".format(content_id))
             hls_url = self._get_hls_url(content_id)
             return HLSStream.parse_variant_playlist(self.session, hls_url)
         else:
-            self.logger.error(u"Could not find the contentId for this stream")
+            self.logger.error("Could not find the contentId for this stream")
 
 
 __plugin__ = Dogan
