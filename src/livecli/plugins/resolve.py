@@ -158,6 +158,12 @@ class Resolve(Plugin):
         Returns:
             List of validate urls
         """
+
+        # Allow only a valid scheme, after the url was repaired
+        valid_scheme = (
+            "http",
+        )
+
         blacklist_netloc_user = self.get_option("blacklist_netloc")
         blacklist_netloc = (
             "127.0.0.1",
@@ -234,6 +240,7 @@ class Resolve(Plugin):
 
             # sorted after the way livecli will try to remove an url
             status_remove = [
+                "SCHEME",     # - Allow only a valid scheme, after the url was repaired
                 "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
                 "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
                 "BL-static",  # - Removes blacklisted domains
@@ -246,7 +253,8 @@ class Resolve(Plugin):
 
             if REMOVE is False:
                 count = 0
-                for url_status in ((url_type == "iframe" and
+                for url_status in ((not parse_new_url.scheme.startswith(valid_scheme)),
+                                   (url_type == "iframe" and
                                     whitelist_netloc_user is not None and
                                     parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
                                    (url_type == "iframe" and
@@ -426,7 +434,7 @@ class Resolve(Plugin):
             playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
             if playlist_list:
                 self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
-                return self._resolve_playlist(playlist_list)
+                return playlist_list
         return False
 
     def _res_text(self, url):
@@ -480,12 +488,12 @@ class Resolve(Plugin):
         """ GET website content """
         o_res = self._res_text(self.url)
 
-        """ HLS or HDS stream """
+        """ Video URL """
         x = self._resolve_res(o_res)
         if x:
-            return x
+            return self._resolve_playlist(x)
 
-        """ iframe url """
+        """ iFrame URL """
         x = self._iframe_src(o_res)
 
         if not x:

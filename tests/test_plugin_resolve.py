@@ -60,6 +60,8 @@ class TestPluginResolve(unittest.TestCase):
         rr.logger = rr.manager.new_module("test")
 
         test_all_removed = [
+            "about:blank",
+            "javascript:false",
             "http://about:blank",
             "http://expressen.se/_livetvpreview/123.html",
             "https://127.0.0.1",
