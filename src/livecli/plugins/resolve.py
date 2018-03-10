@@ -53,6 +53,54 @@ class Resolve(Plugin):
     _unescape_iframe_re = re.compile(r"""unescape\(["'](?P<data>%3C(?:iframe|%69%66%72%61%6d%65)%20[^"']+)["']""", re.IGNORECASE)
     # Regex for obviously ad paths
     _ads_path = re.compile(r"""(?:/static)?/ads?/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
+
+    # START - _make_url_list
+    # Allow only a valid scheme, after the url was repaired
+    valid_scheme = (
+        "http",
+    )
+    # Not allowed at the end of the parsed url path
+    blacklist_endswith = (
+        ".gif",
+        ".jpg",
+        ".png",
+        ".svg",
+        ".vtt",
+        "/chat.html",
+        "/chat",
+    )
+    # Not allowed at the end of the parsed url netloc
+    blacklist_netloc = (
+        "127.0.0.1",
+        "about:blank",
+        "abv.bg",
+        "adfox.ru",
+        "googletagmanager.com",
+        "javascript:false",
+    )
+    # Not allowed at the end of the parsed url netloc and the start of the path
+    blacklist_path = [
+        ("expressen.se", "/_livetvpreview/"),
+        ("facebook.com", "/connect"),
+        ("facebook.com", "/plugins"),
+        ("haber7.com", "/radyohome/station-widget/"),
+        ("static.tvr.by", "/upload/video/atn/promo"),
+        ("twitter.com", "/widgets"),
+        ("vesti.ru", "/native_widget.html"),
+    ]
+    # Only allowed as a valid file format in playlist urls
+    whitelist_endswith = (
+        ".f4m",
+        ".hls",
+        ".m3u",
+        ".m3u8",
+        ".mp3",
+        ".mp4",
+        ".mpd",
+    )
+    # END - _make_url_list
+
+    # PluginOptions
     options = PluginOptions({
         "blacklist_netloc": None,
         "blacklist_path": None,
@@ -159,61 +207,18 @@ class Resolve(Plugin):
             List of validate urls
         """
 
-        # Allow only a valid scheme, after the url was repaired
-        valid_scheme = (
-            "http",
-        )
-
         blacklist_netloc_user = self.get_option("blacklist_netloc")
-        blacklist_netloc = (
-            "127.0.0.1",
-            "about:blank",
-            "abv.bg",
-            "adfox.ru",
-            "googletagmanager.com",
-            "javascript:false",
-        )
         whitelist_netloc_user = self.get_option("whitelist_netloc")
 
-        blacklist_path = [
-            ("expressen.se", "/_livetvpreview/"),
-            ("facebook.com", "/connect"),
-            ("facebook.com", "/plugins"),
-            ("haber7.com", "/radyohome/station-widget/"),
-            ("static.tvr.by", "/upload/video/atn/promo"),
-            ("twitter.com", "/widgets"),
-            ("vesti.ru", "/native_widget.html"),
-        ]
         # Add --resolve-blacklist-path to blacklist_path
         blacklist_path_user = self.get_option("blacklist_path")
         if blacklist_path_user is not None:
-            blacklist_path = self.merge_path_list(blacklist_path, blacklist_path_user)
+            self.blacklist_path = self.merge_path_list(self.blacklist_path, blacklist_path_user)
 
         whitelist_path = []
         whitelist_path_user = self.get_option("whitelist_path")
         if whitelist_path_user is not None:
             whitelist_path = self.merge_path_list(whitelist_path, whitelist_path_user)
-
-        blacklist_endswith = (
-            ".gif",
-            ".jpg",
-            ".png",
-            ".svg",
-            ".vtt",
-            "/chat.html",
-            "/chat",
-        )
-
-        # Allow only valid file formats for playlists
-        whitelist_endswith = (
-            ".f4m",
-            ".hls",
-            ".m3u",
-            ".m3u8",
-            ".mp3",
-            ".mp4",
-            ".mpd",
-        )
 
         new_list = []
         for url in old_list:
@@ -253,20 +258,20 @@ class Resolve(Plugin):
 
             if REMOVE is False:
                 count = 0
-                for url_status in ((not parse_new_url.scheme.startswith(valid_scheme)),
+                for url_status in ((not parse_new_url.scheme.startswith(self.valid_scheme)),
                                    (url_type == "iframe" and
                                     whitelist_netloc_user is not None and
                                     parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
                                    (url_type == "iframe" and
                                     whitelist_path_user is not None and
                                     self.compare_url_path(parse_new_url, whitelist_path) is False),
-                                   (parse_new_url.netloc.endswith(blacklist_netloc)),
+                                   (parse_new_url.netloc.endswith(self.blacklist_netloc)),
                                    (blacklist_netloc_user is not None and
                                     parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
-                                   (self.compare_url_path(parse_new_url, blacklist_path) is True),
-                                   (parse_new_url.path.endswith(blacklist_endswith)),
+                                   (self.compare_url_path(parse_new_url, self.blacklist_path) is True),
+                                   (parse_new_url.path.endswith(self.blacklist_endswith)),
                                    ((url_type == "playlist" and
-                                     not parse_new_url.path.endswith(whitelist_endswith))),
+                                     not parse_new_url.path.endswith(self.whitelist_endswith))),
                                    (self._ads_path.match(parse_new_url.path))):
 
                     count += 1
@@ -275,7 +280,7 @@ class Resolve(Plugin):
                         break
 
             if REMOVE is True:
-                self.logger.debug("{0} - Removed url: {1}".format(status_remove[count - 1], new_url))
+                self.logger.debug("{0} - Removed: {1}".format(status_remove[count - 1], new_url))
                 continue
             # Add url to the list
             new_list += [new_url]
@@ -306,7 +311,7 @@ class Resolve(Plugin):
     def _iframe_src(self, res):
         """Tries to find every iframe url,
            it will use the first iframe as self.url,
-           but every other url can will be shown in the terminal.
+           but every other url will be shown in the terminal.
 
         Args:
             res: Content from self._res_text
