@@ -23,24 +23,20 @@ from livecli.plugin.api.common import _rtmp_re
 
 
 class Resolve(Plugin):
-    """Livecli Plugin that will try to find a validate streamurl
+    """Plugin that will try to find a valid streamurl on every website
 
     Supported
-        - embedded url of an already existing livecli plugin
-        - website with an unencrypted fileurl in there source code
-             - .m3u8
-             - .f4m
-             - .mp3
-             - .mp4
+        - embedded url of an already existing plugin
+        - website with an unencrypted fileurl in there source code,
+          HDS, HLS and HTTP
 
     Unsupported
-        - websites with dash, rtmp or other.
+        - websites with DASH or RTMP
+          it will show the url in the debug log, but won't try to start it.
         - streams that require
             - an authentication
             - an API
         - streams that are hidden behind javascript or other encryption
-        - websites with a lot of iframes
-          (the blacklist feature can be used for unwanted domains)
     """
 
     _url_re = re.compile(r"""(resolve://)?(?P<url>.+)""")
@@ -102,6 +98,7 @@ class Resolve(Plugin):
 
     # PluginOptions
     options = PluginOptions({
+        "turn_off": False,
         "blacklist_netloc": None,
         "blacklist_path": None,
         "whitelist_netloc": None,
@@ -143,7 +140,7 @@ class Resolve(Plugin):
     @classmethod
     def can_handle_url(cls, url):
         m = cls._url_re.match(url)
-        if m:
+        if m and cls.get_option("turn_off") is False:
             return m.group("url") is not None
 
     def help_info_e(self, e):
@@ -190,35 +187,36 @@ class Resolve(Plugin):
         return static_list
 
     def _make_url_list(self, old_list, base_url, url_type="", stream_base=""):
-        """Creates a list of validate urls from a list of broken urls
-           and removes every blacklisted url
+        """creates a list of valid urls
+           - repairs urls
+           - removes unwanted urls
 
         Args:
-            old_list: List of broken urls
-            base_url: url that will get used for scheme and netloc
-            url_type: can be iframe or playlist
-                - iframe is used for
+            old_list: list of urls
+            base_url: url that will get used for scheme and netloc repairs
+            url_type: can be ... and is used for ...
+                - iframe
                     --resolve-whitelist-netloc
-                - playlist is used for
+                - playlist
                     whitelist_endswith
             stream_base: basically same as base_url, but used for .f4m files.
 
         Returns:
-            List of validate urls
+            New list of validate urls.
         """
 
         blacklist_netloc_user = self.get_option("blacklist_netloc")
         whitelist_netloc_user = self.get_option("whitelist_netloc")
 
-        # Add --resolve-blacklist-path to blacklist_path
+        # repairs scheme of --resolve-blacklist-path and merges it into blacklist_path
         blacklist_path_user = self.get_option("blacklist_path")
         if blacklist_path_user is not None:
             self.blacklist_path = self.merge_path_list(self.blacklist_path, blacklist_path_user)
 
-        whitelist_path = []
+        # repairs scheme of --resolve-whitelist-path and merges it into whitelist_path
         whitelist_path_user = self.get_option("whitelist_path")
         if whitelist_path_user is not None:
-            whitelist_path = self.merge_path_list(whitelist_path, whitelist_path_user)
+            whitelist_path = self.merge_path_list([], whitelist_path_user)
 
         new_list = []
         for url in old_list:
@@ -227,31 +225,33 @@ class Resolve(Plugin):
                 continue
             # Repair the scheme
             new_url = url.replace("\\", "")
+            # repairs broken scheme
             if new_url.startswith("http&#58;//"):
                 new_url = "http:" + new_url[9:]
             elif new_url.startswith("https&#58;//"):
                 new_url = "https:" + new_url[10:]
-            # Repair the domain
+            # creates a valid url from path only urls and adds missing scheme for // urls
             if stream_base and new_url[1] is not "/":
                 if new_url[0] is "/":
                     new_url = new_url[1:]
                 new_url = urljoin(stream_base, new_url)
             else:
                 new_url = urljoin(base_url, new_url)
-            # Parse the url and remove not wanted urls
+            # parse the url
             parse_new_url = urlparse(new_url)
 
+            # START - removal of unwanted urls
             REMOVE = False
 
             # sorted after the way livecli will try to remove an url
             status_remove = [
-                "SCHEME",     # - Allow only a valid scheme, after the url was repaired
+                "SCHEME",     # - Allow only an url with a valid scheme
                 "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
                 "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
                 "BL-static",  # - Removes blacklisted domains
                 "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
                 "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
-                "BL-ew",      # - Removes images and chatrooms
+                "BL-ew",      # - Removes unwanted endswith images and chatrooms
                 "WL-ew",      # - Allow only valid file formats for playlists
                 "ADS",        # - Remove obviously ad urls
             ]
@@ -282,9 +282,11 @@ class Resolve(Plugin):
             if REMOVE is True:
                 self.logger.debug("{0} - Removed: {1}".format(status_remove[count - 1], new_url))
                 continue
-            # Add url to the list
+            # END - removal of unwanted urls
+
+            # Add repaired url to a new list
             new_list += [new_url]
-        # Remove duplicates
+        # Remove duplicates from the new list
         new_list = list(set(new_list))
         return new_list
 
@@ -309,7 +311,7 @@ class Resolve(Plugin):
         return
 
     def _iframe_src(self, res):
-        """Tries to find every iframe url,
+        """Try to find every iframe url,
            it will use the first iframe as self.url,
            but every other url will be shown in the terminal.
 
@@ -344,7 +346,7 @@ class Resolve(Plugin):
         return None
 
     def _window_location(self, res):
-        """Tries to find a script with window.location.href
+        """Try to find a script with window.location.href
 
         Args:
             res: Content from self._res_text
@@ -409,7 +411,7 @@ class Resolve(Plugin):
                     self.help_info_e(e)
 
     def _resolve_res(self, res):
-        """Tries to find every .f4m or .m3u8 url on this website,
+        """Try to find every .f4m or .m3u8 url on this website,
            it will try to add every url that was found as a stream.
 
         Args:
@@ -477,7 +479,7 @@ class Resolve(Plugin):
         return res.text
 
     def _get_streams(self):
-        """Tries to find streams.
+        """Try to find streams.
 
         Returns:
             Playable video from self._resolve_res
@@ -486,6 +488,7 @@ class Resolve(Plugin):
         Raises:
             NoPluginError: if no video was found.
         """
+        self.logger.debug("start resolve.py ...")
         self.url = self.url.replace("resolve://", "")
         self._cache_self_url()
         self.url = update_scheme("http://", self.url)

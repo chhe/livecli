@@ -4,7 +4,7 @@ import unittest
 from livecli.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
 
 from livecli import Livecli
-# from livecli import NoPluginError
+from livecli import NoPluginError
 from livecli.plugins import Plugin
 from livecli.stream import AkamaiHDStream
 from livecli.stream import HLSStream
@@ -19,12 +19,14 @@ class TestSession(unittest.TestCase):
         self.session = Livecli()
         self.session.load_plugins(self.PluginPath)
 
-    # def test_exceptions(self):
-    #     try:
-    #         self.session.resolve_url("invalid url")
-    #         self.assertTrue(False)
-    #     except NoPluginError:
-    #         self.assertTrue(True)
+    def test_exceptions(self):
+        try:
+            # Turn off the resolve.py plugin
+            self.session.set_plugin_option("resolve", "turn_off", True)
+            self.session.resolve_url("invalid url")
+            self.assertTrue(False)
+        except NoPluginError:
+            self.assertTrue(True)
 
     def test_load_plugins(self):
         plugins = self.session.get_plugins()

@@ -1463,12 +1463,22 @@ plugin.add_argument(
     A afreecatv.com account password to use with --afreeca-username.
     """
 )
-plugin.add_argument(
+
+resolve = parser.add_argument_group("Resolve Plugin options")
+resolve.add_argument(
+    "--resolve-turn-off",
+    action="store_true",
+    help="""
+    Turns off the resolve.py Plugin.
+    """
+)
+resolve.add_argument(
     "--resolve-blacklist-netloc",
     metavar="NETLOC",
     type=comma_list,
     help="""
-    Blacklist domains that should not be played with the Resolve plugin,
+    Blacklist domains that should not be used,
+
     by using a comma-separated list:
 
       "example.com,localhost,google.com"
@@ -1476,12 +1486,13 @@ plugin.add_argument(
     Useful for websites with lots of iframes.
     """
 )
-plugin.add_argument(
+resolve.add_argument(
     "--resolve-blacklist-path",
     metavar="PATH",
     type=comma_list,
     help="""
-    Blacklist the path of a domain that should not be played with the Resolve plugin,
+    Blacklist the path of a domain that should not be used,
+
     by using a comma-separated list:
 
       "example.com/mypath,localhost/example,google.com/folder"
@@ -1489,12 +1500,13 @@ plugin.add_argument(
     Useful for websites with different iframes of the same domain.
     """
 )
-plugin.add_argument(
+resolve.add_argument(
     "--resolve-whitelist-netloc",
     metavar="NETLOC",
     type=comma_list,
     help="""
-    Whitelist domains that should be searched for the iframe search with the Resolve plugin,
+    Whitelist domains that should only be searched for iframes,
+
     by using a comma-separated list:
 
       "example.com,localhost,google.com"
@@ -1502,12 +1514,13 @@ plugin.add_argument(
     Useful for websites with lots of iframes, where the main iframe always has the same hosting domain.
     """
 )
-plugin.add_argument(
+resolve.add_argument(
     "--resolve-whitelist-path",
     metavar="PATH",
     type=comma_list,
     help="""
-    Whitelist the path of a domain that should be searched for the iframe search with the Resolve plugin,
+    Whitelist the path of a domain that should only be searched for iframes,
+
     by using a comma-separated list:
 
       "example.com/mypath,localhost/example,google.com/folder"

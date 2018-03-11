@@ -1027,6 +1027,10 @@ def setup_plugin_options():
     if afreeca_password:
         livecli.set_plugin_option("afreeca", "password", afreeca_password)
 
+    if args.resolve_turn_off:
+        livecli.set_plugin_option("resolve", "turn_off",
+                                  args.resolve_turn_off)
+
     if args.resolve_blacklist_netloc:
         livecli.set_plugin_option("resolve", "blacklist_netloc",
                                   args.resolve_blacklist_netloc)
