@@ -805,7 +805,7 @@ transport.add_argument(
 
     Useful for playlists that expire after an amount of time.
 
-    Default is False
+    Default is Disabled.
     """)
 transport.add_argument(
     "--hls-audio-select",

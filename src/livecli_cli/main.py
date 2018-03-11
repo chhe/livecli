@@ -425,8 +425,6 @@ def handle_stream(plugin, streams, stream_name):
             stream_type = type(stream).shortname()
 
             if stream_type in args.player_passthrough and not file_output:
-                if args.hls_session_reload:
-                    cache_stream_data(stream_name, stream.url)
                 console.logger.info("Opening stream: {0} ({1})", stream_name,
                                     stream_type)
                 success = output_stream_passthrough(stream)

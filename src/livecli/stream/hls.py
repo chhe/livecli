@@ -175,7 +175,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
         self.duration_limit = self.stream.duration or (int(self.session.options.get("hls-duration")) if self.session.options.get("hls-duration") else None)
         self.hls_live_restart = self.stream.force_restart or self.session.options.get("hls-live-restart")
         self.sequence_ignore_number = self.session.options.get("hls-segment-ignore-number") or False
-        self.session_time = int(time())
+        self.session_reload_time = int(time())
         self.session_reload = self.session.options.get("hls-session-reload") or False
 
         self.reload_playlist()
@@ -201,7 +201,6 @@ class HLSStreamWorker(SegmentedStreamWorker):
 
     def reload_session(self):
         """ Replace the current stream with a new stream,
-            the new stream will be generated from _get_streams()
             after the given reload time.
         """
         self.logger.debug("Reloading session for playlist")
@@ -213,16 +212,16 @@ class HLSStreamWorker(SegmentedStreamWorker):
         cache_url = cache.get("cache_url")
         self.logger.debug("Current stream_name: {0}".format(cache_stream_name))
         if not cache_url:
-            # corrupt cache data
-            # if more than one instance of streamlink
-            # with the same stream_url and hls-session-reload is running
+            # corrupt cache data, if more than one instance of streamlink
+            # with the same stream_url (m3u8) and hls-session-reload is running
+            # this is very rare and shouldn't be a problem
             self.logger.warning("Missing cache data, hls-session-reload is now deactivated")
-            self.session_time = int(time() + time())
+            self.session_reload_time = int(time() + time())
             return
 
         streams = self.session.streams(cache_url)
         if not streams:
-            self.logger.debug("No stream found for reload_session, stream might be offline.")
+            self.logger.debug("No stream found for hls-session-reload, stream might be offline.")
             return
 
         self.stream = streams[cache_stream_name]
@@ -232,7 +231,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
         )
         new_cache.set("cache_stream_name", cache_stream_name, (self.session_reload + 60))
         new_cache.set("cache_url", cache_url, (self.session_reload + 60))
-        self.session_time = int(time())
+        self.session_reload_time = int(time())
 
     def reload_playlist(self):
         if self.closed:
@@ -315,7 +314,7 @@ class HLSStreamWorker(SegmentedStreamWorker):
 
     def iter_segments(self):
         while not self.closed:
-            if self.session_reload and (self.session_time + self.session_reload) < int(time()):
+            if self.session_reload and (self.session_reload_time + self.session_reload) < int(time()):
                 self.reload_session()
             for sequence in filter(self.valid_sequence, self.playlist_sequences):
                 self.logger.debug("Adding segment {0} to queue", sequence.num)
