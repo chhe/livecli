@@ -3,7 +3,6 @@ import re
 
 from livecli import NoPluginError
 from livecli import NoStreamsError
-from livecli.cache import Cache
 from livecli.compat import unquote
 from livecli.compat import urljoin
 from livecli.compat import urlparse
@@ -20,6 +19,13 @@ from livecli.utils import update_scheme
 from livecli.plugin.api.common import _iframe_re
 from livecli.plugin.api.common import _playlist_re
 from livecli.plugin.api.common import _rtmp_re
+
+
+class ResolveCache:
+    """used as temporary url cache
+       - ResolveCache.cache_url_list
+    """
+    pass
 
 
 class Resolve(Plugin):
@@ -108,12 +114,18 @@ class Resolve(Plugin):
     def __init__(self, url):
         """Inits Resolve with default settings"""
         super(Resolve, self).__init__(url)
-        self._session_attributes = Cache(filename="plugin-cache.json", key_prefix="resolve:attributes")
-        self._cache_url = self._session_attributes.get("cache_url")
-        if self._cache_url:
-            self.referer = self._cache_url
+        self.url = self.url.replace("resolve://", "")
+
+        # cache every used url, this will avoid a loop
+        if hasattr(ResolveCache, "cache_url_list"):
+            ResolveCache.cache_url_list += [self.url]
+            # set the last url as a referer
+            self.referer = ResolveCache.cache_url_list[-2]
         else:
-            self.referer = self.url.replace("resolve://", "")
+            ResolveCache.cache_url_list = [self.url]
+            self.referer = self.url
+
+        # default GET header
         self.headers = {
             "User-Agent": useragents.FIREFOX,
             "Referer": self.referer
@@ -220,9 +232,6 @@ class Resolve(Plugin):
 
         new_list = []
         for url in old_list:
-            # Don't add the same url as self.url to the list.
-            if url == self.url:
-                continue
             # Repair the scheme
             new_url = url.replace("\\", "")
             # repairs broken scheme
@@ -245,6 +254,7 @@ class Resolve(Plugin):
 
             # sorted after the way livecli will try to remove an url
             status_remove = [
+                "SAME-URL",   # - Removes an already used iframe url
                 "SCHEME",     # - Allow only an url with a valid scheme
                 "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
                 "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
@@ -258,7 +268,8 @@ class Resolve(Plugin):
 
             if REMOVE is False:
                 count = 0
-                for url_status in ((not parse_new_url.scheme.startswith(self.valid_scheme)),
+                for url_status in ((new_url in ResolveCache.cache_url_list),
+                                   (not parse_new_url.scheme.startswith(self.valid_scheme)),
                                    (url_type == "iframe" and
                                     whitelist_netloc_user is not None and
                                     parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
@@ -289,26 +300,6 @@ class Resolve(Plugin):
         # Remove duplicates from the new list
         new_list = list(set(new_list))
         return new_list
-
-    def _cache_self_url(self):
-        """Cache self.url
-
-        Raises:
-            NoPluginError: if self.url is the same as self._cache_url
-        """
-        # TODO: use a list of all used urls
-        #       and remove the urls with self._make_url_list
-        # this is now useless for one url check
-        # because self._make_url_list will remove self.url
-        if self._cache_url == self.url:
-            self.logger.debug("Abort: Website is already in cache.")
-            raise NoPluginError
-
-        """ set a 2 sec cache to avoid loops with the same url """
-        # self.logger.debug("Old cache: {0}".format(self._session_attributes.get("cache_url")))
-        self._session_attributes.set("cache_url", self.url, expires=2)
-        # self.logger.debug("New cache: {0}".format(self._session_attributes.get("cache_url")))
-        return
 
     def _iframe_src(self, res):
         """Try to find every iframe url,
@@ -489,8 +480,6 @@ class Resolve(Plugin):
             NoPluginError: if no video was found.
         """
         self.logger.debug("start resolve.py ...")
-        self.url = self.url.replace("resolve://", "")
-        self._cache_self_url()
         self.url = update_scheme("http://", self.url)
 
         """ GET website content """
