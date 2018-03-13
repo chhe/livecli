@@ -66,7 +66,7 @@ clone() {
 changelog() {
   cd $CLI
   echo "Getting commit changes. Writing to ../changes.txt"
-  LOG=$(git shortlog --email --no-merges --pretty=%s ${1}.. | sed  's/^/    /')
+  LOG=$(git log --no-merges --pretty=%s ${1}.. | sed  's/^/    /' | sort)
   echo -e "::\n\n$LOG" > ../changes.txt
   echo "Changelog has been written to changes.txt"
   echo "!!PLEASE REVIEW BEFORE CONTINUING!!"
