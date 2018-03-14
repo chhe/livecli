@@ -61,6 +61,7 @@ def command_session(session, old_data):
         "ffmpeg-verbose": "set_option_store_true",
         "hls-live-restart": "set_option_store_true",
         "http-disable-dh": "set_option_store_true",
+        "resolve-turn-off": "set_option_store_true",
         # set_option_comma_list
         "hls-segment-ignore-names": "set_option_comma_list",
         # set_option

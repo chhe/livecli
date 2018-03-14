@@ -112,10 +112,9 @@ class Resolve(Plugin):
     })
 
     def __init__(self, url):
-        """Inits Resolve with default settings"""
         super(Resolve, self).__init__(url)
+        # Remove prefix
         self.url = self.url.replace("resolve://", "")
-
         # cache every used url, this will avoid a loop
         if hasattr(ResolveCache, "cache_url_list"):
             ResolveCache.cache_url_list += [self.url]
@@ -162,7 +161,7 @@ class Resolve(Plugin):
         return
 
     def compare_url_path(self, parsed_url, check_list):
-        """compare if the parsed url matches a url in the check list
+        """compare a parsed url, if it matches an item from a list
 
         Args:
            parsed_url: a url that was used with urlparse
@@ -181,7 +180,7 @@ class Resolve(Plugin):
         return status
 
     def merge_path_list(self, static_list, user_list):
-        """merge the static list from resolve.py with a user list
+        """merge the static list, with an user list
 
         Args:
            static_list: static list from this plugin
@@ -295,9 +294,9 @@ class Resolve(Plugin):
                 continue
             # END - removal of unwanted urls
 
-            # Add repaired url to a new list
+            # Add repaired url
             new_list += [new_url]
-        # Remove duplicates from the new list
+        # Remove duplicates
         new_list = list(set(new_list))
         return new_list
 
@@ -402,15 +401,14 @@ class Resolve(Plugin):
                     self.help_info_e(e)
 
     def _resolve_res(self, res):
-        """Try to find every .f4m or .m3u8 url on this website,
-           it will try to add every url that was found as a stream.
+        """find every playlist url on this website.
 
         Args:
             res: Content from self._res_text
 
         Returns:
-            True
-              - if stream got added
+            A list of stream urls
+              or
             False
               - if no stream got added
         """
@@ -473,28 +471,28 @@ class Resolve(Plugin):
         """Try to find streams.
 
         Returns:
-            Playable video from self._resolve_res
+            Playable video
                 or
-            New self.url for livecli
+            New self.url
         Raises:
             NoPluginError: if no video was found.
         """
         self.logger.debug("start resolve.py ...")
         self.url = update_scheme("http://", self.url)
 
-        """ GET website content """
+        # GET website content
         o_res = self._res_text(self.url)
 
-        """ Video URL """
+        # Video URL
         x = self._resolve_res(o_res)
         if x:
             return self._resolve_playlist(x)
 
-        """ iFrame URL """
+        # iFrame URL
         x = self._iframe_src(o_res)
 
         if not x:
-            """ script window.location.href """
+            # search for window.location.href
             x = self._window_location(o_res)
 
         if x:
