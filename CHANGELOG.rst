@@ -1,3 +1,36 @@
+livecli 3.5.0 (2018-03-14)
+--------------------------
+Livecli 3.5.0 has been released!
+
+For more details see below.
+
+::
+
+    [api] Useragents update.
+    [balticlivecam] better debug msg update
+    [changelog] removed names and emails, removed old changelogs
+    [codecov] use pytest and upload real data
+    [compat] Remove unused imports
+    [compat] Removed unused shlex_quote
+    [dailymotion] Fix for new stream data API
+    [docs] fix table layout on the install page
+    [docs] updated AUTHORS, removed duplicates and removed not used script
+    [dogan] cleanup url_re and better debug
+    [huya] cleanup
+    [IDF1] Add support for IDF1
+    [pixiv] New plugin for sketch.pixiv.net
+    [resolve] new cmd --resolve-turn-off
+    [resolve] moved _iframe_re _playlist_re _rtmp_re into a common file
+    [resolve] moved lists and dicts into the class / self
+    [resolve] remove Cache use a python class as Cache
+    [resolve] Remove invalid scheme urls
+    [resolve] static blacklist update
+    [resolve] whitelist_endswith for playlists and don't allow {} for urls
+    [script] New script that creates a basic plugin template with tests.
+    [sportschau] Fixed plugin.
+    [streann] Fixed broken plugin
+    [tests] Added new Plugin tests.
+
 livecli 3.4.0 (2018-02-21)
 --------------------------
 Livecli 3.4.0 has been released!
