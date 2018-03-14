@@ -1027,6 +1027,17 @@ def setup_plugin_options():
     if afreeca_password:
         livecli.set_plugin_option("afreeca", "password", afreeca_password)
 
+    if args.pixiv_username:
+        livecli.set_plugin_option("pixiv", "username", args.pixiv_username)
+
+    if args.pixiv_username and not args.pixiv_password:
+        pixiv_password = console.askpass("Enter pixiv account password: ")
+    else:
+        pixiv_password = args.pixiv_password
+
+    if pixiv_password:
+        livecli.set_plugin_option("pixiv", "password", pixiv_password)
+
     if args.resolve_turn_off:
         livecli.set_plugin_option("resolve", "turn_off",
                                   args.resolve_turn_off)
