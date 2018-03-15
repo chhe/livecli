@@ -447,8 +447,8 @@ def handle_stream(plugin, streams, stream_name):
 def fetch_streams(plugin):
     """Fetches streams using correct parameters."""
 
-    return plugin.get_streams(stream_types=args.stream_types,
-                              sorting_excludes=args.stream_sorting_excludes)
+    return plugin.streams(stream_types=args.stream_types,
+                          sorting_excludes=args.stream_sorting_excludes)
 
 
 def fetch_streams_infinite(plugin, interval):

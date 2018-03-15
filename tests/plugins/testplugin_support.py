@@ -1,5 +1,5 @@
 from livecli.stream import HTTPStream
 
 
-def get_streams(session):
+def _get_streams(session):
     return dict(support=HTTPStream(session, "http://test.se/support"))

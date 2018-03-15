@@ -360,15 +360,6 @@ class Plugin(object):
 
         return final_sorted_streams
 
-    def get_streams(self, *args, **kwargs):
-        """Deprecated since version 1.9.0.
-
-        Has been renamed to :func:`Plugin.streams`, this is an alias
-        for backwards compatibility.
-        """
-
-        return self.streams(*args, **kwargs)
-
     def _get_streams(self):
         raise NotImplementedError
 

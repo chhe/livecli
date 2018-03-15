@@ -29,8 +29,8 @@ class TestPluginHTTPStreamPlugin(unittest.TestCase):
             self.assertFalse(HTTPStreamPlugin.can_handle_url(url))
 
     def _test_http(self, surl, url, params):
-        channel = self.session.resolve_url(surl)
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url(surl)
+        streams = plugin.streams()
 
         self.assertTrue("live" in streams)
 

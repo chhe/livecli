@@ -57,7 +57,7 @@ class TestPluginTVPlayer(unittest.TestCase):
         TVPlayer.bind(self.session, "test.plugin.tvplayer")
         plugin = TVPlayer("http://tvplayer.com/watch/dave")
 
-        streams = plugin.get_streams()
+        streams = plugin.streams()
 
         self.assertTrue("test" in streams)
 
@@ -80,7 +80,7 @@ class TestPluginTVPlayer(unittest.TestCase):
         TVPlayer.bind(self.session, "test.plugin.tvplayer")
         plugin = TVPlayer("http://tvplayer.com/watch/dave")
 
-        streams = plugin.get_streams()
+        streams = plugin.streams()
 
         self.assertEqual({}, streams)
 

@@ -54,7 +54,7 @@ class TestPlugin(Plugin):
         streams["480p"] = [HTTPStream(self.session, "http://test.se/stream"),
                            RTMPStream(self.session, dict(rtmp="rtmp://test.se"))]
 
-        streams.update(testplugin_support.get_streams(self.session))
+        streams.update(testplugin_support._get_streams(self.session))
 
         return streams
 

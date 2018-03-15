@@ -45,8 +45,8 @@ class TestPluginHLSPlugin(unittest.TestCase):
     def _test_hls(self, surl, url, mock_parse):
         mock_parse.return_value = {}
 
-        channel = self.session.resolve_url(surl)
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url(surl)
+        streams = plugin.streams()
 
         self.assertTrue("live" in streams)
         mock_parse.assert_called_with(self.session, url)
@@ -59,8 +59,8 @@ class TestPluginHLSPlugin(unittest.TestCase):
     def _test_hlsvariant(self, surl, url, mock_parse):
         mock_parse.return_value = {"best": HLSStream(self.session, url)}
 
-        channel = self.session.resolve_url(surl)
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url(surl)
+        streams = plugin.streams()
 
         mock_parse.assert_called_with(self.session, url)
 

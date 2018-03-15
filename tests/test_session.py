@@ -38,9 +38,9 @@ class TestSession(unittest.TestCase):
 
     def test_resolve_url(self):
         plugins = self.session.get_plugins()
-        channel = self.session.resolve_url("http://test.se/channel")
-        self.assertTrue(isinstance(channel, Plugin))
-        self.assertTrue(isinstance(channel, plugins["testplugin"]))
+        plugin = self.session.resolve_url("http://test.se/channel")
+        self.assertTrue(isinstance(plugin, Plugin))
+        self.assertTrue(isinstance(plugin, plugins["testplugin"]))
 
     def test_resolve_url_priority(self):
         from tests.plugins.testplugin import TestPlugin
@@ -60,17 +60,17 @@ class TestSession(unittest.TestCase):
             "test_plugin_low": LowPriority,
             "test_plugin_high": HighPriority,
         }
-        channel = self.session.resolve_url_no_redirect("http://test.se/channel")
+        plugin = self.session.resolve_url_no_redirect("http://test.se/channel")
         plugins = self.session.get_plugins()
 
-        self.assertTrue(isinstance(channel, plugins["test_plugin_high"]))
-        self.assertEqual(HIGH_PRIORITY, channel.priority(channel.url))
+        self.assertTrue(isinstance(plugin, plugins["test_plugin_high"]))
+        self.assertEqual(HIGH_PRIORITY, plugin.priority(plugin.url))
 
     def test_resolve_url_no_redirect(self):
         plugins = self.session.get_plugins()
-        channel = self.session.resolve_url_no_redirect("http://test.se/channel")
-        self.assertTrue(isinstance(channel, Plugin))
-        self.assertTrue(isinstance(channel, plugins["testplugin"]))
+        plugin = self.session.resolve_url_no_redirect("http://test.se/channel")
+        self.assertTrue(isinstance(plugin, Plugin))
+        self.assertTrue(isinstance(plugin, plugins["testplugin"]))
 
     def test_options(self):
         self.session.set_option("test_option", "option")
@@ -84,8 +84,8 @@ class TestSession(unittest.TestCase):
         self.assertEqual(self.session.get_plugin_option("testplugin", "non_existing"), None)
 
     def test_plugin(self):
-        channel = self.session.resolve_url("http://test.se/channel")
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url("http://test.se/channel")
+        streams = plugin.streams()
 
         self.assertTrue("best" in streams)
         self.assertTrue("worst" in streams)
@@ -97,34 +97,34 @@ class TestSession(unittest.TestCase):
         self.assertTrue(isinstance(streams["akamaihd"], AkamaiHDStream))
 
     def test_plugin_stream_types(self):
-        channel = self.session.resolve_url("http://test.se/channel")
-        streams = channel.get_streams(stream_types=["http", "rtmp"])
+        plugin = self.session.resolve_url("http://test.se/channel")
+        streams = plugin.streams(stream_types=["http", "rtmp"])
 
         self.assertTrue(isinstance(streams["480p"], HTTPStream))
         self.assertTrue(isinstance(streams["480p_rtmp"], RTMPStream))
 
-        streams = channel.get_streams(stream_types=["rtmp", "http"])
+        streams = plugin.streams(stream_types=["rtmp", "http"])
 
         self.assertTrue(isinstance(streams["480p"], RTMPStream))
         self.assertTrue(isinstance(streams["480p_http"], HTTPStream))
 
     def test_plugin_stream_sorted_excludes(self):
-        channel = self.session.resolve_url("http://test.se/channel")
-        streams = channel.get_streams(sorting_excludes=["1080p", "3000k"])
+        plugin = self.session.resolve_url("http://test.se/channel")
+        streams = plugin.streams(sorting_excludes=["1080p", "3000k"])
 
         self.assertTrue("best" in streams)
         self.assertTrue("worst" in streams)
         self.assertTrue(streams["best"] is streams["1500k"])
 
-        streams = channel.get_streams(sorting_excludes=[">=1080p", ">1500k"])
+        streams = plugin.streams(sorting_excludes=[">=1080p", ">1500k"])
         self.assertTrue(streams["best"] is streams["1500k"])
 
-        streams = channel.get_streams(sorting_excludes=lambda q: not q.endswith("p"))
+        streams = plugin.streams(sorting_excludes=lambda q: not q.endswith("p"))
         self.assertTrue(streams["best"] is streams["3000k"])
 
     def test_plugin_support(self):
-        channel = self.session.resolve_url("http://test.se/channel")
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url("http://test.se/channel")
+        streams = plugin.streams()
 
         self.assertTrue("support" in streams)
         self.assertTrue(isinstance(streams["support"], HTTPStream))

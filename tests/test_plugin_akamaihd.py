@@ -24,8 +24,8 @@ class TestPluginAkamaiHDPlugin(unittest.TestCase):
             self.assertFalse(AkamaiHDPlugin.can_handle_url(url))
 
     def _test_akamaihd(self, surl, url):
-        channel = self.session.resolve_url(surl)
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url(surl)
+        streams = plugin.streams()
 
         self.assertTrue("live" in streams)
 

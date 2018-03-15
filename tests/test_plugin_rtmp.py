@@ -31,8 +31,8 @@ class TestPluginRTMPPlugin(unittest.TestCase):
             self.assertFalse(RTMPPlugin.can_handle_url(url))
 
     def _test_rtmp(self, surl, url, params):
-        channel = self.session.resolve_url(surl)
-        streams = channel.get_streams()
+        plugin = self.session.resolve_url(surl)
+        streams = plugin.streams()
 
         self.assertTrue("live" in streams)
 
