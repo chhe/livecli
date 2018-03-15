@@ -61,7 +61,7 @@ if environ.get("NO_DEPS"):
     deps = []
 
 here = abspath(dirname(__file__))
-with open(join(here, "README.md"), encoding="utf-8") as f:
+with open(join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 srcdir = join(dirname(abspath(__file__)), "src/")
