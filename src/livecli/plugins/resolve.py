@@ -125,7 +125,7 @@ class Resolve(Plugin):
             self.referer = self.url
 
         # default GET header
-        self.headers = {
+        http.headers = {
             "User-Agent": useragents.FIREFOX,
             "Referer": self.referer
         }
@@ -363,14 +363,14 @@ class Resolve(Plugin):
         Returns:
             yield every stream
         """
-        self.headers.update({"Referer": self.url})
+        http.headers.update({"Referer": self.url})
         for url in playlist_all:
             parsed_url = urlparse(url)
             if parsed_url.path.endswith((".m3u8")):
                 try:
-                    streams = HLSStream.parse_variant_playlist(self.session, url, headers=self.headers).items()
+                    streams = HLSStream.parse_variant_playlist(self.session, url).items()
                     if not streams:
-                        yield "live", HLSStream(self.session, url, headers=self.headers)
+                        yield "live", HLSStream(self.session, url)
                     for s in streams:
                         yield s
                 except Exception as e:
@@ -378,7 +378,7 @@ class Resolve(Plugin):
                     self.help_info_e(e)
             elif parsed_url.path.endswith((".f4m")):
                 try:
-                    for s in HDSStream.parse_manifest(self.session, url, headers=self.headers).items():
+                    for s in HDSStream.parse_manifest(self.session, url).items():
                         yield s
                 except Exception as e:
                     self.logger.error("Skipping hds_url - {0}".format(str(e)))
@@ -389,7 +389,7 @@ class Resolve(Plugin):
                     m = self._httpstream_bitrate_re.search(url)
                     if m:
                         name = "{0}k".format(m.group("bitrate"))
-                    yield name, HTTPStream(self.session, url, headers=self.headers)
+                    yield name, HTTPStream(self.session, url)
                 except Exception as e:
                     self.logger.error("Skipping http_url - {0}".format(str(e)))
                     self.help_info_e(e)
@@ -443,7 +443,7 @@ class Resolve(Plugin):
             Content of the response
         """
         try:
-            res = http.get(url, headers=self.headers, allow_redirects=True)
+            res = http.get(url, allow_redirects=True)
         except Exception as e:
             if "Received response with content-encoding: gzip" in str(e):
                 headers = {
