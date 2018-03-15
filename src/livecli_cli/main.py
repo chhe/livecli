@@ -545,9 +545,6 @@ def handle_url():
     if not streams:
         console.exit("No playable streams found on this URL: {0}", args.url)
 
-    if args.best_stream_default:
-        args.default_stream = ["best"]
-
     if args.default_stream and not args.stream and not args.json:
         args.stream = args.default_stream
 
@@ -683,16 +680,6 @@ def setup_console():
     # We don't want log output when we are printing JSON or a command-line.
     if not any(getattr(args, attr) for attr in QUIET_OPTIONS):
         console.set_level(args.loglevel)
-
-    if args.quiet_player:
-        console.logger.warning("The option --quiet-player is deprecated since "
-                               "version 1.4.3 as hiding player output is now "
-                               "the default.")
-
-    if args.best_stream_default:
-        console.logger.warning("The option --best-stream-default is deprecated "
-                               "since version 1.9.0, use '--default-stream best' "
-                               "instead.")
 
     console.json = args.json
 
@@ -861,12 +848,6 @@ def setup_options():
     livecli.set_option("subprocess-errorlog", args.subprocess_errorlog)
     livecli.set_option("subprocess-errorlog-path", args.subprocess_errorlog_path)
     livecli.set_option("locale", args.locale)
-
-    # Deprecated options
-    if args.hds_fragment_buffer:
-        console.logger.warning("The option --hds-fragment-buffer is deprecated "
-                               "and will be removed in the future. Use "
-                               "--ringbuffer-size instead")
 
 
 def setup_plugin_options():
@@ -1086,6 +1067,7 @@ def log_current_versions():
 
 
 def check_version(force=False):
+    console.logger.debug("run ... check_version")
     cache = Cache(filename="cli.json")
     latest_version = cache.get("latest_version")
 
@@ -1175,7 +1157,7 @@ def main():
     check_root()
     log_current_versions()
 
-    if args.version_check or (not args.no_version_check and args.auto_version_check):
+    if args.version_check or args.auto_version_check:
         with ignored(Exception):
             check_version(force=args.version_check)
 
