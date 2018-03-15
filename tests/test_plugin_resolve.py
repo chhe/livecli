@@ -5,10 +5,17 @@ from livecli.logger import Logger
 from livecli.plugin.api.common import _iframe_re
 from livecli.plugins.resolve import Resolve
 
+try:
+    from unittest.mock import patch
+except ImportError:
+    # python 2.7
+    from mock import patch
+
 
 class TestPluginResolve(unittest.TestCase):
 
-    def setUp(self):
+    @patch("livecli.plugins.resolve.http")
+    def setUp(self, mock_http):
         self.res_plugin = Resolve("https://example.com")
         self.res_plugin.manager = Logger()
         self.res_plugin.logger = self.res_plugin.manager.new_module("test")
