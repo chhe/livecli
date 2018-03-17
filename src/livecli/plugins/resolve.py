@@ -16,9 +16,27 @@ from livecli.stream import HDSStream
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 from livecli.utils import update_scheme
-from livecli.plugin.api.common import _iframe_re
-from livecli.plugin.api.common import _playlist_re
-from livecli.plugin.api.common import _rtmp_re
+
+# Regex for iFrames
+_iframe_re = re.compile(r"""
+    <ifr(?:["']\s?\+\s?["'])?ame
+    (?!\sname=["']g_iFrame).*?src=
+    ["'](?P<url>[^"']+)["']
+    .*?(?:/>|>(?:[^<>]+)?
+    </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
+    """, re.VERBOSE | re.IGNORECASE | re.DOTALL)
+
+# Regex for playlist files
+_playlist_re = re.compile(r"""
+    (?:["']|=|&quot;)(?P<url>
+        (?<!title=["'])
+            [^"'<>\s\;{}]+\.(?:m3u8|f4m|mp3|mp4|mpd)
+        (?:[^"'<>\s\\{}]+)?)
+    (?:["']|(?<!;)\s|>|\\&quot;)
+    """, re.DOTALL | re.VERBOSE)
+
+# Regex for rtmp
+_rtmp_re = re.compile(r"""["'](?P<url>rtmp(?:e|s|t|te)?://[^"']+)["']""")
 
 
 class ResolveCache:
@@ -54,13 +72,9 @@ class Resolve(Plugin):
     _window_location_re = re.compile(r"""<script[^<]+window\.location\.href\s?=\s?["'](?P<url>[^"']+)["'];[^<>]+""", re.DOTALL)
     _unescape_iframe_re = re.compile(r"""unescape\(["'](?P<data>%3C(?:iframe|%69%66%72%61%6d%65)%20[^"']+)["']""", re.IGNORECASE)
     # Regex for obviously ad paths
-    _ads_path = re.compile(r"""(?:/static)?/ads?/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
+    _ads_path = re.compile(r"""(?:/(?:static|\d+))?/ads?/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
 
     # START - _make_url_list
-    # Allow only a valid scheme, after the url was repaired
-    valid_scheme = (
-        "http",
-    )
     # Not allowed at the end of the parsed url path
     blacklist_endswith = (
         ".gif",
@@ -142,9 +156,7 @@ class Resolve(Plugin):
         m = cls._url_re.match(url)
         if m:
             prefix, url = cls._url_re.match(url).groups()
-            if prefix is None:
-                return NO_PRIORITY
-            elif prefix is not None:
+            if prefix is not None:
                 return HIGH_PRIORITY
         return NO_PRIORITY
 
@@ -153,12 +165,6 @@ class Resolve(Plugin):
         m = cls._url_re.match(url)
         if m and cls.get_option("turn_off") is False:
             return m.group("url") is not None
-
-    def help_info_e(self, e):
-        if "CERTIFICATE_VERIFY_FAILED" in str(e):
-            self.logger.info("A workaround for this error is --http-no-ssl-verify "
-                             "https://livecli.github.io/cli.html#cmdoption-http-no-ssl-verify")
-        return
 
     def compare_url_path(self, parsed_url, check_list):
         """compare a parsed url, if it matches an item from a list
@@ -179,23 +185,41 @@ class Resolve(Plugin):
                 status = True
         return status
 
-    def merge_path_list(self, static_list, user_list):
+    def merge_path_list(self, static, user):
         """merge the static list, with an user list
 
         Args:
-           static_list: static list from this plugin
-           user_list: list from a user command
+           static (list): static list from this plugin
+           user (list): list from an user command
 
         Returns:
-            A new valid static_list
+            A new valid list
         """
-        for _path_url in user_list:
+        for _path_url in user:
             if not _path_url.startswith(("http", "//")):
                 _path_url = update_scheme("http://", _path_url)
             _parsed_path_url = urlparse(_path_url)
             if _parsed_path_url.netloc and _parsed_path_url.path:
-                static_list += [(_parsed_path_url.netloc, _parsed_path_url.path)]
-        return static_list
+                static += [(_parsed_path_url.netloc, _parsed_path_url.path)]
+        return static
+
+    def repair_url(self, url, base_url, stream_base):
+        """repair a broken url"""
+        # Repair the scheme
+        new_url = url.replace("\\", "")
+        # repairs broken scheme
+        if new_url.startswith("http&#58;//"):
+            new_url = "http:" + new_url[9:]
+        elif new_url.startswith("https&#58;//"):
+            new_url = "https:" + new_url[10:]
+        # creates a valid url from path only urls and adds missing scheme for // urls
+        if stream_base and new_url[1] is not "/":
+            if new_url[0] is "/":
+                new_url = new_url[1:]
+            new_url = urljoin(stream_base, new_url)
+        else:
+            new_url = urljoin(base_url, new_url)
+        return new_url
 
     def _make_url_list(self, old_list, base_url, url_type="", stream_base=""):
         """creates a list of valid urls
@@ -213,7 +237,7 @@ class Resolve(Plugin):
             stream_base: basically same as base_url, but used for .f4m files.
 
         Returns:
-            New list of validate urls.
+            A new valid list of urls.
         """
 
         blacklist_netloc_user = self.get_option("blacklist_netloc")
@@ -229,65 +253,51 @@ class Resolve(Plugin):
         if whitelist_path_user is not None:
             whitelist_path = self.merge_path_list([], whitelist_path_user)
 
+        # sorted after the way livecli will try to remove an url
+        status_remove = [
+            "SAME-URL",   # - Removes an already used iframe url
+            "SCHEME",     # - Allow only an url with a valid scheme
+            "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
+            "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
+            "BL-static",  # - Removes blacklisted domains
+            "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
+            "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
+            "BL-ew",      # - Removes unwanted endswith images and chatrooms
+            "WL-ew",      # - Allow only valid file formats for playlists
+            "ADS",        # - Remove obviously ad urls
+        ]
+
         new_list = []
         for url in old_list:
-            # Repair the scheme
-            new_url = url.replace("\\", "")
-            # repairs broken scheme
-            if new_url.startswith("http&#58;//"):
-                new_url = "http:" + new_url[9:]
-            elif new_url.startswith("https&#58;//"):
-                new_url = "https:" + new_url[10:]
-            # creates a valid url from path only urls and adds missing scheme for // urls
-            if stream_base and new_url[1] is not "/":
-                if new_url[0] is "/":
-                    new_url = new_url[1:]
-                new_url = urljoin(stream_base, new_url)
-            else:
-                new_url = urljoin(base_url, new_url)
+            new_url = self.repair_url(url, base_url, stream_base)
             # parse the url
             parse_new_url = urlparse(new_url)
 
             # START - removal of unwanted urls
             REMOVE = False
+            count = 0
 
-            # sorted after the way livecli will try to remove an url
-            status_remove = [
-                "SAME-URL",   # - Removes an already used iframe url
-                "SCHEME",     # - Allow only an url with a valid scheme
-                "WL-netloc",  # - Allow only whitelisted domains --resolve-whitelist-netloc
-                "WL-path",    # - Allow only whitelisted paths from a domain --resolve-whitelist-path
-                "BL-static",  # - Removes blacklisted domains
-                "BL-netloc",  # - Removes blacklisted domains --resolve-blacklist-netloc
-                "BL-path",    # - Removes blacklisted paths from a domain --resolve-blacklist-path
-                "BL-ew",      # - Removes unwanted endswith images and chatrooms
-                "WL-ew",      # - Allow only valid file formats for playlists
-                "ADS",        # - Remove obviously ad urls
-            ]
+            for url_status in ((new_url in ResolveCache.cache_url_list),
+                               (not parse_new_url.scheme.startswith(("http"))),
+                               (url_type == "iframe" and
+                                whitelist_netloc_user is not None and
+                                parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
+                               (url_type == "iframe" and
+                                whitelist_path_user is not None and
+                                self.compare_url_path(parse_new_url, whitelist_path) is False),
+                               (parse_new_url.netloc.endswith(self.blacklist_netloc)),
+                               (blacklist_netloc_user is not None and
+                                parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
+                               (self.compare_url_path(parse_new_url, self.blacklist_path) is True),
+                               (parse_new_url.path.endswith(self.blacklist_endswith)),
+                               ((url_type == "playlist" and
+                                 not parse_new_url.path.endswith(self.whitelist_endswith))),
+                               (self._ads_path.match(parse_new_url.path))):
 
-            if REMOVE is False:
-                count = 0
-                for url_status in ((new_url in ResolveCache.cache_url_list),
-                                   (not parse_new_url.scheme.startswith(self.valid_scheme)),
-                                   (url_type == "iframe" and
-                                    whitelist_netloc_user is not None and
-                                    parse_new_url.netloc.endswith(tuple(whitelist_netloc_user)) is False),
-                                   (url_type == "iframe" and
-                                    whitelist_path_user is not None and
-                                    self.compare_url_path(parse_new_url, whitelist_path) is False),
-                                   (parse_new_url.netloc.endswith(self.blacklist_netloc)),
-                                   (blacklist_netloc_user is not None and
-                                    parse_new_url.netloc.endswith(tuple(blacklist_netloc_user))),
-                                   (self.compare_url_path(parse_new_url, self.blacklist_path) is True),
-                                   (parse_new_url.path.endswith(self.blacklist_endswith)),
-                                   ((url_type == "playlist" and
-                                     not parse_new_url.path.endswith(self.whitelist_endswith))),
-                                   (self._ads_path.match(parse_new_url.path))):
-
-                    count += 1
-                    if url_status:
-                        REMOVE = True
-                        break
+                count += 1
+                if url_status:
+                    REMOVE = True
+                    break
 
             if REMOVE is True:
                 self.logger.debug("{0} - Removed: {1}".format(status_remove[count - 1], new_url))
@@ -297,26 +307,21 @@ class Resolve(Plugin):
             # Add repaired url
             new_list += [new_url]
         # Remove duplicates
-        new_list = list(set(new_list))
+        new_list = sorted(list(set(new_list)))
         return new_list
 
-    def _iframe_src(self, res):
-        """Try to find every iframe url,
-           it will use the first iframe as self.url,
-           but every other url will be shown in the terminal.
+    def _iframe_unescape(self, res):
+        """Try to find iframes from unescape('%3Ciframe%20
 
         Args:
             res: Content from self._res_text
 
         Returns:
-            True
-                if self.url was changed with an iframe url.
-            None
-                if no iframe was found.
+            (list) A list of iframe urls
+              or
+            False
+                if no iframe was found
         """
-        iframe_all = _iframe_re.findall(res)
-
-        # Fallback for unescape('%3Ciframe%20
         unescape_iframe = self._unescape_iframe_re.findall(res)
         if unescape_iframe:
             unescape_text = []
@@ -325,15 +330,8 @@ class Resolve(Plugin):
             unescape_text = ",".join(unescape_text)
             unescape_iframe = _iframe_re.findall(unescape_text)
             if unescape_iframe:
-                iframe_all = iframe_all + unescape_iframe
-
-        if iframe_all:
-            iframe_list = self._make_url_list(iframe_all, self.url, url_type="iframe")
-            if iframe_list:
-                self.logger.info("Found iframes: {0}".format(", ".join(iframe_list)))
-                self.url = iframe_list[0]
-                return True
-        return None
+                return unescape_iframe
+        return False
 
     def _window_location(self, res):
         """Try to find a script with window.location.href
@@ -350,9 +348,8 @@ class Resolve(Plugin):
 
         match = self._window_location_re.search(res)
         if match:
-            self.url = match.group("url")
-            return True
-        return None
+            return match.group("url")
+        return False
 
     def _resolve_playlist(self, playlist_all):
         """ yield for _resolve_res
@@ -375,14 +372,12 @@ class Resolve(Plugin):
                         yield s
                 except Exception as e:
                     self.logger.error("Skipping hls_url - {0}".format(str(e)))
-                    self.help_info_e(e)
             elif parsed_url.path.endswith((".f4m")):
                 try:
                     for s in HDSStream.parse_manifest(self.session, url).items():
                         yield s
                 except Exception as e:
                     self.logger.error("Skipping hds_url - {0}".format(str(e)))
-                    self.help_info_e(e)
             elif parsed_url.path.endswith((".mp3", ".mp4")):
                 try:
                     name = "live"
@@ -392,46 +387,11 @@ class Resolve(Plugin):
                     yield name, HTTPStream(self.session, url)
                 except Exception as e:
                     self.logger.error("Skipping http_url - {0}".format(str(e)))
-                    self.help_info_e(e)
             elif parsed_url.path.endswith((".mpd")):
                 try:
                     self.logger.info("Found mpd: {0}".format(url))
                 except Exception as e:
                     self.logger.error("Skipping mpd_url - {0}".format(str(e)))
-                    self.help_info_e(e)
-
-    def _resolve_res(self, res):
-        """find every playlist url on this website.
-
-        Args:
-            res: Content from self._res_text
-
-        Returns:
-            A list of stream urls
-              or
-            False
-              - if no stream got added
-        """
-        playlist_all = _playlist_re.findall(res)
-
-        # experimental rtmp search, will only print the url.
-        m_rtmp = _rtmp_re.search(res)
-        if m_rtmp:
-            self.logger.info("Found RTMP: {0}".format(m_rtmp.group("url")))
-
-        if playlist_all:
-            # m_base is used for .f4m files that doesn't have a base_url
-            m_base = self._stream_base_re.search(res)
-            if m_base:
-                stream_base = m_base.group("base")
-            else:
-                stream_base = ""
-
-            playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
-            if playlist_list:
-                self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
-                return playlist_list
-        return False
 
     def _res_text(self, url):
         """Content of a website
@@ -477,26 +437,53 @@ class Resolve(Plugin):
         Raises:
             NoPluginError: if no video was found.
         """
+        new_session_url = False
+
         self.logger.debug("start resolve.py ...")
         self.url = update_scheme("http://", self.url)
 
         # GET website content
         o_res = self._res_text(self.url)
 
-        # Video URL
-        x = self._resolve_res(o_res)
-        if x:
-            return self._resolve_playlist(x)
+        # rtmp search, will only print the url.
+        m_rtmp = _rtmp_re.search(o_res)
+        if m_rtmp:
+            self.logger.info("Found RTMP: {0}".format(m_rtmp.group("url")))
+
+        # Playlist URL
+        playlist_all = _playlist_re.findall(o_res)
+        if playlist_all:
+            # m_base is used for .f4m files that doesn't have a base_url
+            m_base = self._stream_base_re.search(o_res)
+            if m_base:
+                stream_base = m_base.group("base")
+            else:
+                stream_base = ""
+
+            playlist_list = self._make_url_list(playlist_all, self.url, url_type="playlist", stream_base=stream_base)
+            if playlist_list:
+                self.logger.debug("Found URL: {0}".format(", ".join(playlist_list)))
+                return self._resolve_playlist(playlist_list)
 
         # iFrame URL
-        x = self._iframe_src(o_res)
+        iframe_all = _iframe_re.findall(o_res)
+        iframe_all_unescape = self._iframe_unescape(o_res)
+        if iframe_all_unescape:
+            iframe_all = iframe_all + iframe_all_unescape
 
-        if not x:
+        if iframe_all:
+            # repair and filter urls
+            iframe_list = self._make_url_list(iframe_all, self.url, url_type="iframe")
+            if iframe_list is not False:
+                self.logger.info("Found iframes: {0}".format(", ".join(iframe_list)))
+                new_session_url = iframe_list[0]
+
+        if not new_session_url:
             # search for window.location.href
-            x = self._window_location(o_res)
+            new_session_url = self._window_location(o_res)
 
-        if x:
-            return self.session.streams(self.url)
+        if new_session_url:
+            return self.session.streams(new_session_url)
 
         raise NoPluginError
 
