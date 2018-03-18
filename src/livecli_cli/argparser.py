@@ -25,6 +25,7 @@ _option_re = re.compile("""
     \s*
     (?P<value>.*) # The value, anything goes.
 """, re.VERBOSE)
+_ip_address_re = re.compile(r"^((\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])$")
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -138,6 +139,14 @@ def boolean(value):
         raise argparse.ArgumentTypeError("{0} was not one of {{{1}}}".format(value, ', '.join(truths + falses)))
 
     return value.lower() in truths
+
+
+def ip_address(value):
+    match = _ip_address_re.match(value)
+    if not match:
+        raise ValueError
+
+    return match.group(0)
 
 
 parser = ArgumentParser(
@@ -545,6 +554,17 @@ server.add_argument(
     An IPTV M3U Playlist Generator for Livecli can be found at https://github.com/livecli/iptv
 
     Note: This command should be only used on a local network!
+    """
+)
+server.add_argument(
+    "--server-host",
+    metavar="HOST",
+    type=ip_address,
+    default="127.0.0.1",
+    help="""
+    A fixed ip to use as a host for the --server command.
+
+    Default is 127.0.0.1.
     """
 )
 server.add_argument(

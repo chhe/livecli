@@ -1113,7 +1113,7 @@ def main_server():
     """ class used for --server """
     error_code = 0
 
-    HOST = "127.0.0.1"
+    HOST = args.server_host
     PORT = int(args.server_port)
 
     console.logger.info("Starting server: {0} on port {1}".format(HOST, PORT))
