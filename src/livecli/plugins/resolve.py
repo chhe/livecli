@@ -466,17 +466,19 @@ class Resolve(Plugin):
                 return self._resolve_playlist(playlist_list)
 
         # iFrame URL
-        iframe_all = _iframe_re.findall(o_res)
-        iframe_all_unescape = self._iframe_unescape(o_res)
-        if iframe_all_unescape:
-            iframe_all = iframe_all + iframe_all_unescape
+        iframe_list = []
+        for _iframe_list in (_iframe_re.findall(o_res),
+                             self._iframe_unescape(o_res)):
+            if not _iframe_list:
+                continue
+            iframe_list += _iframe_list
 
-        if iframe_all:
-            # repair and filter urls
-            iframe_list = self._make_url_list(iframe_all, self.url, url_type="iframe")
-            if iframe_list is not False:
-                self.logger.info("Found iframes: {0}".format(", ".join(iframe_list)))
-                new_session_url = iframe_list[0]
+        if iframe_list:
+            # repair and filter iframe url list
+            new_iframe_list = self._make_url_list(iframe_list, self.url, url_type="iframe")
+            if new_iframe_list is not False:
+                self.logger.info("Found iframes: {0}".format(", ".join(new_iframe_list)))
+                new_session_url = new_iframe_list[0]
 
         if not new_session_url:
             # search for window.location.href
