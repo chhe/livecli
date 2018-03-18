@@ -170,7 +170,7 @@ class Resolve(Plugin):
         """compare a parsed url, if it matches an item from a list
 
         Args:
-           parsed_url: a url that was used with urlparse
+           parsed_url: an url that was used with urlparse
            check_list: a list of urls that should get checked
 
         Returns:
@@ -205,7 +205,7 @@ class Resolve(Plugin):
 
     def repair_url(self, url, base_url, stream_base):
         """repair a broken url"""
-        # Repair the scheme
+        # remove \
         new_url = url.replace("\\", "")
         # repairs broken scheme
         if new_url.startswith("http&#58;//"):
@@ -223,7 +223,6 @@ class Resolve(Plugin):
 
     def _make_url_list(self, old_list, base_url, url_type="", stream_base=""):
         """creates a list of valid urls
-           - repairs urls
            - removes unwanted urls
 
         Args:
@@ -237,7 +236,7 @@ class Resolve(Plugin):
             stream_base: basically same as base_url, but used for .f4m files.
 
         Returns:
-            A new valid list of urls.
+            (list) A new valid list of urls.
         """
 
         blacklist_netloc_user = self.get_option("blacklist_netloc")
@@ -340,9 +339,9 @@ class Resolve(Plugin):
             res: Content from self._res_text
 
         Returns:
-            True
-                if self.url was changed.
-            None
+            (str) url
+              or
+            False
                 if no url was found.
         """
 
@@ -352,13 +351,13 @@ class Resolve(Plugin):
         return False
 
     def _resolve_playlist(self, playlist_all):
-        """ yield for _resolve_res
+        """ create streams
 
         Args:
-            playlist_all: List of streams
+            playlist_all: List of stream urls
 
         Returns:
-            yield every stream
+            all streams
         """
         http.headers.update({"Referer": self.url})
         for url in playlist_all:
@@ -428,12 +427,12 @@ class Resolve(Plugin):
         return res.text
 
     def _get_streams(self):
-        """Try to find streams.
+        """Try to find streams on every website.
 
         Returns:
             Playable video
                 or
-            New self.url
+            New session url
         Raises:
             NoPluginError: if no video was found.
         """
