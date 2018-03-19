@@ -1,3 +1,23 @@
+livecli 3.6.0 (2018-03-19)
+--------------------------
+Livecli 3.6.0 has been released!
+
+For more details see below.
+
+::
+
+    [pixiv] Added login option
+    [plugin] Removed Plugin.get_streams use Plugin.streams
+    [readme] replace .md with .rst
+    [resolve] better iframe handling
+    [resolve] moved code
+    [resolve] use http.headers instead of self.headers
+    [server] allow 0.0.0.0 as HOST and new cmd --server-host
+    [server] Fixed HDS support
+    [tests] resolve - AttributeError: 'NoneType' object has no attribute
+    [youtube] Don't use MuxedStream for livestreams
+    Removed some Deprecated livestreamer options
+
 livecli 3.5.0 (2018-03-14)
 --------------------------
 Livecli 3.5.0 has been released!
