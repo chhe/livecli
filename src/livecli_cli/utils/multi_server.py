@@ -16,6 +16,7 @@ from livecli.cache import Cache
 from livecli.compat import parse_qsl
 from livecli.compat import unquote_plus
 from livecli.compat import urlparse
+from livecli.stream import HDSStream
 from livecli.stream import HTTPStream
 
 from .multi_args import command_session
@@ -103,7 +104,7 @@ def _play_stream(HTTPBase):
         stream = streams["best"]
         quality = "best"
 
-    if not isinstance(stream, HTTPStream):
+    if isinstance(stream, HTTPStream) is False and isinstance(stream, HDSStream) is False:
         # allow only http based streams: HDS HLS HTTP
         # RTMP is not supported
         HTTPBase._headers(404, "text/html")
