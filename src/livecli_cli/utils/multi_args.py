@@ -61,7 +61,6 @@ def command_session(session, old_data):
         "ffmpeg-verbose": "set_option_store_true",
         "hls-live-restart": "set_option_store_true",
         "http-disable-dh": "set_option_store_true",
-        "resolve-turn-off": "set_option_store_true",
         # set_option_comma_list
         "hls-segment-ignore-names": "set_option_comma_list",
         # set_option
@@ -140,6 +139,7 @@ def command_session(session, old_data):
         "funimation-mux-subtitles": "set_plugin_option_store_true",
         "npo-subtitles": "set_plugin_option_store_true",
         "pluzz-mux-subtitles": "set_plugin_option_store_true",
+        "resolve-turn-off": "set_plugin_option_store_true",
         "rtve-mux-subtitles": "set_plugin_option_store_true",
         "twitch-oauth-authenticate": "set_plugin_option_store_true",
         "zattoo-purge-credentials": "set_plugin_option_store_true",
