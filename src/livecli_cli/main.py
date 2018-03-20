@@ -31,13 +31,14 @@ from livecli.compat import is_win32
 from livecli.compat import str
 from livecli.stream import StreamProcess
 from livecli.plugins.twitch import TWITCH_CLIENT_ID
+from livecli.utils.named_pipe import NamedPipe
 
 from .argparser import parser
 from .compat import stdout
 from .console import ConsoleOutput
 from .constants import CONFIG_FILES, PLUGINS_DIR, STREAM_SYNONYMS, DOWNLOAD_DIR
 from .output import FileOutput, PlayerOutput
-from .utils import NamedPipe, HTTPServer, ignored, progress, stream_to_url
+from .utils import HTTPServer, ignored, progress, stream_to_url
 from .utils import server_HTTPRequest
 from .utils import server_ThreadedHTTPServer
 
