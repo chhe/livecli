@@ -26,6 +26,11 @@ class TestSession(unittest.TestCase):
         self.logger.debug("test")
         self.assertNotEqual(self.output.tell(), 0)
 
+        # Test for except ValueError
+        with self.assertRaises(AttributeError):
+            self.manager.set_level("FalseValue")
+            self.logger.FalseValue("test")
+
     def test_output(self):
         self.manager.set_level("debug")
         self.logger.debug("test")

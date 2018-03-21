@@ -89,7 +89,7 @@ def create_output(plugin, output_shortname):
             _found_url_re = get_url_re_from_module(plugin)
             m = _found_url_re.match(args.url)
             if m:
-                filename_id = get_id_for_filename(m, args.url)
+                filename_id = get_id_for_filename(m)
 
         if args.auto_output_time:
             filename_time = datetime.utcnow().strftime("_%Y_%m_%d_%Hh%Mm%Ss")

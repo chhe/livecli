@@ -43,7 +43,9 @@ class TestPluginStream(unittest.TestCase):
 
         self.assertTrue(
             stream_weight("3000k") > stream_weight("2500k"))
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertTrue(
+            stream_weight("3000k") > stream_weight("3000k_alt"))
+        self.assertTrue(
+            stream_weight("3000k_alt") > stream_weight("3000k_alt2"))
+        self.assertTrue(
+            stream_weight("3000k_alt2") > stream_weight("3000k_alt4"))

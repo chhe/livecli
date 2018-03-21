@@ -9,10 +9,17 @@ except ImportError:
     from mock import patch, PropertyMock
 
 from livecli.exceptions import PluginError
+from livecli.plugin.api.http_session import _parse_keyvalue_list
 from livecli.plugin.api.http_session import HTTPSession
 
 
 class TestPluginAPIHTTPSession(unittest.TestCase):
+
+    def test_parse_keyvalue_list(self):
+        test_value = "Foo=Bar;Qw=er"
+
+        self.assertEqual(dict(tuple(_parse_keyvalue_list(test_value))), {"Foo": "Bar", "Qw": "er"})
+
     @patch('requests.sessions.Session.send')
     def test_read_timeout(self, mock_send):
         mock_send.side_effect = IOError
