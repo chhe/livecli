@@ -39,9 +39,6 @@ addons:
     packages:
     - nsis
 
-# before_deploy:
-#   - ./script/bintrayconfig.sh
-
 deploy:
   - provider: releases
     api_key: "${RELEASES_API_KEY}"
@@ -57,14 +54,3 @@ deploy:
     on:
       tags: true
       condition: $BUILD_INSTALLER == yes
-  # - provider: bintray
-  #   file: build/bintray-nightly.json
-  #   user: "${BINTRAY_USER}"
-  #   key: "${BINTRAY_KEY}"
-  #   skip_cleanup: true
-  #   on:
-  #     branch: master
-  #     condition: $BUILD_INSTALLER == yes && $TRAVIS_EVENT_TYPE == cron
-
-# after_deploy:
-#   - if [[ "$BUILD_INSTALLER" == 'yes' && "$TRAVIS_EVENT_TYPE" == 'cron' ]]; then ./script/bintrayupdate.sh; fi
