@@ -70,7 +70,7 @@ class Resolve(Plugin):
     _stream_base_re = re.compile(r"""streamBasePath\s?(?::|=)\s?["'](?P<base>[^"']+)["']""", re.IGNORECASE)
     # Regex for: javascript redirection
     _window_location_re = re.compile(r"""<script[^<]+window\.location\.href\s?=\s?["'](?P<url>[^"']+)["'];[^<>]+""", re.DOTALL)
-    _unescape_iframe_re = re.compile(r"""unescape\(["'](?P<data>%3C(?:iframe|%69%66%72%61%6d%65)%20[^"']+)["']""", re.IGNORECASE)
+    _unescape_iframe_re = re.compile(r"""unescape\050["'](?P<data>%3C(?:iframe|%69%66%72%61%6d%65)%20[^"']+)["']""", re.IGNORECASE)
     # Regex for obviously ad paths
     _ads_path = re.compile(r"""(?:/(?:static|\d+))?/ads?/?(?:\w+)?(?:\d+x\d+)?(?:_\w+)?\.(?:html?|php)""")
 
