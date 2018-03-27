@@ -47,7 +47,7 @@ except ImportError:
     is_kodi = False
 
 
-def _play_stream(HTTPBase):
+def _play_stream(HTTPBase, redirect=False):
     """Creates a livecli session and plays the stream."""
     session = Livecli()
     session.set_logprefix("[ID-{0}]".format(str(int(time()))[4:]))
@@ -87,7 +87,10 @@ def _play_stream(HTTPBase):
     loglevel = data_other.get("l") or data_other.get("loglevel") or "debug"
     session.set_loglevel(loglevel)
     try:
-        streams = session.streams(url)
+        if redirect is True:
+            streams = session.streams(url, stream_types=["hls", "http"])
+        else:
+            streams = session.streams(url)
     except Exception as e:
         HTTPBase._headers(404, "text/html")
         logger.error("No Stream Found!")
@@ -108,6 +111,14 @@ def _play_stream(HTTPBase):
         # allow only http based streams: HDS HLS HTTP
         # RTMP is not supported
         HTTPBase._headers(404, "text/html")
+        return
+
+    if redirect is True:
+        logger.info("301 - URL: {0}".format(stream.url))
+        HTTPBase.send_response(301)
+        HTTPBase.send_header("Location", stream.url)
+        HTTPBase.end_headers()
+        logger.info("301 - done")
         return
 
     hls_session_reload = data_other.get("hls-session-reload")
@@ -169,6 +180,8 @@ class HTTPRequest(BaseHTTPRequestHandler):
         """Respond to a GET request."""
         if self.path.startswith("/play/"):
             _play_stream(self)
+        elif self.path.startswith("/301/"):
+            _play_stream(self, redirect=True)
         else:
             self._headers(404, "text/html")
 
