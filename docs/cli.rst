@@ -242,8 +242,10 @@ Livecli will attempt to load standalone plugins from these directories:
 ================= ====================================================
 Platform          Location
 ================= ====================================================
+Linux             $HOME/.config/livecli/plugins
 Unix-like (POSIX) $XDG_CONFIG_HOME/livecli/plugins
 Windows           %APPDATA%\\livecli\\plugins
+Kodi              special://profile/addon_data/service.livecli.proxy/plugins/
 ================= ====================================================
 
 .. note::
