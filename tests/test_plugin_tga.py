@@ -7,6 +7,8 @@ class TestPluginTga(unittest.TestCase):
     def test_can_handle_url(self):
         should_match = [
             'http://star.longzhu.com/lpl',
+            'http://y.longzhu.com/y123123?from=tonglan2.1',
+            'https://star.longzhu.com/123123?from=tonglan4.3',
         ]
         for url in should_match:
             self.assertTrue(Tga.can_handle_url(url))
