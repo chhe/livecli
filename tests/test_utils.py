@@ -8,8 +8,11 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 from livecli import PluginError
+from livecli.compat import parse_qsl
+from livecli.compat import urlparse
 from livecli.plugin.api import validate
 from livecli.utils import absolute_url
+from livecli.utils import filter_urlquery
 from livecli.utils import hours_minutes_seconds
 from livecli.utils import parse_json
 from livecli.utils import parse_qsd
@@ -17,6 +20,7 @@ from livecli.utils import parse_xml
 from livecli.utils import prepend_www
 from livecli.utils import time_to_offset
 from livecli.utils import verifyjson
+
 
 class TestUtil(unittest.TestCase):
     def test_verifyjson(self):
@@ -31,6 +35,56 @@ class TestUtil(unittest.TestCase):
                          absolute_url("http://test.se", "/test"))
         self.assertEqual("http://test2.se/test",
                          absolute_url("http://test.se", "http://test2.se/test"))
+
+    def test_filter_urlquery(self):
+        test_data = [
+            {
+                "url": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123&n=20&b=496,896,1296,1896",
+                "keys": ["hdnea"],
+                "keys_status": False,
+                "result": "http://example.com/z/manifest.f4m?n=20&b=496,896,1296,1896"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["hdnea", "invalid"],
+                "keys_status": False,
+                "result": "http://example.com/i/master.m3u8?__b__=240&b=240,120,64,496,896,1296,1896&n=10"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["invalid"],
+                "keys_status": False,
+                "result": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896"
+            },
+            {
+                "url": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123&n=20&b=496,896,1296,1896",
+                "keys": ["n", "b"],
+                "keys_status": False,
+                "result": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123"
+            },
+            {
+                "url": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123&n=20&b=496,896,1296,1896",
+                "keys": ["hdnea"],
+                "keys_status": True,
+                "result": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["hdnea", "invalid"],
+                "keys_status": True,
+                "result": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["invalid"],
+                "keys_status": True,
+                "result": "http://example.com/i/master.m3u8"
+            },
+        ]
+        for test_dict in test_data:
+            self.assertDictEqual(
+                dict(parse_qsl(urlparse(test_dict["result"]).query)),
+                dict(parse_qsl(urlparse(filter_urlquery(test_dict["url"], test_dict["keys"], test_dict["keys_status"])).query)))
 
     def test_prepend_www(self):
         self.assertEqual("http://www.test.se/test",

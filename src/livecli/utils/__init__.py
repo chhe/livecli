@@ -7,6 +7,8 @@ try:
 except ImportError:  # pragma: no cover
     import xml.etree.ElementTree as ET
 
+from livecli.compat import unquote
+from livecli.compat import urlencode
 from livecli.compat import urljoin, urlparse, parse_qsl, is_py2, urlunparse, is_py3
 from livecli.exceptions import PluginError
 from livecli.utils.named_pipe import NamedPipe
@@ -34,6 +36,37 @@ def absolute_url(baseurl, url):
         return urljoin(baseurl, url)
     else:
         return url
+
+
+def filter_urlquery(url, keys=[], keys_status=False):
+    """Removes unwanted urlquerys
+
+    :param url: an URL
+    :param keys: list of query names
+    :param keys_status: False = removes querys that are in keys
+                        True = allow only querys that are in keys
+    :return: URL with filtered query
+    """
+    parts = urlparse(url)
+    query_dict = dict(parse_qsl(parts.query))
+    new_query_dict = {}
+
+    for key in keys:
+        try:
+            if keys_status is True:
+                new_query_dict[key] = query_dict[key]
+            else:
+                del query_dict[key]
+        except KeyError:
+            continue
+
+    new_parts = list(parts)
+    if keys_status is True:
+        new_parts[4] = unquote(urlencode(new_query_dict))
+    else:
+        new_parts[4] = unquote(urlencode(query_dict))
+    url = urlunparse(new_parts)
+    return url
 
 
 def prepend_www(url):
