@@ -21,7 +21,6 @@ def create_dict_from_plugins():
         "__pycache__",
         "akamaihd.py",
         "common_jwplayer.py",
-        "common_swf.py",
         "hds.py",
         "hls.py",
         "http.py",
