@@ -660,7 +660,7 @@ stream.add_argument(
     can be used as a wildcard to match any other type of stream,
     eg. muxed-stream.
 
-    Default is "rtmp,hls,hds,http,akamaihd,*".
+    Default is "hls,hds,rtmp,http,akamaihd,*".
     """
 )
 stream.add_argument(
