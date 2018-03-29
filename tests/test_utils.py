@@ -80,11 +80,33 @@ class TestUtil(unittest.TestCase):
                 "keys_status": True,
                 "result": "http://example.com/i/master.m3u8"
             },
+            {
+                "url": "http://example.com/z/manifest.f4m?hdnea=st=123~exp=123~acl=/*~hmac=123&n=20&b=496,896,1296,1896",
+                "keys": ["hdnea"],
+                "keys_status": False,
+                "new_dict": {"FOO": "BAR"},
+                "result": "http://example.com/z/manifest.f4m?n=20&b=496,896,1296,1896&FOO=BAR"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["invalid"],
+                "keys_status": True,
+                "new_dict": {"FOO": "BAR"},
+                "result": "http://example.com/i/master.m3u8?FOO=BAR"
+            },
+            {
+                "url": "http://example.com/i/master.m3u8?hdnea=st=123~exp=123~acl=/*~hmac=123&n=10&__b__=240&b=240,120,64,496,896,1296,1896",
+                "keys": ["invalid"],
+                "keys_status": True,
+                "new_dict": {"FOO": "BAR", "FOO2": "BAR2"},
+                "result": "http://example.com/i/master.m3u8?FOO=BAR&FOO2=BAR2"
+            },
         ]
         for test_dict in test_data:
             self.assertDictEqual(
                 dict(parse_qsl(urlparse(test_dict["result"]).query)),
-                dict(parse_qsl(urlparse(filter_urlquery(test_dict["url"], test_dict["keys"], test_dict["keys_status"])).query)))
+                dict(parse_qsl(urlparse(filter_urlquery(test_dict["url"], test_dict["keys"],
+                                                        test_dict["keys_status"], test_dict.get("new_dict", {}))).query)))
 
     def test_prepend_www(self):
         self.assertEqual("http://www.test.se/test",

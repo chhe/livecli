@@ -38,13 +38,14 @@ def absolute_url(baseurl, url):
         return url
 
 
-def filter_urlquery(url, keys=[], keys_status=False):
+def filter_urlquery(url, keys=[], keys_status=False, new_dict={}):
     """Removes unwanted urlquerys
 
     :param url: an URL
     :param keys: list of query names
     :param keys_status: False = removes querys that are in keys
                         True = allow only querys that are in keys
+    :param new_dict: dict of new custom urlquerys
     :return: URL with filtered query
     """
     parts = urlparse(url)
@@ -62,9 +63,11 @@ def filter_urlquery(url, keys=[], keys_status=False):
 
     new_parts = list(parts)
     if keys_status is True:
-        new_parts[4] = unquote(urlencode(new_query_dict))
-    else:
-        new_parts[4] = unquote(urlencode(query_dict))
+        query_dict = new_query_dict
+
+    query_dict.update(new_dict)
+
+    new_parts[4] = unquote(urlencode(query_dict))
     url = urlunparse(new_parts)
     return url
 
