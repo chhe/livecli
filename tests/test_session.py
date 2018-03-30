@@ -2,6 +2,8 @@ import os
 import re
 import unittest
 
+from six import assertRegex
+
 from livecli.plugin.plugin import HIGH_PRIORITY, LOW_PRIORITY
 
 from livecli import Livecli
@@ -168,4 +170,4 @@ class TestSession(unittest.TestCase):
             re.VERBOSE | re.IGNORECASE,
         )
 
-        self.assertRegexpMatches(self.session.version, _version_re)
+        assertRegex(self, self.session.version, _version_re)
