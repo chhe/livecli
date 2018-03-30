@@ -475,7 +475,7 @@ class Resolve(Plugin):
         if iframe_list:
             # repair and filter iframe url list
             new_iframe_list = self._make_url_list(iframe_list, self.url, url_type="iframe")
-            if new_iframe_list is not False:
+            if new_iframe_list:
                 self.logger.info("Found iframes: {0}".format(", ".join(new_iframe_list)))
                 new_session_url = new_iframe_list[0]
 
