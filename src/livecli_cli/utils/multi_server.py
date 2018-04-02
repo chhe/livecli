@@ -139,6 +139,8 @@ def _play_stream(HTTPBase, redirect=False):
     try:
         if redirect is True:
             streams = session.streams(url, stream_types=["hls", "http"])
+        elif data_other.get("stream-types"):
+            streams = session.streams(url, stream_types=data_other.get("stream-types"))
         else:
             streams = session.streams(url)
     except Exception as e:
