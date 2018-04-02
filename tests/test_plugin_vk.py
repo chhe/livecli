@@ -14,6 +14,10 @@ class TestPluginVK(unittest.TestCase):
             "https://vk.com/videos-24136539?z=video-24136539_456241181%2Fpl_-24136539_-2"),
             "https://vk.com/video-24136539_456241181"
         )
+        self.assertEqual(VK.follow_vk_redirect(
+            "https://vk.com/videos24136539?z=video-24136539_456241181%2Fpl_-24136539_-2"),
+            "https://vk.com/video-24136539_456241181"
+        )
 
         # shouldn't redirect
         self.assertEqual(VK.follow_vk_redirect("http://vk.com/"), "http://vk.com/")
@@ -24,8 +28,10 @@ class TestPluginVK(unittest.TestCase):
         # should match
         self.assertTrue(VK.can_handle_url("https://vk.com/video-9944999_456239622"))
         self.assertTrue(VK.can_handle_url("http://vk.com/video-24136539_456239830"))
+        self.assertTrue(VK.can_handle_url("http://vk.com/video24136539_456239830"))
         self.assertTrue(VK.can_handle_url("https://www.vk.com/video-34453259_456240574"))
         self.assertTrue(VK.can_handle_url("https://vk.com/videos-24136539?z=video-24136539_456241155%2Fpl_-24136539_-2"))
+        self.assertTrue(VK.can_handle_url("https://vk.com/videos24136539?z=video-24136539_456241155%2Fpl_-24136539_-2"))
 
         # shouldn't match
         self.assertFalse(VK.can_handle_url("https://vk.com/"))
