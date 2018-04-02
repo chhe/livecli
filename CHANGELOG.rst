@@ -1,3 +1,40 @@
+livecli 3.7.0 (2018-04-02)
+--------------------------
+Livecli 3.7.0 has been released!
+
+For more details see below.
+
+::
+
+    [api] useragents update
+    [bintray] Removed unused bintray scripts
+    [docs] Added E2 ipk to Livecli Applications and Kodi update
+    [docs] Added for Sideloading plugins the Linux and Kodi paths.
+    [docs] New icon and enabled favicon.ico
+    [hls] Added more debug messages for hls-session-reload
+    [livecli_cli] removed duplicate code for NamedPipe
+    [option] Added retry-max option to limit the number of fetch retries.
+    [Plugin] changed default_stream_types to "hls,hds,rtmp,http,*"
+    [plugins] Removed common_jwplayer, not used old code.
+    [plugins] Removed common_swf, not used old code.
+    [resolve] Fixed IndexError: list index out of range
+    [rtve] add an option to parse_xml to try to fix invalid character entities
+    [server] allow `stream-types`
+    [server] allow 301 redirect for HLS and HTTP streams
+    [server] allow different qualitys
+    [server] allow MuxedStreams
+    [server] changed wrong plugin option --resolve-turn-off
+    [server] use str in list instead of not working == (str or str)
+    [tests] Added some tests and Flake8
+    [tests] DeprecationWarning: Please use assertRegex instead.
+    [tests] Don't use possibly closed file with load_module
+    [TF1] Added HD streams for https://www.tf1.fr/tf1/direct
+    [tga] removed rtmp streams, updated domains
+    [ustreamtv] stop api calls if a stream ends
+    [utils] New option to filter urlquerys
+    [vaughnlive] changed rtmp server IP
+    [vk] Fix for new urls
+
 livecli 3.6.0 (2018-03-19)
 --------------------------
 Livecli 3.6.0 has been released!
