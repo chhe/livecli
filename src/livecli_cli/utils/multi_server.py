@@ -47,6 +47,51 @@ except ImportError:
     from livecli_cli.constants import PLUGINS_DIR
     is_kodi = False
 
+STREAM_SYNONYMS = ["best", "worst"]
+
+
+def resolve_stream_name(streams, stream_name):
+    """Returns the real stream name of a synonym."""
+
+    if stream_name in STREAM_SYNONYMS and stream_name in streams:
+        for name, stream in streams.items():
+            if stream is streams[stream_name] and name not in STREAM_SYNONYMS:
+                return name
+
+    return stream_name
+
+
+def format_valid_streams(plugin, streams):
+    """Formats a dict of streams.
+
+    Filters out synonyms and displays them next to
+    the stream they point to.
+
+    Streams are sorted according to their quality
+    (based on plugin.stream_weight).
+
+    """
+
+    delimiter = ", "
+    validstreams = []
+
+    for name, stream in sorted(streams.items(),
+                               key=lambda stream: plugin.stream_weight(stream[0])):
+        if name in STREAM_SYNONYMS:
+            continue
+
+        def synonymfilter(n):
+            return stream is streams[n] and n is not name
+        synonyms = list(filter(synonymfilter, streams.keys()))
+
+        if len(synonyms) > 0:
+            joined = delimiter.join(synonyms)
+            name = "{0} ({1})".format(name, joined)
+
+        validstreams.append(name)
+
+    return delimiter.join(validstreams)
+
 
 def _play_stream(HTTPBase, redirect=False):
     """Creates a livecli session and plays the stream."""
@@ -75,18 +120,22 @@ def _play_stream(HTTPBase, redirect=False):
         HTTPBase._headers(404, "text/html")
         logger.error("No URL provided.")
         return
-    quality = (data_other.get("q") or
-               data_other.get("quality") or
-               data_other.get("stream") or
-               data_other.get("default-stream") or
-               "best")
+
+    plugin = session.resolve_url(url)
+    logger.info("Found matching plugin {0} for URL {1}",
+                plugin.module, url)
+
+    # set cache size
     try:
         cache = data_other.get("cache") or 4096
     except TypeError:
         cache = 4096
 
+    # set loglevel
     loglevel = data_other.get("l") or data_other.get("loglevel") or "debug"
     session.set_loglevel(loglevel)
+
+    # find streams
     try:
         if redirect is True:
             streams = session.streams(url, stream_types=["hls", "http"])
@@ -101,12 +150,28 @@ def _play_stream(HTTPBase, redirect=False):
         HTTPBase._headers(404, "text/html")
         return
 
-    # XXX: only one quality will work currently
+    # set quality
+    quality = (data_other.get("q") or
+               data_other.get("quality") or
+               data_other.get("stream") or
+               data_other.get("default-stream") or
+               ["best"])
+
+    stream_name = "best"
+
+    validstreams = format_valid_streams(plugin, streams)
+    for stream_name in quality:
+        if stream_name in streams:
+            logger.info("Available streams: {0}", validstreams)
+            stream_name = resolve_stream_name(streams, stream_name)
+            break
+
     try:
-        stream = streams[quality]
+        stream = streams[stream_name]
+        logger.debug("Valid quality: {0}".format(stream_name))
     except KeyError:
+        logger.debug("Invald quality: '{0}', using 'best' instead".format(stream_name))
         stream = streams["best"]
-        quality = "best"
 
     if not isinstance(stream, (HDSStream, HTTPStream, MuxedStream)):
         # allow only http based streams: HDS HLS HTTP
@@ -130,7 +195,7 @@ def _play_stream(HTTPBase, redirect=False):
             filename="streamdata.json",
             key_prefix="cache:{0}".format(stream.url)
         )
-        livecli_cache.set("cache_stream_name", quality, (int(hls_session_reload) + 60))
+        livecli_cache.set("cache_stream_name", stream_name, (int(hls_session_reload) + 60))
         livecli_cache.set("cache_url", url, (int(hls_session_reload) + 60))
         session.set_option("hls-session-reload", int(hls_session_reload))
 
