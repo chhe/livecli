@@ -18,6 +18,7 @@ from livecli.compat import unquote_plus
 from livecli.compat import urlparse
 from livecli.stream import HDSStream
 from livecli.stream import HTTPStream
+from livecli.stream.ffmpegmux import MuxedStream
 
 from .multi_args import command_session
 
@@ -107,9 +108,11 @@ def _play_stream(HTTPBase, redirect=False):
         stream = streams["best"]
         quality = "best"
 
-    if isinstance(stream, HTTPStream) is False and isinstance(stream, HDSStream) is False:
+    if not isinstance(stream, (HDSStream, HTTPStream, MuxedStream)):
         # allow only http based streams: HDS HLS HTTP
         # RTMP is not supported
+        logger.debug("only HTTP, HLS, HDS or MuxedStreams are supported.")
+        logger.debug(str(type(stream)))
         HTTPBase._headers(404, "text/html")
         return
 
