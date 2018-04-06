@@ -7,7 +7,9 @@ from livecli.compat import crypto_AES
 from livecli.session import Livecli
 from livecli.stream import hls
 from functools import partial
+from mock import patch, Mock
 import requests_mock
+import pytest
 
 
 def pkcs7_encode(data, keySize):
@@ -136,6 +138,117 @@ audio_only.m3u8
         # Live streams starts the last 3 segments from the playlist
         expectedResult = b''.join(clearStreams[1:] + clearStreams)
         self.assertEqual(livecliResult, expectedResult)
+
+
+@patch('livecli.stream.hls.FFMPEGMuxer.is_usable', Mock(return_value=True))
+class TestHlsExtAudio(unittest.TestCase):
+    playlist = """
+#EXTM3U
+#EXT-X-INDEPENDENT-SEGMENTS
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="aac",LANGUAGE="en",NAME="English",AUTOSELECT=YES,DEFAULT=YES
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="aac",NAME="English",LANGUAGE="en",AUTOSELECT=NO,URI="en.m3u8"
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="aac",NAME="Spanish",LANGUAGE="es",AUTOSELECT=NO,URI="es.m3u8"
+#EXT-X-MEDIA:TYPE=VIDEO,GROUP-ID="chunked",NAME="video",AUTOSELECT=YES,DEFAULT=YES
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3982010,RESOLUTION=1920x1080,CODECS="avc1.4D4029,mp4a.40.2",VIDEO="chunked", AUDIO="aac"
+playlist.m3u8
+    """
+
+    def run_livecli(self, playlist, audio_select=None):
+        livecli = Livecli()
+
+        if audio_select:
+            livecli.set_option("hls-audio-select", audio_select)
+        livecli.logger.set_level("debug")
+
+        master_stream = hls.HLSStream.parse_variant_playlist(livecli, playlist)
+
+        return master_stream
+
+    def test_hls_ext_audio_not_selected(self):
+        master_url = "http://mocked/path/master.m3u8"
+
+        with requests_mock.Mocker() as mock:
+            mock.get(master_url, text=self.playlist)
+            master_stream = self.run_livecli(master_url)['video']
+
+        with pytest.raises(AttributeError):
+            master_stream.substreams
+
+        assert master_stream.url == 'http://mocked/path/playlist.m3u8'
+
+    def test_hls_ext_audio_en(self):
+        """
+        m3u8 with ext audio but no options should not download additional streams
+        :return:
+        """
+
+        master_url = "http://mocked/path/master.m3u8"
+        expected = ['http://mocked/path/playlist.m3u8', 'http://mocked/path/en.m3u8']
+
+        with requests_mock.Mocker() as mock:
+            mock.get(master_url, text=self.playlist)
+            master_stream = self.run_livecli(master_url, 'en')
+
+        substreams = master_stream['video'].substreams
+        result = [x.url for x in substreams]
+
+        # Check result
+        self.assertEqual(result, expected)
+
+    def test_hls_ext_audio_es(self):
+        """
+        m3u8 with ext audio but no options should not download additional streams
+        :return:
+        """
+
+        master_url = "http://mocked/path/master.m3u8"
+        expected = ['http://mocked/path/playlist.m3u8', 'http://mocked/path/es.m3u8']
+
+        with requests_mock.Mocker() as mock:
+            mock.get(master_url, text=self.playlist)
+            master_stream = self.run_livecli(master_url, 'es')
+
+        substreams = master_stream['video'].substreams
+
+        result = [x.url for x in substreams]
+
+        # Check result
+        self.assertEqual(result, expected)
+
+    def test_hls_ext_audio_all(self):
+        """
+        m3u8 with ext audio but no options should not download additional streams
+        :return:
+        """
+
+        master_url = "http://mocked/path/master.m3u8"
+        expected = ['http://mocked/path/playlist.m3u8', 'http://mocked/path/en.m3u8', 'http://mocked/path/es.m3u8']
+
+        with requests_mock.Mocker() as mock:
+            mock.get(master_url, text=self.playlist)
+            master_stream = self.run_livecli(master_url, 'en,es')
+
+        substreams = master_stream['video'].substreams
+
+        result = [x.url for x in substreams]
+
+        # Check result
+        self.assertEqual(result, expected)
+
+    def test_hls_ext_audio_wildcard(self):
+        master_url = "http://mocked/path/master.m3u8"
+        expected = ['http://mocked/path/playlist.m3u8', 'http://mocked/path/en.m3u8', 'http://mocked/path/es.m3u8']
+
+        with requests_mock.Mocker() as mock:
+            mock.get(master_url, text=self.playlist)
+            master_stream = self.run_livecli(master_url, '*')
+
+        substreams = master_stream['video'].substreams
+
+        result = [x.url for x in substreams]
+
+        # Check result
+        self.assertEqual(result, expected)
 
 
 if __name__ == "__main__":
