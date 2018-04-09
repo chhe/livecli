@@ -103,6 +103,8 @@ class TestUtil(unittest.TestCase):
             },
         ]
         for test_dict in test_data:
+            # new_url == result_url can't be tested because of different sorting sometimes
+            # we will only test the parameters as a dict
             self.assertDictEqual(
                 dict(parse_qsl(urlparse(test_dict["result"]).query)),
                 dict(parse_qsl(urlparse(filter_urlquery(test_dict["url"], test_dict["keys"],
