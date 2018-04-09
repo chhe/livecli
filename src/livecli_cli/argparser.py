@@ -1513,6 +1513,28 @@ plugin.add_argument(
     A pixiv.net account password to use with --pixiv-username
     """
 )
+plugin.add_argument(
+    "--abweb-username",
+    metavar="USERNAME",
+    help="""
+    The username associated with your ABweb account, required to access any ABweb stream.
+    """
+)
+plugin.add_argument(
+    "--abweb-password",
+    metavar="PASSWORD",
+    help="""
+    A ABweb account password to use with --abweb-username.
+    """
+)
+plugin.add_argument(
+    "--abweb-purge-credentials",
+    action="store_true",
+    help="""
+    Purge cached ABweb credentials to initiate a new session
+    and reauthenticate.
+    """
+)
 
 resolve = parser.add_argument_group("Resolve Plugin options")
 resolve.add_argument(
