@@ -7,6 +7,19 @@ from livecli.plugin.api import useragents
 from livecli.stream import HLSStream
 from livecli.stream import HTTPStream
 
+__livecli_docs__ = {
+    "domains": [
+        "tvpstream.vod.tvp.pl",
+    ],
+    "geo_blocked": [
+        "PL",
+    ],
+    "notes": "",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-04-10",
+}
+
 
 class TVP(Plugin):
     '''Telewizja Polska S.A.

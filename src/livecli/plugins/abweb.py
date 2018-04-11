@@ -14,6 +14,17 @@ from livecli.stream import HLSStream
 from livecli.utils import parse_json
 from livecli.utils import update_scheme
 
+__livecli_docs__ = {
+    "domains": [
+        "abweb.com",
+    ],
+    "geo_blocked": [],
+    "notes": "Requires a subscription.",
+    "live": True,
+    "vod": False,
+    "last_update": "2018-04-10",
+}
+
 
 class ABweb(Plugin):
     '''BIS Livestreams of french AB Groupe
