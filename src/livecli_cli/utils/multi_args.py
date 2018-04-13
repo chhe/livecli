@@ -62,13 +62,13 @@ def command_session(session, old_data):
         "hls-live-restart": "set_option_store_true",
         "http-disable-dh": "set_option_store_true",
         # set_option_comma_list
+        "hls-audio-select": "set_option_comma_list",
         "hls-segment-ignore-names": "set_option_comma_list",
         # set_option
         "ffmpeg-audio-transcode": "set_option",
         "ffmpeg-ffmpeg": "set_option",
         "ffmpeg-verbose-path": "set_option",
         "ffmpeg-video-transcode": "set_option",
-        "hls-audio-select": "set_option",
         "hls-key-uri": "set_option",
         "http-proxy": "set_option",
         "http-ssl-cert": "set_option",
