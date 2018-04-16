@@ -14,12 +14,14 @@ Livecli is a fork of the
 `Livestreamer <https://github.com/chrippa/livestreamer>`__ project
 
 Websites
+
 -  GitHub: https://github.com/livecli/livecli
 -  Issue tracker: https://github.com/livecli/livecli/issues
 -  Latest release: https://github.com/livecli/livecli/releases/latest
 -  Website: https://livecli.github.io/index.html
 
 Other versions
+
 -  E2 receiver: https://github.com/livecli/ipk
 -  Kodi: https://github.com/livecli/repo
 
