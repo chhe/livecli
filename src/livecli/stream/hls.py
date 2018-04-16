@@ -14,6 +14,7 @@ from livecli.stream.http import HTTPStream
 from livecli.stream.segmented import (SegmentedStreamReader,
                                       SegmentedStreamWriter,
                                       SegmentedStreamWorker)
+from livecli.utils import seconds_to_hhmmss
 from ..exceptions import StreamError
 
 Sequence = namedtuple("Sequence", "num segment")
@@ -156,7 +157,8 @@ class HLSStreamWriter(SegmentedStreamWriter):
             for chunk in res.iter_content(chunk_size):
                 self.reader.buffer.write(chunk)
 
-        self.logger.debug("Download of segment {0} complete", sequence.num)
+        self.logger.debug("Download of segment {0} complete - Time {1}", sequence.num,
+                          seconds_to_hhmmss(seconds=sequence.num * sequence.segment.duration))
 
 
 class HLSStreamWorker(SegmentedStreamWorker):

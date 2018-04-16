@@ -277,6 +277,19 @@ def hours_minutes_seconds(value):
     return s
 
 
+def seconds_to_hhmmss(seconds):
+    """
+    converts seconds to hours:minutes:seconds
+    :param seconds: seconds
+    :return: hh:mm:ss
+    """
+    hours = seconds // (60 * 60)
+    seconds %= (60 * 60)
+    minutes = seconds // 60
+    seconds %= 60
+    return "%02i:%02i:%02i" % (hours, minutes, seconds)
+
+
 def escape_librtmp(value):
     if isinstance(value, bool):
         value = "1" if value else "0"
@@ -299,6 +312,7 @@ __all__ = [
     "parse_xml",
     "prepend_www",
     "rtmpparse",
+    "seconds_to_hhmmss",
     "swfdecompress",
     "time_to_offset",
     "verifyjson",

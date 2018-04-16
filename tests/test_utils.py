@@ -18,6 +18,7 @@ from livecli.utils import parse_json
 from livecli.utils import parse_qsd
 from livecli.utils import parse_xml
 from livecli.utils import prepend_www
+from livecli.utils import seconds_to_hhmmss
 from livecli.utils import time_to_offset
 from livecli.utils import verifyjson
 
@@ -196,3 +197,12 @@ class TestUtil(unittest.TestCase):
 
     def test_hours_minutes_seconds(self):
         self.assertEqual(4815, hours_minutes_seconds("01:20:15"))
+
+    def test_seconds_to_hhmmss(self):
+        minutes = 60
+        hours = 60 * 60
+
+        self.assertEqual("02:15:30", seconds_to_hhmmss(2 * hours + 15 * minutes + 30))
+        self.assertEqual("11:15:30", seconds_to_hhmmss(11 * hours + 15 * minutes + 30))
+        self.assertEqual("99:15:30", seconds_to_hhmmss(99 * hours + 15 * minutes + 30))
+        self.assertEqual("500:15:30", seconds_to_hhmmss(500 * hours + 15 * minutes + 30))
