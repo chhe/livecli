@@ -4,12 +4,11 @@ Overview
 Livecli is a :ref:`command-line utility <cli>` that pipes video streams
 from various services into a video player, such as `VLC <http://videolan.org/>`_.
 
-The main purpose of Livecli is to allow the user to avoid buggy and CPU
-heavy flash plugins but still be able to enjoy various streamed content.
+The main purpose of Livecli is to convert CPU-heavy websites to a
+less CPU-intensive format.
 
 There is also an :ref:`API <api_guide>` available for developers who want access
-to the video stream data. This project was forked from Livestreamer, which is
-no longer maintained.
+to the video stream data. This project is a fork of Streamlink and Livestreamer.
 
 - Latest release: |version| (https://github.com/livecli/livecli/releases/latest)
 - GitHub: https://github.com/livecli/livecli
@@ -25,7 +24,6 @@ to be easily added. Currently most of the big streaming services are supported,
 such as:
 
 - `Dailymotion <https://dailymotion.com/live>`_
-- `Livestream <https://livestream.com>`_
 - `Twitch <https://twitch.tv>`_
 - `UStream <http://ustream.tv>`_
 - `YouTube Live <https://youtube.com>`_
@@ -33,7 +31,7 @@ such as:
 ... and many more. A full list of plugins currently included can be found
 on the :ref:`plugin_matrix` page.
 
-Also a plugin that will try to open a livestream on every website.
+There is also a generic plugin that will try to open a stream on every website.
 
 Quickstart
 ----------

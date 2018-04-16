@@ -91,9 +91,8 @@ rtmpdump. Using the 32-bit version of VLC might help.
 
 Youtube Live does not work with VLC
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The stable version of VLC cannot play Youtube Live streams. This a known bug
-that is fixed in VLC 3, which is still in development. You can also try
-using a different player.
+The version 2 of VLC cannot play Youtube Live streams. This a known bug
+that is fixed in VLC 3. You can also try using a different player.
 
 When using OMXPlayer the stream stops unexpectedly
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
