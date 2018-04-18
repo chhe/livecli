@@ -224,6 +224,14 @@ StrCmp \$0 \${ffmpeg} "" +2
 [% endblock %]
 EOF
 
+echo "Building sha256sum checker..." 1>&2
+
+cat > "${build_dir}/sha256sum.txt" <<EOF
+459417198eae215353782d5d8509ccf45812cbc6ba23ca0c26af3feb9ad52b02  ${nsis_dir}/ffmpeg/ffmpeg.exe
+6178dfd35c4b989da751c279f4d03893e5bbeaf0395134af2a7e9f38726a2f9f  ${nsis_dir}/rtmpdump/rtmpdump.exe
+ec4bbe66b8d34438e7f72ea411fdd9c513cf86d987d55f181ed21ecaba808a6a  ${nsis_dir}/rtmpdump/librtmp.dll
+EOF
+
 echo "Building Python 3 installer" 1>&2
 
 # copy the liveclirc file to the build dir, we cannot use the Include.files property in the config file
@@ -239,7 +247,11 @@ wget -c -O "${nsis_dir}/ffmpeg/ffmpeg.exe" "${LIVECLI_ASSET_BASE}/win32/ffmpeg/f
 wget -c -O "${nsis_dir}/rtmpdump/rtmpdump.exe" "${LIVECLI_ASSET_BASE}/win32/rtmpdump/rtmpdump.exe"
 wget -c -O "${nsis_dir}/rtmpdump/librtmp.dll" "${LIVECLI_ASSET_BASE}/win32/rtmpdump/librtmp.dll"
 
+# control sha256sum
+sha256sum -w -c ${build_dir}/sha256sum.txt
+
 pynsist build/livecli.cfg
 
 echo "Success!" 1>&2
-echo "The installer should be in ${dist_dir}." 1>&2
+echo "The installer should be in ${dist_dir}" 1>&2
+sha256sum ${dist_dir}/${LIVECLI_INSTALLER}.exe
