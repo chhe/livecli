@@ -67,7 +67,7 @@ changelog() {
   cd $CLI
   echo "Getting commit changes. Writing to ../changes.txt"
   LOG=$(git log --no-merges --pretty=%s ${1}.. | sed  's/^/    /' | sort)
-  echo -e "::\n\n$LOG" > ../changes.txt
+  echo -e "Livecli $2 has been released!\n\nSee below for further information.\n\n::\n\n$LOG" > ../changes.txt
   echo "Changelog has been written to changes.txt"
   echo "!!PLEASE REVIEW BEFORE CONTINUING!!"
   echo "Open changes.txt and add the release information"
@@ -247,7 +247,7 @@ main() {
               clone $VERSION
               ;;
           "Generate changelog")
-              changelog $PREV_VERSION
+              changelog $PREV_VERSION $VERSION
               ;;
           "Generate changelog for release")
               changelog_rst $VERSION
