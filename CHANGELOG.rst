@@ -1,3 +1,29 @@
+livecli 3.8.0 (2018-04-21)
+--------------------------
+Livecli 3.8.0 has been released!
+
+See below for further information.
+
+::
+
+    [ABweb] New plugin for BIS Livestreams of french AB Groupe
+    [build] Fixed appveyor build pip10 error (#21)
+    [docs] documentation update
+    [gardenersworld] removed, it was broken and works now with resolve.py
+    [hls] stream.hls: change --hls-audio-select to take a list and wildcard
+    [resolve] add url to debug message
+    [script] added sha256sum check for makeinstaller
+    [script] automate release changelog text
+    [server] update option hls-audio-select
+    [server] update plugin commands
+    [tv4play] removed outdated plugin
+    [tv8cat] removed - it can be used with the resolve.py plugin
+    [TVP] New Plugin for Telewizja Polska S.A.
+    [utils] add examples for filter_urlquery
+    [utils] new method seconds_to_hhmmss, used for hls segment time debug
+    [vk] Fixed regex for video sources
+    [zattoo] set self._expires cache correctly
+
 livecli 3.7.0 (2018-04-02)
 --------------------------
 Livecli 3.7.0 has been released!
