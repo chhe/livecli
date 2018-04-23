@@ -14,14 +14,14 @@ __livecli_docs__ = {
     "notes": "",
     "live": True,
     "vod": False,
-    "last_update": "2017-07-02",
+    "last_update": "2018-04-22",
 }
 
 
 class BritTV(Plugin):
     url_re = re.compile(r"https?://(?:www\.)?brittv\.co.uk/watch/")
     js_re = re.compile(r"""/js/brittv\.player\.js\.php\?key=([^'"]+)['"]""")
-    player_re = re.compile(r"file: '(http://[^']+)'")
+    player_re = re.compile(r"""src:\s?["'](https?://[^"']+)["']""")
 
     @classmethod
     def can_handle_url(cls, url):
@@ -29,13 +29,15 @@ class BritTV(Plugin):
 
     def _get_streams(self):
         res = http.get(self.url, headers={"User-Agent": useragents.CHROME})
+        self.logger.debug("search for js_re")
         m = self.js_re.search(res.text)
         if m:
             self.logger.debug("Found js key: {0}", m.group(1))
             js_url = m.group(0)
             res = http.get(urljoin(self.url, js_url))
-
+            self.logger.debug("search for player_re")
             for url in self.player_re.findall(res.text):
+                self.logger.debug("Found url: {0}".format(url))
                 if "adblock" not in url:
                     yield "live", HLSStream(self.session, url)
 
