@@ -318,7 +318,7 @@ class TestPluginResolve(unittest.TestCase):
 
         test_list = [
             {
-                "url": "\/\/example.com/true1",
+                "url": r"\/\/example.com/true1",
                 "result": "https://example.com/true1",
             },
             {
@@ -588,13 +588,13 @@ class TestPluginResolve(unittest.TestCase):
                 "result": "http://example.com:8081/edge/playlist.m3u8?wmsAuthSign=c9JnZbWludXR4"
             },
             {
-                "data": """
+                "data": r"""
                         "hlsLivestreamURL": "https:\/\/live-http.example.com\/live\/_definst_\/mp4:123\/playlist.m3u8",
                         "appnameLive": "live",
                         "streaming": "true",
                         "autostart": "true",
                         """,
-                "result": "https:\/\/live-http.example.com\/live\/_definst_\/mp4:123\/playlist.m3u8"
+                "result": r"https:\/\/live-http.example.com\/live\/_definst_\/mp4:123\/playlist.m3u8"
             },
             {
                 "data": """
@@ -651,7 +651,7 @@ class TestPluginResolve(unittest.TestCase):
                 "result": "http://999.999.999.999/live/playlist.m3u8?at=123"
             },
             {
-                "data": """
+                "data": r"""
                         \&quot;hlsMasterPlaylistUrl\&quot;:\&quot;https://example.com/hls/video.m3u8?p\&quot;,
                         """,
                 "result": "https://example.com/hls/video.m3u8?p"

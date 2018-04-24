@@ -6,7 +6,7 @@ def comma_list(values):
 
 
 def filesize(value):
-    _filesize_re = re.compile("""
+    _filesize_re = re.compile(r"""
         (?P<size>\d+(\.\d+)?)
         (?P<modifier>[Kk]|[Mm])?
         (?:[Bb])?
@@ -29,7 +29,7 @@ def filesize(value):
 
 
 def keyvalue(value):
-    _keyvalue_re = re.compile("(?P<key>[^=]+)\s*=\s*(?P<value>.*)")
+    _keyvalue_re = re.compile(r"(?P<key>[^=]+)\s*=\s*(?P<value>.*)")
     match = _keyvalue_re.match(value)
     if not match:
         raise ValueError
