@@ -93,7 +93,7 @@ class M3U8Parser(object):
                               streaminf.get("SUBTITLES"))
 
     def split_tag(self, line):
-        match = re.match("#(?P<tag>[\w-]+)(:(?P<value>.+))?", line)
+        match = re.match(r"#(?P<tag>[\w-]+)(:(?P<value>.+))?", line)
 
         if match:
             return match.group("tag"), (match.group("value") or "").strip()
@@ -112,14 +112,14 @@ class M3U8Parser(object):
         return value == "YES"
 
     def parse_byterange(self, value):
-        match = re.match("(?P<range>\d+)(@(?P<offset>.+))?", value)
+        match = re.match(r"(?P<range>\d+)(@(?P<offset>.+))?", value)
 
         if match:
             return ByteRange(int(match.group("range")),
                              int(match.group("offset") or 0))
 
     def parse_extinf(self, value):
-        match = re.match("(?P<duration>\d+(\.\d+)?)(,(?P<title>.+))?", value)
+        match = re.match(r"(?P<duration>\d+(\.\d+)?)(,(?P<title>.+))?", value)
         if match:
             return float(match.group("duration")), match.group("title")
         return (0, None)
@@ -132,7 +132,7 @@ class M3U8Parser(object):
         return unhexlify(value)
 
     def parse_resolution(self, value):
-        match = re.match("(\d+)x(\d+)", value)
+        match = re.match(r"(\d+)x(\d+)", value)
 
         if match:
             width, height = int(match.group(1)), int(match.group(2))

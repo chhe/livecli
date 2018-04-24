@@ -556,7 +556,7 @@ class HDSStream(Stream):
                     # manifest but not the child one.
                     bitrate = media.attrib.get("bitrate")
 
-                    if bitrate and not re.match("^(\d+)k$", name):
+                    if bitrate and not re.match(r"^(\d+)k$", name):
                         name = bitrate + "k"
 
                     streams[name] = stream

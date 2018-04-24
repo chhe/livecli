@@ -10,14 +10,14 @@ from .constants import (
 )
 from .utils import find_default_player
 
-_filesize_re = re.compile("""
+_filesize_re = re.compile(r"""
     (?P<size>\d+(\.\d+)?)
     (?P<modifier>[Kk]|[Mm])?
     (?:[Bb])?
 """, re.VERBOSE)
-_keyvalue_re = re.compile("(?P<key>[^=]+)\s*=\s*(?P<value>.*)")
-_printable_re = re.compile("[{0}]".format(printable))
-_option_re = re.compile("""
+_keyvalue_re = re.compile(r"(?P<key>[^=]+)\s*=\s*(?P<value>.*)")
+_printable_re = re.compile(r"[{0}]".format(printable))
+_option_re = re.compile(r"""
     (?P<name>[A-z-]+) # A option name, valid characters are A to z and dash.
     \s*
     (?P<op>=)? # Separating the option and the value with a equals sign is
@@ -320,7 +320,7 @@ player.add_argument(
     "-p", "--player",
     metavar="COMMAND",
     default=find_default_player(),
-    help="""
+    help=r"""
     Player to feed stream data to. By default, VLC will be used
     if it can be found in its default location.
 
