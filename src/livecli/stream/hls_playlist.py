@@ -68,7 +68,10 @@ class M3U8Parser(object):
     def create_stream_info(self, streaminf, cls=None):
         program_id = streaminf.get("PROGRAM-ID")
         if program_id:
-            program_id = int(program_id)
+            try:
+                program_id = int(program_id)
+            except ValueError:
+                program_id = ""
 
         bandwidth = streaminf.get("BANDWIDTH")
         if bandwidth:
