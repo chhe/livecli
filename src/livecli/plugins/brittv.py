@@ -28,12 +28,14 @@ class BritTV(Plugin):
         return cls.url_re.match(url) is not None
 
     def _get_streams(self):
-        res = http.get(self.url, headers={"User-Agent": useragents.CHROME})
+        http.headers.update({"User-Agent": useragents.CHROME})
+        res = http.get(self.url)
         self.logger.debug("search for js_re")
         m = self.js_re.search(res.text)
         if m:
             self.logger.debug("Found js key: {0}", m.group(1))
             js_url = m.group(0)
+            http.headers.update({"Referer": self.url})
             res = http.get(urljoin(self.url, js_url))
             self.logger.debug("search for player_re")
             for url in self.player_re.findall(res.text):
