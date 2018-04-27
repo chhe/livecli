@@ -39,17 +39,17 @@ class {classname}(Plugin):\n
     def can_handle_url(cls, url):
         return cls._url_re.match(url) is not None\n
     def _get_streams(self):
-        headers = {{'User-Agent': useragents.FIREFOX}}
-        res = http.get(self.url, headers=headers)\n
+        http.headers.update({{'User-Agent': useragents.FIREFOX}})
+        res = http.get(self.url)\n
         m = self._hls_re.search(res.text)
         if not m:
             self.logger.debug('No video url found.')
             return\n
         hls_url = m.group('url')
         self.logger.debug('URL={{0}}'.format(hls_url))
-        streams = HLSStream.parse_variant_playlist(self.session, hls_url, headers=headers)
+        streams = HLSStream.parse_variant_playlist(self.session, hls_url)
         if not streams:
-            return {{'live': HLSStream(self.session, hls_url, headers=headers)}}
+            return {{'live': HLSStream(self.session, hls_url)}}
         else:
             return streams\n\n
 __plugin__ = {classname}\n'''
