@@ -60,19 +60,27 @@ Adhering to the following process is the best way to get your work included in t
    git checkout -b <TOPIC-BRANCH-NAME>
    ```
 
-4. Commit your changes in logical chunks. Please adhere to these [git commit message guidelines][howto-format-commits] or your code is unlikely be merged into the project. Use git's [interactive rebase][howto-rebase] feature to tidy up your commits before making them public.
+4. If you want to create a Plugin, you can use the example createplugin.py script
+   ```bash
+   ./script/createplugin.py YourNewClassName
+   ```
+   It will create two new files, with the name of your className in lower case.
+   - src/livecli/plugins/yournewclassname.py
+   - tests/test_plugin_yournewclassname.py
 
-5. Locally merge (or rebase) the upstream branch into your topic branch:
+5. Commit your changes in logical chunks. Please adhere to these [git commit message guidelines][howto-format-commits] or your code is unlikely be merged into the project. Use git's [interactive rebase][howto-rebase] feature to tidy up your commits before making them public.
+
+6. Locally merge (or rebase) the upstream branch into your topic branch:
    ```bash
    git pull [--rebase] upstream master
    ```
 
-6. Push your topic branch up to your fork:
+7. Push your topic branch up to your fork:
    ```bash
    git push origin <TOPIC-BRANCH-NAME>
    ```
 
-7. [Open a Pull Request][howto-open-pull-requests] with a clear title and description.
+8. [Open a Pull Request][howto-open-pull-requests] with a clear title and description.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work
 under the terms of the [BSD 2-clause license][license].
