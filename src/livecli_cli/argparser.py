@@ -1545,6 +1545,28 @@ plugin.add_argument(
     and reauthenticate.
     """
 )
+plugin.add_argument(
+    "--fc2-username",
+    metavar="USERNAME",
+    help="""
+    The username associated with your FC2 account.
+    """
+)
+plugin.add_argument(
+    "--fc2-password",
+    metavar="PASSWORD",
+    help="""
+    A FC2 account password to use with --fc2-username
+    """
+)
+plugin.add_argument(
+    "--fc2-purge-credentials",
+    action="store_true",
+    help="""
+    Purge cached FC2 credentials to initiate a new session
+    and reauthenticate.
+    """
+)
 
 resolve = parser.add_argument_group("Resolve Plugin options")
 resolve.add_argument(
