@@ -33,14 +33,23 @@
 Third Party Applications
 ========================
 
+Open With
+---------
 
-.. content list start
+.. image:: https://raw.githubusercontent.com/darktrojan/openwith/d607777c96e228f60743d94f1a3b41e77d473fb0/toolbar-dropdown.png
+    :alt: Open With Toolbar
 
+:Description: Open Livecli from your Browser
+:Type: Browser extension
+:OS: |Windows| |MacOS| |Linux|
+:Website: https://darktrojan.github.io/openwith/
+:Source code: https://github.com/darktrojan/openwith
+:Firefox: https://addons.mozilla.org/en-US/firefox/addon/open-with/
+:Chrome: https://chrome.google.com/webstore/detail/open-with/cogjlncmljjnjpbgppagklanlcbchlno
+:Install Guide: https://livecli.github.io/app_open_with.html
+:Info: This extension displays a list of your browsers on your menus and toolbars in Firefox.
+       Clicking on them takes you to the page you're looking at in the browser of your choice.
 
-.. replace this line with the first entry
-
-
-.. content list end
-
+       This can also be used for *Livecli*, check the install Guide.
 
 Help us extend this list by sending us a pull request on Github. Thanks!
