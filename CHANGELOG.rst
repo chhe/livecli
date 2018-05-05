@@ -1,3 +1,34 @@
+livecli 3.9.0 (2018-05-05)
+--------------------------
+Livecli 3.9.0 has been released!
+
+See below for further information.
+
+New
+
+::
+
+    [docs] Added ./script/createplugin.py guide
+    [docs] Added a Guide of how Livecli can be used with a Browser
+    [FC2] new plugin for https://live.fc2.com
+    [hls] allow invalid PROGRAM-ID
+    [RUtube] new plugin for https://rutube.ru
+    [TLCtr] new plugin for https://www.tlctv.com.tr/canli-izle
+
+Updates
+
+::
+
+    [ABweb] changes for site update
+    [app17] Fix HLS URL
+    [filmon] Fix for 404 error - invalid channel name
+    [flake8] W504 line break after binary operator
+    [flake8] W605 invalid escape sequence
+    [ITV] Small tweaks to fix ITV player.
+    [RaiPlay] set User-Agent header, print geo block message
+    [script] update headers for plugin create script
+    [Twitch] updated api client id for --twitch-oauth-authenticate
+
 livecli 3.8.0 (2018-04-21)
 --------------------------
 Livecli 3.8.0 has been released!
