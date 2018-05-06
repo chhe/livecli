@@ -7,4 +7,3 @@ flake8
 mock
 requests-mock
 pynsist
-versioneer
