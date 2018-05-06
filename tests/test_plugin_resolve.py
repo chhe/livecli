@@ -560,6 +560,11 @@ class TestPluginResolve(unittest.TestCase):
         regex_test_list = [
             """<iframe id="iframe" title="" frameborder="0" width="0" height="0" src=""></iframe>""",
             """<iframe name="g_iFrame1" width="70" src="logo"></iframe>""",
+            """<iframe id="<%- uploadIframe %>" name="" style="display:none;"></iframe>
+               <img src="<%- val.thumbUrl %>" alt=""/>""",
+            """<iframe id="<%- uploadIframe %>" name="" style="display:none;"></iframe>
+               <img src="<%-val.thumbUrl%>" alt=""/>""",
+            """<iframe src="invalid url" />""",
         ]
         if not hasattr(self, 'assertNotRegex'):
             self.assertNotRegex = self.assertNotRegexpMatches

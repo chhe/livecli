@@ -21,7 +21,7 @@ from livecli.utils import update_scheme
 _iframe_re = re.compile(r"""
     <ifr(?:["']\s?\+\s?["'])?ame
     (?!\sname=["']g_iFrame).*?src=
-    ["'](?P<url>[^"']+)["']
+    ["'](?P<url>[^"'\s<>]+)["']
     .*?(?:/>|>(?:[^<>]+)?
     </ifr(?:["']\s?\+\s?["'])?ame(?:\s+)?>)
     """, re.VERBOSE | re.IGNORECASE | re.DOTALL)
