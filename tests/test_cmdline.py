@@ -67,7 +67,7 @@ class TestCommandLineInvocation(unittest.TestCase):
         self._test_args(["livecli", "-p", "\"/Applications/Video Player/VLC/vlc\"", "http://test.se", "test"],
                         ["/Applications/Video Player/VLC/vlc", "-"])
         # escaped
-        self._test_args(["livecli", "-p", "/Applications/Video\ Player/VLC/vlc", "http://test.se", "test"],
+        self._test_args(["livecli", "-p", "/Applications/Video\\ Player/VLC/vlc", "http://test.se", "test"],
                         ["/Applications/Video Player/VLC/vlc", "-"])
 
     @unittest.skipIf(is_win32, "test only applicable in a POSIX OS")
@@ -91,34 +91,34 @@ class TestCommandLineInvocation(unittest.TestCase):
 
     @unittest.skipIf(not is_win32, "test only applicable on Windows")
     def test_open_space_path_player_win32(self):
-        self._test_args(["livecli", "-p", "c:\\Program Files\\VideoLAN\VLC\\vlc.exe", "http://test.se", "test"],
+        self._test_args(["livecli", "-p", "c:\\Program Files\\VideoLAN\\VLC\\vlc.exe", "http://test.se", "test"],
                         "c:\\Program Files\\VideoLAN\\VLC\\vlc.exe -")
 
     @unittest.skipIf(not is_win32, "test only applicable on Windows")
     def test_open_space_quote_path_player_win32(self):
-        self._test_args(["livecli", "-p", "\"c:\\Program Files\\VideoLAN\VLC\\vlc.exe\"", "http://test.se", "test"],
+        self._test_args(["livecli", "-p", "\"c:\\Program Files\\VideoLAN\\VLC\\vlc.exe\"", "http://test.se", "test"],
                         "\"c:\\Program Files\\VideoLAN\\VLC\\vlc.exe\" -")
 
     @unittest.skipIf(not is_win32, "test only applicable on Windows")
     def test_open_player_args_with_quote_in_player_win32(self):
         self._test_args(["livecli", "-p",
-                         '''c:\\Program Files\\VideoLAN\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\""''',
+                         '''c:\\Program Files\\VideoLAN\\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\""''',
                          "http://test.se", "test"],
-                        '''c:\\Program Files\\VideoLAN\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" -''')
+                        '''c:\\Program Files\\VideoLAN\\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" -''')
 
     @unittest.skipIf(not is_win32, "test only applicable on Windows")
     def test_open_player_extra_args_in_player_win32(self):
-        self._test_args(["livecli", "-p", "c:\\Program Files\\VideoLAN\VLC\\vlc.exe",
+        self._test_args(["livecli", "-p", "c:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
                          "-a", '''--input-title-format "Poker \\"Stars\\"" {filename}''',
                          "http://test.se", "test"],
-                        '''c:\\Program Files\\VideoLAN\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" -''')
+                        '''c:\\Program Files\\VideoLAN\\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" -''')
 
     @unittest.skipIf(not is_win32, "test only applicable on Windows")
     def test_open_player_extra_args_in_player_pass_through_win32(self):
-        self._test_args(["livecli", "--player-passthrough", "rtmp", "-p", "c:\\Program Files\\VideoLAN\VLC\\vlc.exe",
+        self._test_args(["livecli", "--player-passthrough", "rtmp", "-p", "c:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
                          "-a", '''--input-title-format "Poker \\"Stars\\"" {filename}''',
                          "test.se", "rtmp"],
-                        '''c:\\Program Files\\VideoLAN\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" \"rtmp://test.se\"''',
+                        '''c:\\Program Files\\VideoLAN\\VLC\\vlc.exe --input-title-format "Poker \\"Stars\\"" \"rtmp://test.se\"''',
                         passthrough=True)
 
 

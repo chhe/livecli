@@ -33,8 +33,8 @@ __livecli_docs__ = {{
     "last_update": "2018",
 }}\n\n
 class {classname}(Plugin):\n
-    _url_re = re.compile(r'https?://(?:www\.)?example\.com/[^/]+')
-    _hls_re = re.compile(r\'\'\'["'](?P<url>[^"']+\.m3u8)["']\'\'\')\n
+    _url_re = re.compile(r'https?://(?:www\\.)?example\\.com/[^/]+')
+    _hls_re = re.compile(r\'\'\'["'](?P<url>[^"']+\\.m3u8)["']\'\'\')\n
     @classmethod
     def can_handle_url(cls, url):
         return cls._url_re.match(url) is not None\n
