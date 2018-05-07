@@ -138,11 +138,7 @@ class Resolve(Plugin):
             ResolveCache.cache_url_list = [self.url]
             self.referer = self.url
 
-        # default GET header
-        http.headers = {
-            "User-Agent": useragents.FIREFOX,
-            "Referer": self.referer
-        }
+        http.headers.update({"Referer": self.referer})
 
     @classmethod
     def priority(cls, url):
