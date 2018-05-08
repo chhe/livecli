@@ -1,5 +1,10 @@
 language: python
 
+env:
+  global:
+    # Doctr deploy key for livecli/livecli.github.io
+    - secure: "4lcIcK3mZlkdCWtsTB17bhCj+zAOH162qO7f3Q/Fe7hc8usbBzf5aN3kZpGmlk3Mt4GSEdYpJqZuWujgxRCKD0WlR/kk9YTHI+aZ36rpoe8hwP4SwvoqOxFOupai3/gjWL2meoWgZtP31jJk/duvnMVq8UizCHvB/27v+X9WuJJ7sUvsx7uKrc94PiiJD3cGN5Oh7RGww1MQyUfiRRoIzAuEJQT2uN7wcDQblxJJONyw2vtYVZlyN+nUvlNYDYgBOfb5dqnoNtUDVi+dNgouyhE1k8Ct5WlCMEF+wt2598kPmbTgCAJ+Cm/Ene/H8t9Rq7KdW3XBfsKqPbc5/7miYxHRjlMKfx+6aDV3LOR5MCuxy2RqESQ4fC0a0IjHQS0OOuYQXjLn4+sjS0DGWOCmoXKcgbKB0+UioeuPqf8PfAsbmZ4b8RlgQ1JlaOt2kFQ+JDt4tNNZs/db9Xqa6h9Tm6Hp7NsvzAypto8x1lEQ3BmJuiKx3+2/4FO4kyLshpEf4GJoCsQHT3S1SY1wSDq1q3q0nx6TmUfQZkOkrsbvhU/GB4F4W1iyTV6jkU/61mCBqVECC0SYz+MUZwnc29m7m/d5SFkMlNYDTFhqwDhN51tX8lCDdwRzdH2793SVMg18xQdl0PvXikNkw1seZs/5swpiJd/2ECHNoaSp7bIKnU0="
+
 matrix:
   include:
   - python: '2.7'
@@ -16,7 +21,10 @@ before_install:
   - pip install -U pip setuptools
   - pip install -r dev-requirements.txt
   - pip install pycountry
-  - pip install -r docs-requirements.txt
+  - if [[ $BUILD_DOCS == 'yes' ]]; then
+      pip install -r docs-requirements.txt;
+      pip install doctr;
+    fi
 
 install:
   - pip install -e .
@@ -29,9 +37,11 @@ script:
   - if [[ $BUILD_INSTALLER == 'yes' ]]; then ./script/makeinstaller.sh; fi
 
 after_success:
-  - livecli --version
-  # push the docs only if the build was successful
-  - bash script/pushdocs.sh
+  - set -e
+  # latest version - push docs for master
+  - if [[ $BUILD_DOCS == 'yes' ]]; then doctr deploy latest; fi
+  # stable version - push docs for tags
+  - if [[ $BUILD_DOCS == 'yes' && -n "$TRAVIS_TAG" ]]; then doctr deploy .; fi
   - codecov
 
 addons:
@@ -54,3 +64,9 @@ deploy:
     on:
       tags: true
       condition: $BUILD_INSTALLER == yes
+
+doctr:
+  build-tags: True
+  deploy-repo: livecli/livecli.github.io
+  key-path: deploy_key.enc
+  require-master: True
