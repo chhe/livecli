@@ -106,6 +106,7 @@ def create_output(plugin, output_shortname):
                 # https://unicode.org/reports/tr15/
                 from unicodedata import normalize
                 normal_title = normalize("NFKD", str(normal_title))
+                normal_title = normal_title.encode('ascii', 'ignore').decode('ascii')
             full_download_path = os.path.join(download_path, normal_title + file_endname)
 
         console.logger.info("Download path: \"{0}\"".format(full_download_path))
