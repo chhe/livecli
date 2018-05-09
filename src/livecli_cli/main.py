@@ -58,12 +58,21 @@ def check_file_output(filename, force):
 
     console.logger.debug("Checking file output")
 
-    if os.path.isfile(filename) and not force:
+    if args.auto_output and os.path.isfile(filename) and not force:
+        console.logger.info("File already exists! Adding timestamp.")
+        head, tail = os.path.split(filename)
+        tail = '{0}_{1}'.format(datetime.utcnow().strftime("%Y_%m_%d_%Hh%Mm%Ss"), tail)
+        filename = os.path.join(head, tail)
+        console.logger.info("New Download path: \"{0}\"", filename)
+    elif not args.auto_output and os.path.isfile(filename) and not force:
         answer = console.ask("File {0} already exists! Overwrite it? [y/N] ",
                              filename)
 
         if answer.lower() != "y":
             sys.exit()
+
+    elif force:
+        console.logger.debug("Force overwritten")
 
     return FileOutput(filename)
 
