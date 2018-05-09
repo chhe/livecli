@@ -2,7 +2,7 @@
 
 
 Livecli Applications
-=======================
+====================
 
 E2 Receiver
 -----------
@@ -31,6 +31,5 @@ Kodi
 :Source code: https://github.com/livecli/service.livecli.proxy
 :Repo: https://github.com/livecli/repo
 :M3U generator: https://github.com/livecli/iptv
+:Install Guide: `click here <app_kodi.html>`_
 :Info: This Kodi addon is used as a Proxy between Livecli and **IPTV Simple PVR**.
-
-       For more details read the `Kodi README <https://github.com/livecli/service.livecli.proxy/blob/master/README.md>`_
