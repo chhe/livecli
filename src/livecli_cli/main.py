@@ -52,19 +52,19 @@ QUIET_OPTIONS = ("json", "stream_url", "subprocess_cmdline", "quiet")
 args = console = livecli = plugin = stream_fd = output = None
 
 
-def check_file_output(filename, force):
+def check_file_output(filename, force, status_auto_output=False):
     """Checks if file already exists and ask the user if it should
     be overwritten if it does."""
 
     console.logger.debug("Checking file output")
 
-    if args.auto_output and os.path.isfile(filename) and not force:
+    if status_auto_output and os.path.isfile(filename) and not force:
         console.logger.info("File already exists! Adding timestamp.")
         head, tail = os.path.split(filename)
         tail = '{0}_{1}'.format(datetime.utcnow().strftime("%Y_%m_%d_%Hh%Mm%Ss"), tail)
         filename = os.path.join(head, tail)
         console.logger.info("New Download path: \"{0}\"", filename)
-    elif not args.auto_output and os.path.isfile(filename) and not force:
+    elif not status_auto_output and os.path.isfile(filename) and not force:
         answer = console.ask("File {0} already exists! Overwrite it? [y/N] ",
                              filename)
 
@@ -125,7 +125,7 @@ def create_output(plugin, output_shortname):
         if args.output == "-":
             out = FileOutput(fd=stdout)
         else:
-            out = check_file_output(args.output, args.force)
+            out = check_file_output(args.output, args.force, args.auto_output)
     elif args.stdout:
         out = FileOutput(fd=stdout)
     else:
