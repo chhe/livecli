@@ -5,6 +5,7 @@ from textwrap import dedent
 
 from livecli.utils import hours_minutes_seconds
 
+from .compat import is_py2
 from .constants import (
     LIVECLI_VERSION, STREAM_PASSTHROUGH, DEFAULT_PLAYER_ARGUMENTS
 )
@@ -70,6 +71,8 @@ class HelpFormatter(argparse.RawDescriptionHelpFormatter):
 
 
 def comma_list(values):
+    if is_py2:
+        return [val.decode("utf8").strip() for val in values.split(",")]
     return [val.strip() for val in values.split(",")]
 
 
