@@ -1,0 +1,10 @@
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+{%- block extrahead %}
+<link rel=stylesheet type=text/css href={{ pathto('_static/banner.css', 1) }} />
+{% endblock %}
+{# Prepend banner to body. #}
+{%- set body %}
+    {%- include "banner.html" %}
+    {%- block body %}{% endblock %}  {# Sphinx overrides body block without calling super(). #}
+{% endset %}

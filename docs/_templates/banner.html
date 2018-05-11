@@ -1,0 +1,10 @@
+{# set banner message. #}
+{%- if release != version %}
+    {%- set banner_message = '<b>Warning:</b> You are reading documentation for the unreleased version of %s.'|format(project) %}
+{%- endif %}
+{# Display banner. #}
+{% block banner %}
+{%- if banner_message %}
+    <p class="scv-banner scv-sphinx_rtd_theme">{{ banner_message }}</p>
+{%- endif %}
+{% endblock %}
