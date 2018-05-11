@@ -1,0 +1,18 @@
+.. _applications:
+
+:orphan:
+
+404
+===
+
+.. Error:: Error code 404 - Page not found
+
+.. raw:: html
+
+    <center><form>
+      <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Go Back" />
+    </form><br/><form>
+      <input type="button" value="view documentation of released version" onclick="window.location.href='/index.html'" />
+    </form><br/><form>
+      <input type="button" value="view documentation of unreleased version" onclick="window.location.href='/latest/index.html'" />
+    </form></center>
