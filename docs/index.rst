@@ -13,8 +13,7 @@ to the video stream data. This project is a fork of Streamlink and Livestreamer.
 - Latest release: |version| (https://github.com/livecli/livecli/releases/latest)
 - GitHub: https://github.com/livecli/livecli
 - Issue tracker: https://github.com/livecli/livecli/issues
-- PyPI: https://pypi.python.org/pypi/livecli
-- Free software: Simplified BSD license
+- PyPI: https://pypi.org/project/livecli/
 
 Features
 --------
