@@ -12,14 +12,13 @@ E2 Receiver
 :OS: |Linux|
 :Author: `back-to <https://github.com/back-to>`_
 :Source code: https://github.com/livecli/ipk
+:Install Guide: `E2 guide <click here> <app_e2.html>`_
 :Info: It will run the command
        ``livecli --server --server-host 0.0.0.0 -l debug``
 
-       with this you can add urls to your userbouquet and livecli will resolve them.
+       with this you can add urls to your userbouquet and Livecli will resolve them.
 
        **Important**: This is only tested with a **Vu+ Duo2**
-
-       For more details read the `IPK README <https://github.com/livecli/ipk/blob/master/README.md>`_
 
 Kodi
 ----
@@ -31,5 +30,5 @@ Kodi
 :Source code: https://github.com/livecli/service.livecli.proxy
 :Repo: https://github.com/livecli/repo
 :M3U generator: https://github.com/livecli/iptv
-:Install Guide: `click here <app_kodi.html>`_
+:Install Guide: `Kodi guide <click here> <app_kodi.html>`_
 :Info: This Kodi addon is used as a Proxy between Livecli and **IPTV Simple PVR**.

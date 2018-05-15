@@ -1,0 +1,24 @@
+{# Add rst-badge after rst-versions for small badge style. #}
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span style="float:left" class="fa fa-tasks"> Livecli</span>
+      {% if release == version -%}
+        <!-- stable -->
+        {{ version }}
+      {%- else -%}
+        <!-- latest -->
+        {{ release }}
+      {%- endif %}
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+          {% if release != version %}<strong>{% endif %}
+          <dd><a href="/latest/index.html">latest</a></dd>
+          {% if release != version %}</strong>{% else %}<strong>{% endif %}
+          <dd><a href="/index.html">stable</a></dd>
+          {% if release == version %}</strong>{% endif %}
+      </dl>
+    </div>
+  </div>

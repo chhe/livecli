@@ -9,21 +9,23 @@ online streaming services to a variety of video players.
 The main purpose of Livecli is to convert CPU-heavy websites to a
 less CPU-intensive format.
 
-Livecli is a fork of the
-`Streamlink <https://github.com/streamlink/streamlink>`__ and
-`Livestreamer <https://github.com/chrippa/livestreamer>`__ project
-
 Websites
 
 -  GitHub: https://github.com/livecli/livecli
 -  Issue tracker: https://github.com/livecli/livecli/issues
--  Latest release: https://github.com/livecli/livecli/releases/latest
--  Website: https://livecli.github.io/index.html
+-  Download stable version: https://github.com/livecli/livecli/releases/latest
+-  Stable Website: https://livecli.github.io/index.html
+-  Latest Website: https://livecli.github.io/latest/index.html
+-  PyPI: https://pypi.org/project/livecli/
 
 Other versions
 
--  E2 receiver: https://github.com/livecli/ipk
--  Kodi: https://github.com/livecli/repo
+-  E2 receiver: https://livecli.github.io/latest/app_e2.html
+-  Kodi: https://livecli.github.io/latest/app_kodi.html
+
+Livecli is a fork of the
+`Streamlink <https://github.com/streamlink/streamlink>`__ and
+`Livestreamer <https://github.com/chrippa/livestreamer>`__ project
 
 `Installation <https://livecli.github.io/install.html>`__
 =========================================================
@@ -42,7 +44,7 @@ Manual installation via Python
 
     git clone https://github.com/livecli/livecli
     cd livecli
-    pip install -U .
+    python setup.py install
 
 Features
 ========

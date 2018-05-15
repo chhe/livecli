@@ -91,28 +91,24 @@ github_project = 'livecli/livecli'
 
 # -- Options for HTML output ---------------------------------------------------
 
-sys.path.append(os.path.abspath('_themes'))
-
-html_theme_path = ['_themes']
-html_theme = 'sphinx_rtd_theme_violet'
-html_theme_options = {
-    "oneliner": (
-        "Command-line utility that extracts streams from various services "
-        "and pipes them into a video player of choice."
-    ),
-    "github_user": "livecli",
-    "github_repo": "livecli",
-    "sticky_navigation": True
-}
-
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-# html_theme_options = { "github_fork": "livecli/livecli" }
+html_theme_options = {
+    'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'None',
+    'style_external_links': False,
+    'collapse_navigation': True,
+    'sticky_navigation': True,
+    'navigation_depth': 5,
+    'includehidden': True,
+    'titles_only': False,
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []

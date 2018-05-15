@@ -59,15 +59,26 @@ It allows you to open Livecli streams from your Browser.
 
   **Name:** Livecli
 
+  **Icon:** You can add Custom icons
+
+  Download one of these
+
+  - `<https://avatars0.githubusercontent.com/u/35533657>`_
+  - `<https://avatars2.githubusercontent.com/u/24879726>`_
+
+  Make sure to click on the Icon after you added it.
+
   **Command:** Add one of the following commands
 
-  **Windows**
+Windows
+^^^^^^^
 
   ::
 
     livecli "%s" best
 
-  **Linux**
+Linux
+^^^^^
 
   You will have to find the Livecli path
 
@@ -77,7 +88,8 @@ It allows you to open Livecli streams from your Browser.
 
     /usr/local/bin/livecli "%s" best
 
-  **Linux with gnome-terminal**
+Linux with gnome-terminal
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
   You will have to find the Livecli and your terminal path
 
@@ -87,11 +99,8 @@ It allows you to open Livecli streams from your Browser.
 
     /usr/bin/gnome-terminal -- bash -c "/usr/local/bin/livecli \"%s\" best"
 
-  **Icon:** You can add Custom icons
+Linux with --player-passthrough
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ::
 
-  Download one of these
-
-  - `<https://avatars0.githubusercontent.com/u/35533657>`_
-  - `<https://avatars2.githubusercontent.com/u/24879726>`_
-
-  Make sure to click on the Icon after you added it.
+      /usr/bin/gnome-terminal -- bash -c "/usr/local/bin/livecli \"%s\" best --player-passthrough \"hls\""

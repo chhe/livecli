@@ -28,8 +28,6 @@ manager, or by checking out the latest code with
 
 The commands listed here will also upgrade any existing version of Livecli.
 
-.. rst-class:: table-custom-layout
-
 ==================================== ===========================================
 Version                              Installing
 ==================================== ===========================================
@@ -44,10 +42,10 @@ Version                              Installing
 
                                         $ git clone git+https://github.com/livecli/livecli.git
                                         $ cd livecli
-                                        # pip install -U .
+                                        # python setup.py install
 ==================================== ===========================================
 
-.. _Latest release (pip): https://pypi.python.org/pypi/livecli
+.. _Latest release (pip): https://pypi.org/project/livecli/
 .. _Development version (pip): https://github.com/livecli/livecli
 .. _Development version (git): https://github.com/livecli/livecli
 
@@ -55,8 +53,6 @@ Dependencies
 ^^^^^^^^^^^^
 
 To install Livecli from source you will need these dependencies.
-
-.. rst-class:: table-custom-layout
 
 ==================================== ===========================================
 Name                                 Notes
@@ -73,48 +69,61 @@ Name                                 Notes
 `python-futures`_                    Only needed on Python **2.x**.
 `python-requests`_                   At least version **2.2**.
 `python-singledispatch`_             Only needed on Python versions older than **3.4**.
-`websocket`_
+`websocket`_                         Required to communicate with websites for some plugins.
 
 **Optional**
 --------------------------------------------------------------------------------
 `RTMPDump`_                          Required to play RTMP streams.
 `ffmpeg`_                            Required to play streams that are made up of separate
-                                     audio and video streams, eg. YouTube 1080p+
+                                     audio and video streams.
 ==================================== ===========================================
 
-Using pycrypto and pycountry
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Alternative Python packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With these environment variables it is possible to use
+Some Python packages can't be installed on certain devices |br|
+or they have already a different preinstalled Python package.
 
-`pycrypto`_ or `pycryptodomex`_ instead of `pycryptodome`_
+You will have to set a environment variables before the installation, |br|
+if you want to replace the certain Python package.
 
-.. code-block:: console
+- **alternative for pycryptodome**
 
-    $ export LIVECLI_USE_PYCRYPTO="true"
-    $ export LIVECLI_USE_PYCRYPTODOMEX="true"
+  `pycrypto`_ instead of `pycryptodome`_
 
-`pycountry`_ instead of `iso-639`_ and `iso3166`_
+  .. code-block:: console
 
-.. code-block:: console
+      $ export LIVECLI_USE_PYCRYPTO="true"
 
-    $ export LIVECLI_USE_PYCOUNTRY="true"
+  `pycryptodomex`_ instead of `pycryptodome`_
 
-.. _Python: http://python.org/
-.. _python-setuptools: http://pypi.python.org/pypi/setuptools
-.. _python-futures: http://pypi.python.org/pypi/futures
+  .. code-block:: console
+
+      $ export LIVECLI_USE_PYCRYPTODOMEX="true"
+
+- **alternative for iso-639 and iso3166**
+
+  `pycountry`_ instead of `iso-639`_ and `iso3166`_
+
+  .. code-block:: console
+
+      $ export LIVECLI_USE_PYCOUNTRY="true"
+
+.. _Python: https://www.python.org/
+.. _python-setuptools: https://pypi.org/project/setuptools/
+.. _python-futures: https://pypi.org/project/futures/
 .. _python-requests: http://python-requests.org/
-.. _python-singledispatch: http://pypi.python.org/pypi/singledispatch
+.. _python-singledispatch: https://pypi.org/project/singledispatch/
 .. _RTMPDump: http://rtmpdump.mplayerhq.hu/
-.. _pycountry: https://pypi.python.org/pypi/pycountry
+.. _pycountry: https://pypi.org/project/pycountry/
 .. _pycrypto: https://www.dlitz.net/software/pycrypto/
 .. _pycryptodome: https://pycryptodome.readthedocs.io/en/latest/
 .. _pycryptodomex: https://pycryptodome.readthedocs.io/en/latest/src/introduction.html?highlight=pycryptodomex
-.. _pysocks: https://pypi.python.org/pypi/PySocks
-.. _websocket: https://pypi.python.org/pypi/websocket-client
+.. _pysocks: https://github.com/Anorov/PySocks
+.. _websocket: https://pypi.org/project/websocket-client/
 .. _ffmpeg: https://www.ffmpeg.org/
-.. _iso-639: https://pypi.python.org/pypi/iso-639
-.. _iso3166: https://pypi.python.org/pypi/iso3166
+.. _iso-639: https://pypi.org/project/iso-639/
+.. _iso3166: https://pypi.org/project/iso3166/
 
 
 Installing within a virtual environment
@@ -150,8 +159,6 @@ instead.
 
 Windows binaries
 ----------------
-
-.. rst-class:: table-custom-layout
 
 ==================================== ====================================
 Release                              Notes
