@@ -46,7 +46,7 @@ Open With
 :Source code: https://github.com/darktrojan/openwith
 :Firefox: https://addons.mozilla.org/en-US/firefox/addon/open-with/
 :Chrome: https://chrome.google.com/webstore/detail/open-with/cogjlncmljjnjpbgppagklanlcbchlno
-:Install Guide: `click here <app_open_with.html>`_
+:Install Guide: `OpenWith Guide <click here> <app_open_with.html>`_
 :Info: This extension displays a list of your browsers on your menus and toolbars in Firefox.
        Clicking on them takes you to the page you're looking at in the browser of your choice.
 
