@@ -1,3 +1,39 @@
+..
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    Unreleased
+    ----------
+
+    **Added**
+
+      - for new features.
+
+    **Added Plugin**
+
+      - for new plugins.
+
+    **Changed**
+
+      - for changes in existing functionality.
+
+    **Fixed**
+
+      - for any bug fixes.
+
+    **Fixed Plugin**
+
+      - for any plugin fixes.
+
+    **Deprecated**
+
+      - for soon-to-be removed features.
+
+    **Removed**
+
+      - for now removed features.
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 livecli 3.9.0 (2018-05-05)
 --------------------------
 Livecli 3.9.0 has been released!
