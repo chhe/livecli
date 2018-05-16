@@ -58,12 +58,22 @@ deploy:
     on:
       tags: true
       condition: $BUILD_INSTALLER = yes
+      repo: livecli/livecli
   - provider: script
     script: python script/github_releases.py
     skip_cleanup: true
     on:
       tags: true
       condition: $BUILD_INSTALLER == yes
+      repo: livecli/livecli
+  - provider: pypi
+    user: $PYPI_USERNAME
+    password: $PYPI_PASSWORD
+    distributions: "sdist bdist_wheel"
+    on:
+      tags: true
+      condition: $TRAVIS_PYTHON_VERSION == 3.5
+      repo: livecli/livecli
 
 doctr:
   build-tags: True
