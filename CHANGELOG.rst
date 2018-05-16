@@ -34,6 +34,31 @@
 
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+Unreleased
+----------
+
+**Added**
+
+  - [docs] Added a Guide for E2 Receiver, Kodi and OpenWith
+
+**Added Plugin**
+
+  - [plexstorm] new plugin for plexstorm.com
+
+**Changed**
+
+  - [api] update useragents
+  - [session] set Firefox as the default User-Agent instead of python-requests
+
+**Fixed**
+
+  - [auto-output] Fix for "File already exists! Overwrite it?"
+
+**Fixed Plugin**
+
+  - [resolve] _iframe_re update for invalid urls
+  - [youtube] better handeling for /user/ url's
+
 livecli 3.9.0 (2018-05-05)
 --------------------------
 Livecli 3.9.0 has been released!
