@@ -8,7 +8,6 @@ usage() {
   echo "Requirements:"
   echo " git"
   echo " gpg - with a valid GPG key already generated"
-  echo " hub"
   echo " github-release"
   echo " GITHUB_TOKEN in your env variable"
   echo " "
@@ -29,15 +28,10 @@ requirements() {
   fi
 
   if [ ! -f $GOPATH/bin/github-release ]; then
-    echo "No $GOPATH/bin/github-release. Please run 'go get -v github.com/aktau/github-release'"
+    echo "No github-release. Please run 'go get -v github.com/aktau/github-release'"
     echo "or run"
-    echo "export GOPATH=$HOME/go"
-    echo "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin"
-    exit 1
-  fi
-
-  if [ ! -f /usr/bin/hub ]; then
-    echo "No hub. Please run install hub @ github.com/github/hub"
+    echo "export GOPATH=\$HOME/go"
+    echo "export PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin"
     exit 1
   fi
 
@@ -47,7 +41,7 @@ requirements() {
   fi
 }
 
-# Clone and then change to user's upstream repo for pushing to master / opening PR's :)
+# Clone upstream master
 clone() {
   git clone ssh://git@github.com/$UPSTREAM_REPO/$CLI.git
   if [ $? -eq 0 ]; then
@@ -56,57 +50,22 @@ clone() {
         echo FAIL
         exit
   fi
-  cd $CLI
-  git remote remove origin
-  git remote add origin git@github.com:$ORIGIN_REPO/$CLI.git
-  git checkout -b release-$1
-  cd ..
 }
 
-changelog() {
+test_changelog() {
+  # Test Changelog
   cd $CLI
-  echo "Getting commit changes. Writing to ../changes.txt"
-  LOG=$(git log --no-merges --pretty=%s ${1}.. | sed  's/^/    /' | sort)
-  echo -e "Livecli $2 has been released!\n\nSee below for further information.\n\n::\n\n$LOG" > ../changes.txt
-  echo "Changelog has been written to changes.txt"
-  echo "!!PLEASE REVIEW BEFORE CONTINUING!!"
-  echo "Open changes.txt and add the release information"
-  echo "to the beginning of the file before the git shortlog"
-  cd ..
-}
-
-changelog_rst() {
-  echo "Generating CHANGELOG.rst"
-  CHANGES=$(cat changes.txt)
-  cd $CLI
-  DATE=$(date +"%Y-%m-%d")
-  CHANGELOG=$(cat CHANGELOG.rst)
-  HEADER="$CLI $1 ($DATE)"
-  UNDERLINE=$(printf %s "$HEADER" | tr -c '-' '[-*]')
-  echo -e "$HEADER\n$UNDERLINE\n$CHANGES\n\n$CHANGELOG" >CHANGELOG.rst
-  echo "Changes have been written to CHANGELOG.rst"
-  cd ..
-}
-
-git_commit() {
-  cd $CLI
-
-  BRANCH=`git symbolic-ref --short HEAD`
-  if [ -z "$BRANCH" ]; then
-    echo "Unable to get branch name, is this even a git repo?"
-    return 1
+  if grep --quiet "Livecli $1" CHANGELOG.rst ; then
+    echo "OK - Found version"
+  else
+    echo "!!!"
+    echo "FAIL - No version $1 in the changelog"
+    echo "Update the changelog on github"
+    echo "cleanup the release or manually git pull"
+    echo "RUN THIS TEST AGAIN"
+    echo "!!!"
   fi
-  echo "Branch: " $BRANCH
-
-  git add .
-  git commit -m "$1 Release"
-  git push origin $BRANCH
-  hub pull-request -b $UPSTREAM_REPO/$CLI:master -h $ORIGIN_REPO/$CLI:$BRANCH
-
   cd ..
-  echo ""
-  echo "PR opened against master"
-  echo ""
 }
 
 sign() {
@@ -134,7 +93,7 @@ sign() {
 }
 
 push() {
-  CHANGES=$(cat changes.txt)
+  CHANGES="Changelog pending ..."
   # Release it!
   $GOPATH/bin/github-release release \
       --user $UPSTREAM_REPO \
@@ -203,11 +162,6 @@ main() {
   usage
   requirements
 
-  echo "What is your Github username? (location of your $CLI fork)"
-  read ORIGIN_REPO
-  echo "You entered: $ORIGIN_REPO"
-  echo ""
-
   echo ""
   echo "First, please enter the version of the NEW release: "
   read VERSION
@@ -230,9 +184,7 @@ main() {
   PS3='Please enter your choice: '
   options=(
   "Git clone master"
-  "Generate changelog"
-  "Generate changelog for release"
-  "Create PR"
+  "Test changelog"
   "Tarball and sign - requires gpg key"
   "Upload the tarball and source code to GitHub release page"
   "Test upload to pypi"
@@ -246,14 +198,8 @@ main() {
           "Git clone master")
               clone $VERSION
               ;;
-          "Generate changelog")
-              changelog $PREV_VERSION $VERSION
-              ;;
-          "Generate changelog for release")
-              changelog_rst $VERSION
-              ;;
-          "Create PR")
-              git_commit $VERSION
+          "Test changelog")
+              test_changelog $VERSION
               ;;
           "Tarball and sign - requires gpg key")
               sign $VERSION
