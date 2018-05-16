@@ -39,9 +39,9 @@ script:
 after_success:
   - set -e
   # latest version - push docs for master
-  - if [[ $BUILD_DOCS == 'yes' ]]; then doctr deploy latest; fi
+  - if [[ $BUILD_DOCS == 'yes' && $TRAVIS_REPO_SLUG == 'livecli/livecli' ]]; then doctr deploy latest; fi
   # stable version - push docs for tags
-  - if [[ $BUILD_DOCS == 'yes' && -n "$TRAVIS_TAG" ]]; then doctr deploy .; fi
+  - if [[ $BUILD_DOCS == 'yes' && $TRAVIS_REPO_SLUG == 'livecli/livecli' && -n "$TRAVIS_TAG" ]]; then doctr deploy .; fi
   - codecov
 
 addons:
